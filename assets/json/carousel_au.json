@@ -1,0 +1,44 @@
+[
+    {
+        "type": "carousel",
+        "discount": "30%",
+        "heading": "ROLEX",
+        "subtitle": "Get Discount for every order, only valid for today",
+        "image_url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/sale_watch/photo_2023-06-20_16-40-37.jpg"
+    },
+    {
+        "type": "carousel",
+        "discount": "25%",
+        "heading": "G63",
+        "subtitle": "Get Discount for every order, only valid for this summer",
+        "image_url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/sale_car/photo_2023-06-20_16-39-54.jpg"
+    },
+    {
+        "type": "carousel",
+        "discount": "25%",
+        "heading": "LONGINES",
+        "subtitle": "Get Discount for every order, only valid for this summer",
+        "image_url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/sale_watch/photo_2023-06-20_16-40-51.jpg"
+    },
+    {
+        "type": "carousel",
+        "discount": "25%",
+        "heading": "MECS",
+        "subtitle": "Get Discount for every order, only valid for this summer",
+        "image_url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/sale_car/photo_2023-06-20_16-40-27.jpg"
+    },
+    {
+        "type": "carousel",
+        "discount": "40%",
+        "heading": "ROLEX",
+        "subtitle": "Free delivery with maximum discount on each order",
+        "image_url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/sale_watch/photo_2023-06-20_16-40-54.jpg"
+    },
+    {
+        "type": "carousel",
+        "discount": "25%",
+        "heading": "BENTLY",
+        "subtitle": "Get Discount for every order, only valid for this summer",
+        "image_url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/sale_car/photo_2023-06-20_16-40-31.jpg"
+    }
+]
