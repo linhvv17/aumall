@@ -4,6 +4,8 @@ import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/core/utilities/routes.dart';
 import 'package:aumall/core/utilities/strings.dart';
 
+import '../../../../generated/l10n.dart';
+
 class SuccessView extends StatelessWidget {
   const SuccessView({super.key});
 
@@ -17,7 +19,7 @@ class SuccessView extends StatelessWidget {
             onPressed: () {
               Navigator.pushReplacementNamed(context, AppRoutes.layout);
             },
-            label: const Text(AppStrings.continueShopping)),
+            label:  Text(S.current.continueShopping)),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -29,13 +31,13 @@ class SuccessView extends StatelessWidget {
             height: 20,
           ),
           Text(
-            "${AppStrings.success}!",
+            "${S.current.success}!",
             style: Theme.of(context).textTheme.headline5,
           ),
           const SizedBox(
             height: 10,
           ),
-          Text(AppStrings.successMsg,
+          Text(S.current.successMsg,
               style: Theme.of(context).textTheme.bodyMedium)
         ],
       ),

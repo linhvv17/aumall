@@ -10,6 +10,7 @@ import 'package:aumall/features/login/presentation/widgets/alert_snackbar.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../payment/presentation/bloc/payment_bloc.dart';
 
 class CartView extends StatefulWidget {
@@ -37,7 +38,7 @@ class _CartViewState extends State<CartView> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
-            AppStrings.mybag,
+            S.current.mybag,
             style: Theme.of(context).textTheme.headline6,
           )),
       floatingActionButton: BlocProvider.of<CartBloc>(context).cartItems.isEmpty
@@ -66,19 +67,19 @@ class _CartViewState extends State<CartView> {
                   ),
                 );
                     } else {
-                      showSnackbar(AppStrings.emptybag, context, Colors.red);
+                      showSnackbar(S.current.emptybag, context, Colors.red);
                     }
                   },
                   label: BlocConsumer<CartBloc, CartState>(
                     listener: (context, state) {
                       if (state is AddToCartState) {
                         showSnackbar(
-                            AppStrings.addedToCart, context, Colors.green);
+                            S.current.addedToCart, context, Colors.green);
                       }
                     },
                     builder: (context, state) {
                       return Text(
-                        AppStrings.addToCart.toUpperCase(),
+                        S.current.checkout.toUpperCase(),
                       );
                     },
                   ),),
@@ -114,7 +115,7 @@ class _CartViewState extends State<CartView> {
                         ),
                          Padding(
                            padding: const EdgeInsets.all(8.0),
-                           child: Text(AppStrings.notCart,style: Theme.of(context).textTheme.titleMedium,),
+                           child: Text(S.current.notCart,style: Theme.of(context).textTheme.titleMedium,),
                          ),
                       ],
                     );
@@ -158,7 +159,7 @@ class _CartViewState extends State<CartView> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "${AppStrings.totalAmount}: ",
+                                          "${S.current.totalAmount}: ",
                                           style: Theme.of(context)
                                               .textTheme
                                               .headline6!

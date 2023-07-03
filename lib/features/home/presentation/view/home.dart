@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/features/home/presentation/view/product_details.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../shop/presentation/bloc/products_bloc.dart';
 import '../../widgets/customGridView.dart';
 import '../../widgets/header.dart';
@@ -23,8 +24,8 @@ class HomeView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  AppStrings.recentlyAddedProducts,
+                Text(
+                  S.current.recentlyAddedProducts,
                 ),
                 TextButton(
                   onPressed: () {},
@@ -78,7 +79,7 @@ class HomeView extends StatelessWidget {
                   },
                 ));
               } else if (state is AllProductsErrorState) {
-                return state.message == AppStrings.noInternetError
+                return state.message == S.current.noInternetError
                     ? Expanded(
                       child: Column(
                           children: [

@@ -6,6 +6,7 @@ import 'package:aumall/core/utilities/routes.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../payment/presentation/bloc/order_bloc.dart';
 
 class OrderCard extends StatelessWidget {
@@ -56,7 +57,7 @@ class OrderCard extends StatelessWidget {
                       Navigator.pushNamed(context, AppRoutes.orderDetails,
                           arguments: bloc.activeOrders[index]);
                     },
-                    child: const Text(AppStrings.viewdetails),
+                    child:  Text(S.current.viewdetails),
                   ),
                   Row(
                     children: [

@@ -7,6 +7,7 @@ import '../../../core/theme/theme_data.dart';
 import '../../../core/utilities/enums.dart';
 import '../../../core/utilities/mediaquery.dart';
 import '../../../core/utilities/strings.dart';
+import '../../../generated/l10n.dart';
 import '../../favorite/presentation/bloc/favourite_bloc.dart';
 import '../../login/presentation/widgets/alert_snackbar.dart';
 import '../../shop/domain/entities/products_entity.dart';
@@ -47,9 +48,9 @@ class ProductItem extends StatelessWidget {
                 child: BlocConsumer<FavouriteBloc, FavouriteState>(
                   listener: (context, state) {
                    if(state is AddToFavouriteState){
-                       showSnackbar(AppStrings.addfav,context, Colors.green);
+                       showSnackbar(S.current.addfav,context, Colors.green);
                 }else if(state is RemoveFromFavouriteState){
-                    showSnackbar(AppStrings.deletefav, context, Colors.green);
+                    showSnackbar(S.current.deletefav, context, Colors.green);
                 }
                   },
                   builder: (context, state) {

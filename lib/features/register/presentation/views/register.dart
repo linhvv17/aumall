@@ -5,6 +5,7 @@ import '../../../../core/local/shared_preference.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../login/presentation/widgets/mainbutton.dart';
 import '../../../login/presentation/widgets/maintextformfield.dart';
@@ -49,7 +50,7 @@ class _RegisterViewState extends State<RegisterView> {
                   Row(
                     children: [
                       Text(
-                        AppStrings.register,
+                        S.current.register,
                         style: Theme.of(context).textTheme.headline4!.copyWith(
                             fontWeight: FontWeight.bold,
                             color: ColorManager.dark),
@@ -59,15 +60,15 @@ class _RegisterViewState extends State<RegisterView> {
                   SizedBox(height: kHeight(context) * 0.05),
                   MainTFF(
                       max: 1,
-                      labelText: AppStrings.name,
-                      hintText: AppStrings.name,
+                      labelText: S.current.name,
+                      hintText: S.current.name,
                       controller: nameController,
                       validate: (value) {
                         if (value!.isEmpty) {
-                          return AppStrings.nameEmpty;
+                          return S.current.nameEmpty;
                         } else {
                           if (value.length < 3) {
-                            return AppStrings.nameError;
+                            return S.current.nameError;
                           }
                         }
                         return null;
@@ -80,15 +81,15 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                   MainTFF(
                       max: 1,
-                      labelText: AppStrings.email,
-                      hintText: AppStrings.email,
+                      labelText: S.current.email,
+                      hintText: S.current.email,
                       controller: emailController,
                       validate: (value) {
                         if (value!.isEmpty) {
-                          return AppStrings.emptyEmail;
+                          return S.current.emptyEmail;
                         } else {
                           if (!value.contains('@')) {
-                            return AppStrings.invalidEmail;
+                            return S.current.invalidEmail;
                           }
                         }
                         return null;
@@ -101,15 +102,15 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                   MainTFF(
                       max: 1,
-                      labelText: AppStrings.password,
-                      hintText: AppStrings.password,
+                      labelText: S.current.password,
+                      hintText: S.current.password,
                       controller: passController,
                       validate: (value) {
                         if (value!.isEmpty) {
-                          return AppStrings.passwordEmpty;
+                          return S.current.passwordEmpty;
                         } else {
                           if (value.length < 6) {
-                            return AppStrings.passwordError;
+                            return S.current.passwordError;
                           }
                         }
                         return null;
@@ -134,7 +135,7 @@ class _RegisterViewState extends State<RegisterView> {
                   BlocConsumer<RegisterBloc, RegisterState>(
                     listener: (context, state) {
                       if (state is RegisterFinishedState) {
-                        showSnackbar(AppStrings.registeruccess, context,
+                        showSnackbar(S.current.registeruccess, context,
                             ColorManager.green);
                         PreferenceHelper.saveDataInSharedPreference(
                             key: "token", value: state.data.token);
@@ -150,7 +151,7 @@ class _RegisterViewState extends State<RegisterView> {
                       return state is RegisterLoadingState
                           ? const CircularProgressIndicator()
                           : MainButton(
-                              text: AppStrings.registerText.toUpperCase(),
+                              text: S.current.registerText.toUpperCase(),
                               height: 50,
                               ontab: () {
                                 if (formKey.currentState!.validate()) {
@@ -171,13 +172,13 @@ class _RegisterViewState extends State<RegisterView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(AppStrings.haveAccount,
+                      Text(S.current.haveAccount,
                           style: Theme.of(context).textTheme.labelLarge),
                       TextButton(
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: const Text(AppStrings.login),
+                        child:  Text(S.current.login),
                       ),
                       Container(
                         width: 20,

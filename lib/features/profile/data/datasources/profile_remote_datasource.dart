@@ -17,7 +17,7 @@ class ProfileDataSourceImpl implements ProfileDatasource {
   @override
   Future<ProfileModel> getUserDetails() async {
     final response = await apiProvider.get(
-      endPoint: profileEndPoint,
+      endPoint: profileAuMall,
       token: PreferenceHelper.getDataFromSharedPreference(
                             key: 'token') ?? '',
     );

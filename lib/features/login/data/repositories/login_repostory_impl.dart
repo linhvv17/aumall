@@ -5,6 +5,7 @@ import '../../../../core/error/failure.dart';
 import '../../../../core/network/network_info.dart';
 import '../../../../core/utilities/strings.dart';
 
+import '../../../../generated/l10n.dart';
 import '../../domin/entities/login_entity.dart';
 import '../../domin/repositories/login_repository.dart';
 import '../datasources/login_datasource.dart';
@@ -26,7 +27,7 @@ class LoginRepositoryImpl implements LoginBaseRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return const Left(OfflineFailure(AppStrings.noInternetError));
+      return  Left(OfflineFailure(S.current.noInternetError));
     }
   }
 }

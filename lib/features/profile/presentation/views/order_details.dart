@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:aumall/core/colors/colors.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../payment/domain/entities/all_orders_entity.dart';
 import '../widgets/order_details_card.dart';
 
@@ -20,7 +21,7 @@ class OrderDetailsView extends StatelessWidget {
             },
             icon: const Icon(Icons.arrow_back_ios)),
         title: Text(
-          AppStrings.orderdetails,
+          S.current.orderdetails,
           style: Theme.of(context).textTheme.headline6,
         ),
       ),
@@ -61,7 +62,7 @@ class OrderDetailsView extends StatelessWidget {
               height: 8,
             ),
             Text(
-                '${AppStrings.deliveryAddress}: ${order.shippingInfo.address}'),
+                '${S.current.deliveryAddress}: ${order.shippingInfo.address}'),
             const SizedBox(
               height: 8,
             ),

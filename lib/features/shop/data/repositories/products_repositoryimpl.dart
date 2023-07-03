@@ -4,6 +4,7 @@ import '../../../../core/error/error_handler.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/network/network_info.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../domain/entities/products_entity.dart';
 import '../../domain/entities/response_entity.dart';
 import '../../domain/repositories/product_repository.dart';
@@ -25,7 +26,7 @@ class ProductsRepositoryImpl implements ProductRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return const Left(OfflineFailure(AppStrings.noInternetError));
+      return  Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -41,7 +42,7 @@ class ProductsRepositoryImpl implements ProductRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -57,7 +58,7 @@ class ProductsRepositoryImpl implements ProductRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -73,7 +74,7 @@ class ProductsRepositoryImpl implements ProductRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 }

@@ -9,7 +9,7 @@ import '../../../../core/theme/theme_data.dart';
 import '../../../../core/theme/theme_service.dart';
 import '../../../../core/utilities/enums.dart';
 import '../../../../core/utilities/routes.dart';
-import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/profile_bloc.dart';
 import '../widgets/listtile.dart';
 
@@ -48,10 +48,8 @@ class ProfileView extends StatelessWidget {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          AppStrings.myProfile,
-          style: Theme.of(context).textTheme.headline6!.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          S.current.myProfile,
+          style: const TextStyle(fontWeight: FontWeight.bold, color: ColorManager.dark)
         ),
       ),
       body: SafeArea(
@@ -85,7 +83,6 @@ class ProfileView extends StatelessWidget {
                             children: [
                               Text(
                                 state.data.user!.name,
-                                style: Theme.of(context).textTheme.subtitle1,
                               ),
                               const SizedBox(
                                 height: 4,
@@ -105,24 +102,24 @@ class ProfileView extends StatelessWidget {
                         height: 8,
                       ),
                       MYListTile(
-                        title: AppStrings.editPersonalInfo,
-                        subtitle: AppStrings.edit,
+                        title: S.current.editPersonalInfo,
+                        subtitle: S.current.edit,
                         ontab: () {
                           Navigator.pushNamed(context, AppRoutes.updateProfile,
                               arguments: state.data.user);
                         },
                       ),
                       MYListTile(
-                        title: AppStrings.myOrders,
-                        subtitle: AppStrings.orders,
+                        title: S.current.myOrders,
+                        subtitle: S.current.orders,
                         ontab: () {
                           BlocProvider.of<OrderBloc>(context).add(GetAllOrders());
                           Navigator.pushNamed(context, AppRoutes.orders);
                         },
                       ),
                       MYListTile(
-                        title: AppStrings.changePassword,
-                        subtitle: AppStrings.changePasswordsub,
+                        title: S.current.changePassword,
+                        subtitle: S.current.changePasswordsub,
                         ontab: () {
                           Navigator.pushNamed(context, AppRoutes.updatePassword);
                         },
@@ -134,7 +131,7 @@ class ProfileView extends StatelessWidget {
                             PreferenceHelper.removeData(key: 'token');
                           },
                           title: Text(
-                            AppStrings.logout,
+                            S.current.logout,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
@@ -152,7 +149,7 @@ class ProfileView extends StatelessWidget {
               } else if (state is ProfileLoadingState) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is ProfileErrorState) {
-                return state.message == AppStrings.noInternetError
+                return state.message == S.current.noInternetError
                     ? Column(
                         children: [
                           Padding(

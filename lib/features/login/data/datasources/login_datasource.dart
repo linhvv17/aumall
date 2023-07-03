@@ -1,4 +1,6 @@
 
+import 'package:flutter/foundation.dart';
+
 import '../../../../core/network/api_provider.dart';
 import '../../../../core/utilities/endpoints.dart';
 import '../../domin/repositories/login_repository.dart';
@@ -14,12 +16,13 @@ class LoginDatasourceImpl implements LoginDatasource {
   LoginDatasourceImpl(this.apiProvider);
   @override
   Future<LoginModel> login(LoginParams params) async {
-    final response = await apiProvider.post(endPoint: loginEndPoint, data: { //default
-    // final response = await apiProvider.post(endPoint: loginAuMall, data: {
+    final response = await apiProvider.post(endPoint: loginAuMall, data: {
       "email": params.email,
       "password": params.password,
     });
-    print("login ${response.data}");
+    if (kDebugMode) {
+      print("login ${response.data}");
+    }
     return LoginModel.fromJson(response.data);
   }
 }

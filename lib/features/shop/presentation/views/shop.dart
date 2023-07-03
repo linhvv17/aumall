@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/core/utilities/strings.dart';
 import '../../../../core/colors/colors.dart';
+import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../home/widgets/customGridView.dart';
 import '../../../home/widgets/product_item.dart';
@@ -38,7 +39,7 @@ class ShopView extends StatelessWidget {
                   children: [
                     const FilterProduct(),
                     Text(
-                      AppStrings.shop,
+                      S.current.shop,
                       style: Theme.of(context).textTheme.headline5,
                     ),
                     const SearchWidget()
@@ -148,7 +149,7 @@ class ShopView extends StatelessWidget {
                         },
                       ));
                     } else if (state is ProductsErrorState ) {
-                      return state.message == AppStrings.noInternetError
+                      return state.message == S.current.noInternetError
                     ? Column(
                         children: [
                           Padding(
@@ -220,7 +221,7 @@ class ShopView extends StatelessWidget {
                         },
                       ));
                     } else if (state is SpecificProductsErrorState ) {
-                      return state.message == AppStrings.noInternetError
+                      return state.message == S.current.noInternetError
                     ? Column(
                         children: [
                           Padding(

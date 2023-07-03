@@ -8,6 +8,7 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../favorite/presentation/bloc/favourite_bloc.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../shop/domain/entities/products_entity.dart';
@@ -122,9 +123,9 @@ class _ProductDetailsState extends State<ProductDetails>
               child: BlocConsumer<FavouriteBloc, FavouriteState>(
                 listener: (context, state) {
                   if (state is AddToFavouriteState) {
-                    showSnackbar(AppStrings.addfav, context, Colors.green);
+                    showSnackbar(S.current.addfav, context, Colors.green);
                   } else if (state is RemoveFromFavouriteState) {
-                    showSnackbar(AppStrings.deletefav, context, Colors.green);
+                    showSnackbar(S.current.deletefav, context, Colors.green);
                   }
                 },
                 builder: (context, state) {
@@ -178,12 +179,12 @@ class _ProductDetailsState extends State<ProductDetails>
             label: BlocConsumer<CartBloc, CartState>(
               listener: (context, state) {
                 if (state is AddToCartState) {
-                  showSnackbar(AppStrings.addedToCart, context, Colors.green);
+                  showSnackbar(S.current.addedToCart, context, Colors.green);
                 }
               },
               builder: (context, state) {
                 return Text(
-                  AppStrings.addToCart.toUpperCase(),
+                  S.current.addToCart.toUpperCase(),
                 );
               },
             )),
@@ -266,7 +267,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 padding:
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                 child: Text(
-                  AppStrings.description,
+                  S.current.description,
                   style: Theme.of(context)
                       .textTheme
                       .headline6!
@@ -287,7 +288,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(AppStrings.rateandreview,
+                    Text(S.current.rateandreview,
                         style: Theme.of(context).textTheme.headline6),
                     TextButton(
                         onPressed: () {
@@ -296,7 +297,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           BlocProvider.of<SendReviewBloc>(context)
                               .add(GetReviews(widget.product.id));
                         },
-                        child: const Text(AppStrings.seeMore))
+                        child:  Text(S.current.seeMore))
                   ],
                 ),
               ),
@@ -341,7 +342,7 @@ class _ProductDetailsState extends State<ProductDetails>
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                child: Text(AppStrings.mayLike,
+                child: Text(S.current.mayLike,
                     style: Theme.of(context).textTheme.headline6),
               ),
               SizedBox(

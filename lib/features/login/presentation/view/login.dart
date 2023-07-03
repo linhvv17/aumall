@@ -1,8 +1,8 @@
+import 'package:aumall/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/local/shared_preference.dart';
-import '../../../../core/utilities/endpoints.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/strings.dart';
@@ -39,7 +39,7 @@ class _LoginViewState extends State<LoginView> {
                   Row(
                     children: [
                       Text(
-                        AppStrings.login,
+                        S.current.login,
                         style: Theme.of(context).textTheme.headline4!.copyWith(
                             fontWeight: FontWeight.bold,
                             color: ColorManager.dark),
@@ -48,15 +48,15 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   SizedBox(height: kHeight(context) * 0.1),
                   MainTFF(
-                      labelText: AppStrings.email,
-                      hintText: AppStrings.email,
+                      labelText: S.current.email,
+                      hintText: S.current.email,
                       controller: emailController,
                       validate: (value) {
                         if (value!.isEmpty) {
-                          return AppStrings.emptyEmail;
+                          return S.current.emptyEmail;
                         } else {
                           if (!value.contains('@')) {
-                            return AppStrings.invalidEmail;
+                            return S.current.invalidEmail;
                           }
                         }
                         return null;
@@ -69,15 +69,15 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   MainTFF(
                       max: 1,
-                      labelText: AppStrings.password,
-                      hintText: AppStrings.password,
+                      labelText: S.current.password,
+                      hintText: S.current.password,
                       controller: passController,
                       validate: (value) {
                         if (value!.isEmpty) {
-                          return AppStrings.passwordEmpty;
+                          return S.current.passwordEmpty;
                         } else {
                           if (value.length < 6) {
-                            return AppStrings.passwordError;
+                            return S.current.passwordError;
                           }
                         }
                         return null;
@@ -103,13 +103,13 @@ class _LoginViewState extends State<LoginView> {
                             Navigator.pushNamed(
                                 context, AppRoutes.forgotPassword);
                           },
-                          child: const Text(AppStrings.forgetPassword))),
+                          child: Text(S.current.forgetPassword))),
                   BlocConsumer<LoginBloc, LoginState>(
                     listener: (context, state) {
                       if (state is LoginFinishedState && state.data.success!) {
                         PreferenceHelper.saveDataInSharedPreference(
                             key: "token", value: state.data.token);
-                        showSnackbar(AppStrings.loginsuccess, context,
+                        showSnackbar(S.current.loginsuccess, context,
                             ColorManager.green);
 
                     
@@ -128,7 +128,7 @@ class _LoginViewState extends State<LoginView> {
                       return state is LoginLoadingState
                           ? const CircularProgressIndicator()
                           : MainButton(
-                              text: AppStrings.login.toUpperCase(),
+                              text: S.current.login.toUpperCase(),
                               height: 50,
                               ontab: () {
                                 if (formKey.currentState!.validate()) {
@@ -150,13 +150,13 @@ class _LoginViewState extends State<LoginView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(AppStrings.donthaveAccount,
+                      Text(S.current.donthaveAccount,
                           style: Theme.of(context).textTheme.labelLarge),
                       TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, AppRoutes.register);
                         },
-                        child: const Text(AppStrings.register),
+                        child: Text(S.current.register),
                       ),
                       Container(
                         width: 20,

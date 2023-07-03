@@ -7,6 +7,7 @@ import '../../../../core/utilities/enums.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../login/presentation/widgets/mainbutton.dart';
 import '../../../login/presentation/widgets/maintextformfield.dart';
@@ -59,8 +60,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   children: [
                     Text(
                       status == VerifyStatus.forgotPassword
-                          ? AppStrings.forgetPasswordtext
-                          : AppStrings.verify,
+                          ? S.current.forgetPasswordtext
+                          : S.current.verify,
                       style: Theme.of(context).textTheme.headline4!.copyWith(
                             fontWeight: FontWeight.bold,
                             color: ColorManager.dark,
@@ -71,8 +72,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
                     Text(
                       status == VerifyStatus.forgotPassword
-                          ? AppStrings.enteremail
-                          : AppStrings.enterLink,
+                          ? S.current.enteremail
+                          : S.current.enterLink,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 20),
@@ -80,15 +81,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       key: formKey,
                       child: status == VerifyStatus.forgotPassword
                           ? MainTFF(
-                              labelText: AppStrings.email,
-                              hintText: AppStrings.email,
+                              labelText: S.current.email,
+                              hintText: S.current.email,
                               controller: inputController,
                               validate: (value) {
                                 if (value!.isEmpty) {
-                                  return AppStrings.emptyEmail;
+                                  return S.current.emptyEmail;
                                 } else {
                                   if (!value.contains('@')) {
-                                    return AppStrings.invalidEmail;
+                                    return S.current.invalidEmail;
                                   }
                                 }
                                 return null;
@@ -97,15 +98,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               borderRadius: 16,
                               inputType: TextInputType.emailAddress)
                           : MainTFF(
-                              labelText: AppStrings.code,
-                              hintText: AppStrings.code,
+                              labelText: S.current.code,
+                              hintText: S.current.code,
                               controller: inputController,
                               validate: (value) {
                                 if (value!.isEmpty) {
-                                  return AppStrings.codeEmpty;
+                                  return S.current.codeEmpty;
                                 } else {
                                   if (value.length < 9) {
-                                    return AppStrings.invalidCode;
+                                    return S.current.invalidCode;
                                   }
                                 }
                                 return null;
@@ -132,7 +133,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             ? const Center(child: CircularProgressIndicator())
                             : status == VerifyStatus.forgotPassword
                                 ? MainButton(
-                                    text: AppStrings.send.toUpperCase(),
+                                    text: S.current.send.toUpperCase(),
                                     height: 50,
                                     ontab: () {
                                       if (formKey.currentState!.validate()) {
@@ -145,7 +146,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                       }
                                     })
                                 : MainButton(
-                                    text: AppStrings.send.toUpperCase(),
+                                    text: S.current.send.toUpperCase(),
                                     height: 50,
                                     ontab: () {
                                       if (formKey.currentState!.validate()) {

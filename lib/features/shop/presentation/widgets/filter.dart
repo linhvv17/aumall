@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/mainbutton.dart';
 import '../bloc/products_bloc.dart';
 
@@ -50,7 +51,7 @@ class FilterProduct extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(AppStrings.filter,
+                                    Text(S.current.filter,
                                         style: Theme.of(context)
                                             .textTheme
                                             .headline6),
@@ -58,7 +59,7 @@ class FilterProduct extends StatelessWidget {
                                       height: 30,
                                     ),
                                     Text(
-                                      AppStrings.price,
+                                      S.current.price,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium!
@@ -84,7 +85,7 @@ class FilterProduct extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      AppStrings.rate,
+                                      S.current.rate,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium!
@@ -133,7 +134,7 @@ class FilterProduct extends StatelessWidget {
                                       child: BlocProvider.value(
                                         value: bloc,
                                         child: MainButton(
-                                            text: AppStrings.apply,
+                                            text: S.current.apply,
                                             ontab: () {
                                               setState(() {
                                                 bloc.add(

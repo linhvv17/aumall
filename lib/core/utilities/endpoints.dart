@@ -30,3 +30,4 @@ bool? isLoggedIN;
 const String baseURLAuMall  = "http://45.77.171.218:8080/api";
 const String loginAuMall  = "/auth/login";
 const String registerAuMall  = "/auth/register";
+const String profileAuMall  = "/user";

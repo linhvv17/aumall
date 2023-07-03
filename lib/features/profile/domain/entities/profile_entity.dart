@@ -5,15 +5,15 @@ part 'profile_entity.g.dart';
 @HiveType(typeId: 1)
 class ProfileEntity extends Equatable {
     @HiveField(0)
-  final bool success;
+  final String status;
     @HiveField(1)
   final UserEntity? user;
   @HiveField(2)
   final String? message;
-  const ProfileEntity(this.success, this.user, this.message);
+  const ProfileEntity(this.status, this.user, this.message);
 
   @override
-  List<Object?> get props => [success, user,message];
+  List<Object?> get props => [status, user,message];
 }
 @HiveType(typeId: 2)
 class UserEntity extends Equatable {

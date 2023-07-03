@@ -4,6 +4,7 @@ import 'package:aumall/features/cart/data/models/cart_model.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../bloc/cart_bloc.dart';
 
@@ -58,7 +59,7 @@ class CatItem extends StatelessWidget {
                     BlocListener<CartBloc, CartState>(
                       listener: (context, state) {
                         if (state is RemoveFromCart) {
-                          showSnackbar(AppStrings.removeFromCart, context,
+                          showSnackbar(S.current.removeFromCart, context,
                               Colors.green);
                         }
                       },

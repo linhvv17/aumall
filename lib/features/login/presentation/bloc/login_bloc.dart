@@ -19,12 +19,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final failureOrSuccess = await loginUsecase(
           LoginUsecaseParams(email: event.email, password: event.password));
            failureOrSuccess.fold(
-
           (failure) => emit(LoginErrorState(failure.message)),
           (success) => emit(LoginFinishedState(data: success)));
-   
-      
-     
     });
   }
 }

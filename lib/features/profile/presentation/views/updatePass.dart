@@ -4,6 +4,7 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../login/presentation/widgets/mainbutton.dart';
 import '../../../login/presentation/widgets/maintextformfield.dart';
@@ -34,8 +35,8 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back_ios)),
-        title: const Text(
-          AppStrings.changePassword,
+        title:  Text(
+          S.current.changePassword,
           style: TextStyle(color: ColorManager.dark),
         ),
       ),
@@ -50,15 +51,15 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
                   height: kHeight(context) * .1,
                 ),
                 MainTFF(
-                    labelText: AppStrings.oldpassword,
-                    hintText: AppStrings.oldpassword,
+                    labelText: S.current.oldpassword,
+                    hintText: S.current.oldpassword,
                     controller: oldpassController,
                     validate: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.oldpasswordEmpty;
+                        return S.current.oldpasswordEmpty;
                       } else {
                         if (value.length < 6) {
-                          return AppStrings.passwordError;
+                          return S.current.passwordError;
                         }
                       }
                       return null;
@@ -73,17 +74,17 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
                           Navigator.pushNamed(
                               context, AppRoutes.forgotPassword);
                         },
-                        child: const Text(AppStrings.forgetPassword))),
+                        child:  Text(S.current.forgetPassword))),
                 MainTFF(
-                    labelText: AppStrings.newpassword,
-                    hintText: AppStrings.newpassword,
+                    labelText: S.current.newpassword,
+                    hintText: S.current.newpassword,
                     controller: newpassController,
                     validate: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.newpasswordEmpty;
+                        return S.current.newpasswordEmpty;
                       } else {
                         if (value.length < 6) {
-                          return AppStrings.passwordError;
+                          return S.current.passwordError;
                         }
                       }
                       return null;
@@ -95,15 +96,15 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
                   height: 20,
                 ),
                 MainTFF(
-                    labelText: AppStrings.repeatpassword,
-                    hintText: AppStrings.repeatpassword,
+                    labelText: S.current.repeatpassword,
+                    hintText: S.current.repeatpassword,
                     controller: repeatpassController,
                     validate: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.repeatpasswordEmpty;
+                        return S.current.repeatpasswordEmpty;
                       } else {
                         if (value.length < 6) {
-                          return AppStrings.passwordError;
+                          return S.current.passwordError;
                         }
                       }
                       return null;
@@ -114,8 +115,8 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
                 const SizedBox(height: 30),
                 BlocConsumer<UpdatePasswordBloc, UpdatePasswordState>(
                   listener: (context, state) {
-                    if (state is UpdatePasswordLoaded && state.data.success) {
-                      showSnackbar(AppStrings.updatepasssuccess, context,
+                    if (state is UpdatePasswordLoaded && state.data.status == '200') {
+                      showSnackbar(S.current.updatepasssuccess, context,
                           ColorManager.green);
                     } else if (state is UpdatePasswordError) {
                       showSnackbar(state.message, context, Colors.red);
@@ -127,7 +128,7 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
                     return state is UpdatePasswordLoading
                         ? const CircularProgressIndicator()
                         : MainButton(
-                            text: AppStrings.updatePass.toUpperCase(),
+                            text: S.current.updatePass.toUpperCase(),
                             height: 50,
                             ontab: () {
                               if (formKey.currentState!.validate()) {

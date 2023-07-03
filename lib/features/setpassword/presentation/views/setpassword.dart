@@ -4,6 +4,7 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../login/presentation/widgets/mainbutton.dart';
 import '../../../login/presentation/widgets/maintextformfield.dart';
@@ -43,7 +44,7 @@ class _SetPasswordState extends State<SetPassword> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  AppStrings.reset,
+                  S.current.reset,
                   style: Theme.of(context).textTheme.headline4!.copyWith(
                         fontWeight: FontWeight.bold,
                         color: ColorManager.dark,
@@ -51,21 +52,21 @@ class _SetPasswordState extends State<SetPassword> {
                 ),
                 SizedBox(height: kHeight(context) * 0.05),
                 Text(
-                  AppStrings.enterPassword,
+                  S.current.enterPassword,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 SizedBox(height: kHeight(context) * 0.05),
                 MainTFF(
                     max: 1,
-                    labelText: AppStrings.password,
-                    hintText: AppStrings.password,
+                    labelText: S.current.password,
+                    hintText: S.current.password,
                     controller: passController,
                     validate: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.passwordEmpty;
+                        return S.current.passwordEmpty;
                       } else {
                         if (value.length < 6) {
-                          return AppStrings.passwordError;
+                          return S.current.passwordError;
                         }
                       }
                       return null;
@@ -89,15 +90,15 @@ class _SetPasswordState extends State<SetPassword> {
                 ),
                 MainTFF(
                     max: 1,
-                    labelText: AppStrings.confirmpass,
-                    hintText: AppStrings.confirmpass,
+                    labelText: S.current.confirmpass,
+                    hintText: S.current.confirmpass,
                     controller: confirmPassController,
                     validate: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.passwordEmpty;
+                        return S.current.passwordEmpty;
                       } else {
                         if (confirmPassController.text != passController.text) {
-                          return AppStrings.notValidConfirmPassword;
+                          return S.current.notValidConfirmPassword;
                         }
                       }
                       return null;
@@ -136,7 +137,7 @@ class _SetPasswordState extends State<SetPassword> {
                       child: state is ResetPasswordLoading
                           ? const CircularProgressIndicator()
                           : MainButton(
-                              text: AppStrings.login.toUpperCase(),
+                              text: S.current.login.toUpperCase(),
                               height: 50,
                               ontab: () {
                                 if (formKey.currentState!.validate()) {

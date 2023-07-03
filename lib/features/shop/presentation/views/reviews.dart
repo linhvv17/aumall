@@ -7,6 +7,7 @@ import 'package:aumall/features/shop/presentation/bloc/send_review_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../domain/entities/products_entity.dart';
 import '../widgets/reviewsheet.dart';
 
@@ -30,7 +31,7 @@ class _ReviewsViewState extends State<ReviewsView> {
           },
           icon: const Icon(Icons.arrow_back_ios_new),
         ),
-        title: Text(AppStrings.rateandreview,
+        title: Text(S.current.rateandreview,
             style: Theme.of(context).textTheme.headline6),
       ),
       floatingActionButton: SizedBox(
@@ -68,9 +69,9 @@ class _ReviewsViewState extends State<ReviewsView> {
                 ),
                 SizedBox(
                   width: kWidth(context) / 3.7,
-                  child: const FittedBox(
+                  child:  FittedBox(
                     child: Text(
-                      AppStrings.writereview,
+                      S.current.writereview,
                     ),
                   ),
                 ),

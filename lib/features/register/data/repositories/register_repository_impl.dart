@@ -4,6 +4,7 @@ import '../../../../core/error/error_handler.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/network/network_info.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../domain/entities/register_entity.dart';
 import '../../domain/repositories/register_repository.dart';
 import '../datasources/register_datasource.dart';
@@ -24,7 +25,7 @@ class RegisterRepositoryImpl implements RegisterBaseRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return const Left(OfflineFailure(AppStrings.noInternetError));
+      return  Left(OfflineFailure(S.current.noInternetError));
     }
   }
 }

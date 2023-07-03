@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/colors/colors.dart';
 import '../../../core/utilities/mediaquery.dart';
 import '../../../core/utilities/strings.dart';
+import '../../../generated/l10n.dart';
 import '../../login/presentation/widgets/mainbutton.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -32,7 +33,7 @@ class HomeHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppStrings.headerTitle,
+              S.current.headerTitle,
               style: Theme.of(context)
                   .textTheme
                   .headline4!
@@ -42,7 +43,7 @@ class HomeHeader extends StatelessWidget {
               height: 10,
             ),
             Text(
-              AppStrings.headerSuTitle,
+              S.current.headerSuTitle,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: ColorManager.white.withOpacity(0.9),
                   ),
@@ -53,7 +54,7 @@ class HomeHeader extends StatelessWidget {
             SizedBox(
                 width: 200,
                 child: MainButton(
-                    text: AppStrings.check, height: 40, ontab: () {}))
+                    text: S.current.check, height: 40, ontab: () {}))
           ],
         ),
       ),

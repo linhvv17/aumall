@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:aumall/core/utilities/strings.dart';
 import 'package:aumall/features/profile/presentation/widgets/order_card.dart';
 import 'package:aumall/features/profile/presentation/widgets/order_cardpastOrders.dart';
+import '../../../../generated/l10n.dart';
 import '../../../payment/presentation/bloc/order_bloc.dart';
 
 class OrdersView extends StatelessWidget {
@@ -23,16 +24,16 @@ class OrdersView extends StatelessWidget {
               },
               icon: const Icon(Icons.arrow_back_ios)),
           title: Text(
-            AppStrings.myOrders,
+            S.current.myOrders,
             style: Theme.of(context).textTheme.headline6,
           ),
-          bottom: const TabBar(
+          bottom:  TabBar(
             tabs: [
               Tab(
-                text: AppStrings.activeOrders,
+                text: S.current.activeOrders,
               ),
               Tab(
-                text: AppStrings.deliveredOrders,
+                text: S.current.deliveredOrders,
               ),
             ],
           ),

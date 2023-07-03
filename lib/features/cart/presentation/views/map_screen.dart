@@ -12,6 +12,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
+import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../data/models/suggession_model.dart';
 
@@ -32,7 +33,7 @@ class MapView extends StatelessWidget {
           },
         ),
         title: Text(
-          AppStrings.selectnewaddress,
+          S.current.selectnewaddress,
           style: Theme.of(context).textTheme.headline6,
         ),
       ),
@@ -115,7 +116,7 @@ class MapView extends StatelessWidget {
                                         TextCapitalization.words,
                                     keyboardType: TextInputType.streetAddress,
                                     decoration: InputDecoration(
-                                      hintText: AppStrings.searchlocation,
+                                      hintText: S.current.searchlocation,
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
                                         borderSide: const BorderSide(
@@ -227,7 +228,7 @@ class MapView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
                               const BorderSide(color: Colors.transparent)),
-                      hintText: AppStrings.searchlocation,
+                      hintText: S.current.searchlocation,
                       hintStyle: const TextStyle(
                         color: Color(0xFF535353),
                       ),

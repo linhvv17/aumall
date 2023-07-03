@@ -17,7 +17,7 @@ class ProfileEntityAdapter extends TypeAdapter<ProfileEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ProfileEntity(
-      fields[0] as bool,
+      fields[0] as String,
       fields[1] as UserEntity?,
       fields[2] as String?,
     );
@@ -28,7 +28,7 @@ class ProfileEntityAdapter extends TypeAdapter<ProfileEntity> {
     writer
       ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.success)
+      ..write(obj.status)
       ..writeByte(1)
       ..write(obj.user)
       ..writeByte(2)

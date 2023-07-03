@@ -9,6 +9,7 @@ import 'package:aumall/core/error/error_handler.dart';
 import 'package:aumall/core/network/network_info.dart';
 import 'package:aumall/core/utilities/strings.dart';
 import 'package:aumall/features/cart/data/datasource/placesAPI.dart';
+import '../../../../generated/l10n.dart';
 import '../widgets/permissiondialog.dart';
 
 part 'location_event.dart';
@@ -81,7 +82,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
           emit(MapErrorState(ErrorHandler.handle(error).failure.message));
         }
       } else {
-        ErrorHandler.handle(AppStrings.noInternetError);
+        ErrorHandler.handle(S.current.noInternetError);
       }
     });
 
@@ -120,7 +121,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
           emit(MapErrorState(ErrorHandler.handle(error).failure.message));
         }
       } else {
-        ErrorHandler.handle(AppStrings.noInternetError);
+        ErrorHandler.handle(S.current.noInternetError);
       }
     });
     on<SelectMethod>((event, emit) {

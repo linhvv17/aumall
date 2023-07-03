@@ -26,6 +26,9 @@ import 'features/login/presentation/bloc/login_bloc.dart';
 import 'features/profile/presentation/bloc/profile_bloc.dart';
 import 'features/register/presentation/bloc/register_bloc.dart';
 import 'features/forgotpass&verifyemail/presentation/forgotpass&verifyemail_bloc/forgotpass&verifyemail_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -106,6 +109,14 @@ class MyApp extends StatelessWidget {
             initialRoute: isSkipedOnBoarding != null
                 ? AppRoutes.splash
                 : AppRoutes.onBoarding,
+
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
           );
         },
       ),

@@ -5,6 +5,7 @@ import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/core/utilities/routes.dart';
 import 'package:aumall/core/utilities/strings.dart';
 import 'package:aumall/features/splash&onboarding/presentation/widgets/dots.dart';
+import '../../../../generated/l10n.dart';
 import '../../data/models/onboarding.dart';
 
 class OnBoardingView extends StatefulWidget {
@@ -106,7 +107,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                                       vertical: 25),
                               textStyle: Theme.of(context).textTheme.bodyLarge,
                             ),
-                            child: Text(AppStrings.start.toUpperCase()),
+                            child: Text(S.current.start.toUpperCase()),
                           ),
                         )
                       : Padding(
@@ -130,7 +131,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                                   ),
                                 ),
                                 child: Text(
-                                  AppStrings.skip.toUpperCase(),
+                                  S.current.skip.toUpperCase(),
                                   style: const TextStyle(color: Colors.black),
                                 ),
                               ),
@@ -156,7 +157,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                                       fontSize:
                                           (kWidth(context) <= 550) ? 13 : 17),
                                 ),
-                                child: const Text(AppStrings.next),
+                                child:  Text(S.current.next),
                               ),
                             ],
                           ),

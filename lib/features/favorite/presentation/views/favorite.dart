@@ -5,6 +5,7 @@ import 'package:aumall/features/favorite/presentation/bloc/favourite_bloc.dart';
 import 'package:aumall/features/home/widgets/customGridView.dart';
 import 'package:aumall/features/home/widgets/product_item.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
 
 
@@ -24,7 +25,7 @@ class _FavoriteViewState extends State<FavoriteView> {
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
-            AppStrings.favorite,
+            S.current.favorite,
             style: Theme.of(context).textTheme.headline6,
           )),
       body: Column(
@@ -38,7 +39,7 @@ class _FavoriteViewState extends State<FavoriteView> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(AppStrings.notfavorite,style: Theme.of(context).textTheme.titleMedium,),
+                        child: Text(S.current.notfavorite,style: Theme.of(context).textTheme.titleMedium,),
                       )
                     ],
                   )

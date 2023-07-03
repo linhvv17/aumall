@@ -6,8 +6,7 @@ import '../utilities/endpoints.dart';
 class APIProviderImpl implements APIProvider {
   final Dio dio = Dio(
     BaseOptions(
-      baseUrl: baseUrlPath, //default
-      // baseUrl: baseURLAuMall,
+      baseUrl: baseURLAuMall,
       receiveDataWhenStatusError: true,
       connectTimeout: 5000,
     ),

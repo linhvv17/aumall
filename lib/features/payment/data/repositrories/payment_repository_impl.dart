@@ -12,6 +12,8 @@ import 'package:aumall/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:aumall/features/payment/domain/repositories/payment_repository.dart';
 
+import '../../../../generated/l10n.dart';
+
 class PaymentRepositoryImpl implements PaymentRepository {
   final NetworkInfo networkInfo;
   final PaymentDataSource paymentDataSource;
@@ -29,7 +31,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -57,7 +59,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -74,7 +76,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -102,7 +104,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -116,7 +118,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 }

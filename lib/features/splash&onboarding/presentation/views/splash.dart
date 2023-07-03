@@ -6,6 +6,7 @@ import 'package:aumall/core/utilities/routes.dart';
 import 'package:aumall/core/utilities/strings.dart';
 
 import '../../../../core/local/shared_preference.dart';
+import '../../../../generated/l10n.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -75,7 +76,7 @@ class SplashViewState extends State<SplashView>
                 height: 18,
               ),
               Text(
-                AppStrings.appName,
+                S.current.appName,
                 style: Theme.of(context).textTheme.headline6!.copyWith(
                       color: ColorManager.orangeLight,
                     ),

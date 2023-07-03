@@ -1,5 +1,7 @@
 import 'package:aumall/core/utilities/strings.dart';
 
+import '../../../../generated/l10n.dart';
+
 class OnBoardingContents {
   final String title;
   final String image;
@@ -14,25 +16,25 @@ class OnBoardingContents {
 
 List<OnBoardingContents> contents = [
   OnBoardingContents(
-    title: AppStrings.onBoardingTitle1,
+    title: S.current.onBoardingTitle1,
     image: "assets/images/1.png",
     desc:
-        AppStrings.onBoardingSubTitle1,
+        S.current.onBoardingSubTitle1,
   ),
   OnBoardingContents(
-    title: AppStrings.onBoardingTitle2,
+    title: S.current.onBoardingTitle2,
     image: "assets/images/sale.png",
-    desc: AppStrings.onBoardingSubTitle2,
+    desc: S.current.onBoardingSubTitle2,
   ),
   OnBoardingContents(
-    title: AppStrings.onBoardingTitle3,
+    title: S.current.onBoardingTitle3,
     image: "assets/images/payment.png",
-    desc: AppStrings.onBoardingSubTitle3,
+    desc: S.current.onBoardingSubTitle3,
   ),
   OnBoardingContents(
-    title: AppStrings.onBoardingTitle4,
+    title: S.current.onBoardingTitle4,
     image: "assets/images/delivery.png",
     desc:
-        AppStrings.onBoardingSubTitle4,
+        S.current.onBoardingSubTitle4,
   ),
 ];

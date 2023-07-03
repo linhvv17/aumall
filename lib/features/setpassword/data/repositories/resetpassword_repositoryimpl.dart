@@ -3,6 +3,7 @@ import '../../../../core/error/error_handler.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/network/network_info.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../domain/entities/resetpassword_entity.dart';
 import '../../domain/repositories/resetPassword_repository.dart';
 import '../datasources/Resetpassword_datasource.dart';
@@ -24,7 +25,7 @@ class ResetPasswordRepositoryImpl implements ResetPasswordRepository {
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return const Left(OfflineFailure(AppStrings.noInternetError));
+      return  Left(OfflineFailure(S.current.noInternetError));
     }
   }
 }

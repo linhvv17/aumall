@@ -3,6 +3,7 @@ import '../../../../core/error/error_handler.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/network/network_info.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../domain/entities/profile_entity.dart';
 import '../../domain/repositories/profile_repository.dart';
 import '../datasources/profile_local_datasource.dart';
@@ -28,7 +29,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       final profile = CacheManager().getItem("user-info");
       if (profile != null) return right(profile);
 
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -43,7 +44,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -58,7 +59,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left(const OfflineFailure(AppStrings.noInternetError));
+      return left( OfflineFailure(S.current.noInternetError));
     }
   }
 }

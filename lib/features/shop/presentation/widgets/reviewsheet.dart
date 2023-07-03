@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../login/presentation/widgets/mainbutton.dart';
 import '../../../login/presentation/widgets/maintextformfield.dart';
@@ -36,7 +37,7 @@ class _ReviewSheetState extends State<ReviewSheet> {
                   height: 20,
                 ),
                 Text(
-                  AppStrings.whatrate,
+                  S.current.whatrate,
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 const SizedBox(
@@ -66,7 +67,7 @@ class _ReviewSheetState extends State<ReviewSheet> {
                   height: 10,
                 ),
                 Text(
-                  AppStrings.plsshareopinion,
+                  S.current.plsshareopinion,
                   style: Theme.of(context).textTheme.headline6,
                   textAlign: TextAlign.center,
                 ),
@@ -79,7 +80,7 @@ class _ReviewSheetState extends State<ReviewSheet> {
                     validate: (v) {
                       return null;
                     },
-                    labelText: AppStrings.yourReview,
+                    labelText: S.current.yourReview,
                     isPassword: false,
                     borderRadius: 15,
                     inputType: TextInputType.text),
@@ -89,7 +90,7 @@ class _ReviewSheetState extends State<ReviewSheet> {
                 BlocConsumer<SendReviewBloc, SendReviewState>(
                   listener: (context, state) {
                     if (state is SendReviewLoadedState && state.data.success) {
-                      showSnackbar(AppStrings.sendreviewsuccess, context,
+                      showSnackbar(S.current.sendreviewsuccess, context,
                           ColorManager.green);
                     } else if (state is SendReviewLoadedState) {
                       showSnackbar(state.data.message!, context, Colors.red);
@@ -103,7 +104,7 @@ class _ReviewSheetState extends State<ReviewSheet> {
                             child: CircularProgressIndicator(),
                           )
                         : MainButton(
-                            text: AppStrings.sendReview,
+                            text: S.current.sendReview,
                             ontab: () {
                               if (formKey.currentState!.validate()) {
                                 BlocProvider.of<SendReviewBloc>(context).add(

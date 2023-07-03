@@ -16,6 +16,7 @@ import 'package:aumall/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../core/utilities/routes.dart';
+import '../../../../generated/l10n.dart';
 import '../../../payment/presentation/bloc/payment_bloc.dart';
 
 class AddNewAddressView extends StatefulWidget {
@@ -50,7 +51,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
           },
         ),
         title: Text(
-          AppStrings.checkout,
+          S.current.checkout,
           style: Theme.of(context).textTheme.headline6,
         ),
       ),
@@ -145,7 +146,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                         }
                       },
                       label: Text(
-                        AppStrings.submitOrder.toUpperCase(),
+                        S.current.submitOrder.toUpperCase(),
                       ));
             },
           ),
@@ -160,7 +161,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  AppStrings.currentLocation,
+                  S.current.currentLocation,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 ElevatedButton.icon(
@@ -168,7 +169,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                     Navigator.pushNamed(context, AppRoutes.mapview);
                   },
                   icon: const Icon(Icons.add),
-                  label: const Text(AppStrings.addNew),
+                  label:  Text(S.current.addNew),
                 ),
               ],
             ),
@@ -214,7 +215,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                           child: Row(
                             children: [
                               Text(
-                                AppStrings.deliveryAddress,
+                                S.current.deliveryAddress,
                                 style: Theme.of(context).textTheme.headline6,
                               ),
                             ],
@@ -222,11 +223,11 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                         ),
                         MainTFF(
                             max: 1,
-                            labelText: AppStrings.addressLine,
+                            labelText: S.current.addressLine,
                             controller: addressController,
                             validate: (value) {
                               if (value!.isEmpty) {
-                                return AppStrings.emptyaddress;
+                                return S.current.emptyaddress;
                               }
                               return null;
                             },
@@ -238,11 +239,11 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                         ),
                         MainTFF(
                             max: 1,
-                            labelText: AppStrings.firstname,
+                            labelText: S.current.firstname,
                             controller: firstNameController,
                             validate: (value) {
                               if (value!.isEmpty) {
-                                return AppStrings.nameEmpty;
+                                return S.current.nameEmpty;
                               }
                               return null;
                             },
@@ -254,11 +255,11 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                         ),
                         MainTFF(
                             max: 1,
-                            labelText: AppStrings.lastname,
+                            labelText: S.current.lastname,
                             controller: lastNameController,
                             validate: (value) {
                               if (value!.isEmpty) {
-                                return AppStrings.nameEmpty;
+                                return S.current.nameEmpty;
                               }
                               return null;
                             },
@@ -270,11 +271,11 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                         ),
                         MainTFF(
                             max: 1,
-                            labelText: AppStrings.email,
+                            labelText: S.current.email,
                             controller: emailController,
                             validate: (value) {
                               if (value!.isEmpty) {
-                                return AppStrings.emptyEmail;
+                                return S.current.emptyEmail;
                               }
                               return null;
                             },
@@ -287,18 +288,18 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                         MainTFF(
                           validate: (value) {
                             if (value!.isEmpty) {
-                              return AppStrings.phoneRequired;
+                              return S.current.phoneRequired;
                             } else if (value.length < 10) {
-                              return AppStrings.phonemust;
+                              return S.current.phonemust;
                             }
                             return null;
                           },
                           controller: phoneController,
                           inputType: TextInputType.number,
-                          labelText: AppStrings.phone,
+                          labelText: S.current.phone,
                           max: 1,
                           isPassword: false,
-                          hintText: AppStrings.enterphone,
+                          hintText: S.current.enterphone,
                           prefix: Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 5, vertical: 3),
@@ -341,7 +342,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                         Row(
                           children: [
                             Text(
-                              AppStrings.deliveryMethod,
+                              S.current.deliveryMethod,
                               style: Theme.of(context).textTheme.headline6,
                             ),
                           ],
@@ -366,7 +367,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                AppStrings.order,
+                                S.current.order,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -384,7 +385,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                AppStrings.delivery,
+                                S.current.delivery,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -402,7 +403,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                AppStrings.summery,
+                                S.current.summery,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/strings.dart';
+import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../login/presentation/widgets/mainbutton.dart';
 import '../../../login/presentation/widgets/maintextformfield.dart';
@@ -40,10 +41,10 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
               },
               icon: const Icon(Icons.arrow_back_ios)),
           title: Text(
-            AppStrings.personalinfo,
-            style: Theme.of(context).textTheme.headline6!.copyWith(
-                fontWeight: FontWeight.bold, color: ColorManager.dark),
+            S.current.personalinfo,
+              style: const TextStyle(fontWeight: FontWeight.bold, color: ColorManager.dark)
           ),
+          centerTitle: true,
         ),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -184,12 +185,12 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                   ),
                   const SizedBox(height: 20),
                   MainTFF(
-                    labelText: AppStrings.name,
+                    labelText: S.current.name,
                     hintText: widget.user.name,
                     controller: nameController,
                     validate: (value) {
                       if (value!.isEmpty) {
-                        return AppStrings.nameEmpty;
+                        return S.current.nameEmpty;
                       }
 
                       return null;
@@ -202,15 +203,15 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                     height: 10,
                   ),
                   MainTFF(
-                      labelText: AppStrings.email,
+                      labelText: S.current.email,
                       hintText: widget.user.email,
                       controller: emailController,
                       validate: (value) {
                         if (value!.isEmpty) {
-                          return AppStrings.emptyEmail;
+                          return S.current.emptyEmail;
                         } else {
                           if (!value.contains('@')) {
-                            return AppStrings.invalidEmail;
+                            return S.current.invalidEmail;
                           }
                         }
                         return null;
@@ -223,8 +224,8 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                   ),
                   BlocConsumer<ProfileBloc, ProfileState>(
                     listener: (context, state) {
-                      if (state is ProfileUpdateState && state.data.success) {
-                        showSnackbar(AppStrings.updateproflesuccess, context,
+                      if (state is ProfileUpdateState && state.data.status == '200') {
+                        showSnackbar(S.current.updateproflesuccess, context,
                             ColorManager.green);
                       } else if (state is UpdateProfileErrorState) {
                         showSnackbar(state.message, context, Colors.red);
@@ -234,7 +235,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       return state is UpdateProfileLoadingState
                           ? const CircularProgressIndicator()
                           : MainButton(
-                              text: AppStrings.updateprofile.toUpperCase(),
+                              text: S.current.updateprofile.toUpperCase(),
                               height: 50,
                               ontab: () {
                                 if (formKey.currentState!.validate()) {

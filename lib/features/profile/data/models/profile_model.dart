@@ -5,9 +5,9 @@ class ProfileModel extends ProfileEntity {
  
   const ProfileModel(super.success, super.user, super.message);
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-      json['success'],
-      json['user'] != null
-          ? UserModel.fromJson(json['user'])
+      json['status'].toString(),
+      json['data'] != null
+          ? UserModel.fromJson(json['data'])
           :  CacheManager().getItem("user-info")!.user,
       json['message'] ?? '');
 }
@@ -15,7 +15,7 @@ class ProfileModel extends ProfileEntity {
 class UserModel extends UserEntity {
   const UserModel(super.id, super.name, super.email, super.avtar);
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-      json['_id'],
+      json['id'].toString(),
       json['name'],
       json['email'],
       json['avatar'] != null ? AvatarModel.fromJson(json['avatar']) : null);

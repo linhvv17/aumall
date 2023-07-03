@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/core/utilities/routes.dart';
 import 'package:aumall/core/utilities/strings.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/payment_bloc.dart';
 
 class Payment extends StatefulWidget {
@@ -53,7 +54,7 @@ class _PaymentState extends State<Payment> {
                 Navigator.pushReplacementNamed(context, AppRoutes.success);
               },
               icon: const Icon(Icons.navigate_next),
-              label: const Text(AppStrings.next)),
+              label:  Text(S.current.next)),
         ),
       ]),
     );
