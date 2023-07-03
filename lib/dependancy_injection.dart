@@ -1,3 +1,4 @@
+import 'package:aumall/core/local/shared_preference.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:aumall/core/network/payment_api_provider_impl.dart';
@@ -144,5 +145,5 @@ Future<void> init() async {
   injector.registerLazySingleton(() => InternetConnectionChecker());
 
   //SharedPreference
-  //injector.registerLazySingleton<PreferenceHelper>(() => PreferenceHelper());
+  injector.registerLazySingleton<PreferenceHelper>(() => PreferenceHelper());
 }
