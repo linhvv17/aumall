@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:aumall/core/utilities/file_store.dart';
+
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/network/api_provider.dart';
 import '../../../../core/utilities/endpoints.dart';
@@ -18,9 +22,12 @@ class ProfileDataSourceImpl implements ProfileDatasource {
   Future<ProfileModel> getUserDetails() async {
     final response = await apiProvider.get(
       endPoint: profileEndPoint,
+      // endPoint: profileAuMall,
       token: PreferenceHelper.getDataFromSharedPreference(
                             key: 'token') ?? '',
     );
+    print("getUserDetails ${response.data}");
+    // await FileStorage.writeCounter(jsonEncode(response.data).toString(), 'user.txt');
     return ProfileModel.fromJson(response.data);
   }
 
