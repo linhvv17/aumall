@@ -9,7 +9,6 @@ abstract class FavouriteState extends Equatable {
 
 class FavouriteInitial extends FavouriteState {}
 
-
 class AddToFavouriteState extends FavouriteState {}
 
 class RemoveFromFavouriteState extends FavouriteState {}

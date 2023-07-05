@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addfav":
             MessageLookupByLibrary.simpleMessage("Product Added to Favorite"),
         "addressLine": MessageLookupByLibrary.simpleMessage("Address Line"),
+        "allProducts": MessageLookupByLibrary.simpleMessage("All Products >>"),
         "appName": MessageLookupByLibrary.simpleMessage("AuMall"),
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "badRequestError": MessageLookupByLibrary.simpleMessage(
@@ -95,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot your pasasword?"),
         "forgetPasswordtext":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "goToCart": MessageLookupByLibrary.simpleMessage("Go to cart"),
         "haveAccount":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "headerSuTitle": MessageLookupByLibrary.simpleMessage(
@@ -180,6 +182,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "plsshareopinion": MessageLookupByLibrary.simpleMessage(
             "Please share your opinion\nabout the product"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
+        "productsAbove": MessageLookupByLibrary.simpleMessage("Products Above"),
         "profilePicture":
             MessageLookupByLibrary.simpleMessage("upload_profile_picture"),
         "rate": MessageLookupByLibrary.simpleMessage("Rating"),
@@ -211,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Review sent Successfully"),
         "shop": MessageLookupByLibrary.simpleMessage("Shop"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "stars": MessageLookupByLibrary.simpleMessage("Stars"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "submitOrder": MessageLookupByLibrary.simpleMessage("Submit Order"),

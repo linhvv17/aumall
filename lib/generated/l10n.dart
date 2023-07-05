@@ -1499,6 +1499,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Products Above`
+  String get productsAbove {
+    return Intl.message(
+      'Products Above',
+      name: 'productsAbove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stars`
+  String get stars {
+    return Intl.message(
+      'Stars',
+      name: 'stars',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All Products >>`
+  String get allProducts {
+    return Intl.message(
+      'All Products >>',
+      name: 'allProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to cart`
+  String get goToCart {
+    return Intl.message(
+      'Go to cart',
+      name: 'goToCart',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -12,7 +12,8 @@ class CartStarted extends CartEvent{
 }
 class AddToCart extends CartEvent {
   final ProductEntity product;
-  const AddToCart(this.product);
+  final int index;
+  const AddToCart(this.product, this.index);
 }
 
 class RemoveFromCart extends CartEvent {
@@ -23,12 +24,13 @@ class RemoveFromCart extends CartEvent {
 
 class IncrementCount extends CartEvent {
   final CartProduct cartProduct;
+  final int index;
 
-  const IncrementCount(this.cartProduct);
+  const IncrementCount(this.cartProduct, this.index);
 }
 
 class DecrementCount extends CartEvent {
   final CartProduct cartProduct;
-
-  const DecrementCount(this.cartProduct);
+  final int index;
+  const DecrementCount(this.cartProduct, this.index);
 }

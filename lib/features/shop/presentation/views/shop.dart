@@ -34,15 +34,15 @@ class ShopView extends StatelessWidget {
             final bloc = BlocProvider.of<ProductsBloc>(context);
             return Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Text(
+                  S.current.shop,
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                const Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const FilterProduct(),
-                    Text(
-                      S.current.shop,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                    const SearchWidget()
+                    Expanded(child: SearchWidget()),
+                    FilterProduct(),
                   ],
                 ),
                 Padding(

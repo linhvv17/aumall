@@ -16,24 +16,27 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   String userName = '';
   String userEmail = '';
   final GetUserDetails getUserDetails;
-  final UpdateUserDetailUsecase updataProfile;
+  final UpdateUserDetailUsecase updateProfile;
   CloudinaryResponse? response;
-  ProfileBloc(this.getUserDetails, this.updataProfile)
+  ProfileBloc(this.getUserDetails, this.updateProfile)
       : super(ProfileInitial()) {
     on<GetProfile>((event, emit) async {
       emit(ProfileLoadingState());
       final failureOrSuccess = await getUserDetails(NoParams());
       failureOrSuccess.fold(
-          (failure) => emit(ProfileErrorState(failure.message)), (success) {
-        userName = success.user!.name;
-        userEmail = success.user!.email;
-        emit(ProfileLoadedState(success));
-      });
+              (failure) {
+                  emit(ProfileErrorState(failure.message));
+                  },
+              (success) {
+                  userName = success.user!.name;
+                  userEmail = success.user!.email;
+                  emit(ProfileLoadedState(success));
+                  });
     });
 
     on<UpdataProfileEvent>((event, emit) async {
       emit(UpdateProfileLoadingState());
-      final failureOrSuccess = await updataProfile(
+      final failureOrSuccess = await updateProfile(
           UpdateProfileUsecaseParams(event.name, event.email, event.avatar));
       failureOrSuccess.fold(
           (failure) => emit(UpdateProfileErrorState(failure.message)),

@@ -128,6 +128,7 @@ class ProfileView extends StatelessWidget {
                           onTap: () {
                             Navigator.pushReplacementNamed(
                                 context, AppRoutes.login);
+                            PreferenceHelper.saveDataInSharedPreference(key: 'IsLoggedIn', value: false);
                             PreferenceHelper.removeData(key: 'token');
                           },
                           title: Text(

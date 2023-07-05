@@ -104,7 +104,7 @@ class FilterProduct extends StatelessWidget {
                                         ),
                                         SizedBox(
                                           child: Text(
-                                            'Products Above ${(bloc.rateValue.round())} Stars',
+                                            '${S.current.productsAbove} ${(bloc.rateValue.round())} ${S.current.stars}',
                                             style: const TextStyle(
                                                 color: ColorManager.grey),
                                             textAlign: TextAlign.center,

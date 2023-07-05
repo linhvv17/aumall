@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addfav": MessageLookupByLibrary.simpleMessage(
             "Sản phẩm được thêm vào yêu thích"),
         "addressLine": MessageLookupByLibrary.simpleMessage("Địa chỉ hiện tại"),
+        "allProducts":
+            MessageLookupByLibrary.simpleMessage("Tất cả sản phẩm >>"),
         "appName": MessageLookupByLibrary.simpleMessage("AuMall"),
         "apply": MessageLookupByLibrary.simpleMessage("Áp dụng"),
         "badRequestError": MessageLookupByLibrary.simpleMessage(
@@ -97,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "forgetPasswordtext":
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
+        "goToCart": MessageLookupByLibrary.simpleMessage("Đi đến giỏ hàng"),
         "haveAccount": MessageLookupByLibrary.simpleMessage("Đã có tài khoản?"),
         "headerSuTitle": MessageLookupByLibrary.simpleMessage(
             "Mua sắm những sản phẩm thú vị nhất hiện có trên cửa hàng\nhãy để nó là áo phông, Đồ điện tử và hơn thế nữa!"),
@@ -183,6 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "plsshareopinion": MessageLookupByLibrary.simpleMessage(
             "Hãy chia sẻ ý kiến của bạn về sản phẩm"),
         "price": MessageLookupByLibrary.simpleMessage("Giá"),
+        "productsAbove": MessageLookupByLibrary.simpleMessage("Sản phẩm trên"),
         "profilePicture": MessageLookupByLibrary.simpleMessage("Upload ảnh"),
         "rate": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
         "rateandreview":
@@ -213,6 +217,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gửi đánh giá thành công"),
         "shop": MessageLookupByLibrary.simpleMessage("Cửa hàng"),
         "skip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
+        "stars": MessageLookupByLibrary.simpleMessage("sao"),
         "start": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
         "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
         "submitOrder":

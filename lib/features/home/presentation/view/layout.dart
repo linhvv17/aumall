@@ -1,3 +1,4 @@
+import 'package:aumall/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/features/cart/presentation/bloc/cart_bloc.dart';
@@ -33,7 +34,7 @@ class _LayoutPageState extends State<LayoutPage> {
       builder: (context, state) {
         return Scaffold(
           bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
+            // type: BottomNavigationBarType.fixed,
             backgroundColor: ColorManager.white,
             selectedItemColor: ColorManager.orangeLight,
             unselectedItemColor: ColorManager.grey,
@@ -72,28 +73,28 @@ class _LayoutPageState extends State<LayoutPage> {
                       .add(LoadHome());
               }
             },
-            items: const [
+            items:  [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.home_outlined),
-                  label: 'Home',
-                  activeIcon: Icon(Icons.home)),
+                  icon: const Icon(Icons.home_outlined),
+                  label: S.current.home,
+                  activeIcon: const Icon(Icons.home)),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart_outlined),
-                  label: 'Shop',
-                  activeIcon: Icon(Icons.shopping_cart)),
+                  icon: const Icon(Icons.shopping_cart_outlined),
+                  label: S.current.shop,
+                  activeIcon: const Icon(Icons.shopping_cart)),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_bag_outlined),
-                  label: 'Bag',
-                  activeIcon: Icon(Icons.shopping_bag)),
+                  icon: const Icon(Icons.shopping_bag_outlined),
+                  label: S.current.mybag,
+                  activeIcon: const Icon(Icons.shopping_bag)),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border_outlined),
-                label: 'Favorite',
-                activeIcon: Icon(Icons.favorite),
+                icon: const Icon(Icons.favorite_border_outlined),
+                label: S.current.favorite,
+                activeIcon: const Icon(Icons.favorite),
               ),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.person_outline),
-                  label: 'Profile',
-                  activeIcon: Icon(Icons.person)),
+                  icon: const Icon(Icons.person_outline),
+                  label: S.current.myProfile,
+                  activeIcon: const Icon(Icons.person)),
             ],
           ),
           body: BlocBuilder<BottomNavigationBarBloc, BottomNavigationBarState>(

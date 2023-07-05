@@ -1,3 +1,4 @@
+import 'package:aumall/features/cart/presentation/views/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -159,47 +160,86 @@ class _ProductDetailsState extends State<ProductDetails>
           ),
         ],
       ),
-      floatingActionButton: SizedBox(
-        width: kWidth(context) / 1.12,
-        height: kHeight(context) / 14,
-        child: FloatingActionButton.extended(
-            backgroundColor: ColorManager.orangeLight,
-            elevation: 8,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            onPressed: () {
-              BlocProvider.of<CartBloc>(context).add(AddToCart(widget.product));
-              animateCartAdd(
-                context,
-                NetworkImage(
-                  widget.product.images[0].url,
-                ),
-              );
-            },
-            label: BlocConsumer<CartBloc, CartState>(
-              listener: (context, state) {
-                if (state is AddToCartState) {
-                  showSnackbar(S.current.addedToCart, context, Colors.green);
-                }
-              },
-              builder: (context, state) {
-                return Text(
-                  S.current.addToCart.toUpperCase(),
-                );
-              },
-            )),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          SizedBox(
+            width: kWidth(context) / 2.4,
+            height: kHeight(context) / 14,
+            child: FloatingActionButton.extended(
+                heroTag: "add",
+                backgroundColor: ColorManager.orangeLight,
+                elevation: 8,
+                shape:
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                onPressed: () {
+
+                  BlocProvider.of<CartBloc>(context).add(AddToCart(widget.product, widget.index));
+
+                  animateCartAdd(
+                    context,
+                    NetworkImage(
+                      widget.product.images[0].url,
+                    ),
+                  );
+                },
+                label: BlocConsumer<CartBloc, CartState>(
+                  listener: (context, state) {
+                    if (state is AddToCartState) {
+                      showSnackbar(S.current.addedToCart, context, Colors.green);
+                    }
+                  },
+                  builder: (context, state) {
+                    return Text(
+                      S.current.addToCart.toUpperCase(),
+                    );
+                  },
+                )),
+          ),
+          SizedBox(
+            width: kWidth(context) / 2.4,
+            height: kHeight(context) / 14,
+            child: FloatingActionButton.extended(
+                heroTag: "goToCart",
+                backgroundColor: ColorManager.orangeLight,
+                elevation: 8,
+                shape:
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                onPressed: () => {
+                  // BlocProvider.of<CartBloc>(context).add(AddToCart(widget.product));
+                  // animateCartAdd(
+                  //   context,
+                  //   NetworkImage(
+                  //     widget.product.images[0].url,
+                  //   ),
+                  // );
+                  // MaterialPageRoute(builder: (context) => const CartView())
+
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CartView()))
+
+                },
+                label: BlocConsumer<CartBloc, CartState>(
+                  listener: (context, state) {
+                    // if (state is AddToCartState) {
+                    //   showSnackbar(S.current.addedToCart, context, Colors.green);
+                    // }
+                  },
+                  builder: (context, state) {
+                    return Text(
+                      S.current.goToCart.toUpperCase(),
+                    );
+                  },
+                )),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Hero(
-                  tag: '${widget.index}',
-                  child: Carousel(images: widget.product.images)),
-              const SizedBox(
-                height: 10,
-              ),
+              Carousel(images: widget.product.images),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 15),

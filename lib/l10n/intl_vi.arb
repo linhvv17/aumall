@@ -158,5 +158,9 @@
   "timeoutError" : "Lỗi time out",
   "defaultError" : "Lỗi trong quá trình tải dữ liêụ",
   "cacheError" : "Lỗi cache",
-  "noInternetError" : "Hãy kiểm tra kết nối Internet"
+  "noInternetError" : "Hãy kiểm tra kết nối Internet",
+  "productsAbove" : "Sản phẩm trên",
+  "stars" : "sao",
+  "allProducts" : "Tất cả sản phẩm >>",
+  "goToCart" : "Đi đến giỏ hàng"
 }

@@ -35,55 +35,63 @@ class _CartViewState extends State<CartView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           centerTitle: true,
           title: Text(
             S.current.mybag,
             style: Theme.of(context).textTheme.headline6,
           )),
-      floatingActionButton: BlocProvider.of<CartBloc>(context).cartItems.isEmpty
-          ? const SizedBox()
-          : SizedBox(
+      floatingActionButton: BlocBuilder<CartBloc, CartState>(
+        builder: (context, state) {
+          if (state is CartLoaded) {
+            if (state.items.isEmpty) {
+              return const SizedBox();
+            }
+            return SizedBox(
               width: kWidth(context) / 1.12,
               height: kHeight(context) / 14,
               child: FloatingActionButton.extended(
-                  backgroundColor: ColorManager.orangeLight,
-                  elevation: 8,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50)),
-                  onPressed: () {
-                    if (BlocProvider.of<CartBloc>(context)
-                        .cartItems
-                        .isNotEmpty) {
-                      Navigator.pushNamed(context, AppRoutes.checkout);
-                     
-                          
-                BlocProvider.of<PaymentBloc>(context).add(
-                  RequestOrder(
-                   BlocProvider.of<PaymentBloc>(context).PAYMOB_FIRST_TOKEN,
-                    (BlocProvider.of<CartBloc>(context).totalAmount +
+                backgroundColor: ColorManager.orangeLight,
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                onPressed: () {
+                  if (BlocProvider.of<CartBloc>(context)
+                      .cartItems
+                      .isNotEmpty) {
+                    Navigator.pushNamed(context, AppRoutes.checkout);
+
+
+                    BlocProvider.of<PaymentBloc>(context).add(
+                      RequestOrder(
+                        BlocProvider.of<PaymentBloc>(context).PAYMOB_FIRST_TOKEN,
+                        (BlocProvider.of<CartBloc>(context).totalAmount +
                             BlocProvider.of<LocationBloc>(context).delivery)
-                        .toString(),
-                  ),
-                );
-                    } else {
-                      showSnackbar(S.current.emptybag, context, Colors.red);
+                            .toString(),
+                      ),
+                    );
+                  } else {
+                    showSnackbar(S.current.emptybag, context, Colors.red);
+                  }
+                },
+                label: BlocConsumer<CartBloc, CartState>(
+                  listener: (context, state) {
+                    if (state is AddToCartState) {
+                      showSnackbar(
+                          S.current.addedToCart, context, Colors.green);
                     }
                   },
-                  label: BlocConsumer<CartBloc, CartState>(
-                    listener: (context, state) {
-                      if (state is AddToCartState) {
-                        showSnackbar(
-                            S.current.addedToCart, context, Colors.green);
-                      }
-                    },
-                    builder: (context, state) {
-                      return Text(
-                        S.current.checkout.toUpperCase(),
-                      );
-                    },
-                  ),),
-            ),
+                  builder: (context, state) {
+                    return Text(
+                      S.current.checkout.toUpperCase(),
+                    );
+                  },
+                ),),
+            );
+          }
+          return const SizedBox();
+        },
+      ),
       body: Column(
         children: [
           Expanded(
@@ -127,7 +135,7 @@ class _CartViewState extends State<CartView> {
                           padding: const EdgeInsets.symmetric(vertical: 22),
                           itemCount: state.items.length,
                           itemBuilder: (context, index) {
-                            return CatItem(
+                            return CartItem(
                               item: state.items[index],
                               index: index,
                             );
@@ -147,9 +155,9 @@ class _CartViewState extends State<CartView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "${state.items.length} items",
+                                      "${BlocProvider.of<CartBloc>(context).totalNumberItems} items",
                                       style: const TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 18,
                                         fontWeight: FontWeight.w500,
                                         color: ColorManager.orangeLight,
                                       ),
@@ -190,7 +198,6 @@ class _CartViewState extends State<CartView> {
                     ],
                   );
                 }
-
                 return const SizedBox();
               },
             ),

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 import '../../../../core/error/error_handler.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/network/network_info.dart';
@@ -22,7 +23,9 @@ class ProfileRepositoryImpl implements ProfileRepository {
         CacheManager().putItem(data);
         return right(data);
       } catch (error) {
-        print(error);
+        if (kDebugMode) {
+          print(error);
+        }
         return left(ErrorHandler.handle(error).failure);
       }
     } else {

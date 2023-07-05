@@ -8,10 +8,10 @@ import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../bloc/cart_bloc.dart';
 
-class CatItem extends StatelessWidget {
+class CartItem extends StatelessWidget {
   final CartProduct item;
   final int index;
-  const CatItem({super.key, required this.item, required this.index});
+  const CartItem({super.key, required this.item, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class CatItem extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: InkWell(
                                       onTap: () {
-                                            BlocProvider.of<CartBloc>(context).add(DecrementCount(item));
+                                            BlocProvider.of<CartBloc>(context).add(DecrementCount(item, index));
                                       },
                                       child: const Icon(
                                         Icons.remove,
@@ -121,7 +121,7 @@ class CatItem extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: InkWell(
                                       onTap: () {
-                                        BlocProvider.of<CartBloc>(context).add(IncrementCount(item));
+                                        BlocProvider.of<CartBloc>(context).add(IncrementCount(item, index));
                                       },
                                       child: const Icon(
                                         Icons.add,

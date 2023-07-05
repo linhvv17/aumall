@@ -1,10 +1,15 @@
+import 'package:aumall/features/home/widgets/bannerads.dart';
+import 'package:aumall/features/shop/domain/entities/products_entity.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/features/home/presentation/view/product_details.dart';
+import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/strings.dart';
 import '../../../../generated/l10n.dart';
+import '../../../login/presentation/widgets/mainbutton.dart';
 import '../../../shop/presentation/bloc/products_bloc.dart';
 import '../../widgets/customGridView.dart';
 import '../../widgets/header.dart';
@@ -18,7 +23,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const HomeHeader(),
+          const BannerAds(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
@@ -29,8 +34,8 @@ class HomeView extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: const Text(
-                    'All Products >>',
+                  child: Text(
+                    S.current.allProducts,
                   ),
                 ),
               ],

@@ -15,11 +15,14 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
         event.product.isFavourite = true;
         favouriteList.add(event.product);
         emit(AddToFavouriteState());
+        // emit(FavouriteLoaded(favouriteList));
+
       } else {
         if (event.isFavourite) {
           event.product.isFavourite = false;
           favouriteList.remove(event.product);
           emit(RemoveFromFavouriteState());
+          // emit(FavouriteLoaded(favouriteList));
         }
       }
     });

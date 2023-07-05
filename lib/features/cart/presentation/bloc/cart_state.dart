@@ -14,7 +14,8 @@ class CartLoading extends CartState {}
 
 class CartLoaded extends CartState {
   final List items;
-  const CartLoaded(this.items);
+  final num  totalNumberItems;
+  const CartLoaded(this.items, this.totalNumberItems);
 }
 
 class IncrementCountState extends CartState {

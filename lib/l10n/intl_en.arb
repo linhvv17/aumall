@@ -105,7 +105,7 @@
   "register" : "Register",
   "donthaveAccount" : "Don't have an account?",
   "haveAccount" : "Already have an account?",
-  "home" : "home",
+  "home" : "Home",
   "phone" : "Phone",
   "enterphone" : "Enter Phone Number",
   "deliveryAddress" : "Delivery Address",
@@ -158,5 +158,9 @@
   "timeoutError" : "timeout_error",
   "defaultError" : "Error In Fetching Data",
   "cacheError" : "cache_error",
-  "noInternetError" : "Please Check Your Internet Connection"
+  "noInternetError" : "Please Check Your Internet Connection",
+  "productsAbove" : "Products Above",
+  "stars" : "Stars",
+  "allProducts" : "All Products >>",
+  "goToCart" : "Go to cart"
 }
