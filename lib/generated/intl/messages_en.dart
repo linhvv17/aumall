@@ -103,7 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Shop the most cool products available on the store\nlet it be T-shirts, Electronics and much more!"),
         "headerTitle": MessageLookupByLibrary.simpleMessage(
             "Give your workout\nA New Style!"),
-        "home": MessageLookupByLibrary.simpleMessage("home"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "internalServerError":
             MessageLookupByLibrary.simpleMessage("internal_server_error"),
         "invalidCode":
@@ -120,10 +120,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "mayLike":
             MessageLookupByLibrary.simpleMessage("You can also like this"),
+        "myAddresses": MessageLookupByLibrary.simpleMessage("My Addresses"),
         "myOrders": MessageLookupByLibrary.simpleMessage("My Orders"),
         "myProfile": MessageLookupByLibrary.simpleMessage("My Profile"),
         "mybag": MessageLookupByLibrary.simpleMessage("My Bag"),
-        "myorders": MessageLookupByLibrary.simpleMessage("My Orders"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("Name is required"),
         "nameError": MessageLookupByLibrary.simpleMessage(
@@ -212,6 +212,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendReview": MessageLookupByLibrary.simpleMessage("Send Review"),
         "sendreviewsuccess":
             MessageLookupByLibrary.simpleMessage("Review sent Successfully"),
+        "shippingAddresses":
+            MessageLookupByLibrary.simpleMessage("Shipping addresses"),
+        "shippingAddressesDescription": MessageLookupByLibrary.simpleMessage(
+            "Management shipping addresses"),
         "shop": MessageLookupByLibrary.simpleMessage("Shop"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "stars": MessageLookupByLibrary.simpleMessage("Stars"),

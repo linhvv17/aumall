@@ -39,10 +39,10 @@ class GetFilterSpecificProduct extends ProductsEvent {
   );
 }
 
-class ChangeCatyegory extends ProductsEvent {
+class ChangeCategory extends ProductsEvent {
   final int index;
 
-  const ChangeCatyegory(this.index);
+  const ChangeCategory(this.index);
 }
 
 class OpenSearch extends ProductsEvent {}

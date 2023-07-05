@@ -650,6 +650,36 @@ class S {
     );
   }
 
+  /// `My Addresses`
+  String get myAddresses {
+    return Intl.message(
+      'My Addresses',
+      name: 'myAddresses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shipping addresses`
+  String get shippingAddresses {
+    return Intl.message(
+      'Shipping addresses',
+      name: 'shippingAddresses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Management shipping addresses`
+  String get shippingAddressesDescription {
+    return Intl.message(
+      'Management shipping addresses',
+      name: 'shippingAddressesDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Order Details`
   String get orderdetails {
     return Intl.message(
@@ -1000,10 +1030,10 @@ class S {
     );
   }
 
-  /// `home`
+  /// `Home`
   String get home {
     return Intl.message(
-      'home',
+      'Home',
       name: 'home',
       desc: '',
       args: [],
@@ -1215,16 +1245,6 @@ class S {
     return Intl.message(
       'Personal Information',
       name: 'personalinfo',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `My Orders`
-  String get myorders {
-    return Intl.message(
-      'My Orders',
-      name: 'myorders',
       desc: '',
       args: [],
     );

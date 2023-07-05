@@ -10,6 +10,8 @@ part 'products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   List<String> categories = [
+    "Watches",
+    "Cars",
     "Clothes",
     "Shoes",
     "Electronics",
@@ -22,32 +24,30 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   RangeValues priceSelectRange = const RangeValues(200, 400);
   double rateValue = 0;
   bool searchFolded = true;
-  final GetAllProductsUsecase getAllProductsUsecase;
+  final GetAllProductsUsecase getAllProductsUseCase;
   final GetSpecificProductUseCase getSpecificProductUseCase;
-  ProductsBloc(this.getAllProductsUsecase, this.getSpecificProductUseCase)
+  ProductsBloc(this.getAllProductsUseCase, this.getSpecificProductUseCase)
       : super(
           AllProductsLoadingState(),
         ) {
     on<GetAllProducts>((event, emit) async {
-      final failureOrSuccess = await getAllProductsUsecase(NoParams());
+      final failureOrSuccess = await getAllProductsUseCase(NoParams());
 
       failureOrSuccess.fold(
           (failure) => emit(AllProductsErrorState(failure.message)),
           (success) => emit(AllProductsLoadedState(success)));
     });
-
     on<GetSpecificProduct>((event, emit) async {
       emit(SpecificProductsLoadingState());
       final failureOrSuccess = await getSpecificProductUseCase(
         GetProductUseCaseParams(event.category, event.minPrice, event.maxPrice,
             event.rate, event.keyword),
       );
-
       failureOrSuccess.fold(
           (failure) => emit(SpecificProductsErrorState(failure.message)),
           (success) => emit(SpecificProductsLoadedState(success)));
     });
-    on<ChangeCatyegory>((event, emit) {
+    on<ChangeCategory>((event, emit) {
       current = event.index;
       emit(ChangeCategoryState());
     });

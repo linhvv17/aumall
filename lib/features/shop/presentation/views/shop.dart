@@ -62,7 +62,7 @@ class ShopView extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  bloc.add(ChangeCatyegory(index));
+                                  bloc.add(ChangeCategory(index));
                                   bloc.add(GetSpecificProduct(
                                       bloc.categories[index],
                                       '0',

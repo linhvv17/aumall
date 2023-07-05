@@ -58,7 +58,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
           var animatedOffset = Tween<Offset>(begin: startOffset, end: endOffset)
               .animate(curvedAnimation);
-          animationController.reset();
+          // animationController.reset();
           animationController.animateTo(1);
           return AnimatedBuilder(
             animation: animationController,
@@ -354,6 +354,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         color: Colors.amber,
                       ),
                       direction: Axis.horizontal,
+                      itemCount: 5,
                     ),
                     const SizedBox(width: 4.0),
                     Text(

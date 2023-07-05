@@ -121,10 +121,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "mayLike": MessageLookupByLibrary.simpleMessage(
             "Bạn cũng có thể thích cái này"),
+        "myAddresses":
+            MessageLookupByLibrary.simpleMessage("Địa chỉ giao hàng của tôi"),
         "myOrders": MessageLookupByLibrary.simpleMessage("Đơn hàng của tôi"),
         "myProfile": MessageLookupByLibrary.simpleMessage("Hồ sơ của tôi"),
         "mybag": MessageLookupByLibrary.simpleMessage("Giỏ hàng của tôi"),
-        "myorders": MessageLookupByLibrary.simpleMessage("Đơn hàng của tôi"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("Tên được yêu cầu"),
         "nameError": MessageLookupByLibrary.simpleMessage(
@@ -215,6 +216,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendReview": MessageLookupByLibrary.simpleMessage("Gửi đánh giá"),
         "sendreviewsuccess":
             MessageLookupByLibrary.simpleMessage("Gửi đánh giá thành công"),
+        "shippingAddresses":
+            MessageLookupByLibrary.simpleMessage("Địa chỉ giao hàng"),
+        "shippingAddressesDescription":
+            MessageLookupByLibrary.simpleMessage("Quản lý địa chỉ giao hàng"),
         "shop": MessageLookupByLibrary.simpleMessage("Cửa hàng"),
         "skip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
         "stars": MessageLookupByLibrary.simpleMessage("sao"),

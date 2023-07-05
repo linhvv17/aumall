@@ -118,7 +118,7 @@ class FilterProduct extends StatelessWidget {
                                     ),
                                     Slider(
                                       min: 0,
-                                      max: 4,
+                                      max: 5,
                                       activeColor: ColorManager.orangeLight,
                                       value: bloc.rateValue,
                                       onChanged: (v) {

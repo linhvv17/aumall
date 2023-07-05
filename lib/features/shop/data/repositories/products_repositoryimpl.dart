@@ -35,6 +35,7 @@ class ProductsRepositoryImpl implements ProductRepository {
       GetProductParams params) async {
     if (await networkInfo.isConnected) {
       try {
+        print('getSpecificProduct: ${params.category}');
         // final data = await productsDatasource.getSpecificProduct(params);
         final data = await productsDatasource.getSpecificProductFromTxt(params);
         return right(data);

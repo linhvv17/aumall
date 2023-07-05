@@ -1,0 +1,103 @@
+{
+  "success": true,
+  "products": [
+    {
+      "_id": "63c3dc96d55fda58cc574771",
+      "name": "ROLEX",
+      "description": "ROLEX",
+      "price": 23,
+      "ratings": 3.5,
+      "images": [
+        {
+          "public_id": "products/tozb2ip8bczwrfdkog2u",
+          "url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/watch/rolex/photo_2023-06-20_16-40-37.jpg?t=2023-07-05T08%3A34%3A05.745Z",
+          "_id": "63c3dc96d55fda58cc574772"
+        },
+        {
+          "public_id": "products/xcueupdqkdajun8qzebo",
+          "url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/watch/rolex/photo_2023-06-20_16-40-51.jpg?t=2023-07-05T08%3A42%3A16.319Z",
+          "_id": "63c3dc96d55fda58cc574773"
+        },
+        {
+          "public_id": "products/j25amoybqh7bxwixnjlu",
+          "url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/watch/rolex/photo_2023-06-20_16-40-54.jpg?t=2023-07-05T08%3A42%3A28.626Z",
+          "_id": "63c3dc96d55fda58cc574774"
+        }
+      ],
+      "category": "Watches",
+      "stock": 23,
+      "numOfReviews": 2,
+      "user": "63c3c3db295fa9579ab3cc6b",
+      "reviews": [
+        {
+          "user": "64198c63b9954067ce4b999d",
+          "name": "vvl18",
+          "rating": 3,
+          "comment": "vvl18 commented",
+          "_id": "64199725b9954067ce4b9c43",
+          "createdAt": "2023-03-21T11:38:13.954Z"
+        },
+        {
+          "user": "63c3cc7fdc485469d5a7b70b",
+          "name": "mahmoud",
+          "rating": 5,
+          "comment": "hi bassam🙂🙂",
+          "_id": "6428a6992da69dff73a75905",
+          "createdAt": "2023-04-01T21:48:09.678Z"
+        }
+      ],
+      "createdAt": "2023-01-15T10:59:34.692Z",
+      "__v": 2
+    },
+    {
+      "_id": "63c3dc96d55fda58cc574771",
+      "name": "Carhartt Men's Loose Fit Heavyweight Short-Sleeve Pocket T-Shirt",
+      "description": "A workwear staple, this men's pocket t-shirt is equal parts durable and comfortable. It has an original fit, Carhartt's roomiest cut. The heavyweight fabric only gets softer with time.",
+      "price": 23,
+      "ratings": 5,
+      "images": [
+        {
+          "public_id": "products/j25amoybqh7bxwixnjlu",
+          "url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/watch/rolex/photo_2023-06-20_16-40-54.jpg?t=2023-07-05T08%3A42%3A28.626Z",
+          "_id": "63c3dc96d55fda58cc574774"
+        },
+        {
+          "public_id": "products/xcueupdqkdajun8qzebo",
+          "url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/watch/rolex/photo_2023-06-20_16-40-51.jpg?t=2023-07-05T08%3A42%3A16.319Z",
+          "_id": "63c3dc96d55fda58cc574773"
+        },
+        {
+          "public_id": "products/tozb2ip8bczwrfdkog2u",
+          "url": "https://sjrwwwkfmwedsqzoiebj.supabase.co/storage/v1/object/public/au_mall/watch/rolex/photo_2023-06-20_16-40-37.jpg?t=2023-07-05T08%3A34%3A05.745Z",
+          "_id": "63c3dc96d55fda58cc574772"
+        }
+      ],
+      "category": "Watches",
+      "stock": 23,
+      "numOfReviews": 2,
+      "user": "63c3c3db295fa9579ab3cc6b",
+      "reviews": [
+        {
+          "user": "64198c63b9954067ce4b999d",
+          "name": "vvl17",
+          "rating": 4.5,
+          "comment": ", vvl17 commented",
+          "_id": "64199725b9954067ce4b9c43",
+          "createdAt": "2023-03-21T11:38:13.954Z"
+        },
+        {
+          "user": "63c3cc7fdc485469d5a7b70b",
+          "name": "mahmoud",
+          "rating": 5,
+          "comment": "hi bassam🙂🙂",
+          "_id": "6428a6992da69dff73a75905",
+          "createdAt": "2023-04-01T21:48:09.678Z"
+        }
+      ],
+      "createdAt": "2023-01-15T10:59:34.692Z",
+      "__v": 2
+    }
+  ],
+  "productsCount": 26,
+  "filteredProductsCount": 2
+}

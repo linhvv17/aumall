@@ -42,6 +42,7 @@ class ReviewCard extends StatelessWidget {
                         color: Colors.amber,
                       ),
                       direction: Axis.horizontal,
+                      itemCount: 5,
                     ),
                     Text(
                       DateFormat.yMMMEd()

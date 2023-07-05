@@ -1,3 +1,4 @@
+import 'package:aumall/features/profile/presentation/views/address.dart';
 import 'package:flutter/material.dart';
 import 'package:aumall/features/cart/presentation/views/checkout.dart';
 import 'package:aumall/features/payment/domain/entities/all_orders_entity.dart';
@@ -73,6 +74,8 @@ Route<dynamic> onGenerate(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const SuccessView());
     case AppRoutes.orders:
       return MaterialPageRoute(builder: (context) => const OrdersView());
+    case AppRoutes.address:
+      return MaterialPageRoute(builder: (context) => const AddressView());
     case AppRoutes.orderDetails:
       final order = settings.arguments as AllOrderEntity;
       return MaterialPageRoute(

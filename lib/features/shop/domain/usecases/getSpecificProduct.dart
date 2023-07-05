@@ -12,6 +12,7 @@ class GetSpecificProductUseCase
   @override
   Future<Either<Failure, ProductsEntity>> call(
       GetProductUseCaseParams params) async {
+    print('call: ${params.category}');
     return await productRepository.getSpecificProduct(GetProductParams(
         params.category,
         params.minPrice,

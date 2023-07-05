@@ -118,6 +118,14 @@ class ProfileView extends StatelessWidget {
                         },
                       ),
                       MYListTile(
+                        title: S.current.shippingAddresses,
+                        subtitle: S.current.shippingAddressesDescription,
+                        ontab: () {
+                          BlocProvider.of<OrderBloc>(context).add(GetAllOrders());
+                          Navigator.pushNamed(context, AppRoutes.address);
+                        },
+                      ),
+                      MYListTile(
                         title: S.current.changePassword,
                         subtitle: S.current.changePasswordsub,
                         ontab: () {

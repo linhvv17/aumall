@@ -38,6 +38,8 @@ class ProductsDatasourceImpl implements ProductsDatasource {
 
   @override
   Future<ProductsModel> getSpecificProductFromTxt(GetProductParams params) async {
+    print('getSpecificProductFromTxt:');
+    print('getSpecificProductFromTxt: ${params.category}');
     final data = await rootBundle.loadString('assets/txt/${params.category.toLowerCase()}.txt');
     final body = json.decode(data);
     return ProductsModel.fromJson(body);
