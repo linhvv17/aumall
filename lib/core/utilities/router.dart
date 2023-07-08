@@ -1,4 +1,6 @@
 import 'package:aumall/features/profile/presentation/views/address.dart';
+import 'package:aumall/features/profile/presentation/views/address_list.dart';
+import 'package:aumall/features/shop/presentation/views/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:aumall/features/cart/presentation/views/checkout.dart';
 import 'package:aumall/features/payment/domain/entities/all_orders_entity.dart';
@@ -41,6 +43,8 @@ Route<dynamic> onGenerate(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const LayoutPage());
     case AppRoutes.home:
       return MaterialPageRoute(builder: (context) => const HomeView());
+    case AppRoutes.shop:
+      return MaterialPageRoute(builder: (context) => const ShopView());
     case AppRoutes.productDetails:
       final product = settings.arguments as ProductEntity;
       final products = settings.arguments as List<ProductEntity>;
@@ -51,7 +55,7 @@ Route<dynamic> onGenerate(RouteSettings settings) {
                 products: products,
                 index: index,
               ));
-    case AppRoutes.productreviews:
+    case AppRoutes.productReviews:
       final product = settings.arguments as ProductEntity;
       return MaterialPageRoute(
           builder: (context) => ReviewsView(product: product));
@@ -74,6 +78,8 @@ Route<dynamic> onGenerate(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const SuccessView());
     case AppRoutes.orders:
       return MaterialPageRoute(builder: (context) => const OrdersView());
+    case AppRoutes.addressList:
+      return MaterialPageRoute(builder: (context) => const AddressListView());
     case AppRoutes.address:
       return MaterialPageRoute(builder: (context) => const AddressView());
     case AppRoutes.orderDetails:

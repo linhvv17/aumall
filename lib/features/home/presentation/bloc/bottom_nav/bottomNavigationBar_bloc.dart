@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-part 'BottomNavigationBar_event.dart';
-part 'BottomNavigationBar_state.dart';
+part 'bottomNavigationBar_event.dart';
+part 'bottomNavigationBar_state.dart';
 
 class BottomNavigationBarBloc
     extends Bloc<BottomNavigationBarEvent, BottomNavigationBarState> {

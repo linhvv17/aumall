@@ -1,4 +1,4 @@
-part of 'BottomNavigationBar_bloc.dart';
+part of 'bottomNavigationBar_bloc.dart';
 
 abstract class BottomNavigationBarEvent extends Equatable {
   const BottomNavigationBarEvent();

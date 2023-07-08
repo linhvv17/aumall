@@ -7,8 +7,9 @@ class AppRoutes {
   static const setPassword = "/set-password";
   static const layout = "/layout";
   static const home = "/home";
+  static const shop = "/shop";
   static const productDetails = "/product-details";
-  static const productreviews = "/Product-reviews";
+  static const productReviews = "/Product-reviews";
   static const updateProfile = "/update-profile";
   static const updatePassword = "/update-password";
   static const checkout = "/checkout";
@@ -17,5 +18,6 @@ class AppRoutes {
   static const success = "/success";
   static const orders = "/orders";
   static const address = "/address";
+  static const addressList = "/address-list";
   static const orderDetails = "/order-details";
 }

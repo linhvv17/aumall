@@ -1,8 +1,8 @@
+import 'package:aumall/features/shop/presentation/widgets/sort_by.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
-import 'package:aumall/core/utilities/strings.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
@@ -12,11 +12,27 @@ import '../bloc/products_bloc.dart';
 import '../widgets/filter.dart';
 import '../widgets/search.dart';
 
-class ShopView extends StatelessWidget {
+class ShopView extends StatefulWidget {
   const ShopView({super.key});
+  @override
+  State<StatefulWidget> createState()  => _ShopViewState();
+}
+
+
+class _ShopViewState extends State<ShopView> {
+
+  final List<Map<String, dynamic>> sortBys = [
+    {'id': 0, 'name': 'Popular', 'isSelected': true},
+    {'id': 1, 'name': 'Newest', 'isSelected': false},
+    {'id': 2, 'name': 'Customer review', 'isSelected': false},
+    {'id': 3, 'name': 'Price: lowest to high', 'isSelected': false},
+    {'id': 4, 'name': 'Price: highest to low', 'isSelected': false},
+  ];
+
 
   @override
   Widget build(BuildContext context) {
+    print('_ShopViewState build');
     int current = 0;
     return Scaffold(
       body: RefreshIndicator(
@@ -31,221 +47,224 @@ class ShopView extends StatelessWidget {
         child: SafeArea(
           child: BlocBuilder<ProductsBloc, ProductsState>(
               builder: (context, state) {
-            final bloc = BlocProvider.of<ProductsBloc>(context);
-            return Column(
-              children: [
-                Text(
-                  S.current.shop,
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-                const Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                final bloc = BlocProvider.of<ProductsBloc>(context);
+                return Column(
                   children: [
-                    Expanded(child: SearchWidget()),
-                    FilterProduct(),
-                  ],
-                ),
-                Padding(
-                  padding:
+                    Text(
+                      S.current.shop,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SortProduct(
+                          sortBys: sortBys,
+                        ),
+                        const Expanded(child: SearchWidget()),
+                        const FilterProduct(),
+                      ],
+                    ),
+                    Padding(
+                      padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 60,
-                    child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: BlocProvider.of<ProductsBloc>(context)
-                            .categories
-                            .length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (ctx, index) {
-                          return Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  bloc.add(ChangeCategory(index));
-                                  bloc.add(GetSpecificProduct(
-                                      bloc.categories[index],
-                                      '0',
-                                      '100000',
-                                      '-1',
-                                      ''));
-                                  current = index;
-                                },
-                                child: AnimatedContainer(
-                                  duration: const Duration(milliseconds: 300),
-                                  margin: const EdgeInsets.all(5),
-                                  width: 80,
-                                  height: 45,
-                                  decoration: BoxDecoration(
-                                    color:  Colors.white70,
-                                        
-                                    borderRadius: bloc.current == index
-                                        ? BorderRadius.circular(15)
-                                        : BorderRadius.circular(10),
-                                    border: bloc.current == index
-                                        ? Border.all(
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 60,
+                        child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: BlocProvider.of<ProductsBloc>(context)
+                                .categories
+                                .length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (ctx, index) {
+                              return Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      bloc.add(ChangeCategory(index));
+                                      bloc.add(GetSpecificProduct(
+                                          bloc.categories[index],
+                                          '0',
+                                          '100000',
+                                          '-1',
+                                          ''));
+                                      current = index;
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 300),
+                                      margin: const EdgeInsets.all(5),
+                                      width: 80,
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        color:  Colors.white70,
+
+                                        borderRadius: bloc.current == index
+                                            ? BorderRadius.circular(15)
+                                            : BorderRadius.circular(10),
+                                        border: bloc.current == index
+                                            ? Border.all(
                                             color: ColorManager.orangeLight,
                                             width: 2)
-                                        : null,
-                                  ),
-                                  child: Center(
-                                    child: FittedBox(
-                                      child: Text(
-                                        bloc.categories[index],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: bloc.current == index
-                                                ? Colors.black
-                                                : Colors.grey),
+                                            : null,
+                                      ),
+                                      child: Center(
+                                        child: FittedBox(
+                                          child: Text(
+                                            bloc.categories[index],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                color: bloc.current == index
+                                                    ? Colors.black
+                                                    : Colors.grey),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
+                                ],
+                              );
+                            }),
+                      ),
+                    ),
+                    BlocBuilder<ProductsBloc, ProductsState>(
+                      builder: (context, state) {
+                        if (state is FilterProductsLoadingState ||
+                            state is SpecificProductsLoadingState) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: kHeight(context) / 3,
                               ),
+                              const CircularProgressIndicator(),
                             ],
                           );
-                        }),
-                  ),
-                ),
-                BlocBuilder<ProductsBloc, ProductsState>(
-                  builder: (context, state) {
-                    if (state is FilterProductsLoadingState ||
-                        state is SpecificProductsLoadingState) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: kHeight(context) / 3,
-                          ),
-                          const CircularProgressIndicator(),
-                        ],
-                      );
-                    } else if (state is ProductsLoadedState) {
-                      final products = state.data.products;
-                      return Expanded(
-                          child: GridView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: state.data.filteredProductsCount,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                height: 330, crossAxisCount: 2),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProductDetails(
-                                        product: products[index],
-                                        products: products,
-                                        index: index,
-                                      ),
-                                    ));
-                              },
-                              child: Hero(
-                                  tag: '$index',
-                                  child:
-                                      ProductItem(product: products[index])));
-                        },
-                      ));
-                    } else if (state is ProductsErrorState ) {
-                      return state.message == S.current.noInternetError
-                    ? Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            child: Card(child: LottieBuilder.asset('assets/images/nointernet.json')),
-                          ),
-                          Card(child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(state.message),
-                          ))
-                        ],
-                      )
-                    : Center(child: Text(state.message));
-                    } else if (state is FilterProductsLoadedState) {
-                      final products = state.data.products;
-                      return Expanded(
-                          child: GridView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: state.data.filteredProductsCount,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                height: 330, crossAxisCount: 2),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProductDetails(
-                                        product: products[index],
-                                        products: products,
-                                        index: index,
-                                      ),
-                                    ));
-                              },
-                              child: Hero(
-                                  tag: '$index',
-                                  child:
-                                      ProductItem(product: products[index])));
-                        },
-                      ));
-                    
-                    } else if (state is SpecificProductsLoadedState) {
-                      final products = state.data.products;
-                      return Expanded(
-                          child: GridView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: state.data.filteredProductsCount,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                height: 330, crossAxisCount: 2),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProductDetails(
-                                        product: products[index],
-                                        products: products,
-                                        index: index,
-                                      ),
-                                    ));
-                              },
-                              child: Hero(
-                                  tag: '$index',
-                                  child:
-                                      ProductItem(product: products[index])));
-                        },
-                      ));
-                    } else if (state is SpecificProductsErrorState ) {
-                      return state.message == S.current.noInternetError
-                    ? Column(
-                        children: [
-                          Padding(
-                            
-                            padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 19),
-                            child: Card(
-                              clipBehavior: Clip.antiAlias,
-                              child: LottieBuilder.asset('assets/images/nointernet.json')),
-                          ),
-                          Card(child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(state.message),
-                          ))
-                        ],
-                      )
-                    : Center(child: Text(state.message));
-                    }  else {
-                      return const SizedBox();
-                    }
-                  },
-                ),
-              ],
-            );
-          }),
+                        } else if (state is ProductsLoadedState) {
+                          final products = state.data.products;
+                          return Expanded(
+                              child: GridView.builder(
+                                padding: EdgeInsets.zero,
+                                itemCount: state.data.filteredProductsCount,
+                                gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                    height: 330, crossAxisCount: 2),
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => ProductDetails(
+                                                product: products[index],
+                                                products: products,
+                                                index: index,
+                                              ),
+                                            ));
+                                      },
+                                      child: Hero(
+                                          tag: '$index',
+                                          child:
+                                          ProductItem(product: products[index])));
+                                },
+                              ));
+                        } else if (state is ProductsErrorState ) {
+                          return state.message == S.current.noInternetError
+                              ? Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 14),
+                                child: Card(child: LottieBuilder.asset('assets/images/nointernet.json')),
+                              ),
+                              Card(child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(state.message),
+                              ))
+                            ],
+                          )
+                              : Center(child: Text(state.message));
+                        } else if (state is FilterProductsLoadedState) {
+                          final products = state.data.products;
+                          return Expanded(
+                              child: GridView.builder(
+                                padding: EdgeInsets.zero,
+                                itemCount: state.data.filteredProductsCount,
+                                gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                    height: 330, crossAxisCount: 2),
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => ProductDetails(
+                                                product: products[index],
+                                                products: products,
+                                                index: index,
+                                              ),
+                                            ));
+                                      },
+                                      child: Hero(
+                                          tag: '$index',
+                                          child:
+                                          ProductItem(product: products[index])));
+                                },
+                              ));
+
+                        } else if (state is SpecificProductsLoadedState) {
+                          final products = state.data.products;
+                          return Expanded(
+                              child: GridView.builder(
+                                padding: EdgeInsets.zero,
+                                itemCount: state.data.filteredProductsCount,
+                                gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                    height: 330, crossAxisCount: 2),
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => ProductDetails(
+                                                product: products[index],
+                                                products: products,
+                                                index: index,
+                                              ),
+                                            ));
+                                      },
+                                      child: Hero(
+                                          tag: '$index',
+                                          child:
+                                          ProductItem(product: products[index])));
+                                },
+                              ));
+                        } else if (state is SpecificProductsErrorState ) {
+                          return state.message == S.current.noInternetError
+                              ? Column(
+                            children: [
+                              Padding(
+
+                                padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 19),
+                                child: Card(
+                                    clipBehavior: Clip.antiAlias,
+                                    child: LottieBuilder.asset('assets/images/nointernet.json')),
+                              ),
+                              Card(child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(state.message),
+                              ))
+                            ],
+                          )
+                              : Center(child: Text(state.message));
+                        }  else {
+                          return const SizedBox();
+                        }
+                      },
+                    ),
+                  ],
+                );
+              }),
         ),
       ),
     );

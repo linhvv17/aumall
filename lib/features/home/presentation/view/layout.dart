@@ -10,7 +10,7 @@ import '../../../profile/presentation/bloc/profile_bloc.dart';
 import '../../../profile/presentation/views/profile.dart';
 import '../../../shop/presentation/bloc/products_bloc.dart';
 import '../../../shop/presentation/views/shop.dart';
-import '../bloc/BottomNavigationBar_bloc.dart';
+import '../bloc/bottom_nav/bottomNavigationBar_bloc.dart';
 import 'home.dart';
 
 class LayoutPage extends StatefulWidget {

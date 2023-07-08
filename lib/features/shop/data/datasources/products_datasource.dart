@@ -12,6 +12,7 @@ abstract class ProductsDatasource {
   Future<ProductsModel> getAllProductsFromTxt();
   Future<ProductsModel> getSpecificProductFromTxt(GetProductParams params);
   Future<ProductsModel> getAllProducts();
+  Future<ProductsModel> getAllProductsAuMall();
   Future<ProductsModel> getSpecificProduct(GetProductParams params);
   Future<ResponseModel> sendReview(SendReviewParams params);
   Future<GetReviewsModel> getReviews(GetReviewsParams params);
@@ -27,6 +28,21 @@ class ProductsDatasourceImpl implements ProductsDatasource {
     final data = await rootBundle.loadString('assets/txt/products.txt');
     final body = json.decode(data);
     return ProductsModel.fromJson(body);
+  }
+  //allProductsAuMall
+
+  @override
+  Future<ProductsModel> getAllProductsAuMall() async {
+    final response = await apiProvider.get(
+        endPoint: allProductsAuMall,
+        token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
+      query: <String, dynamic> {
+    'status': '1',
+    }
+    );
+
+    print('getAllProductsAuMall ${response.data}');
+    return ProductsModel.fromJson(response.data);
   }
 
   @override

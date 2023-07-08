@@ -122,7 +122,7 @@ class ProfileView extends StatelessWidget {
                         subtitle: S.current.shippingAddressesDescription,
                         ontab: () {
                           BlocProvider.of<OrderBloc>(context).add(GetAllOrders());
-                          Navigator.pushNamed(context, AppRoutes.address);
+                          Navigator.pushNamed(context, AppRoutes.addressList);
                         },
                       ),
                       MYListTile(

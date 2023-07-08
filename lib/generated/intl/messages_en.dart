@@ -29,6 +29,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Product Added To Cart"),
         "addfav":
             MessageLookupByLibrary.simpleMessage("Product Added to Favorite"),
+        "address": MessageLookupByLibrary.simpleMessage("Address"),
+        "addressHint":
+            MessageLookupByLibrary.simpleMessage("3 NewBridge Court "),
         "addressLine": MessageLookupByLibrary.simpleMessage("Address Line"),
         "allProducts": MessageLookupByLibrary.simpleMessage("All Products >>"),
         "appName": MessageLookupByLibrary.simpleMessage("AuMall"),
@@ -43,15 +46,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "changepass": MessageLookupByLibrary.simpleMessage("Change Password"),
         "check": MessageLookupByLibrary.simpleMessage("Check"),
         "checkout": MessageLookupByLibrary.simpleMessage("Checkout"),
+        "city": MessageLookupByLibrary.simpleMessage("City"),
+        "cityHint": MessageLookupByLibrary.simpleMessage("Chino Hills"),
         "code": MessageLookupByLibrary.simpleMessage("Code"),
         "codeEmpty": MessageLookupByLibrary.simpleMessage("Code is required"),
         "codeLink": MessageLookupByLibrary.simpleMessage("Code is required"),
+        "comingSoonProducts":
+            MessageLookupByLibrary.simpleMessage("Products coming soon"),
         "confirmEmpty": MessageLookupByLibrary.simpleMessage(
             "Confirm Password is Required"),
         "confirmpass": MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "conflictError": MessageLookupByLibrary.simpleMessage("conflict_error"),
         "continueShopping":
             MessageLookupByLibrary.simpleMessage("CONTINUE SHOPPING"),
+        "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "countryHint": MessageLookupByLibrary.simpleMessage("United States"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current Location"),
         "defaultError":
@@ -96,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot your pasasword?"),
         "forgetPasswordtext":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "fullName": MessageLookupByLibrary.simpleMessage("Full name"),
+        "fullNameHint": MessageLookupByLibrary.simpleMessage("D. Rice"),
         "goToCart": MessageLookupByLibrary.simpleMessage("Go to cart"),
         "haveAccount":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
@@ -185,11 +196,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "productsAbove": MessageLookupByLibrary.simpleMessage("Products Above"),
         "profilePicture":
             MessageLookupByLibrary.simpleMessage("upload_profile_picture"),
+        "province":
+            MessageLookupByLibrary.simpleMessage("State/Province/Region"),
+        "provinceHint": MessageLookupByLibrary.simpleMessage("California"),
         "rate": MessageLookupByLibrary.simpleMessage("Rating"),
         "rateandreview":
             MessageLookupByLibrary.simpleMessage("Rating & Reviews"),
         "recentlyAddedProducts":
-            MessageLookupByLibrary.simpleMessage("Recently Added Products"),
+            MessageLookupByLibrary.simpleMessage("New products have arrived"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registerText": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "registeruccess": MessageLookupByLibrary.simpleMessage(
@@ -201,6 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "repeatpasswordEmpty": MessageLookupByLibrary.simpleMessage(
             "Confirm New Password is Required"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset Password"),
+        "saveAddress": MessageLookupByLibrary.simpleMessage("Save Address"),
         "savepass": MessageLookupByLibrary.simpleMessage("Save Password"),
         "search": MessageLookupByLibrary.simpleMessage("search"),
         "searchlocation":
@@ -218,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Management shipping addresses"),
         "shop": MessageLookupByLibrary.simpleMessage("Shop"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "sortBy": MessageLookupByLibrary.simpleMessage("Sort by"),
         "stars": MessageLookupByLibrary.simpleMessage("Stars"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
@@ -227,6 +243,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your order will be delivered soon.\nThank you for choosing our app!"),
         "summery": MessageLookupByLibrary.simpleMessage("Summary:"),
         "timeoutError": MessageLookupByLibrary.simpleMessage("timeout_error"),
+        "todaySuggestProducts":
+            MessageLookupByLibrary.simpleMessage("Today\'s Suggestions"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Total amount"),
         "unauthorizedError": MessageLookupByLibrary.simpleMessage(
             "UNAUTHORIZED: Invalid Input Data"),
@@ -244,6 +262,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("View Order Details"),
         "whatrate": MessageLookupByLibrary.simpleMessage("What is you rate?"),
         "writereview": MessageLookupByLibrary.simpleMessage("Write a review"),
-        "yourReview": MessageLookupByLibrary.simpleMessage("Your review")
+        "yourReview": MessageLookupByLibrary.simpleMessage("Your review"),
+        "zipCode":
+            MessageLookupByLibrary.simpleMessage("Zip Code (Postal Code)"),
+        "zipCodeHint": MessageLookupByLibrary.simpleMessage("91709")
       };
 }

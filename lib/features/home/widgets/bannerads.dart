@@ -1,3 +1,4 @@
+import 'package:aumall/features/home/data/models/banner_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -10,10 +11,10 @@ import '../../../generated/l10n.dart';
 import '../../login/presentation/widgets/mainbutton.dart';
 
 class BannerAds extends StatefulWidget {
-  // final List images;
+  final List images;
   const BannerAds({
     super.key,
-    // required this.images
+    required this.images
   });
 
 
@@ -40,156 +41,10 @@ class _BannerAdsState extends State<BannerAds> {
 
   @override
   Widget build(BuildContext context) {
+    final imageURL = (widget.images[0][1] as ImageModel).src;
+    final imageURL2 = (widget.images[0][2] as ImageModel).src;
     return CarouselSlider(
-      items: [
-        Stack(children: [
-          Container(
-            width: kWidth(context),
-            height: kHeight(context) * 0.5,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/header.png"),
-                    fit: BoxFit.cover)),
-          ),
-          Container(
-              width: kWidth(context),
-              height: kHeight(context) * 0.5,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/opacity.png"),
-                      fit: BoxFit.cover))),
-          Positioned(
-            bottom: kHeight(context) * 0.05,
-            left: 20,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  S.current.headerTitle,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(color: ColorManager.white),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  S.current.headerSuTitle,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorManager.white.withOpacity(0.9),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                    width: 200,
-                    child: MainButton(
-                        text: S.current.check, height: 40, ontab: () {}))
-              ],
-            ),
-          ),
-        ]),
-        Stack(children: [
-          Container(
-            width: kWidth(context),
-            height: kHeight(context) * 0.5,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/header.png"),
-                    fit: BoxFit.cover)),
-          ),
-          Container(
-              width: kWidth(context),
-              height: kHeight(context) * 0.5,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/opacity.png"),
-                      fit: BoxFit.cover))),
-          Positioned(
-            bottom: kHeight(context) * 0.05,
-            left: 20,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  S.current.headerTitle,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(color: ColorManager.white),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  S.current.headerSuTitle,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorManager.white.withOpacity(0.9),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                    width: 200,
-                    child: MainButton(
-                        text: S.current.check, height: 40, ontab: () {}))
-              ],
-            ),
-          ),
-        ]),
-        Stack(children: [
-          Container(
-            width: kWidth(context),
-            height: kHeight(context) * 0.5,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/header.png"),
-                    fit: BoxFit.cover)),
-          ),
-          Container(
-              width: kWidth(context),
-              height: kHeight(context) * 0.5,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/opacity.png"),
-                      fit: BoxFit.cover))),
-          Positioned(
-            bottom: kHeight(context) * 0.05,
-            left: 20,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  S.current.headerTitle,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(color: ColorManager.white),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  S.current.headerSuTitle,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                    color: ColorManager.white.withOpacity(0.9),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                    width: 200,
-                    child: MainButton(
-                        text: S.current.check, height: 40, ontab: () {}))
-              ],
-            ),
-          ),
-        ]),
-      ],
+      items: createListBanner(widget.images),
       options: CarouselOptions(
         autoPlay: true,
         viewportFraction: 1,
@@ -197,4 +52,26 @@ class _BannerAdsState extends State<BannerAds> {
       ),
     );
   }
+
+
+
+  createListBanner (List images){
+    var banners  = <Image>[];
+    // // var list = List<int>.generate(images.length, (i) =>i + 1 );
+    for (int i = 0 ; i  < images[0].length; i++) {
+      var img  = Image.network((widget.images[0][i] as ImageModel).src);
+      print('createListBanner ${(widget.images[0][i] as ImageModel).src} ');
+      banners.add(img);
+    }
+    print('createListBanner ${images[0].length} ');
+    // final imageURL0 = (widget.images[0][0] as ImageModel).src;
+    // final imageURL1 = (widget.images[0][1] as ImageModel).src;
+    // final imageURL2 = (widget.images[0][2] as ImageModel).src;
+    // banners.add(Image.network(imageURL0));
+    // banners.add(Image.network(imageURL1));
+    // banners.add(Image.network(imageURL2));
+    return banners;
+  }
+
+
 }

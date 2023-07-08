@@ -24,15 +24,16 @@ class _ReviewsViewState extends State<ReviewsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.arrow_back_ios_new),
-        ),
+        automaticallyImplyLeading: true,
+        // leading: IconButton(
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        //   icon: const Icon(Icons.arrow_back_ios_new),
+        // ),
         title: Text(S.current.rateandreview,
             style: Theme.of(context).textTheme.headline6),
+        centerTitle: true,
       ),
       floatingActionButton: SizedBox(
         width: kWidth(context) / 2.6,

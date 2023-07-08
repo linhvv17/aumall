@@ -1,4 +1,9 @@
 import 'package:aumall/core/local/shared_preference.dart';
+import 'package:aumall/features/home/data/datasources/home_datasources.dart';
+import 'package:aumall/features/home/data/repositories/home_repository_impl.dart';
+import 'package:aumall/features/home/domain/repositories/home_repository.dart';
+import 'package:aumall/features/home/domain/usecases/get_banner_usecase.dart';
+import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:aumall/core/network/payment_api_provider_impl.dart';
@@ -26,7 +31,7 @@ import 'features/forgotpass&verifyemail/data/repositories/forgotpassword_reposit
 import 'features/forgotpass&verifyemail/domain/repositories/forgotpassword_repository.dart';
 import 'features/forgotpass&verifyemail/domain/usecases/forgotpassword_usecase.dart';
 import 'features/forgotpass&verifyemail/presentation/forgotpass&verifyemail_bloc/forgotpass&verifyemail_bloc.dart';
-import 'features/home/presentation/bloc/BottomNavigationBar_bloc.dart';
+import 'features/home/presentation/bloc/bottom_nav/bottomNavigationBar_bloc.dart';
 import 'features/login/data/datasources/login_datasource.dart';
 import 'features/login/data/repositories/login_repostory_impl.dart';
 import 'features/login/domin/repositories/login_repository.dart';
@@ -66,6 +71,7 @@ GetIt injector = GetIt.instance;
 Future<void> init() async {
   //BLoC
   injector.registerFactory(() => LoginBloc(injector()));
+  injector.registerFactory(() => HomeBloc(injector()));
   injector.registerFactory(() => RegisterBloc(injector()));
   injector.registerFactory(() => ForgetpasswordAndeVerifyEmailBloc(injector()));
   injector.registerFactory(() => ResetPasswordBloc(injector()));
@@ -84,6 +90,7 @@ Future<void> init() async {
   injector.registerFactory(() => OrderBloc(injector(), injector()));
   //Usecase
   injector.registerLazySingleton(() => LoginUsecase(injector()));
+  injector.registerLazySingleton(() => GetBannerUseCase(injector()));
   injector.registerLazySingleton(() => RegisterUseCase(injector()));
   injector.registerLazySingleton(() => ForgotPassUsecase(injector()));
   injector.registerLazySingleton(() => ResetPasswordUseCase(injector()));
@@ -102,6 +109,8 @@ Future<void> init() async {
   //Repository
   injector.registerLazySingleton<LoginBaseRepository>(
       () => LoginRepositoryImpl(injector(), injector()));
+  injector.registerLazySingleton<HomeBaseRepository>(
+          () => HomeRepositoryImpl(injector(), injector()));
   injector.registerLazySingleton<RegisterBaseRepository>(
       () => RegisterRepositoryImpl(injector(), injector()));
   injector.registerLazySingleton<ForgotPasswordRepo>(
@@ -118,6 +127,8 @@ Future<void> init() async {
   //DataSource
   injector.registerLazySingleton<LoginDatasource>(
       () => LoginDatasourceImpl(injector()));
+  injector.registerLazySingleton<HomeDatasource>(
+          () => HomeDatasourceImpl(injector()));
   injector.registerLazySingleton<RegisterBaseDatasource>(
       () => RegisterDataSourceImpl(injector()));
   injector.registerLazySingleton<ForgetPasswordDataSource>(

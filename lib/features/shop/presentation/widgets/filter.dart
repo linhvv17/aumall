@@ -170,7 +170,7 @@ class FilterProduct extends StatelessWidget {
                       );
                     });
               },
-              icon: const Icon(Icons.tune))),
+              icon: const Icon(Icons.filter_list_alt))),
     );
   }
 }

@@ -107,17 +107,17 @@ class _LoginViewState extends State<LoginView> {
                   BlocConsumer<LoginBloc, LoginState>(
                     listener: (context, state) {
                       if (state is LoginFinishedState && state.data.success!) {
-                        PreferenceHelper.saveDataInSharedPreference(
-                            key: "token", value: state.data.token);
                         showSnackbar(S.current.loginsuccess, context,
                             ColorManager.green);
-
-                    
                         PreferenceHelper.saveDataInSharedPreference(
                             key: "IsLoggedIn", value: true);
-                       
+                        PreferenceHelper.saveDataInSharedPreference(
+                            key: "token", value: state.data.token).then((value) =>
+                        {
                         Navigator.pushReplacementNamed(
-                            context, AppRoutes.layout);
+                        context, AppRoutes.layout)
+                        });
+
                       } else if (state is LoginErrorState) {
                         showSnackbar(state.message, context, Colors.red);
                       } else if (state is LoginFinishedState) {

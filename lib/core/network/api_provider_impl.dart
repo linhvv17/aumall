@@ -30,8 +30,10 @@ class APIProviderImpl implements APIProvider {
       if (!isMultipart) 'Content-Type': 'application/json',
       if (!isMultipart) 'Accept': 'application/json',
       if (token != null) 'Authorization':'Bearer $token',
-      'lang': 'en',
+      // 'lang': 'en',
     };
+    print('APIProviderImpl ${endPoint}');
+    print('APIProviderImpl Bearer $token');
     return await dio.get(
       endPoint,
       queryParameters: query,

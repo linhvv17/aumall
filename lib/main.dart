@@ -1,3 +1,4 @@
+import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,7 +14,7 @@ import 'core/theme/theme_service.dart';
 import 'dependancy_injection.dart';
 import 'features/cart/data/datasource/local_datasource.dart';
 import 'features/favorite/presentation/bloc/favourite_bloc.dart';
-import 'features/home/presentation/bloc/BottomNavigationBar_bloc.dart';
+import 'features/home/presentation/bloc/bottom_nav/bottomNavigationBar_bloc.dart';
 import 'features/payment/presentation/bloc/payment_bloc.dart';
 import 'features/profile/data/datasources/profile_local_datasource.dart';
 import 'features/profile/presentation/bloc/update_password_bloc.dart';
@@ -51,6 +52,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => injector<LoginBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => injector<HomeBloc>(),
         ),
         BlocProvider(
           create: (context) => injector<RegisterBloc>(),

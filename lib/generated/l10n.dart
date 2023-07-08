@@ -270,11 +270,31 @@ class S {
     );
   }
 
-  /// `Recently Added Products`
+  /// `New products have arrived`
   String get recentlyAddedProducts {
     return Intl.message(
-      'Recently Added Products',
+      'New products have arrived',
       name: 'recentlyAddedProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Products coming soon`
+  String get comingSoonProducts {
+    return Intl.message(
+      'Products coming soon',
+      name: 'comingSoonProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today's Suggestions`
+  String get todaySuggestProducts {
+    return Intl.message(
+      'Today\'s Suggestions',
+      name: 'todaySuggestProducts',
       desc: '',
       args: [],
     );
@@ -595,6 +615,16 @@ class S {
     return Intl.message(
       'Filter',
       name: 'filter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort by`
+  String get sortBy {
+    return Intl.message(
+      'Sort by',
+      name: 'sortBy',
       desc: '',
       args: [],
     );
@@ -1545,6 +1575,136 @@ class S {
     return Intl.message(
       'All Products >>',
       name: 'allProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Address`
+  String get saveAddress {
+    return Intl.message(
+      'Save Address',
+      name: 'saveAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full name`
+  String get fullName {
+    return Intl.message(
+      'Full name',
+      name: 'fullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `D. Rice`
+  String get fullNameHint {
+    return Intl.message(
+      'D. Rice',
+      name: 'fullNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address`
+  String get address {
+    return Intl.message(
+      'Address',
+      name: 'address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3 NewBridge Court `
+  String get addressHint {
+    return Intl.message(
+      '3 NewBridge Court ',
+      name: 'addressHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get city {
+    return Intl.message(
+      'City',
+      name: 'city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chino Hills`
+  String get cityHint {
+    return Intl.message(
+      'Chino Hills',
+      name: 'cityHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `State/Province/Region`
+  String get province {
+    return Intl.message(
+      'State/Province/Region',
+      name: 'province',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `California`
+  String get provinceHint {
+    return Intl.message(
+      'California',
+      name: 'provinceHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zip Code (Postal Code)`
+  String get zipCode {
+    return Intl.message(
+      'Zip Code (Postal Code)',
+      name: 'zipCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `91709`
+  String get zipCodeHint {
+    return Intl.message(
+      '91709',
+      name: 'zipCodeHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Country`
+  String get country {
+    return Intl.message(
+      'Country',
+      name: 'country',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `United States`
+  String get countryHint {
+    return Intl.message(
+      'United States',
+      name: 'countryHint',
       desc: '',
       args: [],
     );

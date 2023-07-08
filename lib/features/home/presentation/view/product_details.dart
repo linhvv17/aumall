@@ -251,7 +251,7 @@ class _ProductDetailsState extends State<ProductDetails>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: kWidth(context) - 90,
+                          width: kWidth(context)/2,
                           child: Text(
                             widget.product.name,
                             maxLines: 1,
@@ -332,7 +332,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         style: Theme.of(context).textTheme.headline6),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, AppRoutes.productreviews,
+                          Navigator.pushNamed(context, AppRoutes.productReviews,
                               arguments: widget.product);
                           BlocProvider.of<SendReviewBloc>(context)
                               .add(GetReviews(widget.product.id));

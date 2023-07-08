@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sản phẩm được thêm vào giỏ hàng"),
         "addfav": MessageLookupByLibrary.simpleMessage(
             "Sản phẩm được thêm vào yêu thích"),
+        "address": MessageLookupByLibrary.simpleMessage("Địa chỉ"),
+        "addressHint": MessageLookupByLibrary.simpleMessage("A6 Yên Hoà"),
         "addressLine": MessageLookupByLibrary.simpleMessage("Địa chỉ hiện tại"),
         "allProducts":
             MessageLookupByLibrary.simpleMessage("Tất cả sản phẩm >>"),
@@ -44,9 +46,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "changepass": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
         "check": MessageLookupByLibrary.simpleMessage("Kiểm tra"),
         "checkout": MessageLookupByLibrary.simpleMessage("Thanh toán"),
+        "city": MessageLookupByLibrary.simpleMessage("Thành phố"),
+        "cityHint": MessageLookupByLibrary.simpleMessage("Hà Nội"),
         "code": MessageLookupByLibrary.simpleMessage("Mã Code"),
         "codeEmpty": MessageLookupByLibrary.simpleMessage("Mã được yêu cầu"),
         "codeLink": MessageLookupByLibrary.simpleMessage("Mã được yêu cầu"),
+        "comingSoonProducts":
+            MessageLookupByLibrary.simpleMessage("Sản phẩm sắp về"),
         "confirmEmpty":
             MessageLookupByLibrary.simpleMessage("Yêu cầu xác nhận mật khẩu"),
         "confirmpass":
@@ -54,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "conflictError": MessageLookupByLibrary.simpleMessage("Lỗi xung đột"),
         "continueShopping":
             MessageLookupByLibrary.simpleMessage("TIẾP TỤC MUA SẮM"),
+        "country": MessageLookupByLibrary.simpleMessage("Quốc gia"),
+        "countryHint": MessageLookupByLibrary.simpleMessage("Việt Nam"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Địa chỉ hiện tại"),
         "defaultError": MessageLookupByLibrary.simpleMessage(
@@ -99,6 +107,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "forgetPasswordtext":
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
+        "fullName": MessageLookupByLibrary.simpleMessage("Tên người nhận"),
+        "fullNameHint": MessageLookupByLibrary.simpleMessage("Nguyen Van A"),
         "goToCart": MessageLookupByLibrary.simpleMessage("Đi đến giỏ hàng"),
         "haveAccount": MessageLookupByLibrary.simpleMessage("Đã có tài khoản?"),
         "headerSuTitle": MessageLookupByLibrary.simpleMessage(
@@ -189,11 +199,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "price": MessageLookupByLibrary.simpleMessage("Giá"),
         "productsAbove": MessageLookupByLibrary.simpleMessage("Sản phẩm trên"),
         "profilePicture": MessageLookupByLibrary.simpleMessage("Upload ảnh"),
+        "province": MessageLookupByLibrary.simpleMessage("Quận/Huyện"),
+        "provinceHint": MessageLookupByLibrary.simpleMessage("Cầu Giấy"),
         "rate": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
         "rateandreview":
             MessageLookupByLibrary.simpleMessage("Xếp hạng & Bài đánh giá"),
         "recentlyAddedProducts":
-            MessageLookupByLibrary.simpleMessage("Sản phẩm được thêm gần đây"),
+            MessageLookupByLibrary.simpleMessage("Sản phẩm mới về"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "registerText": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "registeruccess":
@@ -205,6 +217,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "repeatpasswordEmpty": MessageLookupByLibrary.simpleMessage(
             "Yêu cầu xác nhận mật khẩu mới"),
         "reset": MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
+        "saveAddress": MessageLookupByLibrary.simpleMessage("Lưu địa chỉ"),
         "savepass": MessageLookupByLibrary.simpleMessage("Lưu mật khẩu"),
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "searchlocation":
@@ -222,6 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Quản lý địa chỉ giao hàng"),
         "shop": MessageLookupByLibrary.simpleMessage("Cửa hàng"),
         "skip": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
+        "sortBy": MessageLookupByLibrary.simpleMessage("Sắp xếp theo"),
         "stars": MessageLookupByLibrary.simpleMessage("sao"),
         "start": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
         "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
@@ -232,6 +246,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đơn hàng của bạn sẽ sớm được giao.\nCảm ơn bạn đã chọn ứng dụng của chúng tôi!"),
         "summery": MessageLookupByLibrary.simpleMessage("Tổng:"),
         "timeoutError": MessageLookupByLibrary.simpleMessage("Lỗi time out"),
+        "todaySuggestProducts":
+            MessageLookupByLibrary.simpleMessage("Gợi ý hôm nay"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Tổng tiền"),
         "unauthorizedError": MessageLookupByLibrary.simpleMessage(
             "Chưa xác thực: Lỗi xác thực quyền truy cập"),
@@ -250,6 +266,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xem chi tiết đơn hàng"),
         "whatrate": MessageLookupByLibrary.simpleMessage("Đánh giá của bạn?"),
         "writereview": MessageLookupByLibrary.simpleMessage("Viết đánh giá"),
-        "yourReview": MessageLookupByLibrary.simpleMessage("Đánh giá của bạn")
+        "yourReview": MessageLookupByLibrary.simpleMessage("Đánh giá của bạn"),
+        "zipCode":
+            MessageLookupByLibrary.simpleMessage("Mã Zip Code (Postal Code)"),
+        "zipCodeHint": MessageLookupByLibrary.simpleMessage("100000")
       };
 }
