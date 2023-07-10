@@ -6,10 +6,10 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/login_entity.dart';
 import '../repositories/login_repository.dart';
 
-class LoginUsecase extends BaseUsecase<LoginEntity, LoginUsecaseParams> {
+class LoginUseCase extends BaseUsecase<LoginEntity, LoginUseCaseParams> {
   final LoginBaseRepository loginBaseRepository;
 
-  LoginUsecase(this.loginBaseRepository);
+  LoginUseCase(this.loginBaseRepository);
 
   @override
   Future<Either<Failure, LoginEntity>> call(params) async {
@@ -18,9 +18,9 @@ class LoginUsecase extends BaseUsecase<LoginEntity, LoginUsecaseParams> {
   }
 }
 
-class LoginUsecaseParams {
+class LoginUseCaseParams {
   final String email;
   final String password;
 
-  LoginUsecaseParams({required this.email, required this.password});
+  LoginUseCaseParams({required this.email, required this.password});
 }

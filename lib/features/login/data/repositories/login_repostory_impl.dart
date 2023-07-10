@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../../core/error/error_handler.dart';
 import '../../../../core/error/failure.dart';
@@ -20,10 +21,15 @@ class LoginRepositoryImpl implements LoginBaseRepository {
   Future<Either<Failure, LoginEntity>> login(LoginParams params) async {
     if (await networkInfo.isConnected) {
       try {
+        print('aaaaaaaaaaaaaaa');
         final response = await loginDatasource.login(params);
+        print('aaaaaaaaaaaaaaa ${response.message}');
         return right(response);
       } catch (error) {
-        print(error);
+        if (kDebugMode) {
+          print(error);
+        }
+        print('bbbbbbbbbbbb');
         return left(ErrorHandler.handle(error).failure);
       }
     } else {

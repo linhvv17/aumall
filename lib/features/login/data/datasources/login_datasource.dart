@@ -22,6 +22,7 @@ class LoginDatasourceImpl implements LoginDatasource {
     });
     if (kDebugMode) {
       print("login ${response.data}");
+      print("login ${response.statusCode}");
     }
     return LoginModel.fromJson(response.data);
   }

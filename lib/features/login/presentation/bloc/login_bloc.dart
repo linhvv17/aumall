@@ -8,16 +8,16 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final LoginUsecase loginUsecase;
+  final LoginUseCase loginUseCase;
   
   LoginBloc(
-    this.loginUsecase,
+    this.loginUseCase,
   ) : super(LoginInitialState()) {
     on<UserLogin>((event, emit) async {
       emit(LoginLoadingState());
       
-        final failureOrSuccess = await loginUsecase(
-          LoginUsecaseParams(email: event.email, password: event.password));
+        final failureOrSuccess = await loginUseCase(
+          LoginUseCaseParams(email: event.email, password: event.password));
            failureOrSuccess.fold(
           (failure) => emit(LoginErrorState(failure.message)),
           (success) => emit(LoginFinishedState(data: success)));

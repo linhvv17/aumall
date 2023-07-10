@@ -89,7 +89,7 @@ Future<void> init() async {
       .registerFactory(() => PaymentBloc(injector(), injector(), injector()));
   injector.registerFactory(() => OrderBloc(injector(), injector()));
   //Usecase
-  injector.registerLazySingleton(() => LoginUsecase(injector()));
+  injector.registerLazySingleton(() => LoginUseCase(injector()));
   injector.registerLazySingleton(() => GetBannerUseCase(injector()));
   injector.registerLazySingleton(() => RegisterUseCase(injector()));
   injector.registerLazySingleton(() => ForgotPassUsecase(injector()));
