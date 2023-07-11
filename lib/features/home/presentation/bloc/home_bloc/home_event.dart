@@ -11,3 +11,7 @@ abstract class HomeEvent extends Equatable {
 class GetBannerData extends HomeEvent {
 
 }
+
+class GetListProductHomeData extends HomeEvent {
+
+}

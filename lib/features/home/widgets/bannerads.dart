@@ -48,7 +48,7 @@ class _BannerAdsState extends State<BannerAds> {
       options: CarouselOptions(
         autoPlay: true,
         viewportFraction: 1,
-        height: kHeight(context) * 0.4,
+        height: kHeight(context) * 0.3,
       ),
     );
   }

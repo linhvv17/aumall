@@ -20,7 +20,7 @@ class ProductsRepositoryImpl implements ProductRepository {
     if (await networkInfo.isConnected) {
       try {
         // final data = await productsDatasource.getAllProducts();
-        final dataCheck = productsDatasource.getAllProductsAuMall();
+        // final dataCheck = productsDatasource.getAllProductsAuMall();
         final data = await productsDatasource.getAllProductsFromTxt();
         return right(data);
       } catch (error) {

@@ -43,6 +43,7 @@ dependencies:
   uuid: ^3.0.7
   webview_flutter: ^3.0.4
   intl_utils: ^2.8.3
+  path_provider:
 dependency_overrides:
   intl: any
   intl_utils: any

@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../home/data/models/list_product_home_model.dart';
+
 class ProductsEntity extends Equatable {
   final bool success;
   final List<ProductEntity> products;
@@ -86,4 +88,94 @@ class ReviewEntity extends Equatable {
 
   @override
   List<Object?> get props => [user, name, rating, comment];
+}
+
+
+
+class ProductSimpleEntity extends Equatable {
+  int? id;
+  int? userId;
+  String? addedBy;
+  String? title;
+  String? description;
+  String? content;
+  int? categoryId;
+  int? brandId;
+  int? madeInId;
+  String? thumbnail;
+  String? featured;
+  String? flashSale;
+  String? price;
+  String? discount;
+  String? reviewNumber;
+  String? ratingNumber;
+  String? createdAt;
+  String? thumbnailUrl;
+  String? videoLink;
+  // Category? category;
+
+  ProductSimpleEntity(
+      {this.id,
+        this.userId,
+        this.addedBy,
+        this.title,
+        this.description,
+        this.content,
+        this.categoryId,
+        this.brandId,
+        this.madeInId,
+        this.thumbnail,
+        this.featured,
+        this.flashSale,
+        this.price,
+        this.discount,
+        this.reviewNumber,
+        this.ratingNumber,
+        this.createdAt,
+        this.thumbnailUrl,
+        this.videoLink,
+        // this.category
+      });
+
+  ProductSimpleEntity.fromJson(Map<String, dynamic> json) {
+    id = json['id'] ?? "";
+    userId = json['user_id']?? "";
+    addedBy = json['added_by']?? "";
+    title = json['title']?? "";
+    description = json['description']?? "";
+    content = json['content']?? "";
+    categoryId = json['category_id']?? "";
+    brandId = json['brand_id']?? "";
+    madeInId = json['made_in_id']?? "";
+    thumbnail = json['thumbnail']?? "";
+    featured = json['featured']?? "";
+    flashSale = json['flash_sale']?? "";
+    price = json['price']?? "";
+    discount = json['discount']?? "";
+    reviewNumber = json['review_number']?? "";
+    ratingNumber = json['rating_number']?? "";
+    createdAt = json['created_at']?? "";
+    thumbnailUrl = json['thumbnail_url']?? "";
+    videoLink = json['video_link']?? "";
+    // category = json['category'] != null
+    //     ? Category.fromJson(json['category'])
+    //     : Category(id: 1, name: "NULL");
+  }
+
+  @override
+  List<Object?> get props {
+    return [
+      id,
+      title,
+      description,
+      price,
+      ratingNumber,
+      thumbnailUrl,
+      // category,
+      reviewNumber,
+      content,
+      categoryId,
+      brandId,
+    ];
+  }
 }

@@ -10,6 +10,32 @@ class ProductsModel extends ProductsEntity {
       json['filteredProductsCount']);
 }
 
+class ProductModelSimple extends ProductSimpleEntity {
+
+  ProductModelSimple(
+      {required super.id,
+        required super.title,
+        required super.description,
+        required super.price,
+        required super.ratingNumber,
+        required super.thumbnailUrl,
+        // required super.category,
+        required super.reviewNumber,
+      });
+  factory ProductModelSimple.fromJson(Map<String, dynamic> json) => ProductModelSimple(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      price: json['price'],
+      ratingNumber: json['rating_number'],
+      // category: json['category'],
+      reviewNumber: json['reviewNumber'],
+      thumbnailUrl: json['thumbnail_url'],
+  );
+
+
+
+}
 class ProductModel extends ProductEntity {
    ProductModel(
       {required super.id,

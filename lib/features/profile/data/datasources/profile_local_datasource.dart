@@ -40,6 +40,7 @@ class CacheManager implements CacheManagerBase<ProfileEntity> {
   @override
   Future<void> clearAll() async {
     await Hive.box("profile-cahce").clear();
+    await Hive.box("product-cahce").clear();
   }
 
   @override

@@ -1,5 +1,7 @@
+import 'package:aumall/features/cart/data/datasource/local_datasource.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 import 'package:aumall/features/payment/presentation/bloc/order_bloc.dart';
 import '../../../../core/colors/colors.dart';
@@ -134,10 +136,12 @@ class ProfileView extends StatelessWidget {
                       ),
                       ListTile(
                           onTap: () {
-                            Navigator.pushReplacementNamed(
-                                context, AppRoutes.login);
+                            //delete cache data of current user
                             PreferenceHelper.saveDataInSharedPreference(key: 'IsLoggedIn', value: false);
                             PreferenceHelper.removeData(key: 'token');
+                            Navigator.pushReplacementNamed(
+                                context, AppRoutes.login);
+
                           },
                           title: Text(
                             S.current.logout,

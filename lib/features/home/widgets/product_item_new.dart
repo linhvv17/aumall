@@ -10,11 +10,12 @@ import '../../../core/utilities/mediaquery.dart';
 import '../../../core/utilities/strings.dart';
 import '../../../generated/l10n.dart';
 import '../../login/presentation/widgets/alert_snackbar.dart';
+import '../../shop/data/models/products_model.dart';
 import '../../shop/domain/entities/products_entity.dart';
 
 class NewProductItem extends StatelessWidget {
   const NewProductItem({super.key, required this.product});
-  final ProductEntity product;
+  final ProductModelSimple product;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,7 +28,7 @@ class NewProductItem extends StatelessWidget {
         child: Stack(
           children: [
             Image.network(
-              product.images[0].url,
+              product.thumbnailUrl!,
               width: 200,
               height: 200,
             ),
@@ -63,23 +64,39 @@ class NewProductItem extends StatelessWidget {
                       )
                     ],
                   ),
-                  child: product.isFavourite
-                      ? CircleAvatar(
-                          backgroundColor: ColorManager.orangeLight,
-                          radius: 20.0,
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {},
-                              child: const Icon(
-                                Icons.shopping_bag,
-                                size: 20.0,
-                                color: ColorManager.white,
-                              ),
-                            ),
-                          ),
-                        )
-                      : const SizedBox()),
+                  // child: product.isFavourite
+                  //     ? CircleAvatar(
+                  //         backgroundColor: ColorManager.orangeLight,
+                  //         radius: 20.0,
+                  //         child: Material(
+                  //           color: Colors.transparent,
+                  //           child: InkWell(
+                  //             onTap: () {},
+                  //             child: const Icon(
+                  //               Icons.shopping_bag,
+                  //               size: 20.0,
+                  //               color: ColorManager.white,
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       )
+                  //     : const SizedBox()
+                child: CircleAvatar(
+                  backgroundColor: ColorManager.orangeLight,
+                  radius: 20.0,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {},
+                      child: const Icon(
+                        Icons.shopping_bag,
+                        size: 20.0,
+                        color: ColorManager.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
             Positioned(
               left: kWidth(context) * 0.3,
@@ -111,23 +128,29 @@ class NewProductItem extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () {
-                            BlocProvider.of<FavouriteBloc>(context).add(
-                                AddToFavorite(
-                                    product: product,
-                                    isFavourite: product.isFavourite,
-                                    ));
+                            // BlocProvider.of<FavouriteBloc>(context).add(
+                            //     // AddToFavorite(
+                            //     //     product: product,
+                            //     //     isFavourite: product.isFavourite,
+                            //     //     )
+                            // );
                           },
-                          child: product.isFavourite
-                              ? const Icon(
-                                  Icons.favorite,
-                                  size: 20.0,
-                                  color: ColorManager.orangeLight,
-                                )
-                              : const Icon(
-                                  Icons.favorite_outline,
-                                  size: 20.0,
-                                  color: ColorManager.grey,
-                                ),
+                          // child: product.isFavourite
+                          //     ? const Icon(
+                          //         Icons.favorite,
+                          //         size: 20.0,
+                          //         color: ColorManager.orangeLight,
+                          //       )
+                          //     : const Icon(
+                          //         Icons.favorite_outline,
+                          //         size: 20.0,
+                          //         color: ColorManager.grey,
+                          //       ),
+                          child: Icon(
+                            Icons.favorite,
+                            size: 20.0,
+                            color: ColorManager.orangeLight,
+                          ),
                         ),
                       ),
                     );
@@ -146,7 +169,7 @@ class NewProductItem extends StatelessWidget {
                       children: [
                         RatingBarIndicator(
                           itemSize: 25.0,
-                          rating: product.ratings.toDouble(),
+                          rating: 4.0,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,
@@ -155,7 +178,7 @@ class NewProductItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 4.0),
                         Text(
-                          '(${product.numOfReviews})',
+                          '(${product.reviewNumber})',
                           style: Theme.of(context).textTheme.caption!.copyWith(
                                 color: Colors.grey,
                               ),
@@ -164,14 +187,14 @@ class NewProductItem extends StatelessWidget {
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      product.category,
+                      "product.category!.name!",
                       style: Theme.of(context).textTheme.caption!.copyWith(
                             color: ColorManager.grey,
                           ),
                     ),
                     const SizedBox(height: 6.0),
                     Text(
-                      product.name,
+                      product.title!,
                       style: Theme.of(context).textTheme.subtitle2!.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
