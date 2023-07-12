@@ -151,20 +151,21 @@ class _ShopViewState extends State<ShopView> {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => ProductDetails(
-                                                product: products[index],
-                                                products: products,
-                                                index: index,
-                                              ),
-                                            ));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //       builder: (context) => ProductDetails(
+                                        //         product: products[index],
+                                        //         products: products,
+                                        //         index: index,
+                                        //       ),
+                                        //     ));
                                       },
                                       child: Hero(
                                           tag: '$index',
-                                          child:
-                                          ProductItem(product: products[index])));
+                                          child:  Container()
+                                          // ProductItem(product: products[index])
+                                  ));
                                 },
                               ));
                         } else if (state is ProductsErrorState ) {
@@ -194,20 +195,21 @@ class _ShopViewState extends State<ShopView> {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => ProductDetails(
-                                                product: products[index],
-                                                products: products,
-                                                index: index,
-                                              ),
-                                            ));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //       builder: (context) => ProductDetails(
+                                        //         product: products[index],
+                                        //         products: products,
+                                        //         index: index,
+                                        //       ),
+                                        //     ));
                                       },
                                       child: Hero(
                                           tag: '$index',
-                                          child:
-                                          ProductItem(product: products[index])));
+                                          child:Container()
+                                          // ProductItem(product: products[index])
+                                  ));
                                 },
                               ));
 
@@ -223,20 +225,21 @@ class _ShopViewState extends State<ShopView> {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => ProductDetails(
-                                                product: products[index],
-                                                products: products,
-                                                index: index,
-                                              ),
-                                            ));
+                                        // Navigator.push(
+                                        //     context,
+                                            // MaterialPageRoute(
+                                            //   builder: (context) => ProductDetails(
+                                            //     product: products[index],
+                                            //     products: products,
+                                            //     index: index,
+                                            //   ),
+                                            // ));
                                       },
                                       child: Hero(
                                           tag: '$index',
-                                          child:
-                                          ProductItem(product: products[index])));
+                                          child: Container()
+                                          // ProductItem(product: products[index])
+                                      ));
                                 },
                               ));
                         } else if (state is SpecificProductsErrorState ) {

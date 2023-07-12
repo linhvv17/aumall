@@ -58,17 +58,19 @@ class _FavoriteViewState extends State<FavoriteView> {
                           itemBuilder: (context, index) {
                             return InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ProductDetails(
-                                          product: favouriteList[index],
-                                          products: favouriteList,
-                                          index: index,
-                                        ),
-                                      ));
+                                  // Navigator.push(
+                                  //     context,
+                                      // MaterialPageRoute(
+                                      //   builder: (context) => ProductDetails(
+                                      //     product: favouriteList[index],
+                                      //     products: favouriteList,
+                                      //     index: index,
+                                      //   ),
+                                      // ));
                                 },
-                                child: ProductItem(product: favouriteList[index]));
+                                child: Container()
+                                // ProductItem(product: favouriteList[index])
+                            );
                           },
                         ),
                     ))

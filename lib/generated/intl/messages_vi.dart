@@ -154,6 +154,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lỗi: Không tìm thấy"),
         "notValidConfirmPassword": MessageLookupByLibrary.simpleMessage(
             "Xác nhận Mật khẩu phải bằng Mật khẩu"),
+        "notYetReview": MessageLookupByLibrary.simpleMessage("0 đánh giá"),
         "notfavorite": MessageLookupByLibrary.simpleMessage(
             "Không có sản phẩm nào trong mục yêu thích!"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),

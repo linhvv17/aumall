@@ -1,5 +1,6 @@
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_event.dart';
+import 'package:aumall/features/home/presentation/view/product_details.dart';
 import 'package:aumall/features/home/widgets/bannerads.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -33,6 +34,9 @@ class _HomeState extends State<HomeView>{
       body: ListView(
         children: [
           BlocBuilder<HomeBloc, HomeLoadState>(
+            buildWhen: (pre, cur){
+              return (cur is HomeStateLoadedFullData);
+            },
               builder: (context, state){
                 if(state is HomeStateLoadedFullData){
                   return  BannerAds(
@@ -79,6 +83,9 @@ class _HomeState extends State<HomeView>{
             ),
           ),
           BlocBuilder<HomeBloc, HomeLoadState>(
+            buildWhen: (pre, cur){
+              return (cur is HomeStateLoadedFullData || cur is HomeStateLoadListProductDataLoaded);
+            },
             builder: (context, state) {
               if (state is HomeStateLoadListProductLoading) {
                 return const Column(
@@ -89,7 +96,7 @@ class _HomeState extends State<HomeView>{
                     CircularProgressIndicator(),
                   ],
                 );
-              } else if (state is HomeStateLoadedFullData) {
+              } else if (state is HomeStateLoadListProductDataLoaded) {
                 print('Home HomeStateLoadListProductDataLoaded');
                 final newProducts = state.listProductHomeEntity!.listProductHomeData.newProducts;
                 return SizedBox(
@@ -104,15 +111,14 @@ class _HomeState extends State<HomeView>{
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => ProductDetails(
-                            //         product: newProducts![index],
-                            //         products: newProducts,
-                            //         index: index,
-                            //       ),
-                            //     ));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetails(
+                                    productSimpleEntity: newProducts![index],
+                                    index: index,
+                                  ),
+                                ));
                           },
                           child: Hero(
                             tag: '$index',

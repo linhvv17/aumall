@@ -3,6 +3,7 @@ import 'package:aumall/core/network/network_info.dart';
 import 'package:aumall/features/home/data/datasources/home_datasources.dart';
 import 'package:aumall/features/home/domain/entities/banner_entity.dart';
 import 'package:aumall/features/home/domain/entities/list_product_home_entity.dart';
+import 'package:aumall/features/home/domain/entities/product_detail_entity.dart';
 import 'package:aumall/features/home/domain/repositories/home_repository.dart';
 import 'package:aumall/generated/l10n.dart';
 import 'package:dartz/dartz.dart';
@@ -39,6 +40,24 @@ class HomeRepositoryImpl extends HomeBaseRepository {
         return right(data);
       } catch (error) {
         print('getListProductHome: catch: ${error.toString()}');
+        return left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return  Left(OfflineFailure(S.current.noInternetError));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ProductDetailEntity>> getProductDetail(GetProductDetailParams getProductDetailParams) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final data = await homeDatasource.getProductDetail(getProductDetailParams);
+        print('getProductDetail try}');
+        print('getProductDetail ${data}');
+        print('getProductDetail ${data.productDetailData}');
+        return right(data);
+      } catch (error) {
+        print('getProductDetail catch}');
         return left(ErrorHandler.handle(error).failure);
       }
     } else {

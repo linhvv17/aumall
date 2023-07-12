@@ -153,6 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ERROR: Not Found"),
         "notValidConfirmPassword": MessageLookupByLibrary.simpleMessage(
             "Confirm Password must equal Password"),
+        "notYetReview": MessageLookupByLibrary.simpleMessage("No reviews yet"),
         "notfavorite":
             MessageLookupByLibrary.simpleMessage("There is No Favorite yet!"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),

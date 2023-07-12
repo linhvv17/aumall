@@ -33,4 +33,5 @@ const String registerAuMall  = "/auth/register";
 const String profileAuMall  = "/user";
 const String bannerAuMall  = "/banner";
 const String homeAuMall  = "/home";
+const String productDetailAuMall  = "/product";
 const String allProductsAuMall  = "/products";

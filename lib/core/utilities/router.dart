@@ -46,13 +46,13 @@ Route<dynamic> onGenerate(RouteSettings settings) {
     case AppRoutes.shop:
       return MaterialPageRoute(builder: (context) => const ShopView());
     case AppRoutes.productDetails:
-      final product = settings.arguments as ProductEntity;
+      final product = settings.arguments as ProductSimpleEntity;
       final products = settings.arguments as List<ProductEntity>;
       final index = settings.arguments as int;
       return MaterialPageRoute(
           builder: (context) => ProductDetails(
-                product: product,
-                products: products,
+                productSimpleEntity: product,
+                // products: products,
                 index: index,
               ));
     case AppRoutes.productReviews:

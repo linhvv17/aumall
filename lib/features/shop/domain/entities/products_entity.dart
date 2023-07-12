@@ -108,7 +108,7 @@ class ProductSimpleEntity extends Equatable {
   String? price;
   String? discount;
   String? reviewNumber;
-  String? ratingNumber;
+  int? ratingNumber;
   String? createdAt;
   String? thumbnailUrl;
   String? videoLink;
@@ -153,7 +153,7 @@ class ProductSimpleEntity extends Equatable {
     price = json['price']?? "";
     discount = json['discount']?? "";
     reviewNumber = json['review_number']?? "";
-    ratingNumber = json['rating_number']?? "";
+    ratingNumber = json['rating_number']?? 0;
     createdAt = json['created_at']?? "";
     thumbnailUrl = json['thumbnail_url']?? "";
     videoLink = json['video_link']?? "";

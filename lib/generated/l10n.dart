@@ -1710,6 +1710,16 @@ class S {
     );
   }
 
+  /// `No reviews yet`
+  String get notYetReview {
+    return Intl.message(
+      'No reviews yet',
+      name: 'notYetReview',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Go to cart`
   String get goToCart {
     return Intl.message(

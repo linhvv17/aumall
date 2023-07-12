@@ -1,3 +1,4 @@
+import 'package:aumall/features/home/data/models/product_detail_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -8,7 +9,7 @@ import '../../../core/colors/colors.dart';
 import '../../../core/utilities/mediaquery.dart';
 
 class Carousel extends StatefulWidget {
-  final List images;
+  final List<Images> images;
   const Carousel({super.key, required this.images});
 
   @override
@@ -28,6 +29,7 @@ class _CarouselState extends State<Carousel> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        //images
         SizedBox(
           height: kHeight(context) * 0.3,
           child: PhotoViewGallery.builder(
@@ -36,7 +38,7 @@ class _CarouselState extends State<Carousel> {
             itemCount: widget.images.length,
             builder: (BuildContext context, int index) {
               return PhotoViewGalleryPageOptions(
-                imageProvider: NetworkImage(widget.images[index].url),
+                imageProvider: NetworkImage(widget.images[index].imageUrl!),
                 minScale: PhotoViewComputedScale.contained * 0.8,
                 maxScale: PhotoViewComputedScale.covered * 1.8,
               );
@@ -55,6 +57,7 @@ class _CarouselState extends State<Carousel> {
           ),
         ),
         const SizedBox(height: 10,),
+        //slides
         CarouselSlider.builder(
           itemCount: widget.images.length,
           options: CarouselOptions(
@@ -87,7 +90,7 @@ class _CarouselState extends State<Carousel> {
 
                 ),
                   child: Image.network(
-                widget.images[index].url!,
+                widget.images[index].imageUrl!,
               )),
             ),
           ),

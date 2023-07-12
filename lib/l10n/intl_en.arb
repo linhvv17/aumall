@@ -181,5 +181,6 @@
   "zipCodeHint" : "91709",
   "country" : "Country",
   "countryHint" : "United States",
+  "notYetReview" : "No reviews yet",
   "goToCart" : "Go to cart"
 }

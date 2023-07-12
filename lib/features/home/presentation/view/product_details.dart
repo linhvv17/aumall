@@ -1,30 +1,32 @@
 import 'package:aumall/features/cart/presentation/views/cart.dart';
+import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
+import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:aumall/features/cart/presentation/bloc/cart_bloc.dart';
-import 'package:aumall/features/shop/presentation/bloc/send_review_bloc.dart';
-import 'package:aumall/features/shop/presentation/widgets/review_card.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
-import '../../../../core/utilities/routes.dart';
-import '../../../../core/utilities/strings.dart';
 import '../../../../generated/l10n.dart';
 import '../../../favorite/presentation/bloc/favourite_bloc.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shop/presentation/widgets/review_card.dart';
+import '../../data/models/product_detail_model.dart';
 import '../../widgets/carousel.dart';
 import '../../widgets/product_item.dart';
+import '../bloc/product_detail_bloc/product_detail_event.dart';
 
 class ProductDetails extends StatefulWidget {
-  final ProductEntity product;
-  final List<ProductEntity> products;
+  final ProductSimpleEntity productSimpleEntity;
+  // final List<ProductEntity> products;
   final int index;
   const ProductDetails(
       {super.key,
-      required this.product,
-      required this.products,
-      required this.index});
+      required this.productSimpleEntity,
+      // required this.products,
+      required this.index
+      });
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -39,6 +41,9 @@ class _ProductDetailsState extends State<ProductDetails>
       duration: const Duration(milliseconds: 500),
       upperBound: 1,
       lowerBound: 0,
+    );
+    BlocProvider.of<ProductDetailBloc>(context).add(
+         GetProductDetailData(widget.productSimpleEntity.id!)
     );
     super.initState();
   }
@@ -92,8 +97,8 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   Widget build(BuildContext context) {
-    List<ProductEntity> newProductsList = widget.products.reversed.toList();
-    newProductsList.shuffle();
+    // List<ProductEntity> newProductsList = widget.products.reversed.toList();
+    // newProductsList.shuffle();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -104,7 +109,7 @@ class _ProductDetailsState extends State<ProductDetails>
           icon: const Icon(Icons.arrow_back_ios_new),
         ),
         title: Text(
-          widget.product.name,
+          widget.productSimpleEntity.title!,
           style: Theme.of(context).textTheme.headline6,
         ),
         actions: [
@@ -135,23 +140,29 @@ class _ProductDetailsState extends State<ProductDetails>
                     radius: 20.0,
                     child: InkWell(
                       onTap: () {
-                        BlocProvider.of<FavouriteBloc>(context)
-                            .add(AddToFavorite(
-                          product: widget.product,
-                          isFavourite: widget.product.isFavourite,
-                        ));
+                        // BlocProvider.of<FavouriteBloc>(context)
+                        //     .add(AddToFavorite(
+                        //   product: widget.productSimpleEntity,
+                        //   isFavourite: widget.productSimpleEntity.isFavourite,
+                        // ));
                       },
-                      child: widget.product.isFavourite
-                          ? const Icon(
-                              Icons.favorite,
-                              size: 20.0,
-                              color: ColorManager.orangeLight,
-                            )
-                          : const Icon(
-                              Icons.favorite_outline,
-                              size: 20.0,
-                              color: ColorManager.grey,
-                            ),
+                      child:
+                      const Icon(
+                        Icons.favorite,
+                        size: 20.0,
+                        color: ColorManager.orangeLight,
+                      ),
+                      // widget.productSimpleEntity.isFavourite
+                      //     ? const Icon(
+                      //         Icons.favorite,
+                      //         size: 20.0,
+                      //         color: ColorManager.orangeLight,
+                      //       )
+                      //     : const Icon(
+                      //         Icons.favorite_outline,
+                      //         size: 20.0,
+                      //         color: ColorManager.grey,
+                      //       ),
                     ),
                   );
                 },
@@ -175,14 +186,14 @@ class _ProductDetailsState extends State<ProductDetails>
                     RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 onPressed: () {
 
-                  BlocProvider.of<CartBloc>(context).add(AddToCart(widget.product, widget.index));
+                  // BlocProvider.of<CartBloc>(context).add(AddToCart(widget.product, widget.index));
 
-                  animateCartAdd(
-                    context,
-                    NetworkImage(
-                      widget.product.images[0].url,
-                    ),
-                  );
+                  // animateCartAdd(
+                  //   context,
+                  //   NetworkImage(
+                  //     widget.product.images[0].url,
+                  //   ),
+                  // );
                 },
                 label: BlocConsumer<CartBloc, CartState>(
                   listener: (context, state) {
@@ -234,190 +245,220 @@ class _ProductDetailsState extends State<ProductDetails>
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Carousel(images: widget.product.images),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+        builder:(context, state){
+          if(state is ProductDetailLoaded){
+            print('ProductDetailsbuild ${state.productDetailEntity.productDetailData!.toJson()}');
+            print('ProductDetailsbuild ${state.productDetailEntity.productDetailData?.reviewNumber}');
+            ProductDetailData productDetailData = state.productDetailEntity.productDetailData!;
+            return SingleChildScrollView(
+              child: SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: kWidth(context)/2,
-                          child: Text(
-                            widget.product.name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          widget.product.category,
-                          style: const TextStyle(
-                            color: ColorManager.grey,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
-                            RatingBarIndicator(
-                              itemSize: 25.0,
-                              rating: widget.product.ratings.toDouble(),
-                              itemBuilder: (context, _) => const Icon(
-                                Icons.star,
-                                color: Colors.amber,
+                    //media of product
+                    Carousel(images: productDetailData!.images!),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          //info
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              //title
+                              SizedBox(
+                                width: kWidth(context)/2,
+                                child: Text(
+                                  productDetailData.title!,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
-                              direction: Axis.horizontal,
-                            ),
-                            const SizedBox(width: 4.0),
-                            Text(
-                              '(${widget.product.numOfReviews})',
-                              style:
-                                  Theme.of(context).textTheme.caption!.copyWith(
-                                        color: Colors.grey,
-                                      ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "${widget.product.price}\$",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6!
-                          .copyWith(color: ColorManager.orangeLight),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                child: Text(
-                  S.current.description,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6!
-                      .copyWith(color: ColorManager.orangeLight),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                child: Text(
-                  widget.product.description,
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(S.current.rateandreview,
-                        style: Theme.of(context).textTheme.headline6),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, AppRoutes.productReviews,
-                              arguments: widget.product);
-                          BlocProvider.of<SendReviewBloc>(context)
-                              .add(GetReviews(widget.product.id));
-                        },
-                        child:  Text(S.current.seeMore))
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-                child: Row(
-                  children: [
-                    RatingBarIndicator(
-                      itemSize: 25.0,
-                      rating: widget.product.ratings.toDouble(),
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              //sub title
+                              Text(
+                                productDetailData.title!,
+                                style: const TextStyle(
+                                  color: ColorManager.grey,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              //rating
+                              Row(
+                                children: [
+                                  RatingBarIndicator(
+                                    itemSize: 25.0,
+                                    rating: widget.productSimpleEntity.ratingNumber != null ?
+                                    widget.productSimpleEntity.ratingNumber!.toDouble() : 0.0,
+                                    itemBuilder: (context, _) => const Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    direction: Axis.horizontal,
+                                  ),
+                                  const SizedBox(width: 4.0),
+                                  Text(
+                                    widget.productSimpleEntity.reviewNumber != null ?
+                                    '(${widget.productSimpleEntity.reviewNumber})'
+                                        : S.current.notYetReview,
+                                    style:
+                                    Theme.of(context).textTheme.caption!.copyWith(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          //price
+                          Text(
+                            "₫${productDetailData.price}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6!
+                                .copyWith(color: ColorManager.orangeLight),
+                          )
+                        ],
                       ),
-                      direction: Axis.horizontal,
-                      itemCount: 5,
                     ),
-                    const SizedBox(width: 4.0),
-                    Text(
-                      widget.product.ratings.toStringAsFixed(1),
-                      style: Theme.of(context).textTheme.caption!.copyWith(
-                            color: Colors.grey,
+                    //description
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      child: Text(
+                        S.current.description,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6!
+                            .copyWith(color: ColorManager.orangeLight),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      child: Text(
+                        productDetailData.description!,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    ////reviews
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(S.current.rateandreview,
+                              style: Theme.of(context).textTheme.headline6),
+                          TextButton(
+                              onPressed: () {
+                                // Navigator.pushNamed(context, AppRoutes.productReviews,
+                                //     arguments: widget.product);
+                                // BlocProvider.of<SendReviewBloc>(context)
+                                //     .add(GetReviews(widget.product.id));
+                              },
+                              child:  Text(S.current.seeMore))
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                      child: Row(
+                        children: [
+                          RatingBarIndicator(
+                            itemSize: 25.0,
+                            rating: productDetailData.ratingNumber != null ?
+                            productDetailData.ratingNumber!.toDouble() : 0.0,
+                            itemBuilder: (context, _) => const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            direction: Axis.horizontal,
+                            itemCount: 5,
                           ),
-                    ),
-                    const SizedBox(width: 4.0),
-                    Text(
-                      '(${widget.product.numOfReviews} reviews)',
-                      style: Theme.of(context).textTheme.caption!.copyWith(
-                            color: Colors.grey,
+                          const SizedBox(width: 4.0),
+                          Text(
+                              productDetailData.ratingNumber != null ?
+                              productDetailData.ratingNumber!.toStringAsFixed(1) : "0.0",
+                            style: Theme.of(context).textTheme.caption!.copyWith(
+                              color: Colors.grey,
+                            ),
                           ),
+                          const SizedBox(width: 4.0),
+                          Text(
+                            productDetailData.reviewNumber != null ?
+                            '(${productDetailData.reviewNumber})'
+                                : S.current.notYetReview,
+                            style: Theme.of(context).textTheme.caption!.copyWith(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-              widget.product.numOfReviews != 0
-                  ? Padding(
+                    productDetailData!.reviews!.isNotEmpty
+                        ? Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 5, horizontal: 15),
-                      child: ReviewCard(product: widget.product, index: 0),
+                      child: ReviewCard(product: productDetailData, index: 0),
                     )
-                  : const SizedBox(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                child: Text(S.current.mayLike,
-                    style: Theme.of(context).textTheme.headline6),
-              ),
-              SizedBox(
-                height: 330,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: widget.products.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ProductDetails(
-                                product: widget.products[index],
-                                products: widget.products,
-                                index: index,
-                              ),
-                            ));
-                      },
-                      child: SizedBox(
-                          width: kWidth(context) / 2,
-                          height: 330,
-                          child: ProductItem(product: newProductsList [index])),
-                    );
-                  },
+                        : const SizedBox(),
+                    Padding(
+                      padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                      child: Text(S.current.mayLike,
+                          style: Theme.of(context).textTheme.headline6),
+                    ),
+                    SizedBox(
+                      height: 330,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: state.productDetailEntity.relatedProducts!.relatedProducts?.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              // Navigator.pushReplacement(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => ProductDetails(
+                              //         product: widget.products[index],
+                              //         products: widget.products,
+                              //         index: index,
+                              //       ),
+                              //     ));
+                            },
+                            child: SizedBox(
+                                width: kWidth(context) / 2,
+                                height: 330,
+                                child: ProductItem(product: state.productDetailEntity.relatedProducts!.relatedProducts![index])
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: kHeight(context) / 11,
+                    )
+                  ],
                 ),
               ),
-              SizedBox(
-                height: kHeight(context) / 11,
-              )
-            ],
-          ),
-        ),
+            );
+          }
+          else if(state is ProductDetailErrorState){
+            return Center(child: Text(state.message));
+          } else {
+            return Container();
+          }
+        }
       ),
     );
   }

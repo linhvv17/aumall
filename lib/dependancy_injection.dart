@@ -3,7 +3,9 @@ import 'package:aumall/features/home/data/datasources/home_datasources.dart';
 import 'package:aumall/features/home/data/repositories/home_repository_impl.dart';
 import 'package:aumall/features/home/domain/repositories/home_repository.dart';
 import 'package:aumall/features/home/domain/usecases/get_banner_usecase.dart';
+import 'package:aumall/features/home/domain/usecases/get_product_detail_usecase.dart';
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
+import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:aumall/core/network/payment_api_provider_impl.dart';
@@ -78,6 +80,7 @@ Future<void> init() async {
   injector.registerFactory(() => ResetPasswordBloc(injector()));
   injector.registerFactory(() => BottomNavigationBarBloc());
   injector.registerFactory(() => ProductsBloc(injector(), injector()));
+  injector.registerFactory(() => ProductDetailBloc(injector()));
   injector.registerFactory(() => ProfileBloc(injector(), injector()));
   injector.registerFactory(() => UpdatePasswordBloc(injector()));
   injector.registerFactory(() => SendReviewBloc(injector(), injector()));
@@ -92,6 +95,7 @@ Future<void> init() async {
   //Usecase
   injector.registerLazySingleton(() => LoginUseCase(injector()));
   injector.registerLazySingleton(() => GetBannerUseCase(injector()));
+  injector.registerLazySingleton(() => GetProductDetailUseCase(injector()));
   injector.registerLazySingleton(() => GetListProductHomeUseCase(injector()));
   injector.registerLazySingleton(() => RegisterUseCase(injector()));
   injector.registerLazySingleton(() => ForgotPassUsecase(injector()));

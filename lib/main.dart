@@ -1,4 +1,5 @@
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
+import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -55,6 +56,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => injector<HomeBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => injector<ProductDetailBloc>(),
         ),
         BlocProvider(
           create: (context) => injector<RegisterBloc>(),

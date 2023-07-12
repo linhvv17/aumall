@@ -181,5 +181,6 @@
   "zipCodeHint" : "100000",
   "country" : "Quốc gia",
   "countryHint" : "Việt Nam",
+  "notYetReview" : "0 đánh giá",
   "goToCart" : "Đi đến giỏ hàng"
 }
