@@ -3,10 +3,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
+import '../../../home/data/models/product_detail_model.dart';
 import '../../domain/entities/products_entity.dart';
 
 class ReviewCard extends StatelessWidget {
-  final ProductEntity product;
+  final ProductDetailData product;
   final int index;
   const ReviewCard({super.key, required this.product, required this.index});
 
@@ -30,13 +31,13 @@ class ReviewCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(product.reviews![index].name!),
+                Text(product.reviews![index].userFullName!),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RatingBarIndicator(
                       itemSize: 20.0,
-                      rating: product.ratings.toDouble(),
+                      rating: product.ratingNumber!.toDouble(),
                       itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -45,8 +46,9 @@ class ReviewCard extends StatelessWidget {
                       itemCount: 5,
                     ),
                     Text(
-                      DateFormat.yMMMEd()
-                          .format(product.reviews![index].createdAt!),
+    product.reviews![index].createdAt!,
+                      // DateFormat.yMMMEd()
+                      //     .format(),
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
