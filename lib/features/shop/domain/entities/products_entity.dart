@@ -82,15 +82,52 @@ class ReviewEntity extends Equatable {
   final String? name;
   final num? rating;
   final String? comment;
-  final DateTime? createdAt;
+  // final DateTime? createdAt;
   const ReviewEntity(
-      this.user, this.name, this.rating, this.comment, this.createdAt);
+      this.user, this.name, this.rating, this.comment,
+      // this.createdAt
+      );
 
   @override
   List<Object?> get props => [user, name, rating, comment];
 }
 
+class ProductFavoriteEntity extends Equatable {
+  int? id;
+  String? title;
+  String? description;
+  String? price;
+  int? ratingNumber;
+  int? reviewNumber;
+  String? thumbnailUrl;
 
+
+  ProductFavoriteEntity(
+  {this.id,
+  this.title,
+  this.description,
+  this.price,
+  this.ratingNumber,
+  this.reviewNumber,
+  this.thumbnailUrl,
+  });
+
+  ProductFavoriteEntity.fromJson(Map<String, dynamic> json) {
+    id = json['id'] ?? 0;
+    title = json['title'] ?? "0";
+    description = json['description'] ?? "";
+    price = json['price'] ?? "";
+    ratingNumber = json['rating_number'] ?? 0;
+    reviewNumber = json['review_number'] ?? 0;
+    thumbnailUrl = json['thumbnail_url'] ?? "";
+  }
+
+  @override
+  List<Object?> get props => [
+    id, title, description, price,ratingNumber, reviewNumber,thumbnailUrl
+  ];
+
+}
 
 class ProductSimpleEntity extends Equatable {
   int? id;
@@ -107,7 +144,7 @@ class ProductSimpleEntity extends Equatable {
   String? flashSale;
   String? price;
   String? discount;
-  String? reviewNumber;
+  int? reviewNumber;
   int? ratingNumber;
   String? createdAt;
   String? thumbnailUrl;
@@ -138,9 +175,9 @@ class ProductSimpleEntity extends Equatable {
       });
 
   ProductSimpleEntity.fromJson(Map<String, dynamic> json) {
-    id = json['id'] ?? "";
-    userId = json['user_id']?? "";
-    addedBy = json['added_by']?? "";
+    id = json['id'] ?? 0;
+    userId = json['user_id']?? 0;
+    addedBy = json['added_by'] ?? "";
     title = json['title']?? "";
     description = json['description']?? "";
     content = json['content']?? "";
@@ -152,9 +189,9 @@ class ProductSimpleEntity extends Equatable {
     flashSale = json['flash_sale']?? "";
     price = json['price']?? "";
     discount = json['discount']?? "";
-    reviewNumber = json['review_number']?? "";
-    ratingNumber = json['rating_number']?? 0;
-    createdAt = json['created_at']?? "";
+    reviewNumber = json['review_number'] ?? 0;
+    ratingNumber = json['rating_number'] ?? 0;
+    createdAt = json['created_at'] as String ?? "";
     thumbnailUrl = json['thumbnail_url']?? "";
     videoLink = json['video_link']?? "";
     // category = json['category'] != null

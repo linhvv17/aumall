@@ -550,16 +550,16 @@ class Reviews {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['product_id'] = this.productId;
-    data['user_id'] = this.userId;
-    data['comment'] = this.comment;
-    data['rating'] = this.rating;
-    data['created_at'] = this.createdAt;
-    data['user_full_name'] = this.userFullName;
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_id'] = productId;
+    data['user_id'] = userId;
+    data['comment'] = comment;
+    data['rating'] = rating;
+    data['created_at'] = createdAt;
+    data['user_full_name'] = userFullName;
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
     return data;
   }

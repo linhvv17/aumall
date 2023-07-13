@@ -35,3 +35,4 @@ const String bannerAuMall  = "/banner";
 const String homeAuMall  = "/home";
 const String productDetailAuMall  = "/product";
 const String allProductsAuMall  = "/products";
+const String favoriteProductsAuMall  = "/product-wish-list";

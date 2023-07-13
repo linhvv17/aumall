@@ -47,9 +47,9 @@ class ListProductHomeData {
     }
     if (json['suggestionProducts'] != null) {
       suggestionProducts = <ProductModelSimple>[];
-      // json['suggestionProducts'].forEach((v) {
-      //   suggestionProducts!.add(ProductModel.fromJson(v));
-      // });
+      json['suggestionProducts'].forEach((v) {
+        suggestionProducts!.add(ProductModelSimple.fromJson(v));
+      });
     }
   }
 

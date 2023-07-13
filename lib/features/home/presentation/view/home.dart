@@ -134,6 +134,172 @@ class _HomeState extends State<HomeView>{
               }
             },
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  S.current.comingSoonProducts.toUpperCase(),
+                  style: const TextStyle(color: Colors.deepOrangeAccent, fontSize: 20),
+                ),
+                TextButton(
+                  onPressed: () {
+                    BlocProvider.of<BottomNavigationBarBloc>(context)
+                        .add(LoadShop());
+                    BlocProvider.of<ProductsBloc>(context).add(
+                        GetSpecificProduct(
+                            BlocProvider.of<ProductsBloc>(context).categories[0],
+                            '0',
+                            '100000',
+                            '-1',
+                            ''
+                        )
+                    );
+                  },
+                  child: Text(
+                    S.current.allProducts,
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          BlocBuilder<HomeBloc, HomeLoadState>(
+            buildWhen: (pre, cur){
+              return (cur is HomeStateLoadedFullData || cur is HomeStateLoadListProductDataLoaded);
+            },
+            builder: (context, state) {
+              if (state is HomeStateLoadListProductLoading) {
+                return const Column(
+                  children: [
+                    SizedBox(
+                      height: 100,
+                    ),
+                    CircularProgressIndicator(),
+                  ],
+                );
+              } else if (state is HomeStateLoadListProductDataLoaded) {
+                print('Home HomeStateLoadListProductDataLoaded');
+                final newProducts = state.listProductHomeEntity!.listProductHomeData.comingSoonProducts;
+                return SizedBox(
+                    height: kHeight(context) / 3,
+                    child: GridView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.zero,
+                      itemCount: newProducts?.length,
+                      gridDelegate:
+                      SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                          height: kWidth(context)/2, crossAxisCount: 1),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetails(
+                                    productSimpleEntity: newProducts![index],
+                                    index: index,
+                                  ),
+                                ));
+                          },
+                          child: Hero(
+                            tag: '$index',
+                            child: NewProductItem(
+                              product: newProducts![index],
+                            ),
+                          ),
+                        );
+                      },
+                    ));
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  S.current.todaySuggestProducts.toUpperCase(),
+                  style: const TextStyle(color: Colors.deepOrangeAccent, fontSize: 20),
+                ),
+                TextButton(
+                  onPressed: () {
+                    BlocProvider.of<BottomNavigationBarBloc>(context)
+                        .add(LoadShop());
+                    BlocProvider.of<ProductsBloc>(context).add(
+                        GetSpecificProduct(
+                            BlocProvider.of<ProductsBloc>(context).categories[0],
+                            '0',
+                            '100000',
+                            '-1',
+                            ''
+                        )
+                    );
+                  },
+                  child: Text(
+                    S.current.allProducts,
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          BlocBuilder<HomeBloc, HomeLoadState>(
+            buildWhen: (pre, cur){
+              return (cur is HomeStateLoadedFullData || cur is HomeStateLoadListProductDataLoaded);
+            },
+            builder: (context, state) {
+              if (state is HomeStateLoadListProductLoading) {
+                return const Column(
+                  children: [
+                    SizedBox(
+                      height: 100,
+                    ),
+                    CircularProgressIndicator(),
+                  ],
+                );
+              } else if (state is HomeStateLoadListProductDataLoaded) {
+                print('Home HomeStateLoadListProductDataLoaded');
+                final newProducts = state.listProductHomeEntity!.listProductHomeData.suggestionProducts;
+                return SizedBox(
+                    height: kHeight(context) / 3,
+                    child: GridView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.zero,
+                      itemCount: newProducts?.length,
+                      gridDelegate:
+                      SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                          height: kWidth(context)/2, crossAxisCount: 1),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetails(
+                                    productSimpleEntity: newProducts![index],
+                                    index: index,
+                                  ),
+                                ));
+                          },
+                          child: Hero(
+                            tag: '$index',
+                            child: NewProductItem(
+                              product: newProducts![index],
+                            ),
+                          ),
+                        );
+                      },
+                    ));
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
           // Padding(
           //   padding: const EdgeInsets.symmetric(horizontal: 10),
           //   child: Row(

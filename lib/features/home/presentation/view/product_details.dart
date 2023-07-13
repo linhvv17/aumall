@@ -130,7 +130,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 listener: (context, state) {
                   if (state is AddToFavouriteState) {
                     showSnackbar(S.current.addfav, context, Colors.green);
-                  } else if (state is RemoveFromFavouriteState) {
+                  } else if (state is RemoveFromFavoriteState) {
                     showSnackbar(S.current.deletefav, context, Colors.green);
                   }
                 },
