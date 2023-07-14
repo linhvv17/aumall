@@ -12,9 +12,9 @@ import '../../../shop/domain/entities/products_entity.dart';
 import '../bloc/favourite_bloc.dart';
 
 
-class ProductItemFavorite extends StatelessWidget {
-  const ProductItemFavorite({super.key, required this.productFavoriteEntity});
-  final ProductFavoriteEntity productFavoriteEntity;
+class ProductItemAuMall extends StatelessWidget {
+  const ProductItemAuMall({super.key, required this.productFavoriteEntity});
+  final ProductAuMallEntity productFavoriteEntity;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -66,23 +66,18 @@ class ProductItemFavorite extends StatelessWidget {
                              );
                           },
                           child:
-                          const Icon(
-                            Icons.favorite,
-                            size: 20.0,
-                            color: ColorManager.orangeLight,
-                          ),
-                          // product.isFavourite
-                          //     ?
-                          //     const Icon(
-                          //         Icons.favorite,
-                          //         size: 20.0,
-                          //         color: ColorManager.orangeLight,
-                          //       )
-                          //     : const Icon(
-                          //         Icons.favorite_outline,
-                          //         size: 20.0,
-                          //         color: ColorManager.grey,
-                          //       ),
+                          productFavoriteEntity.isFavorite!
+                              ?
+                              const Icon(
+                                  Icons.favorite,
+                                  size: 20.0,
+                                  color: ColorManager.orangeLight,
+                                )
+                              : const Icon(
+                                  Icons.favorite_outline,
+                                  size: 20.0,
+                                  color: ColorManager.grey,
+                                ),
                         ),
                       ),
                     );

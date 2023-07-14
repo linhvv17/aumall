@@ -1,3 +1,4 @@
+import 'package:aumall/features/home/data/models/detail_product_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -15,7 +16,7 @@ import '../data/models/product_detail_model.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({super.key, required this.product});
-  final RelatedProduct product;
+  final RelatedProducts product;
   @override
   Widget build(BuildContext context) {
     return Padding(

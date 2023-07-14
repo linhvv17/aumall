@@ -61,7 +61,7 @@ class _FavoriteViewState extends State<FavoriteView> {
                 ],
               ));
             } else if (state is FavouriteDataLoaded) {
-              List<ProductFavoriteEntity> listFavorite =
+              List<ProductAuMallEntity> listFavorite =
                   state.listFavoriteEntity.listFavorite;
               return PageStorage(
                 bucket: PageStorageBucket(),
@@ -113,7 +113,7 @@ class _FavoriteViewState extends State<FavoriteView> {
                                         },
                                         child:
                                             // Container()
-                                            ProductItemFavorite(
+                                            ProductItemAuMall(
                                                 productFavoriteEntity:
                                                     listFavorite[index]));
                                   },

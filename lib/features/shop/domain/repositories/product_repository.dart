@@ -1,16 +1,36 @@
 import 'package:dartz/dartz.dart';
 import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
 import '../../../../core/error/failure.dart';
+import '../entities/categories_entity.dart';
+import '../entities/list_product_shop_entity.dart';
 import '../entities/products_entity.dart';
 import '../entities/response_entity.dart';
 
 abstract class ProductRepository {
+  Future<Either<Failure, ListProductShopEntity>> getListProductByCategory(
+      GetShopDataDefaultParams getShopDataDefaultParams
+      );
+  Future<Either<Failure, CategoriesEntity>> getShopDefaultData(
+      GetShopDataDefaultParams getShopDataDefaultParams
+      );
   Future<Either<Failure, ProductsEntity>> getAllProducts();
   Future<Either<Failure, ProductsEntity>> getSpecificProduct(
       GetProductParams params);
   Future<Either<Failure, ResponseEntity>> sendReview(SendReviewParams params);
   Future<Either<Failure, GetReviewsEntity>> getReviews(GetReviewsParams params);
 }
+
+
+class GetShopDataDefaultParams {
+  final String categoryId;
+  final String minPrice;
+  final String maxPrice;
+  final String rate;
+  final String keyword;
+  GetShopDataDefaultParams(
+      this.categoryId, this.minPrice, this.maxPrice, this.rate, this.keyword);
+}
+
 
 class GetProductParams {
   final String category;

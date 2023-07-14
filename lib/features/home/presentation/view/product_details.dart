@@ -1,4 +1,5 @@
 import 'package:aumall/features/cart/presentation/views/cart.dart';
+import 'package:aumall/features/home/data/models/detail_product_response.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_state.dart';
 import 'package:flutter/material.dart';
@@ -250,14 +251,14 @@ class _ProductDetailsState extends State<ProductDetails>
           if(state is ProductDetailLoaded){
             print('ProductDetailsbuild ${state.productDetailEntity.productDetailData!.toJson()}');
             print('ProductDetailsbuild ${state.productDetailEntity.productDetailData?.reviewNumber}');
-            ProductDetailData productDetailData = state.productDetailEntity.productDetailData!;
+            ProductDetailDataModel productDetailData = state.productDetailEntity.productDetailData!;
             return SingleChildScrollView(
               child: SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //media of product
-                    Carousel(images: productDetailData!.images!),
+                    Carousel(images: productDetailData.images),
                     Padding(
                       padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 15),

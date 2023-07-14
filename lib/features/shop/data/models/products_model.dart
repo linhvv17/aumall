@@ -11,19 +11,20 @@ class ProductsModel extends ProductsEntity {
       json['filteredProductsCount']);
 }
 
-class ProductFavoriteModel extends ProductFavoriteEntity {
-  ProductFavoriteModel({
+class ProductAuMallModel extends ProductAuMallEntity {
+  ProductAuMallModel({
     required super.id,
     required super.title,
     required super.description,
     required super.price,
     required super.ratingNumber,
     required super.thumbnailUrl,
+    required super.isFavorite,
     // required super.category,
     required super.reviewNumber,
   });
 
-  factory ProductFavoriteModel.fromJson(Map<String, dynamic> json) {
+  factory ProductAuMallModel.fromJson(Map<String, dynamic> json) {
     print("ProductFavoriteModel.fromJson ${json['id']}");
     print("ProductFavoriteModel.fromJson ${json['title']}");
     print("ProductFavoriteModel.fromJson ${json['description']}");
@@ -32,7 +33,7 @@ class ProductFavoriteModel extends ProductFavoriteEntity {
     print("ProductFavoriteModel.fromJson ${json['review_number']}");
     print("ProductFavoriteModel.fromJson ${json['thumbnail_url']}");
 
-    return ProductFavoriteModel(
+    return ProductAuMallModel(
       id: json['id'],
       title: json['title'] ?? "",
       description: json['description'] ?? "",
@@ -41,6 +42,7 @@ class ProductFavoriteModel extends ProductFavoriteEntity {
       // category: json['category'],
       reviewNumber: json['review_number'] ?? 0,
       thumbnailUrl: json['thumbnail_url'] ?? "",
+      isFavorite: json['is_favorite'] ?? false,
     );
   }
 }
@@ -51,6 +53,7 @@ class ProductModelSimple extends ProductSimpleEntity {
     required super.title,
     required super.description,
     required super.price,
+    required super.isFavorite,
     required super.ratingNumber,
     required super.thumbnailUrl,
     // required super.category,
@@ -71,6 +74,7 @@ class ProductModelSimple extends ProductSimpleEntity {
       title: json['title'],
       description: json['description'],
       price: json['price'],
+      isFavorite: json['is_favorite'],
       ratingNumber: json['rating_number'],
       // category: json['category'],
       reviewNumber: json['review_number'],

@@ -28,3 +28,7 @@ class RemoveFavoriteSuccess extends FavouriteState {
   final bool isSuccess;
   const RemoveFavoriteSuccess(this.isSuccess);
 }
+class AddFavoriteSuccess extends FavouriteState {
+  final bool isSuccess;
+  const AddFavoriteSuccess(this.isSuccess);
+}

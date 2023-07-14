@@ -1,3 +1,5 @@
+import 'package:aumall/features/shop/domain/entities/categories_entity.dart';
+import 'package:aumall/features/shop/domain/repositories/product_repository.dart';
 import 'package:aumall/features/shop/presentation/widgets/sort_by.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,9 +7,11 @@ import 'package:lottie/lottie.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../generated/l10n.dart';
+import '../../../favorite/presentation/views/product_item_favorite.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../home/widgets/customGridView.dart';
 import '../../../home/widgets/product_item.dart';
+import '../../domain/entities/products_entity.dart';
 import '../bloc/products_bloc.dart';
 import '../widgets/filter.dart';
 import '../widgets/search.dart';
@@ -29,25 +33,56 @@ class _ShopViewState extends State<ShopView> {
     {'id': 4, 'name': 'Price: highest to low', 'isSelected': false},
   ];
 
+  @override
+  void initState() {
+    BlocProvider.of<ProductsBloc>(context).add(GetShopDataDefault(
+      GetShopDataDefaultParams(
+          "1",
+          "minPrice",
+          "maxPrice",
+          "rate",
+          ""
+      )
+    ));
+    BlocProvider.of<ProductsBloc>(context).add(GetProductsShop(
+      GetShopDataDefaultParams(
+          "1",
+          "minPrice",
+          "maxPrice",
+          "rate",
+          ""
+      )
+    ));
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    print('_ShopViewState build');
     int current = 0;
+    List<CategoryEntity> categories = [];
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
-          BlocProvider.of<ProductsBloc>(context).add(GetSpecificProduct(
-              BlocProvider.of<ProductsBloc>(context).categories[current],
-              '0',
-              '100000',
-              '-1',
-              ''));
+          BlocProvider.of<ProductsBloc>(context).add(GetProductsShop(
+              GetShopDataDefaultParams(
+                  "1",
+                  "minPrice",
+                  "maxPrice",
+                  "rate",
+                  ""
+              )
+          ));
         },
         child: SafeArea(
           child: BlocBuilder<ProductsBloc, ProductsState>(
               builder: (context, state) {
                 final bloc = BlocProvider.of<ProductsBloc>(context);
+                if(state is GetShopDefaultDataLoadedState){
+                  print('GetShopDefaultDataLoadedState');
+                  print('GetShopDefaultDataLoadedState ${state.categoriesEntity.categories.length}');
+                  categories = state.categoriesEntity.categories;
+                }
                 return Column(
                   children: [
                     Text(
@@ -64,68 +99,78 @@ class _ShopViewState extends State<ShopView> {
                         const FilterProduct(),
                       ],
                     ),
-                    Padding(
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 60,
-                        child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: BlocProvider.of<ProductsBloc>(context)
-                                .categories
-                                .length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (ctx, index) {
-                              return Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      bloc.add(ChangeCategory(index));
-                                      bloc.add(GetSpecificProduct(
-                                          bloc.categories[index],
-                                          '0',
-                                          '100000',
-                                          '-1',
-                                          ''));
-                                      current = index;
-                                    },
-                                    child: AnimatedContainer(
-                                      duration: const Duration(milliseconds: 300),
-                                      margin: const EdgeInsets.all(5),
-                                      width: 80,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        color:  Colors.white70,
+                    //list categories
+                    BlocBuilder<ProductsBloc, ProductsState>(
+                        builder: (context, state) {
+                          return Padding(
+                            padding:
+                            const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: 60,
+                              child: ListView.builder(
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: categories.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (ctx, index) {
+                                    return Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            print("clickkkkkkkkkkkkk ${categories[index].id}");
+                                            bloc.add(ChangeCategory(index));
+                                            BlocProvider.of<ProductsBloc>(context).add(GetProductsShop(
+                                                GetShopDataDefaultParams(
+                                                    categories[index].id.toString(),
+                                                    "minPrice",
+                                                    "maxPrice",
+                                                    "rate",
+                                                    ""
+                                                )
+                                            ));
 
-                                        borderRadius: bloc.current == index
-                                            ? BorderRadius.circular(15)
-                                            : BorderRadius.circular(10),
-                                        border: bloc.current == index
-                                            ? Border.all(
-                                            color: ColorManager.orangeLight,
-                                            width: 2)
-                                            : null,
-                                      ),
-                                      child: Center(
-                                        child: FittedBox(
-                                          child: Text(
-                                            bloc.categories[index],
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                color: bloc.current == index
-                                                    ? Colors.black
-                                                    : Colors.grey),
+                                            current = index;
+                                          },
+                                          child: AnimatedContainer(
+                                            duration: const Duration(milliseconds: 300),
+                                            margin: const EdgeInsets.all(5),
+                                            width: 80,
+                                            height: 45,
+                                            decoration: BoxDecoration(
+                                              color:  Colors.white70,
+
+                                              borderRadius: bloc.current == index
+                                                  ? BorderRadius.circular(15)
+                                                  : BorderRadius.circular(10),
+                                              border: bloc.current == index
+                                                  ? Border.all(
+                                                  color: ColorManager.orangeLight,
+                                                  width: 2)
+                                                  : null,
+                                            ),
+                                            child: Center(
+                                              child: FittedBox(
+                                                child: Text(
+                                                  categories[index].name,
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w500,
+                                                      color: bloc.current == index
+                                                          ? Colors.black
+                                                          : Colors.grey),
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }),
-                      ),
+                                      ],
+                                    );
+                                  }),
+                            ),
+                          );
+                      }
                     ),
+
+                    //list products
                     BlocBuilder<ProductsBloc, ProductsState>(
                       builder: (context, state) {
                         if (state is FilterProductsLoadingState ||
@@ -139,12 +184,13 @@ class _ShopViewState extends State<ShopView> {
                               const CircularProgressIndicator(),
                             ],
                           );
-                        } else if (state is ProductsLoadedState) {
-                          final products = state.data.products;
-                          return Expanded(
-                              child: GridView.builder(
+                        } else if (state is GetProductsShopLoadedState) {
+                          final List<ProductAuMallEntity> listProduct = state.listProductShopEntity.listProductAuMall;
+                          return listProduct.isEmpty ?
+                              const Text("Không có sản phầm nào!!!!!!!!!!!!!!!") :
+                            Expanded(child: GridView.builder(
                                 padding: EdgeInsets.zero,
-                                itemCount: state.data.filteredProductsCount,
+                                itemCount: state.listProductShopEntity.listProductAuMall.length,
                                 gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
                                     height: 330, crossAxisCount: 2),
@@ -163,8 +209,8 @@ class _ShopViewState extends State<ShopView> {
                                       },
                                       child: Hero(
                                           tag: '$index',
-                                          child:  Container()
-                                          // ProductItem(product: products[index])
+                                          child:
+                                          ProductItemAuMall(productFavoriteEntity: state.listProductShopEntity.listProductAuMall[index],)
                                   ));
                                 },
                               ));
@@ -183,7 +229,8 @@ class _ShopViewState extends State<ShopView> {
                             ],
                           )
                               : Center(child: Text(state.message));
-                        } else if (state is FilterProductsLoadedState) {
+                        }
+                        else if (state is FilterProductsLoadedState) {
                           final products = state.data.products;
                           return Expanded(
                               child: GridView.builder(
@@ -213,7 +260,8 @@ class _ShopViewState extends State<ShopView> {
                                 },
                               ));
 
-                        } else if (state is SpecificProductsLoadedState) {
+                        }
+                        else if (state is SpecificProductsLoadedState) {
                           final products = state.data.products;
                           return Expanded(
                               child: GridView.builder(
@@ -242,7 +290,8 @@ class _ShopViewState extends State<ShopView> {
                                       ));
                                 },
                               ));
-                        } else if (state is SpecificProductsErrorState ) {
+                        }
+                        else if (state is SpecificProductsErrorState ) {
                           return state.message == S.current.noInternetError
                               ? Column(
                             children: [

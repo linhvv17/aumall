@@ -6,6 +6,7 @@ import '../models/list_favorite_model.dart';
 abstract class FavoriteDatasource {
   Future<ListFavoriteModel> getListFavorite();
   Future<bool> removeFavoriteProduct(int idProduct);
+  Future<bool> addFavoriteProduct(int idProduct);
 }
 
 class FavoriteDatasourceImpl implements FavoriteDatasource{
@@ -31,6 +32,21 @@ class FavoriteDatasourceImpl implements FavoriteDatasource{
         endPoint: favoriteProductsAuMall,
         token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
       data: dataSend
+    );
+
+    return response.statusCode == 200 ? true : false ;
+  }
+
+  @override
+  Future<bool> addFavoriteProduct(int idProduct) async {
+    final dataSend = <String, dynamic> {
+      "product_id": idProduct,
+      "type" : 1
+    };
+    final response = await apiProvider.post(
+        endPoint: favoriteProductsAuMall,
+        token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
+        data: dataSend
     );
 
     return response.statusCode == 200 ? true : false ;

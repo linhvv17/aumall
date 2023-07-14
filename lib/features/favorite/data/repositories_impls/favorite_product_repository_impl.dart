@@ -43,4 +43,20 @@ class FavoriteRepositoryImpl extends FavoriteBaseRepository {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> addFavoriteProduct(int idProduct) async {
+    if(await networkInfo.isConnected){
+      try {
+        final data = await favoriteDatasource.addFavoriteProduct(idProduct);
+        print("FavoriteRepositoryImpl getFavoriteList() try ${data}");
+        return right(data);
+      } catch(error) {
+        print("FavoriteRepositoryImpl getFavoriteList() catch ${error}");
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else{
+      return Left(OfflineFailure(S.current.noInternetError));
+    }
+  }
 }

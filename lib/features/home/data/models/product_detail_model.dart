@@ -1,4 +1,5 @@
 import 'package:aumall/features/home/data/models/banner_model.dart';
+import 'package:aumall/features/home/data/models/detail_product_response.dart';
 import 'package:aumall/features/shop/domain/entities/products_entity.dart';
 import 'package:equatable/equatable.dart';
 
@@ -14,7 +15,7 @@ class ProductDetailModel extends ProductDetailEntity{
   factory ProductDetailModel.fromJson(Map<String, dynamic> json) {
     print('ProductDetailModel.fromJson $json');
     return ProductDetailModel(
-        ProductDetailData.fromJson(json['data']),
+        ProductDetailDataModel.fromJson(json['data']),
         // ListRelatedProducts(relatedProducts: []),
         ListRelatedProducts.fromJson(json)
     );
@@ -24,181 +25,162 @@ class ProductDetailModel extends ProductDetailEntity{
 }
 
 
-class ProductDetailData {
-  int? id;
-  int? userId;
-  Null? addedBy;
-  String? title;
-  String? description;
-  int? view;
-  Null? videoProvider;
-  Null? videoUrl;
-  String? content;
-  int? categoryId;
-  int? brandId;
-  int? madeInId;
-  String? thumbnail;
-  Null? featured;
-  Null? flashSale;
-  String? price;
-  Null? discount;
-  int? reviewNumber;
-  int? ratingNumber;
-  String? createdAt;
-  String? updatedAt;
-  String? thumbnailUrl;
-  Null? videoLink;
-  List<Images>? images;
-  Brand? brand;
-  MadeIn? madeIn;
-  Category? category;
-  User? user;
-  List<Reviews>? reviews;
+// class ProductDetailData {
+//   int? id;
+//   int? userId;
+//   Null? addedBy;
+//   String? title;
+//   String? description;
+//   int? view;
+//   Null? videoProvider;
+//   Null? videoUrl;
+//   String? content;
+//   int? categoryId;
+//   int? brandId;
+//   int? madeInId;
+//   String? thumbnail;
+//   Null? featured;
+//   Null? flashSale;
+//   String? price;
+//   Null? discount;
+//   int? reviewNumber;
+//   int? ratingNumber;
+//   String? createdAt;
+//   String? updatedAt;
+//   String? thumbnailUrl;
+//   Null? videoLink;
+//   List<Images>? images;
+//   Brand? brand;
+//   MadeIn? madeIn;
+//   Category? category;
+//   User? user;
+//   List<Reviews>? reviews;
+//
+//   ProductDetailData(
+//       {this.id,
+//         this.userId,
+//         this.addedBy,
+//         this.title,
+//         this.description,
+//         this.view,
+//         this.videoProvider,
+//         this.videoUrl,
+//         this.content,
+//         this.categoryId,
+//         this.brandId,
+//         this.madeInId,
+//         this.thumbnail,
+//         this.featured,
+//         this.flashSale,
+//         this.price,
+//         this.discount,
+//         this.reviewNumber,
+//         this.ratingNumber,
+//         this.createdAt,
+//         this.updatedAt,
+//         this.thumbnailUrl,
+//         this.videoLink,
+//         this.images,
+//         this.brand,
+//         this.madeIn,
+//         this.category,
+//         this.user,
+//         this.reviews});
+//
+//   ProductDetailData.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     userId = json['user_id'];
+//     addedBy = json['added_by'];
+//     title = json['title'];
+//     description = json['description'];
+//     view = json['view'];
+//     videoProvider = json['video_provider'];
+//     videoUrl = json['video_url'];
+//     content = json['content'];
+//     categoryId = json['category_id'];
+//     brandId = json['brand_id'];
+//     madeInId = json['made_in_id'];
+//     thumbnail = json['thumbnail'];
+//     featured = json['featured'];
+//     flashSale = json['flash_sale'];
+//     price = json['price'];
+//     discount = json['discount'];
+//     reviewNumber = json['review_number'];
+//     ratingNumber = json['rating_number'];
+//     createdAt = json['created_at'] as String;
+//     updatedAt = json['updated_at'] as String;
+//     thumbnailUrl = json['thumbnail_url'];
+//     videoLink = json['video_link'];
+//     if (json['images'] != null) {
+//       images = <Images>[];
+//       json['images'].forEach((v) {
+//         images!.add(Images.fromJson(v));
+//       });
+//     }
+//     brand = json['brand'] != null ? Brand.fromJson(json['brand']) : null;
+//     madeIn =
+//     json['made_in'] != null ? MadeIn.fromJson(json['made_in']) : null;
+//     category = json['category'] != null
+//         ? Category.fromJson(json['category'])
+//         : null;
+//     user = json['user'] != null ? User.fromJson(json['user']) : null;
+//     if (json['reviews'] != null) {
+//       reviews = <Reviews>[];
+//       json['reviews'].forEach((v) {
+//         reviews!.add(Reviews.fromJson(v));
+//       });
+//     }
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['user_id'] = this.userId;
+//     data['added_by'] = this.addedBy;
+//     data['title'] = this.title;
+//     data['description'] = this.description;
+//     data['view'] = this.view;
+//     data['video_provider'] = this.videoProvider;
+//     data['video_url'] = this.videoUrl;
+//     data['content'] = this.content;
+//     data['category_id'] = this.categoryId;
+//     data['brand_id'] = this.brandId;
+//     data['made_in_id'] = this.madeInId;
+//     data['thumbnail'] = this.thumbnail;
+//     data['featured'] = this.featured;
+//     data['flash_sale'] = this.flashSale;
+//     data['price'] = this.price;
+//     data['discount'] = this.discount;
+//     data['review_number'] = this.reviewNumber;
+//     data['rating_number'] = this.ratingNumber;
+//     data['created_at'] = this.createdAt;
+//     data['updated_at'] = this.updatedAt;
+//     data['thumbnail_url'] = this.thumbnailUrl;
+//     data['video_link'] = this.videoLink;
+//     if (this.images != null) {
+//       data['images'] = this.images!.map((v) => v.toJson()).toList();
+//     }
+//     if (this.brand != null) {
+//       data['brand'] = this.brand!.toJson();
+//     }
+//     if (this.madeIn != null) {
+//       data['made_in'] = this.madeIn!.toJson();
+//     }
+//     if (this.category != null) {
+//       data['category'] = this.category!.toJson();
+//     }
+//     if (this.user != null) {
+//       data['user'] = this.user!.toJson();
+//     }
+//     if (this.reviews != null) {
+//       data['reviews'] = this.reviews!.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
 
-  ProductDetailData(
-      {this.id,
-        this.userId,
-        this.addedBy,
-        this.title,
-        this.description,
-        this.view,
-        this.videoProvider,
-        this.videoUrl,
-        this.content,
-        this.categoryId,
-        this.brandId,
-        this.madeInId,
-        this.thumbnail,
-        this.featured,
-        this.flashSale,
-        this.price,
-        this.discount,
-        this.reviewNumber,
-        this.ratingNumber,
-        this.createdAt,
-        this.updatedAt,
-        this.thumbnailUrl,
-        this.videoLink,
-        this.images,
-        this.brand,
-        this.madeIn,
-        this.category,
-        this.user,
-        this.reviews});
-
-  ProductDetailData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
-    addedBy = json['added_by'];
-    title = json['title'];
-    description = json['description'];
-    view = json['view'];
-    videoProvider = json['video_provider'];
-    videoUrl = json['video_url'];
-    content = json['content'];
-    categoryId = json['category_id'];
-    brandId = json['brand_id'];
-    madeInId = json['made_in_id'];
-    thumbnail = json['thumbnail'];
-    featured = json['featured'];
-    flashSale = json['flash_sale'];
-    price = json['price'];
-    discount = json['discount'];
-    reviewNumber = json['review_number'];
-    ratingNumber = json['rating_number'];
-    createdAt = json['created_at'] as String;
-    updatedAt = json['updated_at'] as String;
-    thumbnailUrl = json['thumbnail_url'];
-    videoLink = json['video_link'];
-    if (json['images'] != null) {
-      images = <Images>[];
-      json['images'].forEach((v) {
-        images!.add(Images.fromJson(v));
-      });
-    }
-    brand = json['brand'] != null ? Brand.fromJson(json['brand']) : null;
-    madeIn =
-    json['made_in'] != null ? MadeIn.fromJson(json['made_in']) : null;
-    category = json['category'] != null
-        ? Category.fromJson(json['category'])
-        : null;
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    if (json['reviews'] != null) {
-      reviews = <Reviews>[];
-      json['reviews'].forEach((v) {
-        reviews!.add(Reviews.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['added_by'] = this.addedBy;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['view'] = this.view;
-    data['video_provider'] = this.videoProvider;
-    data['video_url'] = this.videoUrl;
-    data['content'] = this.content;
-    data['category_id'] = this.categoryId;
-    data['brand_id'] = this.brandId;
-    data['made_in_id'] = this.madeInId;
-    data['thumbnail'] = this.thumbnail;
-    data['featured'] = this.featured;
-    data['flash_sale'] = this.flashSale;
-    data['price'] = this.price;
-    data['discount'] = this.discount;
-    data['review_number'] = this.reviewNumber;
-    data['rating_number'] = this.ratingNumber;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['thumbnail_url'] = this.thumbnailUrl;
-    data['video_link'] = this.videoLink;
-    if (this.images != null) {
-      data['images'] = this.images!.map((v) => v.toJson()).toList();
-    }
-    if (this.brand != null) {
-      data['brand'] = this.brand!.toJson();
-    }
-    if (this.madeIn != null) {
-      data['made_in'] = this.madeIn!.toJson();
-    }
-    if (this.category != null) {
-      data['category'] = this.category!.toJson();
-    }
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
-    }
-    if (this.reviews != null) {
-      data['reviews'] = this.reviews!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
 
 
-class ListRelatedProducts {
-  late List<RelatedProduct>? relatedProducts;
-  ListRelatedProducts({required this.relatedProducts});
-  ListRelatedProducts.fromJson(Map<String, dynamic> json) {
-    if (['relatedProducts'] != null) {
-      relatedProducts = <RelatedProduct>[];
-      json['relatedProducts'].forEach((v) {
-        relatedProducts!.add(RelatedProduct.fromJson(v));
-      });
-    }
-
-    print("ListRelatedProducts.fromJson ${relatedProducts!.length}");
-
-    //
-    // list = json.decode(response.body)['results']
-    //     .map((data) => Model.fromJson(data))
-    //     .toList();
-
-  }
-}
 
 
 
@@ -396,30 +378,30 @@ class Data {
   }
 }
 
-class Images {
-  int? id;
-  int? productId;
-  String? src;
-  String? imageUrl;
-
-  Images({this.id, this.productId, this.src, this.imageUrl});
-
-  Images.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    productId = json['product_id'];
-    src = json['src'];
-    imageUrl = json['image_url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['product_id'] = this.productId;
-    data['src'] = this.src;
-    data['image_url'] = this.imageUrl;
-    return data;
-  }
-}
+// class Images {
+//   int? id;
+//   int? productId;
+//   String? src;
+//   String? imageUrl;
+//
+//   Images({this.id, this.productId, this.src, this.imageUrl});
+//
+//   Images.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     productId = json['product_id'];
+//     src = json['src'];
+//     imageUrl = json['image_url'];
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['product_id'] = this.productId;
+//     data['src'] = this.src;
+//     data['image_url'] = this.imageUrl;
+//     return data;
+//   }
+// }
 
 class Brand {
   int? id;

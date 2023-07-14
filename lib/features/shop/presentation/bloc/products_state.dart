@@ -7,7 +7,29 @@ abstract class ProductsState extends Equatable {
   List<Object> get props => [];
 }
 
-class AllProductsLoadingState extends ProductsState {}
+class GetProductsShopLoadedState extends ProductsState {
+  final ListProductShopEntity listProductShopEntity;
+
+  const GetProductsShopLoadedState(this.listProductShopEntity,);
+
+  @override
+  List<Object> get props => [
+    listProductShopEntity
+  ];
+
+
+}
+
+
+class GetShopDefaultDataLoadedState extends ProductsState {
+  final CategoriesEntity categoriesEntity;
+
+  const GetShopDefaultDataLoadedState(this.categoriesEntity,);
+}
+
+class AllProductsLoadingState extends ProductsState {
+
+}
 
 class AllProductsLoadedState extends ProductsState {
   final ProductsEntity data;

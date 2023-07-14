@@ -25,6 +25,16 @@ class ListProductHomeModel extends ListProductHomeEntity{
   }
 }
 
+
+class ListProductHomeDataEntity {
+  final List<ProductModelSimple>? newProducts;
+  final List<ProductModelSimple>? comingSoonProducts;
+  final List<ProductModelSimple>? suggestionProducts;
+
+  const ListProductHomeDataEntity(this.newProducts, this.comingSoonProducts, this.suggestionProducts);
+
+}
+
 class ListProductHomeData {
   late List<ProductModelSimple>? newProducts;
   late List<ProductModelSimple>? comingSoonProducts;
@@ -54,6 +64,9 @@ class ListProductHomeData {
   }
 
 }
+
+
+
 
 class NewProducts{
   int? id;

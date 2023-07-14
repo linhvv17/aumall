@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
-import 'package:aumall/features/shop/domain/usecases/getAllReviews.dart';
+import 'package:aumall/features/shop/domain/usecases/get_all_reviews.dart';
 import '../../domain/entities/response_entity.dart';
-import '../../domain/usecases/sendReview_usecase.dart';
+import '../../domain/usecases/send_review_usecase.dart';
 
 part 'send_review_event.dart';
 part 'send_review_state.dart';

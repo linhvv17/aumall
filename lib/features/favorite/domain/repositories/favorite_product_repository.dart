@@ -9,6 +9,7 @@ import '../entities/list_favorite_entity.dart';
 abstract class FavoriteBaseRepository {
   Future<Either<Failure, ListFavoriteEntity>> getFavoriteList();
   Future<Either<Failure, bool>> removeFavoriteProduct(int idProduct);
+  Future<Either<Failure, bool>> addFavoriteProduct(int idProduct);
 }
 
 class GetFavoriteParams {

@@ -1,3 +1,4 @@
+import 'package:aumall/features/home/data/models/detail_product_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
@@ -7,7 +8,7 @@ import '../../../home/data/models/product_detail_model.dart';
 import '../../domain/entities/products_entity.dart';
 
 class ReviewCard extends StatelessWidget {
-  final ProductDetailData product;
+  final ProductDetailDataModel product;
   final int index;
   const ReviewCard({super.key, required this.product, required this.index});
 

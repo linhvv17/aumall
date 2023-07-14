@@ -7,6 +7,20 @@ abstract class ProductsEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class GetShopDataDefault extends ProductsEvent {
+  final GetShopDataDefaultParams getShopDataDefaultParams;
+  const GetShopDataDefault(
+      this.getShopDataDefaultParams,
+      );
+}
+
+class GetProductsShop extends ProductsEvent {
+  final GetShopDataDefaultParams getShopDataDefaultParams;
+  const GetProductsShop(
+      this.getShopDataDefaultParams,
+      );
+}
+
 class GetAllProducts extends ProductsEvent {}
 
 class GetSpecificProduct extends ProductsEvent {

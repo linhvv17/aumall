@@ -10,9 +10,19 @@ abstract class HomeLoadState extends Equatable {
   List<Object> get props => [];
 }
 
-class HomeStateInitial extends HomeLoadState {}
+class HomeStateInitial extends HomeLoadState {
 
-class HomeStateLoading extends HomeLoadState {}
+}
+
+class HomeStateLoading extends HomeLoadState {
+
+}
+class HomeStateGetDataSuccess extends HomeLoadState {
+  BannerEntity? bannerEntity;
+  ListProductHomeEntity? listProductHomeEntity;
+
+  HomeStateGetDataSuccess(this.bannerEntity,  this.listProductHomeEntity);
+}
 
 class HomeStateLoadedFullData extends HomeLoadState {
   BannerEntity? bannerEntity;
@@ -20,15 +30,15 @@ class HomeStateLoadedFullData extends HomeLoadState {
 
   HomeStateLoadedFullData(this.bannerEntity,  this.listProductHomeEntity);
 
-  HomeStateLoadedFullData copyWith({
-    BannerEntity? bannerEntity,
-    ListProductHomeEntity? listProductHomeEntity,
-  }) {
-    return HomeStateLoadedFullData(
-        bannerEntity ?? this.bannerEntity,
-        listProductHomeEntity?? this.listProductHomeEntity
-    );
-  }
+  // HomeStateLoadedFullData copyWith({
+  //   BannerEntity? bannerEntity,
+  //   ListProductHomeEntity? listProductHomeEntity,
+  // }) {
+  //   return HomeStateLoadedFullData(
+  //       bannerEntity ?? this.bannerEntity,
+  //       listProductHomeEntity?? this.listProductHomeEntity
+  //   );
+  // }
 
 }
 

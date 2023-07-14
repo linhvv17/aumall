@@ -7,6 +7,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 
 import '../../../core/colors/colors.dart';
 import '../../../core/utilities/mediaquery.dart';
+import '../data/models/detail_product_response.dart';
 
 class Carousel extends StatefulWidget {
   final List<Images> images;

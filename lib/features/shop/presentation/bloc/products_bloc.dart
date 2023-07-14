@@ -1,10 +1,15 @@
+import 'package:aumall/features/shop/domain/entities/categories_entity.dart';
+import 'package:aumall/features/shop/domain/repositories/product_repository.dart';
+import 'package:aumall/features/shop/domain/usecases/get_products_shop_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/usecase/usecase.dart';
+import '../../domain/entities/list_product_shop_entity.dart';
 import '../../domain/entities/products_entity.dart';
-import '../../domain/usecases/getAllProducts_usecase.dart';
-import '../../domain/usecases/getSpecificProduct.dart';
+import '../../domain/usecases/get_all_products_usecase.dart';
+import '../../domain/usecases/get_shop_data_default_usecase.dart';
+import '../../domain/usecases/get_specific_product.dart';
 part 'products_event.dart';
 part 'products_state.dart';
 
@@ -26,10 +31,31 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   bool searchFolded = true;
   final GetAllProductsUsecase getAllProductsUseCase;
   final GetSpecificProductUseCase getSpecificProductUseCase;
-  ProductsBloc(this.getAllProductsUseCase, this.getSpecificProductUseCase)
-      : super(
-          AllProductsLoadingState(),
-        ) {
+  final GetShopDataDefaultUseCase getShopDataDefaultUseCase;
+  final GetProductsShopUseCase getProductsShopUseCase;
+  ProductsBloc(
+      this.getAllProductsUseCase,
+      this.getSpecificProductUseCase,
+      this.getShopDataDefaultUseCase,
+      this.getProductsShopUseCase)
+      : super(AllProductsLoadingState()) {
+    on<GetProductsShop>((event, emit) async {
+      final failureOrSuccess = await getProductsShopUseCase(event.getShopDataDefaultParams);
+
+      failureOrSuccess.fold(
+              (failure) => emit(AllProductsErrorState(failure.message)),
+              (success) => emit(GetProductsShopLoadedState(success)));
+
+    });
+
+    on<GetShopDataDefault>((event, emit) async {
+      final failureOrSuccess = await getShopDataDefaultUseCase(event.getShopDataDefaultParams);
+
+      failureOrSuccess.fold(
+              (failure) => emit(AllProductsErrorState(failure.message)),
+              (success) => emit(GetShopDefaultDataLoadedState(success)));
+
+    });
     on<GetAllProducts>((event, emit) async {
       final failureOrSuccess = await getAllProductsUseCase(NoParams());
 

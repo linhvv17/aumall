@@ -33,6 +33,7 @@ const String registerAuMall  = "/auth/register";
 const String profileAuMall  = "/user";
 const String bannerAuMall  = "/banner";
 const String homeAuMall  = "/home";
+const String categoryAuMall  = "/category";
 const String productDetailAuMall  = "/product";
 const String allProductsAuMall  = "/products";
 const String favoriteProductsAuMall  = "/product-wish-list";

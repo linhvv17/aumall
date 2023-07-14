@@ -92,7 +92,7 @@ class ReviewEntity extends Equatable {
   List<Object?> get props => [user, name, rating, comment];
 }
 
-class ProductAuMallEntity extends Equatable {
+class ProductFavoriteEntity extends Equatable {
   int? id;
   String? title;
   String? description;
@@ -100,10 +100,9 @@ class ProductAuMallEntity extends Equatable {
   int? ratingNumber;
   int? reviewNumber;
   String? thumbnailUrl;
-  bool? isFavorite;
 
 
-  ProductAuMallEntity(
+  ProductFavoriteEntity(
   {this.id,
   this.title,
   this.description,
@@ -111,10 +110,9 @@ class ProductAuMallEntity extends Equatable {
   this.ratingNumber,
   this.reviewNumber,
   this.thumbnailUrl,
-  this.isFavorite,
   });
 
-  ProductAuMallEntity.fromJson(Map<String, dynamic> json) {
+  ProductFavoriteEntity.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
     title = json['title'] ?? "0";
     description = json['description'] ?? "";
@@ -122,12 +120,11 @@ class ProductAuMallEntity extends Equatable {
     ratingNumber = json['rating_number'] ?? 0;
     reviewNumber = json['review_number'] ?? 0;
     thumbnailUrl = json['thumbnail_url'] ?? "";
-    isFavorite = json['is_favorite'] ?? false;
   }
 
   @override
   List<Object?> get props => [
-    id, title, description, price,ratingNumber, reviewNumber,thumbnailUrl, isFavorite
+    id, title, description, price,ratingNumber, reviewNumber,thumbnailUrl
   ];
 
 }

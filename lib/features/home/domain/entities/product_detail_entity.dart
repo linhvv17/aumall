@@ -1,9 +1,10 @@
+import 'package:aumall/features/home/data/models/detail_product_response.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../data/models/product_detail_model.dart';
+
 
 class ProductDetailEntity extends Equatable{
-  final ProductDetailData? productDetailData;
+  final ProductDetailDataModel? productDetailData;
   final ListRelatedProducts? relatedProducts;
   const ProductDetailEntity( this.productDetailData, this.relatedProducts);
   @override

@@ -1,16 +1,20 @@
 import 'dart:convert';
+import 'package:aumall/features/shop/data/models/categories_model.dart';
 import 'package:aumall/features/shop/data/models/reviews_model.dart';
 import 'package:flutter/services.dart';
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/network/api_provider.dart';
 import '../../../../core/utilities/endpoints.dart';
 import '../../domain/repositories/product_repository.dart';
+import '../models/list_shop_products_model.dart';
 import '../models/products_model.dart';
 import '../models/response_model.dart';
 
 abstract class ProductsDatasource {
   Future<ProductsModel> getAllProductsFromTxt();
   Future<ProductsModel> getSpecificProductFromTxt(GetProductParams params);
+  Future<CategoriesModel> getShopDefaultData(GetShopDataDefaultParams getShopDataDefaultParams);
+  Future<ListShopProductsModel> getListProductByCategory(GetShopDataDefaultParams getShopDataDefaultParams);
   Future<ProductsModel> getAllProducts();
   Future<ProductsModel> getAllProductsAuMall();
   Future<ProductsModel> getSpecificProduct(GetProductParams params);
@@ -93,6 +97,62 @@ class ProductsDatasourceImpl implements ProductsDatasource {
     );
     return GetReviewsModel.fromJson(response.data);
   }
+
+  @override
+  Future<CategoriesModel> getShopDefaultData(GetShopDataDefaultParams getShopDataDefaultParams) async {
+    final response = await apiProvider.get(
+        endPoint: categoryAuMall,
+        // data: {
+        //   'status' : 1,
+        //   'category_id': getShopDataDefaultParams.categoryId,
+        //   // 'comment': params.comment,
+        //   // 'rating': params.rating,
+        // },
+        token:
+        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+
+    print('getShopDefaultData getShopDefaultData: ${response.data}');
+
+
+
+
+
+
+
+    return CategoriesModel.fromJson(response.data);
+  }
+
+  @override
+  Future<ListShopProductsModel> getListProductByCategory(GetShopDataDefaultParams getShopDataDefaultParams) async {
+
+    print('getListProductByCategory categoryId : ${getShopDataDefaultParams.categoryId}');
+
+
+    final responseProducts = await apiProvider.get(
+        endPoint: allProductsAuMall,
+        data: {
+          'status' : 1,
+          'category_id': getShopDataDefaultParams.categoryId,
+          // 'comment': params.comment,
+          // 'rating': params.rating,
+        },
+        token:
+        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+
+
+
+    print('getListProductByCategory getListProductByCategory : ${responseProducts.data}');
+
+
+    return ListShopProductsModel.fromJson(
+        responseProducts.data
+    );
+
+
+
+  }
+
+  
 }
 
 

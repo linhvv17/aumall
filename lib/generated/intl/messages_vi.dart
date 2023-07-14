@@ -82,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage(
             "Chỉnh sửa ảnh đại diện, tên, email"),
         "editPersonalInfo":
-            MessageLookupByLibrary.simpleMessage("Personal Information"),
+            MessageLookupByLibrary.simpleMessage("Thông tin cá nhân"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emptyEmail":
             MessageLookupByLibrary.simpleMessage("Email được yêu cầu"),
