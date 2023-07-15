@@ -162,7 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "oldpasswordEmpty":
             MessageLookupByLibrary.simpleMessage("Cần có mật khẩu cũ"),
         "onBoardingSubTitle1": MessageLookupByLibrary.simpleMessage(
-            "Chọn Nhiều loại Sản phẩm từ Cửa hàng, những sản phẩm thú vị nhất có sẵn trên cửa hàng, đó có thể là áo phông, Đồ điện tử, v.v!"),
+            "Chọn Nhiều loại Sản phẩm từ Cửa hàng, những sản phẩm thú vị nhất có sẵn trên cửa hàng, đó có thể là Xe hơi, Đồng hồ, v.v!"),
         "onBoardingSubTitle2": MessageLookupByLibrary.simpleMessage(
             "Chỉ cần Hai lần nhấp chuột và bạn có thể mua tất cả những gì bạn muốn."),
         "onBoardingSubTitle3": MessageLookupByLibrary.simpleMessage(

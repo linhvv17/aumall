@@ -32,8 +32,8 @@ class ProductItemAuMall extends StatelessWidget {
               height: 200,
             ),
             Positioned(
-              left: kWidth(context) * 0.35,
-              bottom: kHeight(context) *0.01,
+              left: kWidth(context) * 0.34,
+              bottom: kHeight(context) *0.008,
               child: Container(
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,

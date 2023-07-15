@@ -13,7 +13,7 @@ import '../models/response_model.dart';
 abstract class ProductsDatasource {
   Future<ProductsModel> getAllProductsFromTxt();
   Future<ProductsModel> getSpecificProductFromTxt(GetProductParams params);
-  Future<CategoriesModel> getShopDefaultData(GetShopDataDefaultParams getShopDataDefaultParams);
+  Future<CategoriesModel> getShopDefaultData();
   Future<ListShopProductsModel> getListProductByCategory(GetShopDataDefaultParams getShopDataDefaultParams);
   Future<ProductsModel> getAllProducts();
   Future<ProductsModel> getAllProductsAuMall();
@@ -99,7 +99,7 @@ class ProductsDatasourceImpl implements ProductsDatasource {
   }
 
   @override
-  Future<CategoriesModel> getShopDefaultData(GetShopDataDefaultParams getShopDataDefaultParams) async {
+  Future<CategoriesModel> getShopDefaultData() async {
     final response = await apiProvider.get(
         endPoint: categoryAuMall,
         // data: {
@@ -127,21 +127,21 @@ class ProductsDatasourceImpl implements ProductsDatasource {
 
     print('getListProductByCategory categoryId : ${getShopDataDefaultParams.categoryId}');
 
+    final params = <String, dynamic>{
+      'status' : "1",
+      'category_id': getShopDataDefaultParams.categoryId.toString(),
+    };
 
     final responseProducts = await apiProvider.get(
         endPoint: allProductsAuMall,
-        data: {
-          'status' : 1,
-          'category_id': getShopDataDefaultParams.categoryId,
-          // 'comment': params.comment,
-          // 'rating': params.rating,
-        },
+        query: params,
         token:
         PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
 
 
-    print('getListProductByCategory getListProductByCategory : ${responseProducts.data}');
+    print('final json : ${responseProducts.data}');
+
 
 
     return ListShopProductsModel.fromJson(

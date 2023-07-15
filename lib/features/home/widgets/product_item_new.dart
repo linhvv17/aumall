@@ -13,27 +13,36 @@ import '../../login/presentation/widgets/alert_snackbar.dart';
 import '../../shop/data/models/products_model.dart';
 import '../../shop/domain/entities/products_entity.dart';
 
-class NewProductItem extends StatelessWidget {
+class NewProductItem extends StatefulWidget {
   const NewProductItem({super.key, required this.product});
 
-  final ProductModelSimple product;
+  final ProductAuMallModel product;
+
+
+
+  @override
+  State<StatefulWidget> createState() => _NewProductItemState();
+}
+
+class _NewProductItemState extends State<NewProductItem>{
+
 
   @override
   Widget build(BuildContext context) {
-    bool isLike = product.isFavorite!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Container(
         decoration: BoxDecoration(
             color: BlocProvider.of<ThemeBloc>(context).themeData ==
-                    appThemeData[AppTheme.lightTheme]
+                appThemeData[AppTheme.lightTheme]
                 ? ColorManager.white
                 : Colors.white.withOpacity(0.2),
             borderRadius: BorderRadius.circular(15)),
         child: Stack(
           children: [
             Image.network(
-              product.thumbnailUrl!,
+              widget.product.thumbnailUrl!,
               width: 200,
               height: 200,
             ),
@@ -104,8 +113,8 @@ class NewProductItem extends StatelessWidget {
             //   ),
             // ),
             Positioned(
-              left: kWidth(context) * 0.35,
-              bottom: kHeight(context) * 0.01,
+              left: kWidth(context) * 0.34,
+              bottom: kHeight(context) * 0.007,
               child: Container(
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
@@ -134,24 +143,30 @@ class NewProductItem extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             BlocProvider.of<FavouriteBloc>(context)
-                                .add(product.isFavorite!
-                                    ? RemoveFavoriteProduct(product.id!)
-                                    : AddToFavorite(
-                                        product: product,
-                                        isFavourite: product.isFavorite!,
-                                      ));
+                                .add(widget.product.isFavorite!
+                                ? RemoveFavoriteProduct(widget.product.id!)
+                                : AddToFavorite(
+                              product: widget.product,
+                              isFavourite: widget.product.isFavorite!,
+                            ));
+
+                            setState(() {
+                              print('setState bf ${widget.product.isFavorite}');
+                              widget.product.isFavorite = !widget.product.isFavorite!;
+                              print('setState at ${widget.product.isFavorite}');
+                            });
                           },
-                          child: product.isFavorite!
+                          child: widget.product.isFavorite!
                               ? const Icon(
-                                  Icons.favorite,
-                                  size: 20.0,
-                                  color: ColorManager.orangeLight,
-                                )
+                            Icons.favorite,
+                            size: 20.0,
+                            color: ColorManager.orangeLight,
+                          )
                               : const Icon(
-                                  Icons.favorite_outline,
-                                  size: 20.0,
-                                  color: ColorManager.grey,
-                                ),
+                            Icons.favorite_outline,
+                            size: 20.0,
+                            color: ColorManager.grey,
+                          ),
                         ),
                       ),
                     );
@@ -179,36 +194,36 @@ class NewProductItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 4.0),
                         Text(
-                          '(${product.reviewNumber})',
-                          style: Theme.of(context).textTheme.caption!.copyWith(
-                                color: Colors.grey,
-                              ),
+                          '(${widget.product.reviewNumber})',
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      "product.category!.name!",
-                      style: Theme.of(context).textTheme.caption!.copyWith(
-                            color: ColorManager.grey,
-                          ),
+                      widget.product.title!,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: ColorManager.grey,
+                      ),
                     ),
                     const SizedBox(height: 6.0),
                     Text(
-                      product.title!,
-                      style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                      widget.product.title!,
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 6.0),
                     Text.rich(
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: '${product.price} \$',
+                            text: '${widget.product.price} \$',
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle2!
+                                .titleSmall!
                                 .copyWith(color: ColorManager.dark),
                           ),
                         ],

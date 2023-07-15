@@ -20,7 +20,7 @@ class GetListFavoriteProduct extends FavoriteEvent{
 
 class AddToFavorite extends FavoriteEvent {
   final bool isFavourite;
-  final ProductSimpleEntity product;
+  final ProductAuMallEntity product;
   const AddToFavorite({
     required this.isFavourite,
     required this.product,

@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:aumall/features/favorite/presentation/bloc/favourite_bloc.dart';
 import 'package:aumall/features/home/widgets/customGridView.dart';
 import '../../../../generated/l10n.dart';
+import '../../../home/presentation/view/product_details.dart';
 import '../../../home/widgets/product_item.dart';
 import '../../../shop/domain/entities/products_entity.dart';
 
@@ -101,15 +102,14 @@ class _FavoriteViewState extends State<FavoriteView> {
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                         onTap: () {
-                                          // Navigator.push(
-                                          //     context,
-                                          // MaterialPageRoute(
-                                          //   builder: (context) => ProductDetails(
-                                          //     product: favouriteList[index],
-                                          //     products: favouriteList,
-                                          //     index: index,
-                                          //   ),
-                                          // ));
+                                          Navigator.push(
+                                              context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ProductDetails(
+                                              productSimpleEntity: listFavorite[index],
+                                              index: index,
+                                            ),
+                                          ));
                                         },
                                         child:
                                             // Container()

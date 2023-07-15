@@ -36,29 +36,29 @@ class ListProductHomeDataEntity {
 }
 
 class ListProductHomeData {
-  late List<ProductModelSimple>? newProducts;
-  late List<ProductModelSimple>? comingSoonProducts;
-  late List<ProductModelSimple>? suggestionProducts;
+  late List<ProductAuMallModel>? newProducts;
+  late List<ProductAuMallModel>? comingSoonProducts;
+  late List<ProductAuMallModel>? suggestionProducts;
 
   ListProductHomeData({required this.newProducts, required this.comingSoonProducts, required this.suggestionProducts});
 
   ListProductHomeData.fromJson(Map<String, dynamic> json) {
     if (json['newProducts'] != null) {
-      newProducts = <ProductModelSimple>[];
+      newProducts = <ProductAuMallModel>[];
       json['newProducts'].forEach((v) {
-        newProducts!.add(ProductModelSimple.fromJson(v));
+        newProducts!.add(ProductAuMallModel.fromJson(v));
       });
     }
     if (json['comingSoonProducts'] != null) {
-      comingSoonProducts = <ProductModelSimple>[];
+      comingSoonProducts = <ProductAuMallModel>[];
       json['comingSoonProducts'].forEach((v) {
-        comingSoonProducts!.add(ProductModelSimple.fromJson(v));
+        comingSoonProducts!.add(ProductAuMallModel.fromJson(v));
       });
     }
     if (json['suggestionProducts'] != null) {
-      suggestionProducts = <ProductModelSimple>[];
+      suggestionProducts = <ProductAuMallModel>[];
       json['suggestionProducts'].forEach((v) {
-        suggestionProducts!.add(ProductModelSimple.fromJson(v));
+        suggestionProducts!.add(ProductAuMallModel.fromJson(v));
       });
     }
   }

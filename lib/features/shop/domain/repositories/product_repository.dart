@@ -11,7 +11,7 @@ abstract class ProductRepository {
       GetShopDataDefaultParams getShopDataDefaultParams
       );
   Future<Either<Failure, CategoriesEntity>> getShopDefaultData(
-      GetShopDataDefaultParams getShopDataDefaultParams
+      // GetShopDataDefaultParams getShopDataDefaultParams
       );
   Future<Either<Failure, ProductsEntity>> getAllProducts();
   Future<Either<Failure, ProductsEntity>> getSpecificProduct(

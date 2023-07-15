@@ -83,11 +83,11 @@ class ProductsRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, CategoriesEntity>> getShopDefaultData(GetShopDataDefaultParams getShopDataDefaultParams) async  {
+  Future<Either<Failure, CategoriesEntity>> getShopDefaultData() async  {
     if (await networkInfo.isConnected) {
       try {
-        print('getShopDefaultData: ${getShopDataDefaultParams.categoryId}');
-        final data = await productsDatasource.getShopDefaultData(getShopDataDefaultParams);
+        // print('getShopDefaultData: ${getShopDataDefaultParams.categoryId}');
+        final data = await productsDatasource.getShopDefaultData();
         // final data = await productsDatasource.getSpecificProductFromTxt(params);
         return right(data);
       } catch (error) {

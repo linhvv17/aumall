@@ -8,9 +8,9 @@ abstract class ProductsEvent extends Equatable {
 }
 
 class GetShopDataDefault extends ProductsEvent {
-  final GetShopDataDefaultParams getShopDataDefaultParams;
+  // final GetShopDataDefaultParams getShopDataDefaultParams;
   const GetShopDataDefault(
-      this.getShopDataDefaultParams,
+      // this.getShopDataDefaultParams,
       );
 }
 

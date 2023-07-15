@@ -100,10 +100,10 @@ class S {
     );
   }
 
-  /// `Select Wide Range Of Products from Shop the most cool products available on the store let it be T-shirts, Electronics and much more!`
+  /// `Select Wide Range Of Products from Shop the most cool products available on the store let it be Car, Watch and much more!`
   String get onBoardingSubTitle1 {
     return Intl.message(
-      'Select Wide Range Of Products from Shop the most cool products available on the store let it be T-shirts, Electronics and much more!',
+      'Select Wide Range Of Products from Shop the most cool products available on the store let it be Car, Watch and much more!',
       name: 'onBoardingSubTitle1',
       desc: '',
       args: [],

@@ -40,6 +40,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       this.getProductsShopUseCase)
       : super(AllProductsLoadingState()) {
     on<GetProductsShop>((event, emit) async {
+      emit(ProductsLoadingState());
       final failureOrSuccess = await getProductsShopUseCase(event.getShopDataDefaultParams);
 
       failureOrSuccess.fold(
@@ -49,7 +50,9 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     });
 
     on<GetShopDataDefault>((event, emit) async {
-      final failureOrSuccess = await getShopDataDefaultUseCase(event.getShopDataDefaultParams);
+      final failureOrSuccess = await getShopDataDefaultUseCase(
+          NoParams()
+      );
 
       failureOrSuccess.fold(
               (failure) => emit(AllProductsErrorState(failure.message)),

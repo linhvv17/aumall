@@ -13,13 +13,12 @@ import '../../../favorite/presentation/bloc/favourite_bloc.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../shop/domain/entities/products_entity.dart';
 import '../../../shop/presentation/widgets/review_card.dart';
-import '../../data/models/product_detail_model.dart';
 import '../../widgets/carousel.dart';
 import '../../widgets/product_item.dart';
 import '../bloc/product_detail_bloc/product_detail_event.dart';
 
 class ProductDetails extends StatefulWidget {
-  final ProductSimpleEntity productSimpleEntity;
+  final ProductAuMallEntity productSimpleEntity;
   // final List<ProductEntity> products;
   final int index;
   const ProductDetails(
@@ -146,24 +145,35 @@ class _ProductDetailsState extends State<ProductDetails>
                         //   product: widget.productSimpleEntity,
                         //   isFavourite: widget.productSimpleEntity.isFavourite,
                         // ));
+
+                        BlocProvider.of<FavouriteBloc>(context)
+                            .add(widget.productSimpleEntity.isFavorite!
+                            ? RemoveFavoriteProduct(widget.productSimpleEntity.id!)
+                            : AddToFavorite(
+                          product: widget.productSimpleEntity,
+                          isFavourite: widget.productSimpleEntity.isFavorite!,
+                        ));
+
+                        setState(() {
+                          print('setState bf ${widget.productSimpleEntity.isFavorite}');
+                          widget.productSimpleEntity.isFavorite = !widget.productSimpleEntity.isFavorite!;
+                          print('setState at ${widget.productSimpleEntity.isFavorite}');
+                        });
+
+
                       },
                       child:
-                      const Icon(
-                        Icons.favorite,
-                        size: 20.0,
-                        color: ColorManager.orangeLight,
-                      ),
-                      // widget.productSimpleEntity.isFavourite
-                      //     ? const Icon(
-                      //         Icons.favorite,
-                      //         size: 20.0,
-                      //         color: ColorManager.orangeLight,
-                      //       )
-                      //     : const Icon(
-                      //         Icons.favorite_outline,
-                      //         size: 20.0,
-                      //         color: ColorManager.grey,
-                      //       ),
+                      widget.productSimpleEntity.isFavorite!
+                          ? const Icon(
+                              Icons.favorite,
+                              size: 20.0,
+                              color: ColorManager.orangeLight,
+                            )
+                          : const Icon(
+                              Icons.favorite_outline,
+                              size: 20.0,
+                              color: ColorManager.grey,
+                            ),
                     ),
                   );
                 },

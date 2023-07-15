@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:aumall/core/network/api_provider.dart';
+import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import '../utilities/endpoints.dart';
 
 
@@ -11,6 +12,7 @@ class APIProviderImpl implements APIProvider {
       connectTimeout: 5000,
     ),
   );
+
   @override
   Future<Response> get(
       {String? baseUrl,
@@ -25,6 +27,8 @@ class APIProviderImpl implements APIProvider {
       dio.options.connectTimeout = timeOut;
     }
 
+
+
     dio.options.headers = {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
       if (!isMultipart) 'Content-Type': 'application/json',
@@ -34,6 +38,16 @@ class APIProviderImpl implements APIProvider {
     };
     print('APIProviderImpl ${endPoint}');
     print('APIProviderImpl Bearer $token');
+
+
+    dio.interceptors.add(
+      DioLoggingInterceptor(
+        level: Level.body,
+        compact: false,
+      ),
+    );
+
+
     return await dio.get(
       endPoint,
       queryParameters: query,

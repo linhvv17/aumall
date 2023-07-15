@@ -161,7 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "oldpasswordEmpty":
             MessageLookupByLibrary.simpleMessage("Old Password is Required"),
         "onBoardingSubTitle1": MessageLookupByLibrary.simpleMessage(
-            "Select Wide Range Of Products from Shop the most cool products available on the store let it be T-shirts, Electronics and much more!"),
+            "Select Wide Range Of Products from Shop the most cool products available on the store let it be Car, Watch and much more!"),
         "onBoardingSubTitle2": MessageLookupByLibrary.simpleMessage(
             "Just Two Clicks and you can buy all you want."),
         "onBoardingSubTitle3": MessageLookupByLibrary.simpleMessage(

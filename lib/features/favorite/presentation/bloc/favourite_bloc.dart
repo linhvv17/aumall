@@ -18,6 +18,7 @@ class FavouriteBloc extends Bloc<FavoriteEvent, FavouriteState> {
 
   FavouriteBloc(this.getFavoriteProductUseCase, this.removeFavoriteProductUseCase, this.addFavoriteProductUseCase) : super(FavouriteInitial()) {
     on<AddToFavorite>((event, emit) async {
+      print('click FavouriteBloc AddToFavorite');
       emit(FavouriteInitial());
       // if (!event.isFavourite) {
       //   // event.product.isFavourite = true;
@@ -55,6 +56,7 @@ class FavouriteBloc extends Bloc<FavoriteEvent, FavouriteState> {
     });
 
     on<RemoveFavoriteProduct>((event, emit) async {
+      print('click FavouriteBloc RemoveFavoriteProduct');
       emit(FavouriteDataLoading());
       final failureOrSuccess = await removeFavoriteProductUseCase(RemoveFavoriteProductUseCaseParams(idProduct: event.productId));
       failureOrSuccess.fold(

@@ -36,17 +36,21 @@ class _HomeState extends State<HomeView> {
         child:
           BlocBuilder<HomeBloc, HomeLoadState>(builder: (context, state) {
             if (state is HomeStateLoading) {
-              return const Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 100,
-                  ),
-                  CircularProgressIndicator(),
-                ],
+              return const Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 100,
+                    ),
+                    CircularProgressIndicator(),
+                    Text("Đang tải dữ liệu ...")
+                  ],
+                ),
               );
-            } else if (state is HomeStateGetDataSuccess) {
+            }
+            else if (state is HomeStateGetDataSuccess) {
               final newProducts = state
                   .listProductHomeEntity!.listProductHomeData.newProducts;
 
@@ -110,7 +114,7 @@ class _HomeState extends State<HomeView> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ProductDetails(
-                                    productSimpleEntity: newProducts![index],
+                                    productSimpleEntity: newProducts[index],
                                     index: index,
                                   ),
                                 ));

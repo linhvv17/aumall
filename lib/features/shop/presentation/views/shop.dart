@@ -26,33 +26,35 @@ class ShopView extends StatefulWidget {
 class _ShopViewState extends State<ShopView> {
 
   final List<Map<String, dynamic>> sortBys = [
-    {'id': 0, 'name': 'Popular', 'isSelected': true},
-    {'id': 1, 'name': 'Newest', 'isSelected': false},
-    {'id': 2, 'name': 'Customer review', 'isSelected': false},
-    {'id': 3, 'name': 'Price: lowest to high', 'isSelected': false},
-    {'id': 4, 'name': 'Price: highest to low', 'isSelected': false},
+    {'id': 0, 'name': 'Phổ biến nhất', 'isSelected': true},
+    {'id': 1, 'name': 'Mới nhất', 'isSelected': false},
+    {'id': 2, 'name': 'Đánh giá của khách hàng', 'isSelected': false},
+    {'id': 3, 'name': 'Giá: Từ thấp đến cao', 'isSelected': false},
+    {'id': 4, 'name': 'Giá: Từ cao đến thấp', 'isSelected': false},
   ];
 
   @override
   void initState() {
     BlocProvider.of<ProductsBloc>(context).add(GetShopDataDefault(
-      GetShopDataDefaultParams(
-          "1",
-          "minPrice",
-          "maxPrice",
-          "rate",
-          ""
-      )
+      // GetShopDataDefaultParams(
+      //     "1",
+      //     "minPrice",
+      //     "maxPrice",
+      //     "rate",
+      //     ""
+      // )
     ));
+
     BlocProvider.of<ProductsBloc>(context).add(GetProductsShop(
-      GetShopDataDefaultParams(
-          "1",
-          "minPrice",
-          "maxPrice",
-          "rate",
-          ""
-      )
+        GetShopDataDefaultParams(
+            "1",
+            "minPrice",
+            "maxPrice",
+            "rate",
+            ""
+        )
     ));
+
     super.initState();
   }
 
@@ -101,7 +103,21 @@ class _ShopViewState extends State<ShopView> {
                     ),
                     //list categories
                     BlocBuilder<ProductsBloc, ProductsState>(
+                      buildWhen:(pre, current) {
+                        return (current is GetShopDefaultDataLoadedState);
+                      },
                         builder: (context, state) {
+                        if(state is GetShopDefaultDataLoadedState){
+                          // BlocProvider.of<ProductsBloc>(context).add(GetProductsShop(
+                          //     GetShopDataDefaultParams(
+                          //         state.categoriesEntity.categories[0].id.toString(),
+                          //         "minPrice",
+                          //         "maxPrice",
+                          //         "rate",
+                          //         ""
+                          //     )
+                          // ));
+                        }
                           return Padding(
                             padding:
                             const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -173,8 +189,7 @@ class _ShopViewState extends State<ShopView> {
                     //list products
                     BlocBuilder<ProductsBloc, ProductsState>(
                       builder: (context, state) {
-                        if (state is FilterProductsLoadingState ||
-                            state is SpecificProductsLoadingState) {
+                        if (state is ProductsLoadingState) {
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -184,10 +199,11 @@ class _ShopViewState extends State<ShopView> {
                               const CircularProgressIndicator(),
                             ],
                           );
-                        } else if (state is GetProductsShopLoadedState) {
+                        }
+                        else if (state is GetProductsShopLoadedState) {
                           final List<ProductAuMallEntity> listProduct = state.listProductShopEntity.listProductAuMall;
                           return listProduct.isEmpty ?
-                              const Text("Không có sản phầm nào!!!!!!!!!!!!!!!") :
+                              const Center(child: Text("Không có sản phầm nào!!!!!!!!!!!!!!!")) :
                             Expanded(child: GridView.builder(
                                 padding: EdgeInsets.zero,
                                 itemCount: state.listProductShopEntity.listProductAuMall.length,
@@ -197,15 +213,14 @@ class _ShopViewState extends State<ShopView> {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                       onTap: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //       builder: (context) => ProductDetails(
-                                        //         product: products[index],
-                                        //         products: products,
-                                        //         index: index,
-                                        //       ),
-                                        //     ));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => ProductDetails(
+                                                productSimpleEntity: state.listProductShopEntity.listProductAuMall[index],
+                                                index: index,
+                                              ),
+                                            ));
                                       },
                                       child: Hero(
                                           tag: '$index',
@@ -214,7 +229,8 @@ class _ShopViewState extends State<ShopView> {
                                   ));
                                 },
                               ));
-                        } else if (state is ProductsErrorState ) {
+                        }
+                        else if (state is ProductsErrorState ) {
                           return state.message == S.current.noInternetError
                               ? Column(
                             children: [
@@ -230,86 +246,87 @@ class _ShopViewState extends State<ShopView> {
                           )
                               : Center(child: Text(state.message));
                         }
-                        else if (state is FilterProductsLoadedState) {
-                          final products = state.data.products;
-                          return Expanded(
-                              child: GridView.builder(
-                                padding: EdgeInsets.zero,
-                                itemCount: state.data.filteredProductsCount,
-                                gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                    height: 330, crossAxisCount: 2),
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //       builder: (context) => ProductDetails(
-                                        //         product: products[index],
-                                        //         products: products,
-                                        //         index: index,
-                                        //       ),
-                                        //     ));
-                                      },
-                                      child: Hero(
-                                          tag: '$index',
-                                          child:Container()
-                                          // ProductItem(product: products[index])
-                                  ));
-                                },
-                              ));
-
-                        }
-                        else if (state is SpecificProductsLoadedState) {
-                          final products = state.data.products;
-                          return Expanded(
-                              child: GridView.builder(
-                                padding: EdgeInsets.zero,
-                                itemCount: state.data.filteredProductsCount,
-                                gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                    height: 330, crossAxisCount: 2),
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: () {
-                                        // Navigator.push(
-                                        //     context,
-                                            // MaterialPageRoute(
-                                            //   builder: (context) => ProductDetails(
-                                            //     product: products[index],
-                                            //     products: products,
-                                            //     index: index,
-                                            //   ),
-                                            // ));
-                                      },
-                                      child: Hero(
-                                          tag: '$index',
-                                          child: Container()
-                                          // ProductItem(product: products[index])
-                                      ));
-                                },
-                              ));
-                        }
-                        else if (state is SpecificProductsErrorState ) {
-                          return state.message == S.current.noInternetError
-                              ? Column(
-                            children: [
-                              Padding(
-
-                                padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 19),
-                                child: Card(
-                                    clipBehavior: Clip.antiAlias,
-                                    child: LottieBuilder.asset('assets/images/nointernet.json')),
-                              ),
-                              Card(child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(state.message),
-                              ))
-                            ],
-                          )
-                              : Center(child: Text(state.message));
-                        }  else {
+                        // else if (state is FilterProductsLoadedState) {
+                        //   final products = state.data.products;
+                        //   return Expanded(
+                        //       child: GridView.builder(
+                        //         padding: EdgeInsets.zero,
+                        //         itemCount: state.data.filteredProductsCount,
+                        //         gridDelegate:
+                        //         const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                        //             height: 330, crossAxisCount: 2),
+                        //         itemBuilder: (context, index) {
+                        //           return InkWell(
+                        //               onTap: () {
+                        //                 // Navigator.push(
+                        //                 //     context,
+                        //                 //     MaterialPageRoute(
+                        //                 //       builder: (context) => ProductDetails(
+                        //                 //         product: products[index],
+                        //                 //         products: products,
+                        //                 //         index: index,
+                        //                 //       ),
+                        //                 //     ));
+                        //               },
+                        //               child: Hero(
+                        //                   tag: '$index',
+                        //                   child:Container()
+                        //                   // ProductItem(product: products[index])
+                        //           ));
+                        //         },
+                        //       ));
+                        //
+                        // }
+                        // else if (state is SpecificProductsLoadedState) {
+                        //   final products = state.data.products;
+                        //   return Expanded(
+                        //       child: GridView.builder(
+                        //         padding: EdgeInsets.zero,
+                        //         itemCount: state.data.filteredProductsCount,
+                        //         gridDelegate:
+                        //         const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                        //             height: 330, crossAxisCount: 2),
+                        //         itemBuilder: (context, index) {
+                        //           return InkWell(
+                        //               onTap: () {
+                        //                 // Navigator.push(
+                        //                 //     context,
+                        //                     // MaterialPageRoute(
+                        //                     //   builder: (context) => ProductDetails(
+                        //                     //     product: products[index],
+                        //                     //     products: products,
+                        //                     //     index: index,
+                        //                     //   ),
+                        //                     // ));
+                        //               },
+                        //               child: Hero(
+                        //                   tag: '$index',
+                        //                   child: Container()
+                        //                   // ProductItem(product: products[index])
+                        //               ));
+                        //         },
+                        //       ));
+                        // }
+                        // else if (state is SpecificProductsErrorState ) {
+                        //   return state.message == S.current.noInternetError
+                        //       ? Column(
+                        //     children: [
+                        //       Padding(
+                        //
+                        //         padding: const EdgeInsets.symmetric(vertical: 14,horizontal: 19),
+                        //         child: Card(
+                        //             clipBehavior: Clip.antiAlias,
+                        //             child: LottieBuilder.asset('assets/images/nointernet.json')),
+                        //       ),
+                        //       Card(child: Padding(
+                        //         padding: const EdgeInsets.all(8.0),
+                        //         child: Text(state.message),
+                        //       ))
+                        //     ],
+                        //   )
+                        //       : Center(child: Text(state.message));
+                        // }
+                        else {
                           return const SizedBox();
                         }
                       },

@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^4.0.6
+  dio_logging_interceptor: ^1.0.1
   equatable: ^2.0.5
   fl_country_code_picker: ^0.0.4
   flutter:
