@@ -5,6 +5,7 @@ import '../entities/categories_entity.dart';
 import '../entities/list_product_shop_entity.dart';
 import '../entities/products_entity.dart';
 import '../entities/response_entity.dart';
+import '../entities/shop_data_default_entity.dart';
 
 abstract class ProductRepository {
   Future<Either<Failure, ListProductShopEntity>> getListProductByCategory(
@@ -18,6 +19,9 @@ abstract class ProductRepository {
       GetProductParams params);
   Future<Either<Failure, ResponseEntity>> sendReview(SendReviewParams params);
   Future<Either<Failure, GetReviewsEntity>> getReviews(GetReviewsParams params);
+
+  Future<Either<Failure, ShopDataDefaultEntity>> getShopDataDefault();
+  Future<Either<Failure, ListProductShopEntity>> changeCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
 }
 
 
@@ -54,4 +58,10 @@ class GetReviewsParams {
   final String productId;
 
   GetReviewsParams(this.productId);
+}
+
+class ChangeCategoryUseCaseParams {
+  final int categoryId;
+
+  ChangeCategoryUseCaseParams(this.categoryId,);
 }

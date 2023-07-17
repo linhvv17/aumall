@@ -40,7 +40,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                 prefixIcon: IconButton(
                                     onPressed: () {
                                       bloc.add(GetFilterSpecificProduct(
-                                          bloc.categories[bloc.current],
+                                          bloc.categoriesEntity[bloc.current].name,
                                           '0',
                                           '100000',
                                           '-1',

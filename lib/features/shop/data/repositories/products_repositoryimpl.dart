@@ -1,4 +1,5 @@
 import 'package:aumall/features/shop/domain/entities/categories_entity.dart';
+import 'package:aumall/features/shop/domain/entities/shop_data_default_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
 import '../../../../core/error/error_handler.dart';
@@ -105,6 +106,34 @@ class ProductsRepositoryImpl implements ProductRepository {
         print('getListProductByCategory: ${getShopDataDefaultParams.categoryId}');
         final data = await productsDatasource.getListProductByCategory(getShopDataDefaultParams);
         // final data = await productsDatasource.getSpecificProductFromTxt(params);
+        return right(data);
+      } catch (error) {
+        return left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return left( OfflineFailure(S.current.noInternetError));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ShopDataDefaultEntity>> getShopDataDefault() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final data = await productsDatasource.getShopDataDefault();
+        return right(data);
+      } catch (error) {
+        return left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return left( OfflineFailure(S.current.noInternetError));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ListProductShopEntity>> changeCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final data = await productsDatasource.changCategory(changeCategoryUseCaseParams);
         return right(data);
       } catch (error) {
         return left(ErrorHandler.handle(error).failure);

@@ -84,7 +84,7 @@ class _HomeState extends State<HomeView> {
                           BlocProvider.of<ProductsBloc>(context).add(
                               GetSpecificProduct(
                                   BlocProvider.of<ProductsBloc>(context)
-                                      .categories[0],
+                                      .categoriesEntity[0].name,
                                   '0',
                                   '100000',
                                   '-1',
@@ -147,7 +147,7 @@ class _HomeState extends State<HomeView> {
                           BlocProvider.of<ProductsBloc>(context).add(
                               GetSpecificProduct(
                                   BlocProvider.of<ProductsBloc>(context)
-                                      .categories[0],
+                                      .categoriesEntity[0].name,
                                   '0',
                                   '100000',
                                   '-1',
@@ -210,7 +210,7 @@ class _HomeState extends State<HomeView> {
                           BlocProvider.of<ProductsBloc>(context).add(
                               GetSpecificProduct(
                                   BlocProvider.of<ProductsBloc>(context)
-                                      .categories[0],
+                                      .categoriesEntity[0].name,
                                   '0',
                                   '100000',
                                   '-1',

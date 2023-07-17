@@ -139,8 +139,8 @@ class FilterProduct extends StatelessWidget {
                                               setState(() {
                                                 bloc.add(
                                                     GetFilterSpecificProduct(
-                                                        bloc.categories[
-                                                            bloc.current],
+                                                        bloc.categoriesEntity[
+                                                            bloc.current].name,
                                                         bloc.priceSelectRange
                                                             .start
                                                             .round()

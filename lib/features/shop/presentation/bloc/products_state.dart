@@ -91,3 +91,22 @@ class ChangeCategoryState extends ProductsState {}
 class OpenSearchInitialState extends ProductsState {}
 
 class OpenSearchState extends ProductsState {}
+
+
+
+class ChangCategorySuccessState extends ProductsState {
+  final ListProductShopEntity listProductAuMall;
+
+  const ChangCategorySuccessState(this.listProductAuMall);
+
+  @override
+  List<Object> get props => [
+    listProductAuMall
+  ];
+
+
+}
+class GetShopDataDefaultSuccessState extends ProductsState {
+  final ShopDataDefaultEntity shopDataDefaultEntity;
+  const GetShopDataDefaultSuccessState(this.shopDataDefaultEntity,);
+}

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../../domain/entities/list_product_shop_entity.dart';
 import '../../domain/entities/products_entity.dart';
+import '../../domain/entities/shop_data_default_entity.dart';
+import '../../domain/usecases/change_category_usecase.dart';
 import '../../domain/usecases/get_all_products_usecase.dart';
 import '../../domain/usecases/get_shop_data_default_usecase.dart';
 import '../../domain/usecases/get_specific_product.dart';
@@ -14,17 +16,7 @@ part 'products_event.dart';
 part 'products_state.dart';
 
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
-  List<String> categories = [
-    "Watches",
-    "Cars",
-    "Clothes",
-    "Shoes",
-    "Electronics",
-    "Smartphones",
-    "Camera",
-    "Sports",
-    "Books",
-  ];
+  List<CategoryEntity> categoriesEntity = [];
   int current = 0;
   RangeValues priceSelectRange = const RangeValues(200, 400);
   double rateValue = 0;
@@ -33,11 +25,13 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final GetSpecificProductUseCase getSpecificProductUseCase;
   final GetShopDataDefaultUseCase getShopDataDefaultUseCase;
   final GetProductsShopUseCase getProductsShopUseCase;
+  final ChangeCategoryUseCase changeCategoryUseCase;
   ProductsBloc(
       this.getAllProductsUseCase,
       this.getSpecificProductUseCase,
       this.getShopDataDefaultUseCase,
-      this.getProductsShopUseCase)
+      this.getProductsShopUseCase,
+      this.changeCategoryUseCase)
       : super(AllProductsLoadingState()) {
     on<GetProductsShop>((event, emit) async {
       emit(ProductsLoadingState());
@@ -56,7 +50,10 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
       failureOrSuccess.fold(
               (failure) => emit(AllProductsErrorState(failure.message)),
-              (success) => emit(GetShopDefaultDataLoadedState(success)));
+              (success) {
+                categoriesEntity = success.categoriesEntity.categories;
+                emit(GetShopDataDefaultSuccessState(success));
+              });
 
     });
     on<GetAllProducts>((event, emit) async {
@@ -76,9 +73,21 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
           (failure) => emit(SpecificProductsErrorState(failure.message)),
           (success) => emit(SpecificProductsLoadedState(success)));
     });
-    on<ChangeCategory>((event, emit) {
-      current = event.index;
-      emit(ChangeCategoryState());
+    on<ChangeCategory>((event, emit) async {
+      // emit(ChangeCategoryState());
+
+      final failureOrSuccess = await changeCategoryUseCase(
+          ChangeCategoryUseCaseParams(event.categoryId)
+      );
+
+      failureOrSuccess.fold(
+              (failure) => emit(AllProductsErrorState(failure.message)),
+              (success) {
+                current = event.index;
+                categoriesEntity = categoriesEntity;
+                print('ChangeCategory ChangCategorySuccessState $current');
+                emit(ChangCategorySuccessState(success));
+              });
     });
     on<GetFilterSpecificProduct>((event, emit) async {
       emit(FilterProductsLoadingState());

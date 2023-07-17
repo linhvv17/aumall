@@ -8,10 +8,7 @@ abstract class ProductsEvent extends Equatable {
 }
 
 class GetShopDataDefault extends ProductsEvent {
-  // final GetShopDataDefaultParams getShopDataDefaultParams;
-  const GetShopDataDefault(
-      // this.getShopDataDefaultParams,
-      );
+  const GetShopDataDefault();
 }
 
 class GetProductsShop extends ProductsEvent {
@@ -55,8 +52,9 @@ class GetFilterSpecificProduct extends ProductsEvent {
 
 class ChangeCategory extends ProductsEvent {
   final int index;
+  final int categoryId;
 
-  const ChangeCategory(this.index);
+  const ChangeCategory( this.index, this.categoryId);
 }
 
 class OpenSearch extends ProductsEvent {}

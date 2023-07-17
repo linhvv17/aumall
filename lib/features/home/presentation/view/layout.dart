@@ -52,7 +52,7 @@ class _LayoutPageState extends State<LayoutPage> {
                       .add(LoadShop());
                   BlocProvider.of<ProductsBloc>(context).add(
                       GetSpecificProduct(
-                          BlocProvider.of<ProductsBloc>(context).categories[0],
+                          BlocProvider.of<ProductsBloc>(context).categoriesEntity[0].name,
                           '0',
                           '100000',
                           '-1',
