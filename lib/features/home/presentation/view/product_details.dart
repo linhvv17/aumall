@@ -197,14 +197,14 @@ class _ProductDetailsState extends State<ProductDetails>
                     RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 onPressed: () {
 
-                  // BlocProvider.of<CartBloc>(context).add(AddToCart(widget.product, widget.index));
+                  BlocProvider.of<CartBloc>(context).add(AddProductToCart(widget.productSimpleEntity, widget.index));
 
-                  // animateCartAdd(
-                  //   context,
-                  //   NetworkImage(
-                  //     widget.product.images[0].url,
-                  //   ),
-                  // );
+                  animateCartAdd(
+                    context,
+                    NetworkImage(
+                      widget.productSimpleEntity.thumbnailUrl!,
+                    ),
+                  );
                 },
                 label: BlocConsumer<CartBloc, CartState>(
                   listener: (context, state) {

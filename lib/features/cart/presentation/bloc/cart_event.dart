@@ -10,6 +10,13 @@ abstract class CartEvent extends Equatable {
 class CartStarted extends CartEvent{
   
 }
+
+class AddProductToCart extends CartEvent {
+  final ProductAuMallEntity productAuMallEntity;
+  final int index;
+  const AddProductToCart(this.productAuMallEntity, this.index);
+}
+
 class AddToCart extends CartEvent {
   final ProductEntity product;
   final int index;
@@ -23,14 +30,14 @@ class RemoveFromCart extends CartEvent {
 }
 
 class IncrementCount extends CartEvent {
-  final CartProduct cartProduct;
+  final CartProductModel cartProduct;
   final int index;
 
   const IncrementCount(this.cartProduct, this.index);
 }
 
 class DecrementCount extends CartEvent {
-  final CartProduct cartProduct;
+  final CartProductModel cartProduct;
   final int index;
   const DecrementCount(this.cartProduct, this.index);
 }

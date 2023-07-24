@@ -24,6 +24,7 @@ class _CartViewState extends State<CartView> {
   @override
   void initState() {
     
+    BlocProvider.of<CartBloc>(context).add(CartStarted());
     BlocProvider.of<LocationBloc>(context).add(GetCurrentLocation());
     BlocProvider.of<PaymentBloc>(context)
                     .add(RequestAuth(dotenv.env['PAYMENT_API_KEY']!));

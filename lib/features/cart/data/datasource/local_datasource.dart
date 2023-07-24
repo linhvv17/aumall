@@ -1,4 +1,5 @@
 
+import 'package:aumall/features/cart/data/models/cart_product_model.dart';
 import 'package:hive/hive.dart';
 import '../../../../core/local/cache_manager.dart';
 import '../models/cart_model.dart';
@@ -9,6 +10,7 @@ class CartLocalDataSourceManager implements CacheManagerBase<CartProduct> {
   Future<void> init() async {
     registerAdapter();
     await Hive.openBox<CartProduct>("product-cahce");
+    await Hive.openBox<CartProductModel>("product-cache");
   }
 
   @override

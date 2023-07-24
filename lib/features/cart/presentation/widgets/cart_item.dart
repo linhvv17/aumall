@@ -1,3 +1,4 @@
+import 'package:aumall/features/cart/data/models/cart_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/features/cart/data/models/cart_model.dart';
@@ -9,7 +10,8 @@ import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../bloc/cart_bloc.dart';
 
 class CartItem extends StatelessWidget {
-  final CartProduct item;
+  // final CartProduct item;
+  final CartProductModel item;
   final int index;
   const CartItem({super.key, required this.item, required this.index});
 
@@ -51,7 +53,7 @@ class CartItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          item.category,
+                          "item.category",
                           style: Theme.of(context).textTheme.bodySmall!.copyWith(color: ColorManager.dark,)
                         )
                       ],
@@ -135,8 +137,8 @@ class CartItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${item.price} \$',
-                        style: Theme.of(context).textTheme.headline6,
+                        'đ ${item.price}',
+                        style: const TextStyle(fontSize: 13),
                       )
                     ],
                   ),
