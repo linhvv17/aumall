@@ -7,8 +7,8 @@ import '../../../../core/network/network_info.dart';
 import '../../../../core/utilities/strings.dart';
 
 import '../../../../generated/l10n.dart';
-import '../../domin/entities/login_entity.dart';
-import '../../domin/repositories/login_repository.dart';
+import '../../domain/entities/login_entity.dart';
+import '../../domain/repositories/login_repository.dart';
 import '../datasources/login_datasource.dart';
 
 class LoginRepositoryImpl implements LoginBaseRepository {

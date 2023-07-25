@@ -69,8 +69,8 @@ class FilterProduct extends StatelessWidget {
                                     ),
                                     RangeSlider(
                                       activeColor: ColorManager.orangeLight,
-                                      min: 5,
-                                      max: 600,
+                                      min: 0000000000,
+                                      max: 5000000000,
                                       values: bloc.priceSelectRange,
                                       onChanged: (value) {
                                         setState(() {
@@ -78,7 +78,7 @@ class FilterProduct extends StatelessWidget {
                                               .priceSelectRange = value;
                                         });
                                       },
-                                      divisions: 100,
+                                      divisions: 5,
                                       labels: RangeLabels(
                                         "${bloc.priceSelectRange.start.round().toString()}\$",
                                         "${bloc.priceSelectRange.end.round().toString()}\$",
@@ -138,9 +138,7 @@ class FilterProduct extends StatelessWidget {
                                             ontab: () {
                                               setState(() {
                                                 bloc.add(
-                                                    GetFilterSpecificProduct(
-                                                        bloc.categoriesEntity[
-                                                            bloc.current].name,
+                                                    GetProductsByFilter(
                                                         bloc.priceSelectRange
                                                             .start
                                                             .round()
@@ -153,8 +151,8 @@ class FilterProduct extends StatelessWidget {
                                                             ? '-1'
                                                             : bloc.rateValue
                                                                 .round()
-                                                                .toString(),
-                                                        ''));
+                                                                .toString()
+                                                        ));
                                               });
                                               Navigator.pop(context);
                                             },

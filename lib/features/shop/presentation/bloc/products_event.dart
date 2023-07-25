@@ -2,23 +2,28 @@ part of 'products_bloc.dart';
 
 abstract class ProductsEvent extends Equatable {
   const ProductsEvent();
-
   @override
   List<Object> get props => [];
 }
+
+class GetAllProducts extends ProductsEvent {}
 
 class GetShopDataDefault extends ProductsEvent {
   const GetShopDataDefault();
 }
 
-class GetProductsShop extends ProductsEvent {
-  final GetShopDataDefaultParams getShopDataDefaultParams;
-  const GetProductsShop(
-      this.getShopDataDefaultParams,
-      );
+
+class GetProductsByFilter extends ProductsEvent {
+  final String minPrice;
+  final String maxPrice;
+  final String rate;
+  const GetProductsByFilter(
+    this.minPrice,
+    this.maxPrice,
+    this.rate,
+  );
 }
 
-class GetAllProducts extends ProductsEvent {}
 
 class GetSpecificProduct extends ProductsEvent {
   final String category;
@@ -35,21 +40,13 @@ class GetSpecificProduct extends ProductsEvent {
   );
 }
 
-class GetFilterSpecificProduct extends ProductsEvent {
-  final String category;
-  final String minPrice;
-  final String maxPrice;
-  final String rate;
-    final String keyword;
-  const GetFilterSpecificProduct(
-    this.category,
-    this.minPrice,
-    this.maxPrice,
-    this.rate,
-        this.keyword,
-  );
-}
 
+//search products
+class SearchProduct extends ProductsEvent {
+  final String keyword;
+  const SearchProduct(this.keyword);
+}
+//change tab category
 class ChangeCategory extends ProductsEvent {
   final int index;
   final int categoryId;
@@ -57,4 +54,6 @@ class ChangeCategory extends ProductsEvent {
   const ChangeCategory( this.index, this.categoryId);
 }
 
-class OpenSearch extends ProductsEvent {}
+class OpenSearch extends ProductsEvent {
+
+}

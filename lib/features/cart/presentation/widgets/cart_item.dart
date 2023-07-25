@@ -98,6 +98,7 @@ class CartItem extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: InkWell(
                                       onTap: () {
+                                        //giam 1
                                             BlocProvider.of<CartBloc>(context).add(DecrementCount(item, index));
                                       },
                                       child: const Icon(
@@ -123,6 +124,7 @@ class CartItem extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: InkWell(
                                       onTap: () {
+                                        //tang 1
                                         BlocProvider.of<CartBloc>(context).add(IncrementCount(item, index));
                                       },
                                       child: const Icon(

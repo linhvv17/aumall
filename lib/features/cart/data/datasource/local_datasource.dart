@@ -38,8 +38,10 @@ class CartLocalDataSourceManager implements CacheManagerBase<CartProduct> {
   @override
   void registerAdapter() {
     if (!Hive.isAdapterRegistered(4)) {
-      Hive.registerAdapter(CartProductAdapter());
+      // Hive.registerAdapter(CartProductAdapter());
+      Hive.registerAdapter(CartProductModelAdapter());
     }
+
   }
 
   @override

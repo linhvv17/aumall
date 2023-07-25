@@ -39,12 +39,10 @@ class _SearchWidgetState extends State<SearchWidget> {
                             decoration: InputDecoration(
                                 prefixIcon: IconButton(
                                     onPressed: () {
-                                      bloc.add(GetFilterSpecificProduct(
-                                          bloc.categoriesEntity[bloc.current].name,
-                                          '0',
-                                          '100000',
-                                          '-1',
-                                          searchControler.text));
+
+
+                                      bloc.add(SearchProduct(searchControler.text));
+
                                     },
                                     icon: const Icon(Icons.search)),
                                 hintText: 'Search',
@@ -56,6 +54,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   setState(() {
                     bloc.searchFolded = !bloc.searchFolded;
                   });
+                  bloc.add(const GetShopDataDefault());
                 },
                 icon: bloc.searchFolded
                     ? const Icon(Icons.search)

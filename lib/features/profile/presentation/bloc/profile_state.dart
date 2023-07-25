@@ -40,6 +40,10 @@ class UploadImageState extends ProfileState {
   final CloudinaryResponse image;
 
   const UploadImageState(this.image);
+}
 
+class GetAddressListLoadedState extends ProfileState {
+  final List<AddressEntity> data;
 
+  const GetAddressListLoadedState(this.data);
 }

@@ -9,7 +9,6 @@ import 'package:aumall/features/cart/presentation/widgets/cart_item.dart';
 import 'package:aumall/features/login/presentation/widgets/alert_snackbar.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
-import '../../../../core/utilities/strings.dart';
 import '../../../../generated/l10n.dart';
 import '../../../payment/presentation/bloc/payment_bloc.dart';
 

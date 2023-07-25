@@ -1,3 +1,4 @@
+import 'package:aumall/features/profile/domain/entities/address_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import '../../../../core/error/error_handler.dart';
@@ -57,6 +58,34 @@ class ProfileRepositoryImpl implements ProfileRepository {
     if (await networkInfo.isConnected) {
       try {
         final data = await profileDatasource.updatePassword(params);
+        return right(data);
+      } catch (error) {
+        return left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return left( OfflineFailure(S.current.noInternetError));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<AddressEntity>>> getAddressList() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final data = await profileDatasource.getAddressList();
+        return right(data);
+      } catch (error) {
+        return left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return left( OfflineFailure(S.current.noInternetError));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> addAddress() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final data = await profileDatasource.addAddress();
         return right(data);
       } catch (error) {
         return left(ErrorHandler.handle(error).failure);

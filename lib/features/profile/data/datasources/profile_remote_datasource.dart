@@ -1,3 +1,5 @@
+import 'package:aumall/features/profile/data/models/address_model.dart';
+
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/network/api_provider.dart';
 import '../../../../core/utilities/endpoints.dart';
@@ -8,6 +10,8 @@ abstract class ProfileDatasource {
   Future<ProfileModel> getUserDetails();
   Future<ProfileModel> updateProfile(UpdateProfileParams params);
   Future<ProfileModel> updatePassword(UpdatePassParnms parnms);
+  Future<List<AddressModel>> getAddressList();
+  Future<bool> addAddress();
 }
 
 class ProfileDataSourceImpl implements ProfileDatasource {
@@ -52,5 +56,32 @@ class ProfileDataSourceImpl implements ProfileDatasource {
                             key: 'token') ?? '',
     );
     return ProfileModel.fromJson(response.data);
+  }
+
+  @override
+  Future<List<AddressModel>> getAddressList() async {
+    final response = await apiProvider.get(
+      endPoint: shippingAddressAuMall,
+      token: PreferenceHelper.getDataFromSharedPreference(
+          key: 'token') ?? '',
+    );
+    List<AddressModel> listAddressModel
+    = List<AddressModel>.from(
+        response.data['data']['data'].map((x) => AddressModel.fromJson(x)));
+    return listAddressModel;
+  }
+
+  @override
+  Future<bool> addAddress() async {
+    final data = {
+
+    };
+    final response = await apiProvider.post(
+      endPoint: shippingAddressAuMall,
+      token: PreferenceHelper.getDataFromSharedPreference(
+          key: 'token') ?? '',
+    );
+
+    return true;
   }
 }

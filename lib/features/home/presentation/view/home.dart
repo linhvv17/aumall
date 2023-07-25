@@ -75,7 +75,7 @@ class _HomeState extends State<HomeView> {
                       Text(
                         S.current.recentlyAddedProducts.toUpperCase(),
                         style: const TextStyle(
-                            color: Colors.deepOrangeAccent, fontSize: 20),
+                            color: Colors.deepOrangeAccent, fontSize: 18),
                       ),
                       TextButton(
                         onPressed: () {

@@ -1,33 +1,28 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecase/usecase.dart';
-import '../entities/products_entity.dart';
+import '../entities/list_product_shop_entity.dart';
 import '../repositories/product_repository.dart';
 
-class GetSpecificProductUseCase
-    extends BaseUsecase<ProductsEntity, GetProductUseCaseParams> {
+class GetProductByFilterUseCase
+    extends BaseUsecase<ListProductShopEntity, GetProductByFilterUseCaseParams> {
   final ProductRepository productRepository;
 
-  GetSpecificProductUseCase(this.productRepository);
+  GetProductByFilterUseCase(this.productRepository);
   @override
-  Future<Either<Failure, ProductsEntity>> call(
-      GetProductUseCaseParams params) async {
-    print('call: ${params.category}');
-    return await productRepository.getSpecificProduct(GetProductParams(
-        params.category,
+  Future<Either<Failure, ListProductShopEntity>> call(
+      GetProductByFilterUseCaseParams params) async {
+    return await productRepository.getProductByFilter(GetProductByFilterUseCaseParams(
         params.minPrice,
         params.maxPrice,
-        params.rate,
-        params.keyword));
+        params.rate));
   }
 }
 
-class GetProductUseCaseParams {
-  final String category;
+class GetProductByFilterUseCaseParams {
   final String minPrice;
   final String maxPrice;
   final String rate;
-  final String keyword;
-  GetProductUseCaseParams(
-      this.category, this.minPrice, this.maxPrice, this.rate, this.keyword);
+  GetProductByFilterUseCaseParams(
+      this.minPrice, this.maxPrice, this.rate,);
 }

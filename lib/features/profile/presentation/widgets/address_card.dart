@@ -1,9 +1,10 @@
+import 'package:aumall/features/profile/domain/entities/address_entity.dart';
 import 'package:flutter/material.dart';
 
 class AddressCard extends StatelessWidget {
   final int index;
-
-  const AddressCard({super.key, required this.index});
+  final AddressEntity addressEntity;
+  const AddressCard({super.key, required this.index, required this.addressEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +25,8 @@ class AddressCard extends StatelessWidget {
               )
             ],
           ),
-          child:  const Padding(
-            padding: EdgeInsets.all(20.0),
+          child:   Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -33,15 +34,15 @@ class AddressCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'John Doe',
-                      style: TextStyle(
+                      addressEntity.name!,
+                      style: const TextStyle(
                         color: Color(0xFF222222),
                         fontSize: 14,
                         fontFamily: 'Metropolis',
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Edit',
                       textAlign: TextAlign.right,
                       style: TextStyle(
@@ -54,15 +55,15 @@ class AddressCard extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  '3 Newbridge Court\nChino Hills, CA 91709, United States',
-                  style: TextStyle(
+                  addressEntity.address!,
+                  style: const TextStyle(
                     color: Color(0xFF222222),
                     fontSize: 14,
                     fontFamily: 'Metropolis',
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CheckboxCustom(),

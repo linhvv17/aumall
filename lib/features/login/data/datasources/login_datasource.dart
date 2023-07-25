@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../../../core/network/api_provider.dart';
 import '../../../../core/utilities/endpoints.dart';
-import '../../domin/repositories/login_repository.dart';
+import '../../domain/repositories/login_repository.dart';
 import '../models/login_model.dart';
 
 abstract class LoginDatasource {

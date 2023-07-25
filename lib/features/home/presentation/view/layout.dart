@@ -23,7 +23,7 @@ class LayoutPage extends StatefulWidget {
 class _LayoutPageState extends State<LayoutPage> {
   @override
   void initState() {
-    BlocProvider.of<ProductsBloc>(context).add(GetAllProducts());
+    // BlocProvider.of<ProductsBloc>(context).add(GetAllProducts());
     BlocProvider.of<LocationBloc>(context).add(CheckPermission(context));
     super.initState();
   }

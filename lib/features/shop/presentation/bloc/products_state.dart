@@ -16,7 +16,65 @@ class GetProductsShopLoadedState extends ProductsState {
   List<Object> get props => [
     listProductShopEntity
   ];
+}
 
+
+class ProductsSearchStateDataLoaded extends ProductsState {
+
+  final ListProductShopEntity listProductAuMall;
+
+
+  const ProductsSearchStateDataLoaded(
+  {this.listProductAuMall =  const ListProductShopEntity([])}
+      );
+
+
+  ProductsSearchStateDataLoaded copyWith(
+  {
+    ListProductShopEntity? listProductAuMall}
+      ){
+    return ProductsSearchStateDataLoaded(
+      listProductAuMall: listProductAuMall ?? this.listProductAuMall
+    );
+  }
+
+
+  @override
+  List<Object> get props => [
+    listProductAuMall
+  ];
+
+}
+
+
+class ProductsStateDataLoaded extends ProductsState {
+
+  final CategoriesEntity categoriesEntity;
+  final ListProductShopEntity listProductAuMall;
+
+
+  const ProductsStateDataLoaded(
+  {this.categoriesEntity =  const CategoriesEntity([]),
+  this.listProductAuMall =  const ListProductShopEntity([])}
+      );
+
+
+  ProductsStateDataLoaded copyWith(
+  {CategoriesEntity? categoriesEntity,
+    ListProductShopEntity? listProductAuMall}
+      ){
+    return ProductsStateDataLoaded(
+      categoriesEntity: categoriesEntity ?? this.categoriesEntity,
+      listProductAuMall: listProductAuMall ?? this.listProductAuMall
+    );
+  }
+
+
+  @override
+  List<Object> get props => [
+    categoriesEntity,
+    listProductAuMall
+  ];
 
 }
 

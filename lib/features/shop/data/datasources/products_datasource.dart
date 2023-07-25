@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:aumall/features/shop/data/models/categories_model.dart';
 import 'package:aumall/features/shop/data/models/reviews_model.dart';
+import 'package:aumall/features/shop/domain/usecases/get_specific_product.dart';
 import 'package:flutter/services.dart';
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/network/api_provider.dart';
@@ -18,11 +19,12 @@ abstract class ProductsDatasource {
   Future<ListShopProductsModel> getListProductByCategory(GetShopDataDefaultParams getShopDataDefaultParams);
   Future<ProductsModel> getAllProducts();
   Future<ProductsModel> getAllProductsAuMall();
-  Future<ProductsModel> getSpecificProduct(GetProductParams params);
   Future<ResponseModel> sendReview(SendReviewParams params);
   Future<GetReviewsModel> getReviews(GetReviewsParams params);
   Future<ShopDataDefaultModel> getShopDataDefault();
   Future<ListShopProductsModel> changCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
+  Future<ListShopProductsModel> searchProducts(SearchProductsUseCaseParams searchProductsUseCaseParams);
+  Future<ListShopProductsModel> getProductsByFilter(GetProductByFilterUseCaseParams params);
 }
 
 class ProductsDatasourceImpl implements ProductsDatasource {
@@ -67,17 +69,7 @@ class ProductsDatasourceImpl implements ProductsDatasource {
     final body = json.decode(data);
     return ProductsModel.fromJson(body);
   }
-  @override
-  Future<ProductsModel> getSpecificProduct(GetProductParams params) async {
-    final response = await apiProvider.get(endPoint: productsEndPoint, query: {
-      "category": params.category,
-      "price[gt]": params.minPrice,
-      "price[lt]": params.maxPrice,
-      "ratings[gt]": params.rate,
-      "keyword": params.keyword,
-    });
-    return ProductsModel.fromJson(response.data);
-  }
+
 
   @override
   Future<ResponseModel> sendReview(SendReviewParams params) async {
@@ -213,6 +205,45 @@ class ProductsDatasourceImpl implements ProductsDatasource {
         query: params,
         token:
         PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+    return ListShopProductsModel.fromJson(
+        responseProducts.data
+    );
+  }
+
+  @override
+  Future<ListShopProductsModel> searchProducts(SearchProductsUseCaseParams searchProductsUseCaseParams) async {
+
+    final params = <String, dynamic>{
+      'keyword': searchProductsUseCaseParams.keyWord,
+    };
+    final responseProducts = await apiProvider.get(
+        endPoint: searchProductsAuMall,
+        query: params,
+        token:
+        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+
+    print("searchProducts ${responseProducts.data.toString()}");
+
+    return ListShopProductsModel.fromJson(
+        responseProducts.data
+    );
+  }
+
+  @override
+  Future<ListShopProductsModel> getProductsByFilter(GetProductByFilterUseCaseParams getProductByFilterUseCaseParams) async {
+    final params = <String, dynamic>{
+      'status' : "1",
+      'min_price': getProductByFilterUseCaseParams.minPrice,
+      'max_price': getProductByFilterUseCaseParams.maxPrice,
+    };
+    final responseProducts = await apiProvider.get(
+        endPoint: allProductsAuMall,
+        query: params,
+        token:
+        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+
+    print("getProductsByFilter ${responseProducts.data.toString()}");
+
     return ListShopProductsModel.fromJson(
         responseProducts.data
     );

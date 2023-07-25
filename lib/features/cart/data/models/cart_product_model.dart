@@ -22,7 +22,7 @@ class CartProductModel{
   final int numOfReviews;
    @HiveField(7)
   bool isFavourite =false;
-     @HiveField(11)
+   @HiveField(8)
    num amount =1;
    CartProductModel({
     required this.id,
@@ -33,7 +33,7 @@ class CartProductModel{
     required this.productImage,
     required this.numOfReviews,
      this.isFavourite= false,
-this.amount=0,
+     this.amount=0,
   });
 
   

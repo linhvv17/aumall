@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
+import '../entities/address_entity.dart';
 import '../entities/profile_entity.dart';
 
 abstract class ProfileRepository {
@@ -7,6 +8,8 @@ abstract class ProfileRepository {
   Future<Either<Failure, ProfileEntity>> updateProfile(
       UpdateProfileParams updateProfileParams);
   Future<Either<Failure, ProfileEntity>> updatePassword(UpdatePassParnms params);
+  Future<Either<Failure, List<AddressEntity>>> getAddressList();
+  Future<Either<Failure, bool>> addAddress();
 }
 
 class UpdateProfileParams {
