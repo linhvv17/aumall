@@ -42,14 +42,19 @@ class AddressCard extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const Text(
-                      'Edit',
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: Color(0xFFDB3022),
-                        fontSize: 14,
-                        fontFamily: 'Metropolis',
-                        fontWeight: FontWeight.w500,
+                    TextButton(
+                      onPressed: (){
+
+                      },
+                      child: const Text(
+                        'Edit',
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          color: Color(0xFFDB3022),
+                          fontSize: 14,
+                          fontFamily: 'Metropolis',
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     )
                   ],
@@ -63,11 +68,11 @@ class AddressCard extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    CheckboxCustom(),
-                    Text(
+                    addressEntity.defaultAddress! ? const CheckboxCustom2():const CheckboxCustom(),
+                    const Text(
                       'Use as the shipping address',
                       style: TextStyle(
                         color: Color(0xFF222222),
@@ -94,10 +99,11 @@ class CheckboxCustom extends StatefulWidget {
 }
 
 class _CheckboxCustomState extends State<CheckboxCustom> {
-  bool isChecked = false;
-
+  bool isChecked  = false ;
   @override
   Widget build(BuildContext context) {
+
+
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
@@ -125,5 +131,54 @@ class _CheckboxCustomState extends State<CheckboxCustom> {
       ),
     )
       ;
+  }
+}
+
+
+
+
+
+
+
+class CheckboxCustom2 extends StatefulWidget {
+  const CheckboxCustom2({super.key});
+
+  @override
+  State<CheckboxCustom2> createState() => _CheckboxCustom2State();
+}
+
+class _CheckboxCustom2State extends State<CheckboxCustom2> {
+  bool isChecked  = true ;
+  @override
+  Widget build(BuildContext context) {
+
+
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return Colors.red;
+    }
+
+    return Transform.scale(
+      scale: 1.2,
+      child: Checkbox(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        checkColor: Colors.white,
+        fillColor: MaterialStateProperty.resolveWith(getColor),
+        value: isChecked,
+        onChanged: (bool? value) {
+          setState(() {
+            isChecked = value!;
+          });
+        },
+      ),
+    )
+    ;
   }
 }

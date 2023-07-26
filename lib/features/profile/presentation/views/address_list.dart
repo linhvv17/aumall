@@ -76,7 +76,9 @@ class _AddressListState extends State<AddressListView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.address);
+          Navigator.pushNamed(context, AppRoutes.address).then((value) => {
+          BlocProvider.of<ProfileBloc>(context).add(GetListAddress())
+          });
         },
         foregroundColor: Colors.white,
         backgroundColor: Colors.deepOrangeAccent,

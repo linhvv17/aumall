@@ -8,6 +8,7 @@ import 'package:aumall/features/home/domain/usecases/get_banner_usecase.dart';
 import 'package:aumall/features/home/domain/usecases/get_product_detail_usecase.dart';
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
+import 'package:aumall/features/profile/domain/usecases/add_address_usecase.dart';
 import 'package:aumall/features/shop/domain/usecases/change_category_usecase.dart';
 import 'package:aumall/features/shop/domain/usecases/get_products_shop_usecase.dart';
 import 'package:aumall/features/shop/domain/usecases/search_products_usecase.dart';
@@ -93,7 +94,7 @@ Future<void> init() async {
   injector.registerFactory(() => BottomNavigationBarBloc());
   injector.registerFactory(() => ProductsBloc(injector(), injector(), injector(), injector(), injector(), injector()));
   injector.registerFactory(() => ProductDetailBloc(injector()));
-  injector.registerFactory(() => ProfileBloc(injector(), injector(), injector()));
+  injector.registerFactory(() => ProfileBloc(injector(), injector(), injector(), injector()));
   injector.registerFactory(() => UpdatePasswordBloc(injector()));
   injector.registerFactory(() => SendReviewBloc(injector(), injector()));
   injector.registerFactory(() => FavouriteBloc(injector(), injector(), injector()));
@@ -124,9 +125,10 @@ Future<void> init() async {
   injector.registerLazySingleton(() => GetProductByFilterUseCase(injector()));
   injector.registerLazySingleton(() => GetUserDetails(injector()));
   injector.registerLazySingleton(() => GetAddressListUseCase(injector()));
+  injector.registerLazySingleton(() => AddAddressUseCase(injector()));
   injector.registerLazySingleton(() => UpdateUserDetailUsecase(injector()));
   injector.registerLazySingleton(() => UpdatePasswordUsecase(injector()));
-  injector.registerLazySingleton(() => GetReviewsUsecase(injector()));
+  injector.registerLazySingleton(() => GetReviewsUseCase(injector()));
   injector.registerLazySingleton(() => SendReviewUsecase(injector()));
   injector.registerLazySingleton(() => RequestAuthUsecase(injector()));
   injector.registerLazySingleton(() => RequestOrderUsecase(injector()));

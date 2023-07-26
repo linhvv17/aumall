@@ -8,10 +8,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:aumall/features/cart/presentation/bloc/cart_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
+import '../../../../core/utilities/routes.dart';
 import '../../../../generated/l10n.dart';
 import '../../../favorite/presentation/bloc/favourite_bloc.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shop/presentation/bloc/send_review_bloc.dart';
 import '../../../shop/presentation/widgets/review_card.dart';
 import '../../widgets/carousel.dart';
 import '../../widgets/product_item.dart';
@@ -374,10 +376,10 @@ class _ProductDetailsState extends State<ProductDetails>
                               style: Theme.of(context).textTheme.headline6),
                           TextButton(
                               onPressed: () {
-                                // Navigator.pushNamed(context, AppRoutes.productReviews,
-                                //     arguments: widget.product);
-                                // BlocProvider.of<SendReviewBloc>(context)
-                                //     .add(GetReviews(widget.product.id));
+                                Navigator.pushNamed(context, AppRoutes.productReviews,
+                                    arguments: widget.productSimpleEntity);
+                                BlocProvider.of<SendReviewBloc>(context)
+                                    .add(GetReviews(widget.productSimpleEntity.id.toString()));
                               },
                               child:  Text(S.current.seeMore))
                         ],

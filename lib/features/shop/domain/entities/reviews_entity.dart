@@ -1,17 +1,23 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../home/data/models/detail_product_response.dart';
+
 class GetReviewsEntity extends Equatable {
-  final bool success;
+  // final bool success;
   final List<GetReviewEntity>? reviews;
 
-  const GetReviewsEntity(this.success, this.reviews);
+  const GetReviewsEntity(
+      // this.success,
+      this.reviews);
 
   @override
-  List<Object?> get props => [success, reviews];
+  List<Object?> get props => [
+    // success,
+    reviews];
 }
 
 class GetReviewEntity extends Equatable {
-  final String? user;
+  final User? user;
   final String? name;
   final num? rating;
   final String? comment;

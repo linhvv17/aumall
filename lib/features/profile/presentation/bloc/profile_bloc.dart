@@ -1,4 +1,6 @@
 import 'package:aumall/features/profile/domain/entities/address_entity.dart';
+import 'package:aumall/features/profile/domain/repositories/profile_repository.dart';
+import 'package:aumall/features/profile/domain/usecases/add_address_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloudinary_sdk/cloudinary_sdk.dart';
 import 'package:equatable/equatable.dart';
@@ -21,10 +23,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final GetUserDetails getUserDetails;
   final UpdateUserDetailUsecase updateProfile;
   final GetAddressListUseCase getAddressListUseCase;
+  final AddAddressUseCase addAddressUseCase;
   CloudinaryResponse? response;
 
   ProfileBloc(
-      this.getUserDetails, this.updateProfile, this.getAddressListUseCase)
+      this.getUserDetails, this.updateProfile, this.getAddressListUseCase, this.addAddressUseCase)
       : super(ProfileInitial()) {
     on<GetProfile>((event, emit) async {
       emit(ProfileLoadingState());
@@ -91,13 +94,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<AddAddress>((event, emit) async {
       emit(ProfileLoadingState());
 
-      final failureOrSuccess = await getAddressListUseCase(NoParams());
+      final failureOrSuccess = await addAddressUseCase(
+        AddAddressParams(
+            event.name,
+            event.mobile,
+            event.address,
+            event.isDefault ? 1 : 0
+        )
+      );
       failureOrSuccess.fold((failure) {
         emit(ProfileErrorState(failure.message));
       }, (success) {
 
-        print("getAddressListUseCase success");
-        emit(GetAddressListLoadedState(success));
+        print("addAddressUseCase success");
+        emit(AddAddressSuccessState(success));
       });
     });
   }

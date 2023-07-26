@@ -1,8 +1,10 @@
 import '../../domain/entities/reviews_entity.dart';
 class GetReviewsModel extends GetReviewsEntity {
-  const GetReviewsModel(super.success, super.reviews);
+  const GetReviewsModel(
+      // super.success,
+      super.reviews);
   factory GetReviewsModel.fromJson(Map<String, dynamic> json) => GetReviewsModel(
-      json['success'],
+      // json['success'],
     List<GetReviewModel>.from(
             json['reviews'].map((x) => GetReviewModel.fromJson(x))),
     );
@@ -15,6 +17,6 @@ class GetReviewModel extends GetReviewEntity {
         json['name'] ?? "",
   json['rating']??0,
         json['comment'] ?? "",
-       DateTime.parse(json['createdAt']) 
+       DateTime.parse(json['created_at'])
       );
 }

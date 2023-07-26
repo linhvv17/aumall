@@ -47,3 +47,9 @@ class GetAddressListLoadedState extends ProfileState {
 
   const GetAddressListLoadedState(this.data);
 }
+
+class AddAddressSuccessState extends ProfileState {
+  final bool isSuccess;
+
+  const AddAddressSuccessState(this.isSuccess);
+}

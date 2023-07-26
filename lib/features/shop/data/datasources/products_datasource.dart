@@ -87,10 +87,15 @@ class ProductsDatasourceImpl implements ProductsDatasource {
 
   @override
   Future<GetReviewsModel> getReviews(GetReviewsParams params) async {
+
     final response = await apiProvider.get(
-      endPoint: "$reviewEndPoint?id=${params.productId}",
+      endPoint: "$productDetailAuMall/${params.productId}",
+      // endPoint: "$reviewEndPoint?id=${params.productId}",
+        token:
+        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? ''
     );
-    return GetReviewsModel.fromJson(response.data);
+
+    return GetReviewsModel.fromJson(response.data['data']);
   }
 
   @override

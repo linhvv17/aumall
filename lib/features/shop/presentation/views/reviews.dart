@@ -12,7 +12,7 @@ import '../../domain/entities/products_entity.dart';
 import '../widgets/reviewsheet.dart';
 
 class ReviewsView extends StatefulWidget {
-  final ProductEntity product;
+  final ProductAuMallEntity product;
   const ReviewsView({super.key, required this.product});
 
   @override
@@ -57,7 +57,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
                       child: ReviewSheet(
-                        id: widget.product.id,
+                        id: widget.product.id.toString(),
                       ),
                     );
                   });
@@ -94,7 +94,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                       children: [
                         Column(
                           children: [
-                            Text(widget.product.ratings.toStringAsFixed(1),
+                            Text(widget.product.ratingNumber!.toStringAsFixed(1),
                                 style: Theme.of(context).textTheme.headline6),
                             Text(
                                 '${state.data.reviews!.length.toString()} ratings',
@@ -106,7 +106,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                         ),
                         RatingBarIndicator(
                           itemSize: 50.0,
-                          rating: widget.product.ratings.toDouble(),
+                          rating: widget.product.ratingNumber!.toDouble(),
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,

@@ -56,7 +56,7 @@ Route<dynamic> onGenerate(RouteSettings settings) {
                 index: index,
               ));
     case AppRoutes.productReviews:
-      final product = settings.arguments as ProductEntity;
+      final product = settings.arguments as ProductAuMallEntity;
       return MaterialPageRoute(
           builder: (context) => ReviewsView(product: product));
     case AppRoutes.updateProfile:

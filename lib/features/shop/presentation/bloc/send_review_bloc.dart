@@ -9,13 +9,13 @@ part 'send_review_event.dart';
 part 'send_review_state.dart';
 
 class SendReviewBloc extends Bloc<SendReviewEvent, SendReviewState> {
-  final SendReviewUsecase sendReviewUsecase;
-  final GetReviewsUsecase getReviewsUsecase;
-  SendReviewBloc(this.sendReviewUsecase, this.getReviewsUsecase)
+  final SendReviewUsecase sendReviewUseCase;
+  final GetReviewsUseCase getReviewsUseCase;
+  SendReviewBloc(this.sendReviewUseCase, this.getReviewsUseCase)
       : super(SendReviewInitial()) {
     on<SendReview>((event, emit) async {
       emit(SendReviewLoadingState());
-      final failurOrSuccess = await sendReviewUsecase(
+      final failureOrSuccess = await sendReviewUseCase(
         SendReviewUsecaseParams(
           event.productId,
           event.comment,
@@ -23,7 +23,7 @@ class SendReviewBloc extends Bloc<SendReviewEvent, SendReviewState> {
         ),
       );
 
-      failurOrSuccess.fold(
+      failureOrSuccess.fold(
           (failure) => emit(SendReviewErrorState(failure.message)), (success) {
         emit(SendReviewLoadedState(success));
         add(GetReviews(event.productId));
@@ -33,9 +33,9 @@ class SendReviewBloc extends Bloc<SendReviewEvent, SendReviewState> {
     on<GetReviews>((event, emit) async {
       emit(GetAllReviewsLoadingState());
 
-      final failurOrSuccess =
-          await getReviewsUsecase(GetReviewsUsecaseParams(event.productId));
-      failurOrSuccess
+      final failureOrSuccess =
+          await getReviewsUseCase(GetReviewsUseCaseParams(event.productId));
+      failureOrSuccess
           .fold((failure) => emit(GetAllReviewsErrorState(failure.message)),
               (success) {
         emit(GetAllReviewsLoadedState(success));

@@ -11,7 +11,7 @@ abstract class ProfileDatasource {
   Future<ProfileModel> updateProfile(UpdateProfileParams params);
   Future<ProfileModel> updatePassword(UpdatePassParnms parnms);
   Future<List<AddressModel>> getAddressList();
-  Future<bool> addAddress();
+  Future<bool> addAddress(AddAddressParams addAddressParams);
 }
 
 class ProfileDataSourceImpl implements ProfileDatasource {
@@ -72,12 +72,17 @@ class ProfileDataSourceImpl implements ProfileDatasource {
   }
 
   @override
-  Future<bool> addAddress() async {
+  Future<bool> addAddress(AddAddressParams addAddressParams) async {
     final data = {
+      "name" : addAddressParams.name,
+      "mobile" : addAddressParams.mobile,
+      "address" : addAddressParams.address,
+      "address_default" : addAddressParams.addressDefault,
 
     };
     final response = await apiProvider.post(
       endPoint: shippingAddressAuMall,
+      data: data,
       token: PreferenceHelper.getDataFromSharedPreference(
           key: 'token') ?? '',
     );

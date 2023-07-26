@@ -7,12 +7,12 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/profile_entity.dart';
 import '../repositories/profile_repository.dart';
 
-class AddAddressUseCase implements BaseUsecase<bool, NoParams> {
+class AddAddressUseCase implements BaseUsecase<bool, AddAddressParams> {
   final ProfileRepository profileRepository;
 
   AddAddressUseCase(this.profileRepository);
   @override
-  Future<Either<Failure, bool>> call(NoParams params) async {
-    return await profileRepository.addAddress();
+  Future<Either<Failure, bool>> call(AddAddressParams addAddressParams) async {
+    return await profileRepository.addAddress(addAddressParams);
   }
 }

@@ -82,10 +82,10 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> addAddress() async {
+  Future<Either<Failure, bool>> addAddress(AddAddressParams addAddressParams) async {
     if (await networkInfo.isConnected) {
       try {
-        final data = await profileDatasource.addAddress();
+        final data = await profileDatasource.addAddress(addAddressParams);
         return right(data);
       } catch (error) {
         return left(ErrorHandler.handle(error).failure);

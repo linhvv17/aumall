@@ -9,7 +9,7 @@ abstract class ProfileRepository {
       UpdateProfileParams updateProfileParams);
   Future<Either<Failure, ProfileEntity>> updatePassword(UpdatePassParnms params);
   Future<Either<Failure, List<AddressEntity>>> getAddressList();
-  Future<Either<Failure, bool>> addAddress();
+  Future<Either<Failure, bool>> addAddress(AddAddressParams addAddressParams);
 }
 
 class UpdateProfileParams {
@@ -26,4 +26,18 @@ class UpdatePassParnms {
   final String confirmPassword;
 
   UpdatePassParnms(this.oldPassword, this.newPassword, this.confirmPassword);
+}
+
+class AddAddressParams {
+  final String name;
+  final String mobile;
+  final String address;
+  final int addressDefault;
+
+  AddAddressParams(
+      this.name,
+      this.mobile,
+      this.address,
+      this.addressDefault
+      );
 }
