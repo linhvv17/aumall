@@ -97,7 +97,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                             Text(widget.product.ratingNumber!.toStringAsFixed(1),
                                 style: Theme.of(context).textTheme.headline6),
                             Text(
-                                '${state.data.reviews!.length.toString()} ratings',
+                                '${state.listReviews.length.toString()} ratings',
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyLarge!
@@ -117,10 +117,10 @@ class _ReviewsViewState extends State<ReviewsView> {
                     ),
                     Expanded(
                         child: Center(
-                            child: state.data.reviews!.isEmpty
+                            child: state.listReviews.isEmpty
                                 ? Lottie.asset('assets/images/empty.json')
                                 : ListView.builder(
-                                    itemCount: state.data.reviews!.length,
+                                    itemCount: state.listReviews.length,
                                     itemBuilder: (context, index) {
                                       return Stack(children: [
                                         SizedBox(
@@ -144,8 +144,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(state.data
-                                                      .reviews![index].name!),
+                                                  Text(state.listReviews[index].userFullName),
                                                   Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -153,7 +152,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                                                     children: [
                                                       RatingBarIndicator(
                                                         itemSize: 20.0,
-                                                        rating: state.data.reviews![index].rating!.toDouble(),
+                                                        rating: state.listReviews[index].rating!.toDouble(),
                                                             
                                                         itemBuilder:
                                                             (context, _) =>
@@ -165,11 +164,11 @@ class _ReviewsViewState extends State<ReviewsView> {
                                                             Axis.horizontal,
                                                       ),
                                                       Text(
-                                                        DateFormat.yMMMEd()
-                                                            .format(state
-                                                                .data
-                                                                .reviews![index]
-                                                                .createdAt!),
+                                                        // DateFormat.yMMMEd()
+                                                        //     .format(
+                                                        //     state.listReviews[index].createdAt!
+                                                        // ),
+                                                        state.listReviews[index].createdAt!,
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .bodyLarge!
@@ -188,7 +187,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                                                       maxLines: 7,
                                                       overflow:
                                                           TextOverflow.ellipsis,
-                                                      state.data.reviews![index]
+                                                      state.listReviews[index]
                                                           .comment!,
                                                       textAlign:
                                                           TextAlign.justify,

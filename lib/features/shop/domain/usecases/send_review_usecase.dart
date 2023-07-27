@@ -4,20 +4,20 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/response_entity.dart';
 import '../repositories/product_repository.dart';
 
-class SendReviewUsecase extends BaseUsecase<ResponseEntity, SendReviewUsecaseParams> {
+class SendReviewUseCase extends BaseUsecase<ResponseEntity, SendReviewUseCaseParams> {
   final ProductRepository productRepository;
 
-  SendReviewUsecase(this.productRepository);
+  SendReviewUseCase(this.productRepository);
   @override
-  Future<Either<Failure, ResponseEntity>> call(SendReviewUsecaseParams params) async {
+  Future<Either<Failure, ResponseEntity>> call(SendReviewUseCaseParams params) async {
     return await productRepository.sendReview(SendReviewParams(params.productId, params.comment, params.rating));
   }
 }
 
-class SendReviewUsecaseParams {
+class SendReviewUseCaseParams {
   final String productId;
   final String comment;
   final num rating;
 
-  SendReviewUsecaseParams(this.productId, this.comment, this.rating);
+  SendReviewUseCaseParams(this.productId, this.comment, this.rating);
 }

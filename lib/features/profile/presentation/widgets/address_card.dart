@@ -60,6 +60,15 @@ class AddressCard extends StatelessWidget {
                   ],
                 ),
                 Text(
+                  addressEntity.mobile!,
+                  style: const TextStyle(
+                    color: Color(0xFF222222),
+                    fontSize: 14,
+                    fontFamily: 'Metropolis',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Text(
                   addressEntity.address!,
                   style: const TextStyle(
                     color: Color(0xFF222222),

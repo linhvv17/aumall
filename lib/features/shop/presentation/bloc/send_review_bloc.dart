@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
 import 'package:aumall/features/shop/domain/usecases/get_all_reviews.dart';
+import '../../../home/data/models/detail_product_response.dart';
 import '../../domain/entities/response_entity.dart';
 import '../../domain/usecases/send_review_usecase.dart';
 
@@ -9,14 +10,14 @@ part 'send_review_event.dart';
 part 'send_review_state.dart';
 
 class SendReviewBloc extends Bloc<SendReviewEvent, SendReviewState> {
-  final SendReviewUsecase sendReviewUseCase;
+  final SendReviewUseCase sendReviewUseCase;
   final GetReviewsUseCase getReviewsUseCase;
   SendReviewBloc(this.sendReviewUseCase, this.getReviewsUseCase)
       : super(SendReviewInitial()) {
     on<SendReview>((event, emit) async {
       emit(SendReviewLoadingState());
       final failureOrSuccess = await sendReviewUseCase(
-        SendReviewUsecaseParams(
+        SendReviewUseCaseParams(
           event.productId,
           event.comment,
           event.rating,
@@ -38,7 +39,7 @@ class SendReviewBloc extends Bloc<SendReviewEvent, SendReviewState> {
       failureOrSuccess
           .fold((failure) => emit(GetAllReviewsErrorState(failure.message)),
               (success) {
-        emit(GetAllReviewsLoadedState(success));
+        emit(GetAllReviewsLoadedState(success.productDetailData!.reviews));
       });
     });
   }

@@ -5,6 +5,7 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
+import '../widgets/address_card.dart';
 
 class AddressView extends StatefulWidget {
   const AddressView({super.key});
@@ -20,6 +21,8 @@ class _AddressViewState extends State<AddressView>{
   final TextEditingController tfProvince = TextEditingController();
   final TextEditingController tfCity = TextEditingController();
   final TextEditingController tfDefault = TextEditingController();
+
+  bool isChecked  = false ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +40,7 @@ class _AddressViewState extends State<AddressView>{
             // do stuff here based on BlocA's state
             if(state is AddAddressSuccessState){
               showSnackbar("Thêm địa chỉ giao hàng thành công !!!!!", context, Colors.red);
+              Navigator.of(context).pop();
             }
           },
           child: Padding(
@@ -194,34 +198,31 @@ class _AddressViewState extends State<AddressView>{
                       fillColor: Colors.white),
                 ),
 
-                //Country
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                  child: Text(
-                    "Default",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade500),
-                  ),
-                ),
-                TextField(
-                  controller: tfDefault,
-                  decoration: InputDecoration(
-                      hintText: S.current.countryHint,
-                      hintStyle: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey.shade500),
-                      border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide:
-                        BorderSide(color: Colors.white, width: 1.5),
+
+
+                Row(
+                  children: [
+                    Checkbox(
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      checkColor: Colors.white,
+                      fillColor: MaterialStateProperty.all(Colors.deepOrangeAccent),
+                      value: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      },
+                    ),
+                    const Text(
+                      'Đặt làm địa chỉ giao hàng mặc định',
+                      style: TextStyle(
+                        color: Color(0xFF222222),
+                        fontSize: 14,
+                        fontFamily: 'Metropolis',
+                        fontWeight: FontWeight.w400,
                       ),
-                      filled: true,
-                      fillColor: Colors.white),
+                    )
+                  ],
                 ),
 
 
@@ -241,7 +242,7 @@ class _AddressViewState extends State<AddressView>{
                               tfName.value.text,
                               tfMobile.value.text,
                             "${tfAddress.value.text} - ${tfProvince.value.text} - ${tfCity.value.text}",
-                              true,
+                              isChecked,
                           ));
 
                         },

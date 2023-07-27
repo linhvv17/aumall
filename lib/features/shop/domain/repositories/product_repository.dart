@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
 import '../../../../core/error/failure.dart';
+import '../../../home/domain/entities/product_detail_entity.dart';
 import '../entities/categories_entity.dart';
 import '../entities/list_product_shop_entity.dart';
 import '../entities/products_entity.dart';
@@ -19,7 +20,7 @@ abstract class ProductRepository {
   Future<Either<Failure, ListProductShopEntity>> getProductByFilter(
       GetProductByFilterUseCaseParams params);
   Future<Either<Failure, ResponseEntity>> sendReview(SendReviewParams params);
-  Future<Either<Failure, GetReviewsEntity>> getReviews(GetReviewsParams params);
+  Future<Either<Failure, ProductDetailEntity>> getReviews(GetReviewsParams params);
 
   Future<Either<Failure, ShopDataDefaultEntity>> getShopDataDefault();
   Future<Either<Failure, ListProductShopEntity>> changeCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams);

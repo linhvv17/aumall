@@ -1,3 +1,4 @@
+import 'package:aumall/features/home/domain/entities/product_detail_entity.dart';
 import 'package:aumall/features/shop/domain/entities/categories_entity.dart';
 import 'package:aumall/features/shop/domain/entities/shop_data_default_entity.dart';
 import 'package:aumall/features/shop/domain/usecases/get_specific_product.dart';
@@ -53,7 +54,7 @@ class ProductsRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, GetReviewsEntity>> getReviews(
+  Future<Either<Failure, ProductDetailEntity>> getReviews(
       GetReviewsParams params) async {
     if (await networkInfo.isConnected) {
       try {

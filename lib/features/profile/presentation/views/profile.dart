@@ -124,7 +124,9 @@ class ProfileView extends StatelessWidget {
                         subtitle: S.current.shippingAddressesDescription,
                         ontab: () {
                           BlocProvider.of<OrderBloc>(context).add(GetAllOrders());
-                          Navigator.pushNamed(context, AppRoutes.addressList);
+                          Navigator.pushNamed(context, AppRoutes.addressList).then((value) => {
+                          BlocProvider.of<ProfileBloc>(context).add(GetProfile())
+                          });
                         },
                       ),
                       MYListTile(
