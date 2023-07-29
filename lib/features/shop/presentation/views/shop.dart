@@ -236,7 +236,9 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                       ),
 
                       Expanded(
-                        child: GridView.builder(
+                        child:
+                            newState is ProductsLoadingState ? const Center(child: CircularProgressIndicator()) :
+                        GridView.builder(
                           padding: EdgeInsets.zero,
                           itemCount: newState
                               .listProductAuMall.listProductAuMall.length,

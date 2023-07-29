@@ -8,13 +8,13 @@ part 'update_password_state.dart';
 
 class UpdatePasswordBloc
     extends Bloc<UpdatePasswordEvent, UpdatePasswordState> {
-  final UpdatePasswordUsecase updatePasswordUsecase;
-  UpdatePasswordBloc(this.updatePasswordUsecase)
+  final UpdatePasswordUseCase updatePasswordUseCase;
+  UpdatePasswordBloc(this.updatePasswordUseCase)
       : super(UpdatePasswordInitial()) {
     on<UserUpdatePassword>((event, emit) async {
       emit(UpdatePasswordLoading());
-      final failureOrSuccess = await updatePasswordUsecase(
-          UpdatePasswordUsecaseParams(
+      final failureOrSuccess = await updatePasswordUseCase(
+          UpdatePasswordUseCaseParams(
               event.oldPassword, event.newPassword, event.confirmPassword));
       failureOrSuccess.fold(
           (failure) => emit(UpdatePasswordError(failure.message)),

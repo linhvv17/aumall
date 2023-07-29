@@ -233,7 +233,7 @@ class MadeIn {
   MadeIn.fromJson(Map<String, dynamic> json){
     id = json['id'];
     name = json['name'];
-    image = json['image'] ?? '';
+    image = json['image'].toString() ?? '';
     imageUrl = json['image_url'];
   }
 
@@ -268,23 +268,61 @@ class Category {
   }
 }
 
+// class User {
+//   User({
+//     required this.id,
+//     required this.name,
+//     required this.fullName,
+//     required this.storeName,
+//   });
+//   late final int id;
+//   late final String name;
+//   late final String fullName;
+//   late final String storeName;
+//
+//   User.fromJson(Map<String, dynamic> json){
+//     id = json['id'];
+//     name = json['name'];
+//     fullName = json['full_name'];
+//     storeName = json['store_name'] ?? '';//
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final _data = <String, dynamic>{};
+//     _data['id'] = id;
+//     _data['name'] = name;
+//     _data['full_name'] = fullName;
+//     _data['store_name'] = storeName;
+//     return _data;
+//   }
+// }
+
 class User {
   User({
     required this.id,
     required this.name,
     required this.fullName,
     required this.storeName,
+    required this.shopName,
+    required this.avatarUrl,
+    required this.shop,
   });
   late final int id;
-  late final String name;
-  late final String fullName;
-  late final String storeName;
+  late final String? name;
+  late final String? fullName;
+  late final String? storeName;
+  late final String? shopName;
+  late final String? avatarUrl;
+  late final Shop? shop;
 
   User.fromJson(Map<String, dynamic> json){
     id = json['id'];
-    name = json['name'];
-    fullName = json['full_name'];
-    storeName = json['store_name'] ?? '';//
+    name = json['name'] ?? "";
+    fullName = json['full_name'] ?? "";
+    storeName = json['store_name'].toString() ?? "";
+    shopName = json['shop_name'].toString() ?? "";
+    avatarUrl = json['avatar_url'] ?? "";
+    shop = json['shop'] != null ? Shop.fromJson(json['shop']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -293,9 +331,82 @@ class User {
     _data['name'] = name;
     _data['full_name'] = fullName;
     _data['store_name'] = storeName;
+    _data['shop_name'] = shopName;
+    _data['avatar_url'] = avatarUrl;
+    _data['shop'] = shop !=null ? shop?.toJson() : null;
     return _data;
   }
 }
+
+class Shop {
+  Shop({
+    required this.id,
+    required this.userId,
+    required this.name,
+    required this.address,
+    required this.contact,
+    required this.description,
+    required this.banner,
+    required this.image,
+    required this.note,
+    required this.status,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.bannerUrl,
+    required this.imageUrl,
+  });
+  late final int id;
+  late final int userId;
+  late final String? name;
+  late final String? address;
+  late final String ?contact;
+  late final String? description;
+  late final String? banner;
+  late final String? image;
+  late final String? note;
+  late final int status;
+  late final String? createdAt;
+  late final String? updatedAt;
+  late final String? bannerUrl;
+  late final String? imageUrl;
+
+  Shop.fromJson(Map<String, dynamic> json){
+    id = json['id'];
+    userId = json['user_id'];
+    name = json['name'] ?? "";
+    address = json['address'] ?? "";
+    contact = json['contact'] ?? "";
+    description = json['description'] ?? "";
+    banner = json['banner'] ?? "";
+    image = json['image'] ?? "";
+    note = json['note'].toString() ?? "";
+    status = json['status'];
+    createdAt = json['created_at'] ?? "";
+    updatedAt = json['updated_at'] ?? "";
+    bannerUrl = json['banner_url'] ?? "";
+    imageUrl = json['image_url'] ?? "";
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['user_id'] = userId;
+    data['name'] = name;
+    data['address'] = address;
+    data['contact'] = contact;
+    data['description'] = description;
+    data['banner'] = banner;
+    data['image'] = image;
+    data['note'] = note;
+    data['status'] = status;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['banner_url'] = bannerUrl;
+    data['image_url'] = imageUrl;
+    return data;
+  }
+}
+
 
 class Reviews {
   Reviews({
@@ -315,7 +426,7 @@ class Reviews {
   late final int rating;
   late final String createdAt;
   late final String userFullName;
-  late final User user;
+  late final User? user;
 
   Reviews.fromJson(Map<String, dynamic> json){
     id = json['id'];
@@ -324,8 +435,8 @@ class Reviews {
     comment = json['comment'];
     rating = json['rating'];
     createdAt = json['created_at'];
-    userFullName = json['user_full_name'];
-    user = User.fromJson(json['user']);
+    userFullName = json['user_full_name'].toString();
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -337,7 +448,7 @@ class Reviews {
     _data['rating'] = rating;
     _data['created_at'] = createdAt;
     _data['user_full_name'] = userFullName;
-    _data['user'] = user.toJson();
+    _data['user'] = user?.toJson();
     return _data;
   }
 }

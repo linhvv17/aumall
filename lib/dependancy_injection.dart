@@ -127,7 +127,7 @@ Future<void> init() async {
   injector.registerLazySingleton(() => GetAddressListUseCase(injector()));
   injector.registerLazySingleton(() => AddAddressUseCase(injector()));
   injector.registerLazySingleton(() => UpdateUserDetailUsecase(injector()));
-  injector.registerLazySingleton(() => UpdatePasswordUsecase(injector()));
+  injector.registerLazySingleton(() => UpdatePasswordUseCase(injector()));
   injector.registerLazySingleton(() => GetReviewsUseCase(injector()));
   injector.registerLazySingleton(() => SendReviewUseCase(injector()));
   injector.registerLazySingleton(() => RequestAuthUsecase(injector()));

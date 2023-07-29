@@ -70,6 +70,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
             print('ChangeCategory ChangCategorySuccessState $current');
             // emit(ChangCategorySuccessState(success));
             emit(ProductsLoadingState());
+
             emit(const ProductsStateDataLoaded()
                 .copyWith(
               categoriesEntity: categoriesEntityModel,

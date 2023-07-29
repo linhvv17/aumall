@@ -40,3 +40,4 @@ const String favoriteProductsAuMall  = "/product-wish-list";
 const String searchProductsAuMall  = "/search";
 const String shippingAddressAuMall  = "/shipping-address";
 const String sendReviewAuMall  = "/product-review";
+const String updatePasswordAuMall = '/users/password/update';

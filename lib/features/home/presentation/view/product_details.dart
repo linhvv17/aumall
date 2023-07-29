@@ -345,6 +345,97 @@ class _ProductDetailsState extends State<ProductDetails>
                         ],
                       ),
                     ),
+
+                    //shop info
+                    Container(
+                      // width: 350,
+                      // height: 65,
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 49,
+                                height: 49,
+                                decoration: ShapeDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(productDetailData.user.avatarUrl.toString()),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    productDetailData.user.shopName.toString(),
+                                    style: const TextStyle(
+                                      color: Color(0xFF393F42),
+                                      fontSize: 16,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 3),
+                                  const Text(
+                                    'online 12 mins ago',
+                                    style: TextStyle(
+                                      color: Color(0xFF939393),
+                                      fontSize: 12,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(width: 77),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(width: 0.50, color: Color(0xFFD9D9D9)),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Follow',
+                                  style: TextStyle(
+                                    color: Color(0xFF393F42),
+                                    fontSize: 14,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+
+
+
                     //description
                     Padding(
                       padding:

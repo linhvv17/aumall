@@ -5,23 +5,23 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/profile_entity.dart';
 import '../repositories/profile_repository.dart';
 
-class UpdatePasswordUsecase
-    extends BaseUsecase<ProfileEntity, UpdatePasswordUsecaseParams> {
+class UpdatePasswordUseCase
+    extends BaseUsecase<ProfileEntity, UpdatePasswordUseCaseParams> {
   final ProfileRepository profileRepository;
 
-  UpdatePasswordUsecase(this.profileRepository);
+  UpdatePasswordUseCase(this.profileRepository);
   @override
   Future<Either<Failure, ProfileEntity>> call(
-      UpdatePasswordUsecaseParams params) async {
+      UpdatePasswordUseCaseParams params) async {
     return await profileRepository.updatePassword(UpdatePassParnms(params.oldPassword, params.newPassword, params.confirmPassword));
   }
 }
 
-class UpdatePasswordUsecaseParams {
+class UpdatePasswordUseCaseParams {
   final String oldPassword;
   final String newPassword;
   final String confirmPassword;
 
-  UpdatePasswordUsecaseParams(
+  UpdatePasswordUseCaseParams(
       this.oldPassword, this.newPassword, this.confirmPassword);
 }
