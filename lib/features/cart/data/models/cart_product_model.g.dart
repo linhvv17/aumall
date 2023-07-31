@@ -25,7 +25,7 @@ class CartProductModelAdapter extends TypeAdapter<CartProductModel> {
       productImage: fields[5] as String,
       numOfReviews: fields[6] as int,
       isFavourite: fields[7] as bool,
-      amount: fields[11] as num,
+      amount: fields[8] as num,
     );
   }
 
@@ -49,7 +49,7 @@ class CartProductModelAdapter extends TypeAdapter<CartProductModel> {
       ..write(obj.numOfReviews)
       ..writeByte(7)
       ..write(obj.isFavourite)
-      ..writeByte(11)
+      ..writeByte(8)
       ..write(obj.amount);
   }
 

@@ -24,11 +24,17 @@ class UserEntity extends Equatable {
     @HiveField(2)
   final String email;
     @HiveField(3)
-  final AvatarEntity ?avtar;
-  const UserEntity(this.id, this.name, this.email, this.avtar);
+  final String ?avatar;
+    @HiveField(4)
+    final String ?phone;
+    @HiveField(5)
+    final String ?dateOfBirth;
+    @HiveField(6)
+    final String ?address;
+  const UserEntity(this.id, this.name, this.email, this.avatar, this.phone, this.dateOfBirth, this.address);
 
   @override
-  List<Object?> get props => [id, name, email, avtar];
+  List<Object?> get props => [id, name, email, avatar];
 }
 @HiveType(typeId: 3)
 class AvatarEntity extends Equatable {

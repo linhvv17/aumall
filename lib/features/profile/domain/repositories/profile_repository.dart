@@ -13,11 +13,14 @@ abstract class ProfileRepository {
 }
 
 class UpdateProfileParams {
+  final String fullName;
   final String name;
-  final String email;
+  final String mobile;
   final String avatar;
+  final String dateOfBirth;
+  final String address;
 
-  UpdateProfileParams(this.name, this.email, this.avatar);
+  UpdateProfileParams(this.name, this.mobile, this.avatar, this.fullName, this.dateOfBirth, this.address);
 }
 
 class UpdatePassParnms {

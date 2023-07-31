@@ -67,11 +67,11 @@ class ProfileView extends StatelessWidget {
                       const SizedBox(
                         height: 25,
                       ),
-                      state.data.user!.avtar != null
+                      state.data.user!.avatar != null
                           ? CircleAvatar(
                               radius: 50,
                               backgroundImage:
-                                  NetworkImage(state.data.user!.avtar!.url),
+                                  NetworkImage(state.data.user!.avatar.toString()),
                             )
                           : const CircleAvatar(
                               radius: 50,

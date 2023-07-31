@@ -64,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "countryHint": MessageLookupByLibrary.simpleMessage("Việt Nam"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Địa chỉ hiện tại"),
+        "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "defaultError": MessageLookupByLibrary.simpleMessage(
             "Lỗi trong quá trình tải dữ liêụ"),
         "deletefav": MessageLookupByLibrary.simpleMessage(

@@ -22,6 +22,9 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController mobileController = TextEditingController();
+  final TextEditingController dateOfBirthController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
   @override
   void initState() {
     emailController.text = widget.user.email;
@@ -112,10 +115,10 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                           CircleAvatar(
                             radius: 50,
                             backgroundImage: NetworkImage(state
-                                        .data.user!.avtar ==
+                                        .data.user!.avatar ==
                                     null
                                 ? 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png'
-                                : state.data.user!.avtar!.url),
+                                : state.data.user!.avatar.toString()),
                           ),
                           Positioned(
                             left: 2,
@@ -150,10 +153,10 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                           ),
                           CircleAvatar(
                             radius: 50,
-                            backgroundImage: NetworkImage(widget.user.avtar ==
+                            backgroundImage: NetworkImage(widget.user.avatar ==
                                     null
                                 ? 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png'
-                                : widget.user.avtar!.url),
+                                : widget.user.avatar.toString()),
                           ),
                           Positioned(
                             left: 2,
@@ -184,6 +187,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                     },
                   ),
                   const SizedBox(height: 20),
+                  //name
                   MainTFF(
                     labelText: S.current.name,
                     hintText: widget.user.name,
@@ -202,6 +206,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                   const SizedBox(
                     height: 10,
                   ),
+                  //email
                   MainTFF(
                       labelText: S.current.email,
                       hintText: widget.user.email,
@@ -219,6 +224,65 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                       isPassword: false,
                       borderRadius: 16,
                       inputType: TextInputType.emailAddress),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  //mobile
+                  MainTFF(
+                    labelText: S.current.phone,
+                    hintText: widget.user.phone,
+                    controller: mobileController,
+                    validate: (value) {
+                      if (value!.isEmpty) {
+                        return S.current.nameEmpty;
+                      }
+
+                      return null;
+                    },
+                    borderRadius: 16,
+                    inputType: TextInputType.text,
+                    isPassword: false,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  //date of birth
+                  MainTFF(
+                      labelText: S.current.dateOfBirth,
+                      hintText: widget.user.dateOfBirth,
+                      controller: dateOfBirthController,
+                      validate: (value) {
+                        if (value!.isEmpty) {
+                          return S.current.emptyEmail;
+                        } else {
+                          if (!value.contains('@')) {
+                            return S.current.invalidEmail;
+                          }
+                        }
+                        return null;
+                      },
+                      isPassword: false,
+                      borderRadius: 16,
+                      inputType: TextInputType.emailAddress),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  //address
+                  MainTFF(
+                    labelText: S.current.address,
+                    hintText: widget.user.address,
+                    controller: addressController,
+                    validate: (value) {
+                      if (value!.isEmpty) {
+                        return S.current.nameEmpty;
+                      }
+
+                      return null;
+                    },
+                    borderRadius: 16,
+                    inputType: TextInputType.text,
+                    isPassword: false,
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
@@ -242,10 +306,14 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                                   BlocProvider.of<ProfileBloc>(context).add(
                                       UpdataProfileEvent(
                                           nameController.text,
-                                          emailController.text,
                                           BlocProvider.of<ProfileBloc>(context)
                                               .response!
-                                              .secureUrl!));
+                                              .secureUrl!,
+                                        nameController.text,
+                                        mobileController.text,
+                                        dateOfBirthController.text,
+                                        addressController.text,
+                                      ));
                                 }
                               });
                     },

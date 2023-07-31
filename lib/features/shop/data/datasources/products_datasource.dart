@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:aumall/features/home/domain/entities/product_detail_entity.dart';
 import 'package:aumall/features/shop/data/models/categories_model.dart';
 import 'package:aumall/features/shop/data/models/reviews_model.dart';
+import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
 import 'package:aumall/features/shop/domain/usecases/get_specific_product.dart';
 import 'package:flutter/services.dart';
 import '../../../../core/local/shared_preference.dart';
@@ -22,7 +23,7 @@ abstract class ProductsDatasource {
   Future<ProductsModel> getAllProducts();
   Future<ProductsModel> getAllProductsAuMall();
   Future<ResponseModel> sendReview(SendReviewParams params);
-  Future<ProductDetailEntity> getReviews(GetReviewsParams params);
+  Future<GetReviewsEntity> getReviews(GetReviewsParams params);
   Future<ShopDataDefaultModel> getShopDataDefault();
   Future<ListShopProductsModel> changCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
   Future<ListShopProductsModel> searchProducts(SearchProductsUseCaseParams searchProductsUseCaseParams);
@@ -88,16 +89,20 @@ class ProductsDatasourceImpl implements ProductsDatasource {
   }
 
   @override
-  Future<ProductDetailEntity> getReviews(GetReviewsParams params) async {
+  Future<GetReviewsEntity> getReviews(GetReviewsParams params) async {
 
     final response = await apiProvider.get(
-      endPoint: "$productDetailAuMall/${params.productId}",
+      // endPoint: "$productDetailAuMall/${params.productId}",
+      endPoint: reviewAuMall,
+        query: <String, dynamic> {
+          'product_id': params.productId ,
+        },
       // endPoint: "$reviewEndPoint?id=${params.productId}",
         token:
         PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? ''
     );
 
-    return ProductDetailModel.fromJson(
+    return GetReviewsModel.fromJson(
         response.data
     );
   }

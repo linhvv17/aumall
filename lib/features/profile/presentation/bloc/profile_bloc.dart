@@ -44,7 +44,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<UpdataProfileEvent>((event, emit) async {
       emit(UpdateProfileLoadingState());
       final failureOrSuccess = await updateProfile(
-          UpdateProfileUsecaseParams(event.name, event.email, event.avatar));
+          UpdateProfileUsecaseParams(
+              event.fullName,
+              event.name,
+              event.mobile,
+              event.avatar,
+              event.dateOfBirth,
+              event.address
+          ));
       failureOrSuccess
           .fold((failure) => emit(UpdateProfileErrorState(failure.message)),
               (success) {

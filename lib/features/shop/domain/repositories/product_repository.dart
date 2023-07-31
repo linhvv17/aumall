@@ -20,7 +20,7 @@ abstract class ProductRepository {
   Future<Either<Failure, ListProductShopEntity>> getProductByFilter(
       GetProductByFilterUseCaseParams params);
   Future<Either<Failure, ResponseEntity>> sendReview(SendReviewParams params);
-  Future<Either<Failure, ProductDetailEntity>> getReviews(GetReviewsParams params);
+  Future<Either<Failure, GetReviewsEntity>> getReviews(GetReviewsParams params);
 
   Future<Either<Failure, ShopDataDefaultEntity>> getShopDataDefault();
   Future<Either<Failure, ListProductShopEntity>> changeCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams);

@@ -30,12 +30,16 @@ class ProfileDataSourceImpl implements ProfileDatasource {
 
   @override
   Future<ProfileModel> updateProfile(UpdateProfileParams params) async {
-    final response = await apiProvider.put(
-      endPoint: updateProfileEndPoint,
+
+    final response = await apiProvider.post(
+      endPoint: updateProfileAuMall,
       data: {
-        "avatar": params.avatar,
+        "full_name": params.avatar,
         "name": params.name,
-        "email": params.email,
+        "mobile": params.mobile,
+        "avatar": params.avatar,
+        "date_or_birth": params.dateOfBirth,
+        "address": params.address,
       },
       token: PreferenceHelper.getDataFromSharedPreference(
                             key: 'token') ?? '',

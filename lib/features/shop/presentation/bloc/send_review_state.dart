@@ -26,7 +26,7 @@ class SendReviewErrorState extends SendReviewState {
 class GetAllReviewsLoadingState extends SendReviewState {}
 
 class GetAllReviewsLoadedState extends SendReviewState {
-  final List<Reviews> listReviews;
+  final List<GetReviewEntity> listReviews;
 
   const GetAllReviewsLoadedState(this.listReviews);
 }

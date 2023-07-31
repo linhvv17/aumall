@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:aumall/features/shop/presentation/bloc/send_review_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
-import '../../../../core/utilities/strings.dart';
 import '../../../../generated/l10n.dart';
 import '../../domain/entities/products_entity.dart';
 import '../widgets/reviewsheet.dart';
@@ -144,7 +142,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(state.listReviews[index].userFullName),
+                                                  Text(state.listReviews[index].name.toString()),
                                                   Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -168,7 +166,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                                                         //     .format(
                                                         //     state.listReviews[index].createdAt!
                                                         // ),
-                                                        state.listReviews[index].createdAt!,
+                                                        state.listReviews[index].createdAt!.toString(),
                                                         style: Theme.of(context)
                                                             .textTheme
                                                             .bodyLarge!

@@ -19,11 +19,14 @@ class AddAddress extends ProfileEvent {
 }
 
 class UpdataProfileEvent extends ProfileEvent {
+  final String fullName;
   final String name;
-  final String email;
+  final String mobile;
   final String avatar;
+  final String dateOfBirth;
+  final String address;
 
-  const UpdataProfileEvent(this.name, this.email, this.avatar);}
+  const UpdataProfileEvent(this.name, this.avatar, this.fullName, this.mobile, this.dateOfBirth, this.address);}
 
 class UploadImage extends ProfileEvent {
 

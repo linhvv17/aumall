@@ -6,12 +6,12 @@ import '../../../home/domain/entities/product_detail_entity.dart';
 import '../repositories/product_repository.dart';
 
 class GetReviewsUseCase
-    extends BaseUsecase<ProductDetailEntity, GetReviewsUseCaseParams> {
+    extends BaseUsecase<GetReviewsEntity, GetReviewsUseCaseParams> {
   final ProductRepository productRepository;
 
   GetReviewsUseCase(this.productRepository);
   @override
-  Future<Either<Failure, ProductDetailEntity>> call(
+  Future<Either<Failure, GetReviewsEntity>> call(
       GetReviewsUseCaseParams params) async {
     return await productRepository.getReviews(GetReviewsParams(params.productId));
   }

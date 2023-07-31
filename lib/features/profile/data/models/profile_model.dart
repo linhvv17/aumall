@@ -13,12 +13,17 @@ class ProfileModel extends ProfileEntity {
 }
 
 class UserModel extends UserEntity {
-  const UserModel(super.id, super.name, super.email, super.avtar);
+  const UserModel(super.id, super.name, super.email, super.avatar, super.phone, super.dateOfBirth, super.address);
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       json['id'].toString(),
       json['name'],
       json['email'],
-      json['avatar'] != null ? AvatarModel.fromJson(json['avatar']) : null);
+      json['avatar'],
+      json['mobile'],
+      json['birthday'],
+      json['address']
+          // != null ? AvatarModel.fromJson(json['avatar']) : null
+  );
 }
 
 class AvatarModel extends AvatarEntity {

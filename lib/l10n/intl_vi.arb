@@ -182,5 +182,6 @@
   "country" : "Quốc gia",
   "countryHint" : "Việt Nam",
   "notYetReview" : "0 đánh giá",
-  "goToCart" : "Đi đến giỏ hàng"
+  "goToCart" : "Đi đến giỏ hàng",
+  "dateOfBirth" : "Ngày sinh"
 }

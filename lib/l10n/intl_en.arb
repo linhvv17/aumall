@@ -182,5 +182,6 @@
   "country" : "Country",
   "countryHint" : "United States",
   "notYetReview" : "No reviews yet",
-  "goToCart" : "Go to cart"
+  "goToCart" : "Go to cart",
+  "dateOfBirth" : "Date of birth"
 }

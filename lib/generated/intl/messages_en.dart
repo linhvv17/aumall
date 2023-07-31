@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "countryHint": MessageLookupByLibrary.simpleMessage("United States"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current Location"),
+        "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of birth"),
         "defaultError":
             MessageLookupByLibrary.simpleMessage("Error In Fetching Data"),
         "deletefav": MessageLookupByLibrary.simpleMessage(

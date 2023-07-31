@@ -39,7 +39,7 @@ class SendReviewBloc extends Bloc<SendReviewEvent, SendReviewState> {
       failureOrSuccess
           .fold((failure) => emit(GetAllReviewsErrorState(failure.message)),
               (success) {
-        emit(GetAllReviewsLoadedState(success.productDetailData!.reviews));
+        emit(GetAllReviewsLoadedState(success.reviews));
       });
     });
   }

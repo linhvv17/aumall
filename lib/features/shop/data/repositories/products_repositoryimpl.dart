@@ -54,7 +54,7 @@ class ProductsRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, ProductDetailEntity>> getReviews(
+  Future<Either<Failure, GetReviewsEntity>> getReviews(
       GetReviewsParams params) async {
     if (await networkInfo.isConnected) {
       try {
