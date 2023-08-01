@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:aumall/features/profile/data/models/address_model.dart';
+import 'package:dio/dio.dart';
 
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/network/api_provider.dart';
@@ -31,16 +34,35 @@ class ProfileDataSourceImpl implements ProfileDatasource {
   @override
   Future<ProfileModel> updateProfile(UpdateProfileParams params) async {
 
+    // FormData formData = FormData.fromMap({
+    //   "image": await MultipartFile.fromFile(params.avatar.path,
+    //       filename: params.avatar.path, ),
+    //   "type": "image/png"
+    // });
+     File file = File(params.avatar.path);
+    String fileName = file.path.split('/').last;
+    FormData formData = FormData.fromMap({
+      "full_name": params.name,
+      "name": params.name,
+      "mobile": params.mobile,
+      "avatar": await MultipartFile.fromFile(file.path, filename:fileName),
+      "date_or_birth": params.dateOfBirth,
+      "address": params.address,
+    });
+
+
+
     final response = await apiProvider.post(
       endPoint: updateProfileAuMall,
-      data: {
-        "full_name": params.avatar,
-        "name": params.name,
-        "mobile": params.mobile,
-        "avatar": params.avatar,
-        "date_or_birth": params.dateOfBirth,
-        "address": params.address,
-      },
+      // data: {
+      //   "full_name": params.name,
+      //   "name": params.name,
+      //   "mobile": params.mobile,
+      //   "avatar": formData,
+      //   "date_or_birth": params.dateOfBirth,
+      //   "address": params.address,
+      // },
+      data: formData,
       token: PreferenceHelper.getDataFromSharedPreference(
                             key: 'token') ?? '',
     );

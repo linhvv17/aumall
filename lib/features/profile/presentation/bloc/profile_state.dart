@@ -36,10 +36,11 @@ class UpdateProfileErrorState extends ProfileState {
 
   const UpdateProfileErrorState(this.message);
 }
-class UploadImageState extends ProfileState {
-  final CloudinaryResponse image;
+class PickedImageState extends ProfileState {
+  // final CloudinaryResponse image;
+  final XFile xFileToUpload;
 
-  const UploadImageState(this.image);
+  const PickedImageState(this.xFileToUpload);
 }
 
 class GetAddressListLoadedState extends ProfileState {

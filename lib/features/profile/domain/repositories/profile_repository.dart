@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
 import '../entities/address_entity.dart';
@@ -16,7 +18,7 @@ class UpdateProfileParams {
   final String fullName;
   final String name;
   final String mobile;
-  final String avatar;
+  final File avatar;
   final String dateOfBirth;
   final String address;
 

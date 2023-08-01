@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failure.dart';
@@ -15,10 +17,10 @@ class UpdateUserDetailUsecase
       UpdateProfileUsecaseParams params) async {
     return await profileRepository.updateProfile(
         UpdateProfileParams(
-            params.fullName,
             params.name,
             params.mobile,
             params.avatar,
+            params.fullName,
             params.dateOfBirth,
             params.address
         ));
@@ -29,7 +31,7 @@ class UpdateProfileUsecaseParams {
   final String fullName;
   final String name;
   final String mobile;
-  final String avatar;
+  final File avatar;
   final String dateOfBirth;
   final String address;
 

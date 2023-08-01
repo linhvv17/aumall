@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aumall/features/profile/domain/entities/address_entity.dart';
 import 'package:aumall/features/profile/domain/repositories/profile_repository.dart';
 import 'package:aumall/features/profile/domain/usecases/add_address_usecase.dart';
@@ -46,9 +48,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final failureOrSuccess = await updateProfile(
           UpdateProfileUsecaseParams(
               event.fullName,
-              event.name,
-              event.mobile,
               event.avatar,
+              event.fullName,
+              event.mobile,
               event.dateOfBirth,
               event.address
           ));
@@ -62,27 +64,32 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     });
 
     on<UploadImage>((event, emit) async {
+      emit(UploadImagesLoadingState());
       final XFile? selectedImage =
           await imagePicker.pickImage(source: ImageSource.gallery);
-      emit(UploadImagesLoadingState());
       // final cloudinary = Cloudinary.full(
       //     apiKey: dotenv.env['CLOUDINARY_API_KEY']!,
       //     apiSecret: dotenv.env['CLOUDINARY_SECRET_KEY']!,
       //     cloudName: dotenv.env['CLOUDINARY_NAME']!);
 
-      final cloudinary = Cloudinary.full(
-        apiKey: "728976969822939",
-        apiSecret: "xYhviS6YegaA08HlcygjrSNxr5Q",
-        cloudName: "dqxrv6oct",
-      );
 
-      response = await cloudinary.uploadResource(CloudinaryUploadResource(
-        filePath: selectedImage!.path,
-        resourceType: CloudinaryResourceType.image,
-        fileName: 'profile-avatar',
-      ));
+      // final cloudinary = Cloudinary.full(
+      //   apiKey: "728976969822939",
+      //   apiSecret: "xYhviS6YegaA08HlcygjrSNxr5Q",
+      //   cloudName: "dqxrv6oct",
+      // );
+      //
+      // response = await cloudinary.uploadResource(CloudinaryUploadResource(
+      //   filePath: selectedImage!.path,
+      //   resourceType: CloudinaryResourceType.image,
+      //   fileName: 'profile-avatar',
+      // ));
 
-      emit(UploadImageState(response!));
+
+      print("AAAAAAAAAAA ${selectedImage?.path}");
+
+      emit(PickedImageState(selectedImage!));
+
     });
 
     on<GetListAddress>((event, emit) async {

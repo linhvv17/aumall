@@ -83,7 +83,7 @@ class CartItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SizedBox(
-                        width: kWidth(context) * .4,
+                        width: kWidth(context) * .33,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -93,7 +93,7 @@ class CartItem extends StatelessWidget {
                                     boxShadow: kElevationToShadow[4]),
                                 child: CircleAvatar(
                                   backgroundColor: ColorManager.white,
-                                  radius: 20.0,
+                                  radius: 15.0,
                                   child: Material(
                                     color: Colors.transparent,
                                     child: InkWell(
@@ -119,7 +119,7 @@ class CartItem extends StatelessWidget {
                                     boxShadow: kElevationToShadow[4]),
                                 child: CircleAvatar(
                                   backgroundColor: ColorManager.white,
-                                  radius: 20.0,
+                                  radius: 15.0,
                                   child: Material(
                                     color: Colors.transparent,
                                     child: InkWell(

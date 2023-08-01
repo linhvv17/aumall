@@ -22,7 +22,7 @@ class UpdataProfileEvent extends ProfileEvent {
   final String fullName;
   final String name;
   final String mobile;
-  final String avatar;
+  final File avatar;
   final String dateOfBirth;
   final String address;
 
