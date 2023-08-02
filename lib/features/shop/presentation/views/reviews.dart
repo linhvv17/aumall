@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:aumall/features/shop/presentation/bloc/send_review_bloc.dart';
 import '../../../../core/colors/colors.dart';
@@ -85,6 +86,21 @@ class _ReviewsViewState extends State<ReviewsView> {
               if (state is GetAllReviewsLoadingState) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is GetAllReviewsLoadedState) {
+
+
+                var averageRate = 0.0;
+                var totalRate = 0.0;
+
+                if(state.listReviews.isNotEmpty){
+                  for(int i = 0; i < state.listReviews.length; i++ ){
+                    totalRate = totalRate + state.listReviews[i]!.rating!;
+                  }
+                  averageRate = totalRate/state.listReviews.length;
+                }
+
+
+
+
                 return Column(
                   children: [
                     Row(
@@ -92,8 +108,8 @@ class _ReviewsViewState extends State<ReviewsView> {
                       children: [
                         Column(
                           children: [
-                            Text(widget.product.ratingNumber!.toStringAsFixed(1),
-                                style: Theme.of(context).textTheme.headline6),
+                            Text(averageRate.toStringAsFixed(1),
+                                style: Theme.of(context).textTheme.titleLarge),
                             Text(
                                 '${state.listReviews.length.toString()} ratings',
                                 style: Theme.of(context)
@@ -103,7 +119,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                           ],
                         ),
                         RatingBarIndicator(
-                          itemSize: 50.0,
+                          itemSize: 45.0,
                           rating: widget.product.ratingNumber!.toDouble(),
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
@@ -120,87 +136,111 @@ class _ReviewsViewState extends State<ReviewsView> {
                                 : ListView.builder(
                                     itemCount: state.listReviews.length,
                                     itemBuilder: (context, index) {
-                                      return Stack(children: [
-                                        SizedBox(
-                                          height: kHeight(context) / 3.9,
-                                          width: kWidth(context),
-                                        ),
-                                        Positioned(
-                                          top: 25,
-                                          left: 10,
-                                          right: 10,
-                                          child: SizedBox(
+                                      return Padding(
+                                        padding: const EdgeInsets.only(top: 8.0),
+                                        child: Stack(children: [
+                                          SizedBox(
+                                            height: kHeight(context) / 4.2,
                                             width: kWidth(context),
-                                            height: kHeight(context) / 4.5,
-                                            child: Card(
-                                                child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 20,
-                                                      vertical: 10),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(state.listReviews[index].name.toString()),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      RatingBarIndicator(
-                                                        itemSize: 20.0,
-                                                        rating: state.listReviews[index].rating!.toDouble(),
-                                                            
-                                                        itemBuilder:
-                                                            (context, _) =>
-                                                                const Icon(
-                                                          Icons.star,
-                                                          color: Colors.amber,
-                                                        ),
-                                                        direction:
-                                                            Axis.horizontal,
-                                                      ),
-                                                      Text(
-                                                        // DateFormat.yMMMEd()
-                                                        //     .format(
-                                                        //     state.listReviews[index].createdAt!
-                                                        // ),
-                                                        state.listReviews[index].createdAt!.toString(),
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyLarge!
-                                                            .copyWith(
-                                                                color:
-                                                                    ColorManager
-                                                                        .grey),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      maxLines: 7,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      state.listReviews[index]
-                                                          .comment!,
-                                                      textAlign:
-                                                          TextAlign.justify,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            )),
                                           ),
-                                        ),
-                                        const CircleAvatar(
-                                          backgroundImage: AssetImage(
-                                              'assets/images/avatar.jpg'),
-                                        ),
-                                      ]);
+                                          Positioned(
+                                            top: 25,
+                                            left: 10,
+                                            right: 10,
+                                            child: SizedBox(
+                                              width: kWidth(context),
+                                              height: kHeight(context) / 4.5,
+                                              child: Card(
+                                                  child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 20,
+                                                        vertical: 10),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(state.listReviews[index].name.toString()),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        RatingBarIndicator(
+                                                          itemSize: 20.0,
+                                                          rating: state.listReviews[index].rating!.toDouble(),
+
+                                                          itemBuilder:
+                                                              (context, _) =>
+                                                                  const Icon(
+                                                            Icons.star,
+                                                            color: Colors.amber,
+                                                          ),
+                                                          direction:
+                                                              Axis.horizontal,
+                                                        ),
+
+                                                        Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                                          children: [
+                                                            Text(
+                                                              DateFormat.yMMMEd()
+                                                                  .format(
+                                                                  state.listReviews[index].createdAt!
+                                                              ),
+                                                              // DateFormat.Hms().format(state.listReviews[index].createdAt!),
+                                                              // state.listReviews[index].createdAt!.toString(),
+                                                              style: Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyLarge!
+                                                                  .copyWith(
+                                                                      color:
+                                                                          ColorManager
+                                                                              .grey),
+                                                            ),
+                                                            Text(
+                                                              // DateFormat.yMMMEd()
+                                                              //     .format(
+                                                              //     state.listReviews[index].createdAt!
+                                                              // ),
+                                                              DateFormat.Hms().format(state.listReviews[index].createdAt!),
+                                                              // state.listReviews[index].createdAt!.toString(),
+                                                              style: Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyLarge!
+                                                                  .copyWith(
+                                                                      color:
+                                                                          ColorManager
+                                                                              .grey),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Expanded(
+                                                      child: Text(
+                                                        maxLines: 7,
+                                                        overflow:
+                                                            TextOverflow.ellipsis,
+                                                        state.listReviews[index]
+                                                            .comment!,
+                                                        textAlign:
+                                                            TextAlign.justify,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              )),
+                                            ),
+                                          ),
+                                          CircleAvatar(
+                                            backgroundImage: NetworkImage( state.listReviews[index].user!.avatarUrl!),
+                                          ),
+                                        ]),
+                                      );
                                     },
                                   )))
                   ],

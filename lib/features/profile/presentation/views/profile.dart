@@ -108,7 +108,9 @@ class ProfileView extends StatelessWidget {
                         subtitle: S.current.edit,
                         ontab: () {
                           Navigator.pushNamed(context, AppRoutes.updateProfile,
-                              arguments: state.data.user);
+                              arguments: state.data.user).then((value) => {
+                            BlocProvider.of<ProfileBloc>(context).add(GetProfile())
+                          });
                         },
                       ),
                       MYListTile(

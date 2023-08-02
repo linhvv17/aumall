@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../core/local/shared_preference.dart';
 import '../../domain/entities/login_entity.dart';
 import '../../domain/usecases/login_usecase.dart';
 
@@ -20,7 +21,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           LoginUseCaseParams(email: event.email, password: event.password));
            failureOrSuccess.fold(
           (failure) => emit(LoginErrorState(failure.message)),
-          (success) => emit(LoginFinishedState(data: success)));
+          (success) {
+            print('aaaaaaaaaaaaaaa ${success}');
+            print('aaaaaaaaaaaaaaa ${(success as LoginEntity).id}');
+            print('aaaaaaaaaaaaaaa ${(success as LoginEntity).name}');
+            PreferenceHelper.saveDataInSharedPreference(key: "keyUser", value: "${(success as LoginEntity).id}-${success.name}");
+            emit(LoginFinishedState(data: success));
+          });
     });
   }
 }

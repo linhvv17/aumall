@@ -23,11 +23,12 @@ class ShopView extends StatefulWidget {
 
 class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
   final List<Map<String, dynamic>> sortBys = [
-    {'id': 0, 'name': 'Phổ biến nhất', 'isSelected': true},
-    {'id': 1, 'name': 'Mới nhất', 'isSelected': false},
-    {'id': 2, 'name': 'Đánh giá của khách hàng', 'isSelected': false},
-    {'id': 3, 'name': 'Giá: Từ thấp đến cao', 'isSelected': false},
-    {'id': 4, 'name': 'Giá: Từ cao đến thấp', 'isSelected': false},
+    {'id': 0, 'name': 'Phổ biến nhất', 'isSelected': true, 'key': 'is_featured'},
+    {'id': 0, 'name': 'Flash Sale', 'isSelected': true, 'key': 'flash_sale'},
+    // {'id': 1, 'name': 'Mới nhất', 'isSelected': false, 'key': ''},
+    // {'id': 2, 'name': 'Đánh giá của khách hàng', 'isSelected': false, 'key': ''},
+    // {'id': 3, 'name': 'Giá: Từ thấp đến cao', 'isSelected': false, 'key': ''},
+    // {'id': 4, 'name': 'Giá: Từ cao đến thấp', 'isSelected': false, 'key': ''},
   ];
 
   @override
@@ -51,7 +52,6 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
             .map((categoryEntity) => categoryEntity.name)
             .toList();
         current = BlocProvider.of<ProductsBloc>(context).current;
-        print("LIST CATEGORY ${categoryNames.length}");
         tabController = TabController(
             initialIndex: current, length: categoryNames.length, vsync: this);
         tabController.addListener(() {
@@ -91,12 +91,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
               body: newState.listProductAuMall.listProductAuMall.isEmpty
                   ? Column(
                 children: [
-                  // Text(
-                  //   S.current.shop,
-                  //   style: Theme.of(context).textTheme.headline5,
-                  // ),
                   Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SortProduct(
                         sortBys: sortBys,
@@ -110,12 +105,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
               )
                   : Column(
                       children: [
-                        // Text(
-                        //   S.current.shop,
-                        //   style: Theme.of(context).textTheme.headline5,
-                        // ),
                         Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SortProduct(
                               sortBys: sortBys,
@@ -162,7 +152,8 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                         productFavoriteEntity: newState
                                             .listProductAuMall
                                             .listProductAuMall[index],
-                                      )));
+                                      )
+                                  ));
                             },
                           ),
                         ),

@@ -27,6 +27,7 @@ abstract class ProductsDatasource {
   Future<ShopDataDefaultModel> getShopDataDefault();
   Future<ListShopProductsModel> changCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
   Future<ListShopProductsModel> searchProducts(SearchProductsUseCaseParams searchProductsUseCaseParams);
+  Future<ListShopProductsModel> getProductsByType(GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams);
   Future<ListShopProductsModel> getProductsByFilter(GetProductByFilterUseCaseParams params);
 }
 
@@ -257,6 +258,25 @@ class ProductsDatasourceImpl implements ProductsDatasource {
         PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
     print("getProductsByFilter ${responseProducts.data.toString()}");
+
+    return ListShopProductsModel.fromJson(
+        responseProducts.data
+    );
+  }
+
+  @override
+  Future<ListShopProductsModel> getProductsByType(GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams) async {
+    final params = <String, dynamic>{
+      'status': 1,
+      getProductsByTypeUseCaseParams.keyWord: 1,
+    };
+    final responseProducts = await apiProvider.get(
+        endPoint: allProductsAuMall,
+        query: params,
+        token:
+        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+
+    print("searchProducts ${responseProducts.data.toString()}");
 
     return ListShopProductsModel.fromJson(
         responseProducts.data

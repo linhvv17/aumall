@@ -1,8 +1,14 @@
+import 'dart:developer';
+
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
+import 'package:aumall/local_notification_service.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:aumall/core/theme/bloc/theme_bloc.dart';
 import 'package:aumall/core/utilities/endpoints.dart';
@@ -19,6 +25,7 @@ import 'features/home/presentation/bloc/bottom_nav/bottomNavigationBar_bloc.dart
 import 'features/payment/presentation/bloc/payment_bloc.dart';
 import 'features/profile/data/datasources/profile_local_datasource.dart';
 import 'features/profile/presentation/bloc/update_password_bloc.dart';
+import 'features/register/presentation/views/register.dart';
 import 'features/setpassword/presentation/bloc/reset_password_bloc.dart';
 import 'features/shop/presentation/bloc/products_bloc.dart';
 import 'features/shop/presentation/bloc/send_review_bloc.dart';
@@ -30,7 +37,19 @@ import 'features/register/presentation/bloc/register_bloc.dart';
 import 'features/forgotpass&verifyemail/presentation/forgotpass&verifyemail_bloc/forgotpass&verifyemail_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'firebase_options.dart';
 import 'generated/l10n.dart';
+
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  print("Handling a background message: ${message.messageId}");
+
+
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,14 +60,97 @@ void main() async {
   await CartLocalDataSourceManager().init();
   await ThemeDatabaseService.checkDatabaseExists();
   await dotenv.load(fileName: ".env");
+  await Firebase.initializeApp();
+  await LocalNotificationService().setup();
   runApp(const MyApp());
+
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  Future<void> setupInteractedMessage() async {
+
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    print('User granted permission: ${settings.authorizationStatus}');
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    await FirebaseMessaging.instance.setAutoInitEnabled(true);
+    print("FCMToken $fcmToken");
+
+    _handleAndroidFCMWhenOpenApp();
+
+  }
+
+  void _handleAndroidFCMWhenOpenApp() async {
+    //Create a new AndroidNotificationChannel instance:
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+      'high_importance_channel', // id
+      'High Importance Notifications', // title
+      description: 'This channel is used for important notifications.', // description
+      importance: Importance.max,
+    );
+
+    //Create the channel on the device (if a channel with an id already exists, it will be updated):
+    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+
+      // If `onMessage` is triggered with a notification, construct our own
+      // local notification to show to users using the created channel.
+      if (notification != null && android != null) {
+        // Navigator.pushNamed(context, AppRoutes.register);
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                channelDescription: channel.description,
+                icon: android.smallIcon,
+                // other properties...
+              ),
+            ));
+      }
+    });
+
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  }
+  
+
+  @override
+  void initState() {
+    super.initState();
+    setupInteractedMessage();
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(

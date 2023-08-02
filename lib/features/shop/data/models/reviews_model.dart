@@ -14,11 +14,11 @@ class GetReviewsModel extends GetReviewsEntity {
 }
 class GetReviewModel extends GetReviewEntity {
   const GetReviewModel(
-      // super.user,
+      super.user,
       super.name,super.rating, super.comment,super.createdAt);
 
   factory GetReviewModel.fromJson(Map<String, dynamic> json) => GetReviewModel(
-      // json['user'] != null ? User.fromJson(json['user']) : null,
+      json['user'] != null ? User.fromJson(json['user']) : null,
         json['name'] ?? "",
   json['rating']??0,
         json['comment'] ?? "",

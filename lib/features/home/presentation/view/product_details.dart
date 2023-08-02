@@ -264,9 +264,17 @@ class _ProductDetailsState extends State<ProductDetails>
       body: BlocBuilder<ProductDetailBloc, ProductDetailState>(
         builder:(context, state){
           if(state is ProductDetailLoaded){
-            print('ProductDetailsbuild ${state.productDetailEntity.productDetailData!.toJson()}');
-            print('ProductDetailsbuild ${state.productDetailEntity.productDetailData?.reviewNumber}');
             ProductDetailDataModel productDetailData = state.productDetailEntity.productDetailData!;
+            var averageRate = 0.0;
+            var totalRate = 0.0;
+
+            if(productDetailData.reviews.isNotEmpty){
+              for(int i = 0; i < productDetailData.reviews.length; i++ ){
+                totalRate = totalRate + productDetailData.reviews[i]!.rating!;
+              }
+              averageRate = totalRate/productDetailData.reviews.length;
+            }
+
             return SingleChildScrollView(
               child: SafeArea(
                 child: Column(
@@ -313,7 +321,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   RatingBarIndicator(
                                     itemSize: 25.0,
                                     rating: widget.productSimpleEntity.ratingNumber != null ?
-                                    widget.productSimpleEntity.ratingNumber!.toDouble() : 0.0,
+                                    averageRate : 0.0,
                                     itemBuilder: (context, _) => const Icon(
                                       Icons.star,
                                       color: Colors.amber,
@@ -323,7 +331,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   const SizedBox(width: 4.0),
                                   Text(
                                     widget.productSimpleEntity.reviewNumber != null ?
-                                    '(${widget.productSimpleEntity.reviewNumber})'
+                                    '(${averageRate.toStringAsFixed(1)})'
                                         : S.current.notYetReview,
                                     style:
                                     Theme.of(context).textTheme.caption!.copyWith(
@@ -336,10 +344,10 @@ class _ProductDetailsState extends State<ProductDetails>
                           ),
                           //price
                           Text(
-                            "₫${productDetailData.price}",
+                            "₫${double.parse(productDetailData.price).toInt()}",
                             style: Theme.of(context)
                                 .textTheme
-                                .headline6!
+                                .titleLarge!
                                 .copyWith(color: ColorManager.orangeLight),
                           )
                         ],
@@ -390,9 +398,9 @@ class _ProductDetailsState extends State<ProductDetails>
                                     ),
                                   ),
                                   const SizedBox(height: 3),
-                                  const Text(
-                                    'online 12 mins ago',
-                                    style: TextStyle(
+                                  Text(
+                                    productDetailData.user.name.toString(),
+                                    style: const TextStyle(
                                       color: Color(0xFF939393),
                                       fontSize: 12,
                                       fontFamily: 'Inter',
@@ -408,7 +416,7 @@ class _ProductDetailsState extends State<ProductDetails>
                             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
                             decoration: ShapeDecoration(
                               shape: RoundedRectangleBorder(
-                                side: BorderSide(width: 0.50, color: Color(0xFFD9D9D9)),
+                                side: const BorderSide(width: 0.50, color: Color(0xFFD9D9D9)),
                                 borderRadius: BorderRadius.circular(4),
                               ),
                             ),
@@ -432,10 +440,6 @@ class _ProductDetailsState extends State<ProductDetails>
                         ],
                       ),
                     ),
-
-
-
-
                     //description
                     Padding(
                       padding:
@@ -464,7 +468,7 @@ class _ProductDetailsState extends State<ProductDetails>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(S.current.rateandreview,
-                              style: Theme.of(context).textTheme.headline6),
+                              style: Theme.of(context).textTheme.titleLarge),
                           TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(context, AppRoutes.productReviews,
@@ -484,7 +488,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           RatingBarIndicator(
                             itemSize: 25.0,
                             rating: productDetailData.ratingNumber != null ?
-                            productDetailData.ratingNumber!.toDouble() : 0.0,
+                            averageRate : 0.0,
                             itemBuilder: (context, _) => const Icon(
                               Icons.star,
                               color: Colors.amber,
@@ -495,24 +499,24 @@ class _ProductDetailsState extends State<ProductDetails>
                           const SizedBox(width: 4.0),
                           Text(
                               productDetailData.ratingNumber != null ?
-                              productDetailData.ratingNumber!.toStringAsFixed(1) : "0.0",
-                            style: Theme.of(context).textTheme.caption!.copyWith(
+                              averageRate.toStringAsFixed(1) : "0.0",
+                            style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               color: Colors.grey,
                             ),
                           ),
                           const SizedBox(width: 4.0),
                           Text(
                             productDetailData.reviewNumber != null ?
-                            '(${productDetailData.reviewNumber})'
+                            "(${productDetailData.reviews.length})"
                                 : S.current.notYetReview,
-                            style: Theme.of(context).textTheme.caption!.copyWith(
+                            style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               color: Colors.grey,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    productDetailData!.reviews!.isNotEmpty
+                    productDetailData.reviews.isNotEmpty
                         ? Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 5, horizontal: 15),

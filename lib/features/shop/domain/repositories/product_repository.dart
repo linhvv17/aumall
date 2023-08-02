@@ -25,6 +25,7 @@ abstract class ProductRepository {
   Future<Either<Failure, ShopDataDefaultEntity>> getShopDataDefault();
   Future<Either<Failure, ListProductShopEntity>> changeCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
   Future<Either<Failure, ListProductShopEntity>> searchProducts(SearchProductsUseCaseParams searchProductsUseCaseParams);
+  Future<Either<Failure, ListProductShopEntity>> getProductsByType(GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams);
 }
 
 
@@ -61,6 +62,11 @@ class SearchProductsUseCaseParams {
   final String keyWord;
 
   SearchProductsUseCaseParams(this.keyWord);
+}
+class GetProductsByTypeUseCaseParams {
+  final String keyWord;
+
+  GetProductsByTypeUseCaseParams(this.keyWord);
 }
 
 class GetReviewsParams {

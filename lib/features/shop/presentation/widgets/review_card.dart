@@ -10,6 +10,7 @@ import '../../domain/entities/products_entity.dart';
 class ReviewCard extends StatelessWidget {
   final ProductDetailDataModel product;
   final int index;
+
   const ReviewCard({super.key, required this.product, required this.index});
 
   @override
@@ -32,13 +33,13 @@ class ReviewCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(product.reviews![index].userFullName!),
+                Text(product.reviews![index].userFullName),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RatingBarIndicator(
                       itemSize: 20.0,
-                      rating: product.ratingNumber!.toDouble(),
+                      rating: product.ratingNumber.toDouble(),
                       itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -47,7 +48,7 @@ class ReviewCard extends StatelessWidget {
                       itemCount: 5,
                     ),
                     Text(
-    product.reviews![index].createdAt!,
+                      product.reviews[index].createdAt,
                       // DateFormat.yMMMEd()
                       //     .format(),
                       style: Theme.of(context)
@@ -64,7 +65,7 @@ class ReviewCard extends StatelessWidget {
                   child: Text(
                     maxLines: 7,
                     overflow: TextOverflow.ellipsis,
-                    product.reviews![index].comment!,
+                    product.reviews![index].comment,
                     textAlign: TextAlign.justify,
                   ),
                 )
@@ -73,8 +74,9 @@ class ReviewCard extends StatelessWidget {
           )),
         ),
       ),
-      const CircleAvatar(
-        backgroundImage: AssetImage('assets/images/avatar.jpg'),
+      CircleAvatar(
+        // backgroundImage: AssetImage('assets/images/avatar.jpg'),
+        backgroundImage: NetworkImage(product.thumbnailUrl),
       ),
     ]);
   }

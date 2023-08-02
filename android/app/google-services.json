@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "889879832382",
+    "project_id": "aumall-7869e",
+    "storage_bucket": "aumall-7869e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889879832382:android:5f643a7028e8ce49be6e6f",
+        "android_client_info": {
+          "package_name": "com.au.aumall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889879832382-hr928ooijf2sn54smoe74g1pj46r7bfo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9t-1Rekv2s4i1VQbn2m_KsJts33YI-_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889879832382-hr928ooijf2sn54smoe74g1pj46r7bfo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "889879832382-l1fjgfg6nm8m6180ogda5h3pqppa2jbi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.au.aumall"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

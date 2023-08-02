@@ -185,7 +185,7 @@ class _NewProductItemState extends State<NewProductItem>{
                       children: [
                         RatingBarIndicator(
                           itemSize: 25.0,
-                          rating: 4.0,
+                          rating: widget.product.ratingNumber!.toDouble(),
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,
@@ -194,7 +194,7 @@ class _NewProductItemState extends State<NewProductItem>{
                         ),
                         const SizedBox(width: 4.0),
                         Text(
-                          '(${widget.product.reviewNumber})',
+                          '(${widget.product.ratingNumber})',
                           style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: Colors.grey,
                           ),

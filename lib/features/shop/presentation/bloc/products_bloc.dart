@@ -11,6 +11,7 @@ import '../../domain/entities/products_entity.dart';
 import '../../domain/entities/shop_data_default_entity.dart';
 import '../../domain/usecases/change_category_usecase.dart';
 import '../../domain/usecases/get_all_products_usecase.dart';
+import '../../domain/usecases/get_products_by_type_usecase.dart';
 import '../../domain/usecases/get_shop_data_default_usecase.dart';
 import '../../domain/usecases/get_specific_product.dart';
 part 'products_event.dart';
@@ -29,13 +30,14 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final GetProductsShopUseCase getProductsShopUseCase;
   final ChangeCategoryUseCase changeCategoryUseCase;
   final SearchProductsUseCase searchProductsUseCase;
+  final GetProductsByTypeUseCase getProductsByTypeUseCase;
   ProductsBloc(
       this.getAllProductsUseCase,
       this.getProductByFilterUseCase,
       this.getShopDataDefaultUseCase,
       this.getProductsShopUseCase,
       this.changeCategoryUseCase,
-      this.searchProductsUseCase)
+      this.searchProductsUseCase, this.getProductsByTypeUseCase)
       : super(AllProductsLoadingState()) {
 
     on<GetShopDataDefault>((event, emit) async {
@@ -93,6 +95,28 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
             // emit(ChangCategorySuccessState(success));
             emit(ProductsLoadingState());
             emit(const ProductsSearchStateDataLoaded()
+                .copyWith(
+                listProductAuMall: success));
+          });
+    });
+
+
+
+
+    on<GetProductsByType>((event, emit) async {
+      // emit(ChangeCategoryState());
+      final failureOrSuccess = await getProductsByTypeUseCase(
+          GetProductsByTypeUseCaseParams(event.key)
+      );
+
+      failureOrSuccess.fold(
+              (failure) => emit(AllProductsErrorState(failure.message)),
+              (success) {
+            // current = event.index;
+            print('ChangeCategory ChangCategorySuccessState $current');
+            // emit(ChangCategorySuccessState(success));
+            emit(ProductsLoadingState());
+            emit(const ProductsStateDataLoaded()
                 .copyWith(
                 listProductAuMall: success));
           });

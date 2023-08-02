@@ -161,9 +161,22 @@ class ChangCategorySuccessState extends ProductsState {
   List<Object> get props => [
     listProductAuMall
   ];
-
-
 }
+
+
+class GetProductsByTypeSuccessState extends ProductsState {
+  final ListProductShopEntity listProductAuMall;
+
+  const GetProductsByTypeSuccessState(this.listProductAuMall);
+
+  @override
+  List<Object> get props => [
+    listProductAuMall
+  ];
+}
+
+
+
 class GetShopDataDefaultSuccessState extends ProductsState {
   final ShopDataDefaultEntity shopDataDefaultEntity;
   const GetShopDataDefaultSuccessState(this.shopDataDefaultEntity,);

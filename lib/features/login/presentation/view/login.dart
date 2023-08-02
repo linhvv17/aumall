@@ -1,3 +1,4 @@
+
 import 'package:aumall/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +6,6 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/routes.dart';
-import '../../../../core/utilities/strings.dart';
 import '../bloc/login_bloc.dart';
 import '../widgets/alert_snackbar.dart';
 import '../widgets/mainbutton.dart';
@@ -24,6 +24,12 @@ class _LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
   bool hidePass = true;
 
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       Text(
                         S.current.login,
-                        style: Theme.of(context).textTheme.headline4!.copyWith(
+                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                             fontWeight: FontWeight.bold,
                             color: ColorManager.dark),
                       ),

@@ -12,9 +12,17 @@ import '../../../shop/domain/entities/products_entity.dart';
 import '../bloc/favourite_bloc.dart';
 
 
-class ProductItemAuMall extends StatelessWidget {
+class ProductItemAuMall extends StatefulWidget {
   const ProductItemAuMall({super.key, required this.productFavoriteEntity});
   final ProductAuMallEntity productFavoriteEntity;
+
+
+  @override
+  State<StatefulWidget> createState() => _ProductItemAuMallState();
+}
+
+class _ProductItemAuMallState extends State<ProductItemAuMall> {
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,12 +30,12 @@ class ProductItemAuMall extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: BlocProvider.of<ThemeBloc>(context).themeData== appThemeData[AppTheme.lightTheme]
-                    ? ColorManager.white
-                    : Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(15)),
+                ? ColorManager.white
+                : Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(15)),
         child: Stack(
           children: [
             Image.network(
-              productFavoriteEntity.thumbnailUrl!,
+              widget.productFavoriteEntity.thumbnailUrl!,
               width: 200,
               height: 200,
             ),
@@ -47,11 +55,11 @@ class ProductItemAuMall extends StatelessWidget {
                 ),
                 child: BlocConsumer<FavouriteBloc, FavouriteState>(
                   listener: (context, state) {
-                   if(state is AddToFavouriteState){
-                       showSnackbar(S.current.addfav,context, Colors.green);
-                }else if(state is RemoveFromFavoriteState){
-                    showSnackbar(S.current.deletefav, context, Colors.green);
-                }
+                    if(state is AddToFavouriteState){
+                      showSnackbar(S.current.addfav,context, Colors.green);
+                    }else if(state is RemoveFromFavoriteState){
+                      showSnackbar(S.current.deletefav, context, Colors.green);
+                    }
                   },
                   builder: (context, state) {
                     return CircleAvatar(
@@ -61,23 +69,32 @@ class ProductItemAuMall extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () {
-                             BlocProvider.of<FavouriteBloc>(context).add(
-                                RemoveFavoriteProduct(productFavoriteEntity.id!)
-                             );
+                            BlocProvider.of<FavouriteBloc>(context)
+                                .add(widget.productFavoriteEntity.isFavorite!
+                                ? RemoveFavoriteProduct(widget.productFavoriteEntity.id!)
+                                : AddToFavorite(
+                              product: widget.productFavoriteEntity,
+                              isFavourite: widget.productFavoriteEntity.isFavorite!,
+                            ));
+                            setState(() {
+                              print('setState bf ${widget.productFavoriteEntity.isFavorite}');
+                              widget.productFavoriteEntity.isFavorite = !widget.productFavoriteEntity.isFavorite!;
+                              print('setState at ${widget.productFavoriteEntity.isFavorite}');
+                            });
                           },
                           child:
-                          productFavoriteEntity.isFavorite!
+                          widget.productFavoriteEntity.isFavorite!
                               ?
-                              const Icon(
-                                  Icons.favorite,
-                                  size: 20.0,
-                                  color: ColorManager.orangeLight,
-                                )
+                          const Icon(
+                            Icons.favorite,
+                            size: 20.0,
+                            color: ColorManager.orangeLight,
+                          )
                               : const Icon(
-                                  Icons.favorite_outline,
-                                  size: 20.0,
-                                  color: ColorManager.grey,
-                                ),
+                            Icons.favorite_outline,
+                            size: 20.0,
+                            color: ColorManager.grey,
+                          ),
                         ),
                       ),
                     );
@@ -96,8 +113,8 @@ class ProductItemAuMall extends StatelessWidget {
                       children: [
                         RatingBarIndicator(
                           itemSize: 25.0,
-                          rating: productFavoriteEntity.ratingNumber != null ?
-                          productFavoriteEntity.ratingNumber!.toDouble() : 0.0,
+                          rating: widget.productFavoriteEntity.ratingNumber != null ?
+                          widget.productFavoriteEntity.ratingNumber!.toDouble() : 0.0,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,
@@ -106,10 +123,10 @@ class ProductItemAuMall extends StatelessWidget {
                         ),
                         const SizedBox(width: 4.0),
                         Text(
-                          '(${productFavoriteEntity.reviewNumber})',
-                          style: Theme.of(context).textTheme.caption!.copyWith(
-                                color: Colors.grey,
-                              ),
+                          '(${widget.productFavoriteEntity.reviewNumber})',
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     ),
@@ -122,20 +139,20 @@ class ProductItemAuMall extends StatelessWidget {
                     // ),
                     const SizedBox(height: 6.0),
                     Text(
-                      productFavoriteEntity.title!,
-                      style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                      widget.productFavoriteEntity.title!,
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 6.0),
                     Text.rich(
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: '${productFavoriteEntity.price} \$',
+                            text: '${widget.productFavoriteEntity.price} \$',
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle2!
+                                .titleSmall!
                                 .copyWith(color: ColorManager.dark),
                           ),
                         ],

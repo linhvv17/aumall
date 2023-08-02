@@ -157,5 +157,19 @@ class ProductsRepositoryImpl implements ProductRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, ListProductShopEntity>> getProductsByType(GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final data = await productsDatasource.getProductsByType(getProductsByTypeUseCaseParams);
+        return right(data);
+      } catch (error) {
+        return left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return left( OfflineFailure(S.current.noInternetError));
+    }
+  }
+
 
 }

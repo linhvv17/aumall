@@ -11,14 +11,16 @@ class LoginModel extends LoginEntity {
        super.createdAt,
        super.success,
        super.token});
-  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-        id: json["_id"]??"",
-        name: json["name"]??"",
-        email: json["email"]??"",
-        role: json["role"]??"",
-        createdAt: DateTime.parse(json["createdAt"]??"2022-11-26T18:08:07.693Z") ,
-        token: json["token"]??"",
-        success: json["success"]??true,
-        message: json["message"]??"wellcome",
-      );
+  factory LoginModel.fromJson(Map<String, dynamic> json) {
+    return  LoginModel(
+      id: json['data']["id"].toString() ??"",
+      name: json['data']["name"]??"",
+      email: json['data']["email"]??"",
+      role: json["role"]??"",
+      createdAt: DateTime.parse(json["createdAt"]??"2022-11-26T18:08:07.693Z") ,
+      token: json["token"]??"",
+      success: json["success"]??true,
+      message: json["message"]??"wellcome",
+    );
+  }
 }

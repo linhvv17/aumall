@@ -17,7 +17,7 @@ import '../../features/home/presentation/view/layout.dart';
 import '../../features/home/presentation/view/product_details.dart';
 import '../../features/login/presentation/view/login.dart';
 import '../../features/profile/domain/entities/profile_entity.dart';
-import '../../features/profile/presentation/views/updatePass.dart';
+import '../../features/profile/presentation/views/updatepass.dart';
 import '../../features/profile/presentation/views/updateprofile.dart';
 import '../../features/register/presentation/views/register.dart';
 import '../../features/setpassword/presentation/views/setpassword.dart';

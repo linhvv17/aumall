@@ -8,6 +8,7 @@ import 'package:aumall/features/cart/presentation/bloc/location_bloc.dart';
 import 'package:aumall/features/cart/presentation/widgets/cart_item.dart';
 import 'package:aumall/features/login/presentation/widgets/alert_snackbar.dart';
 import '../../../../core/colors/colors.dart';
+import '../../../../core/local/shared_preference.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../generated/l10n.dart';
 import '../../../payment/presentation/bloc/payment_bloc.dart';
@@ -27,7 +28,8 @@ class _CartViewState extends State<CartView> {
     BlocProvider.of<LocationBloc>(context).add(GetCurrentLocation());
     BlocProvider.of<PaymentBloc>(context)
                     .add(RequestAuth(dotenv.env['PAYMENT_API_KEY']!));
-    
+    print("PreferenceHelper.getDataFromSharedPreference(key: "")");
+    print(PreferenceHelper.getDataFromSharedPreference(key: "keyUser"));
     super.initState();
   }
 

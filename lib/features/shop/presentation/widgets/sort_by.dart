@@ -85,6 +85,12 @@ class _SortProductState extends State<SortProduct> {
                                         : Colors.white,
                                     child: ListTile(
                                       onTap: () {
+                                        print("AAAAAAAAAAAAAAAA");
+                                        print(widget.sortBys[index]['key']);
+                                        Navigator.pop(context);
+                                        BlocProvider.of<ProductsBloc>(context).add(
+                                            GetProductsByType(widget.sortBys[index]['key'])
+                                        );
                                         // if this item isn't selected yet, "isSelected": false -> true
                                         // If this item already is selected: "isSelected": true -> false
                                         setNewState(() {

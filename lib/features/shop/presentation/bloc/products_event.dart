@@ -54,6 +54,12 @@ class ChangeCategory extends ProductsEvent {
   const ChangeCategory( this.index, this.categoryId);
 }
 
+//get by type products
+class GetProductsByType extends ProductsEvent {
+  final String key;
+  const GetProductsByType(this.key);
+}
+
 class OpenSearch extends ProductsEvent {
 
 }

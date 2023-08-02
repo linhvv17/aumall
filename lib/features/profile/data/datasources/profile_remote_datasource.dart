@@ -44,12 +44,11 @@ class ProfileDataSourceImpl implements ProfileDatasource {
     FormData formData = FormData.fromMap({
       "full_name": params.name,
       "name": params.name,
-      "mobile": params.mobile,
+      "mobile": int.parse(params.mobile),
       "avatar": await MultipartFile.fromFile(file.path, filename:fileName),
       "date_or_birth": params.dateOfBirth,
       "address": params.address,
     });
-
 
 
     final response = await apiProvider.post(

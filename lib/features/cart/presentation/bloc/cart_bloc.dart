@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:aumall/features/shop/domain/entities/products_entity.dart';
+import '../../../../core/local/shared_preference.dart';
 import '../../data/models/cart_model.dart';
 
 part 'cart_event.dart';
@@ -18,8 +19,13 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   num totalNumberItems = 0;
 
 
-  final Box<CartProduct> itemBox = Hive.box<CartProduct>("product-cahce");
-  final Box<CartProductModel> itemBoxCartProduct = Hive.box<CartProductModel>("product-cache");
+  // final Box<CartProduct> itemBox = Hive.box<CartProduct>("product-cahce");
+  // final Box<CartProductModel> itemBoxCartProduct = Hive.box<CartProductModel>("product-cache");
+  // String nameProductCache = PreferenceHelper.getDataFromSharedPreference(key: "keyUser");
+
+  final Box<CartProductModel> itemBoxCartProduct = Hive.box<CartProductModel>(
+      PreferenceHelper.getDataFromSharedPreference(key: "keyUser")
+  );
 
 
   CartBloc() : super(CartInitial()) {

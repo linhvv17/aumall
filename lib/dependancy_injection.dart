@@ -76,6 +76,7 @@ import 'features/shop/data/datasources/products_datasource.dart';
 import 'features/shop/data/repositories/products_repositoryimpl.dart';
 import 'features/shop/domain/repositories/product_repository.dart';
 import 'features/shop/domain/usecases/get_all_products_usecase.dart';
+import 'features/shop/domain/usecases/get_products_by_type_usecase.dart';
 import 'features/shop/domain/usecases/get_shop_data_default_usecase.dart';
 import 'features/shop/domain/usecases/get_specific_product.dart';
 import 'features/shop/domain/usecases/send_review_usecase.dart';
@@ -92,7 +93,7 @@ Future<void> init() async {
   injector.registerFactory(() => ForgetpasswordAndeVerifyEmailBloc(injector()));
   injector.registerFactory(() => ResetPasswordBloc(injector()));
   injector.registerFactory(() => BottomNavigationBarBloc());
-  injector.registerFactory(() => ProductsBloc(injector(), injector(), injector(), injector(), injector(), injector()));
+  injector.registerFactory(() => ProductsBloc(injector(), injector(), injector(), injector(), injector(), injector(), injector()));
   injector.registerFactory(() => ProductDetailBloc(injector()));
   injector.registerFactory(() => ProfileBloc(injector(), injector(), injector(), injector()));
   injector.registerFactory(() => UpdatePasswordBloc(injector()));
@@ -115,6 +116,7 @@ Future<void> init() async {
   injector.registerLazySingleton(() => SearchProductsUseCase(injector()));
   injector.registerLazySingleton(() => GetListProductHomeUseCase(injector()));
   injector.registerLazySingleton(() => GetProductsShopUseCase(injector()));
+  injector.registerLazySingleton(() => GetProductsByTypeUseCase(injector()));
   injector.registerLazySingleton(() => GetFavoriteProductUseCase(injector()));
   injector.registerLazySingleton(() => RemoveFavoriteProductUseCase(injector()));
   injector.registerLazySingleton(() => AddFavoriteProductUseCase(injector()));

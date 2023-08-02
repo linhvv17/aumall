@@ -17,17 +17,17 @@ class GetReviewsEntity extends Equatable {
 }
 
 class GetReviewEntity extends Equatable {
-  // final User? user;
+  final User? user;
   final String? name;
   final num? rating;
   final String? comment;
   final DateTime? createdAt;
   const GetReviewEntity(
-      // this.user,
-      this.name, this.rating, this.comment, this.createdAt);
+      this.user,
+      this.name, this.rating, this.comment, this.createdAt,);
 
   @override
   List<Object?> get props => [
-    // user,
+    user,
     name, rating, comment];
 }
