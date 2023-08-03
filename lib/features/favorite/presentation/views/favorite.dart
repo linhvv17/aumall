@@ -1,4 +1,4 @@
-import 'package:aumall/features/favorite/presentation/views/product_item_favorite.dart';
+import 'package:aumall/features/favorite/presentation/views/product_item_aumall.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -115,7 +115,9 @@ class _FavoriteViewState extends State<FavoriteView> {
                                             // Container()
                                             ProductItemAuMall(
                                                 productFavoriteEntity:
-                                                    listFavorite[index]));
+                                                    listFavorite[index],
+                                                isAuctionProduct: false
+                                            ));
                                   },
                                 ),
                               ))

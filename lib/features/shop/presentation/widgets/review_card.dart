@@ -47,14 +47,49 @@ class ReviewCard extends StatelessWidget {
                       direction: Axis.horizontal,
                       itemCount: 5,
                     ),
-                    Text(
-                      product.reviews[index].createdAt,
-                      // DateFormat.yMMMEd()
-                      //     .format(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: ColorManager.grey),
+                    // Text(
+                    //   product.reviews[index].createdAt,
+                    //   // DateFormat.yMMMEd()
+                    //   //     .format(),
+                    //   style: Theme.of(context)
+                    //       .textTheme
+                    //       .bodyLarge!
+                    //       .copyWith(color: ColorManager.grey),
+                    // ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          DateFormat.yMMMEd()
+                              .format(
+                              product.reviews[index].createdAt!
+                          ),
+                          // DateFormat.Hms().format(state.listReviews[index].createdAt!),
+                          // state.listReviews[index].createdAt!.toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                              color:
+                              ColorManager
+                                  .grey),
+                        ),
+                        Text(
+                          // DateFormat.yMMMEd()
+                          //     .format(
+                          //     state.listReviews[index].createdAt!
+                          // ),
+                          DateFormat.Hms().format(product.reviews[index].createdAt!),
+                          // state.listReviews[index].createdAt!.toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                              color:
+                              ColorManager
+                                  .grey),
+                        ),
+                      ],
                     )
                   ],
                 ),

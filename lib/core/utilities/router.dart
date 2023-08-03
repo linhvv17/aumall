@@ -1,3 +1,4 @@
+import 'package:aumall/features/auction/presentation/views/auction.dart';
 import 'package:aumall/features/profile/presentation/views/address.dart';
 import 'package:aumall/features/profile/presentation/views/address_list.dart';
 import 'package:aumall/features/shop/presentation/views/shop.dart';
@@ -45,6 +46,8 @@ Route<dynamic> onGenerate(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const HomeView());
     case AppRoutes.shop:
       return MaterialPageRoute(builder: (context) => const ShopView());
+    case AppRoutes.auction:
+      return MaterialPageRoute(builder: (context) => const AuctionView());
     case AppRoutes.productDetails:
       final product = settings.arguments as ProductAuMallEntity;
       final products = settings.arguments as List<ProductEntity>;

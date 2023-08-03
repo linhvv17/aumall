@@ -17,6 +17,11 @@ class LoadShop extends BottomNavigationBarEvent {
   List<Object> get props => [];
 }
 
+class LoadAuction extends BottomNavigationBarEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class LoadBag extends BottomNavigationBarEvent {
   @override
   List<Object> get props => [];

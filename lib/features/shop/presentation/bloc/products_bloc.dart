@@ -24,7 +24,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   RangeValues priceSelectRange = const RangeValues(200, 400);
   double rateValue = 0;
   bool searchFolded = true;
-  final GetAllProductsUsecase getAllProductsUseCase;
+  final GetAllProductsUseCase getAllProductsUseCase;
   final GetProductByFilterUseCase getProductByFilterUseCase;
   final GetShopDataDefaultUseCase getShopDataDefaultUseCase;
   final GetProductsShopUseCase getProductsShopUseCase;
@@ -99,9 +99,6 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
                 listProductAuMall: success));
           });
     });
-
-
-
 
     on<GetProductsByType>((event, emit) async {
       // emit(ChangeCategoryState());

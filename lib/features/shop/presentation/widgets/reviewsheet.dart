@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
-import '../../../../core/utilities/strings.dart';
 import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../login/presentation/widgets/mainbutton.dart';
@@ -38,7 +37,7 @@ class _ReviewSheetState extends State<ReviewSheet> {
                 ),
                 Text(
                   S.current.whatrate,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(
                   height: 10,
@@ -68,7 +67,7 @@ class _ReviewSheetState extends State<ReviewSheet> {
                 ),
                 Text(
                   S.current.plsshareopinion,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(

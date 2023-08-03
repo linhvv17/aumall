@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tất cả sản phẩm >>"),
         "appName": MessageLookupByLibrary.simpleMessage("AuMall"),
         "apply": MessageLookupByLibrary.simpleMessage("Áp dụng"),
+        "auction": MessageLookupByLibrary.simpleMessage("Đấu giá"),
         "badRequestError": MessageLookupByLibrary.simpleMessage(
             "Email này đã được sử dụng trước đây"),
         "cacheError": MessageLookupByLibrary.simpleMessage("Lỗi cache"),
@@ -91,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Địa chỉ là bắt buộc"),
         "emptybag": MessageLookupByLibrary.simpleMessage(
             "Có vẻ như bạn chưa thêm sản phẩm nào"),
+        "end": MessageLookupByLibrary.simpleMessage("Đã kết thúc"),
         "enterLink": MessageLookupByLibrary.simpleMessage(
             "Vui lòng nhập mã đã được gửi đến email của bạn. Mã này có hiệu lực trong 10 phút."),
         "enterPassword":
@@ -156,8 +158,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "notValidConfirmPassword": MessageLookupByLibrary.simpleMessage(
             "Xác nhận Mật khẩu phải bằng Mật khẩu"),
         "notYetReview": MessageLookupByLibrary.simpleMessage("0 đánh giá"),
+        "notauction":
+            MessageLookupByLibrary.simpleMessage("Không có phiên đấu giá nào!"),
         "notfavorite": MessageLookupByLibrary.simpleMessage(
             "Không có sản phẩm nào trong mục yêu thích!"),
+        "now": MessageLookupByLibrary.simpleMessage("Đang diễn ra"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "oldpassword": MessageLookupByLibrary.simpleMessage("Mật khẩu cũ"),
         "oldpasswordEmpty":
@@ -255,6 +260,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Chưa xác thực: Lỗi xác thực quyền truy cập"),
         "unknownError":
             MessageLookupByLibrary.simpleMessage("Lỗi không xác định"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("Sắp diễn ra"),
         "updatePass": MessageLookupByLibrary.simpleMessage("Cập nhật mật khẩu"),
         "updatepassfail":
             MessageLookupByLibrary.simpleMessage("Cập nhật mật khẩu thất bại"),

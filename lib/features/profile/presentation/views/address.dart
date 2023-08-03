@@ -232,7 +232,6 @@ class _AddressViewState extends State<AddressView>{
                     width: kWidth(context),
                     height: kHeight(context) / 14,
                     child: FloatingActionButton.extended(
-                        heroTag: "add",
                         backgroundColor: ColorManager.orangeLight,
                         elevation: 8,
                         shape:

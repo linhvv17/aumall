@@ -131,6 +131,7 @@
       "Hãy chia sẻ ý kiến của bạn về sản phẩm",
   "next" : "Tiếp theo",
   "shop" : "Cửa hàng",
+  "auction" : "Đấu giá",
   "details" : "Chi tiết",
   "changepass" : "Đổi mật khẩu",
   "favorite" : "Yêu thích",
@@ -183,5 +184,9 @@
   "countryHint" : "Việt Nam",
   "notYetReview" : "0 đánh giá",
   "goToCart" : "Đi đến giỏ hàng",
-  "dateOfBirth" : "Ngày sinh"
+  "dateOfBirth" : "Ngày sinh",
+  "now" : "Đang diễn ra",
+  "upcoming" : "Sắp diễn ra",
+  "end" : "Đã kết thúc",
+  "notauction" : "Không có phiên đấu giá nào!"
 }

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
 
 import '../../../../generated/l10n.dart';
-import '../../../favorite/presentation/views/product_item_favorite.dart';
+import '../../../favorite/presentation/views/product_item_aumall.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../home/widgets/customGridView.dart';
 import '../../domain/entities/products_entity.dart';
@@ -71,21 +71,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                         S.current.shop,
                         style: Theme.of(context).textTheme.headline5,
                       ),
-                      // elevation: 0,
-                      // primary: false,
                       automaticallyImplyLeading: false,
-                      // backgroundColor: Colors.transparent,
-                      // titleSpacing: 10,
-                      // bottom: TabBar(
-                      //   indicatorColor: Colors.grey.shade800,
-                      //   indicatorWeight: 3,
-                      //   unselectedLabelColor: Colors.grey,
-                      //   labelColor: Colors.black,
-                      //   controller: tabController,
-                      //   tabs: categoryNames
-                      //       .map((tabName) => Tab(child: Text(tabName)))
-                      //       .toList(),
-                      // ),
                     ),
                   )),
               body: newState.listProductAuMall.listProductAuMall.isEmpty
@@ -143,6 +129,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                                 .listProductAuMall
                                                 .listProductAuMall[index],
                                             index: index,
+                                            isFromAuction: false,
                                           ),
                                         ));
                                   },
@@ -152,6 +139,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                         productFavoriteEntity: newState
                                             .listProductAuMall
                                             .listProductAuMall[index],
+                                        isAuctionProduct: false,
                                       )
                                   ));
                             },

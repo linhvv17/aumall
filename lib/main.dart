@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:aumall/features/auction/presentation/bloc/auction_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:aumall/local_notification_service.dart';
@@ -185,6 +186,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => injector<SendReviewBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => injector<AuctionBloc>(),
         ),
         BlocProvider(
           create: (context) => injector<FavouriteBloc>(),

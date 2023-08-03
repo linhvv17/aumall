@@ -8,6 +8,7 @@ class AppRoutes {
   static const layout = "/layout";
   static const home = "/home";
   static const shop = "/shop";
+  static const auction = "/auction";
   static const productDetails = "/product-details";
   static const productReviews = "/Product-reviews";
   static const updateProfile = "/update-profile";

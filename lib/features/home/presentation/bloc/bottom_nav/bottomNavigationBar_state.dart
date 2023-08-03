@@ -31,9 +31,18 @@ class ShopState extends BottomNavigationBarState {
   List<Object> get props => [index, title];
 }
 
-class BagState extends BottomNavigationBarState {
+class AuctionSelectState extends BottomNavigationBarState {
   @override
   final int index = 2;
+  final String title = 'Auction';
+
+  @override
+  List<Object> get props => [index, title];
+}
+
+class BagState extends BottomNavigationBarState {
+  @override
+  final int index = 3;
   final String title = 'Bag';
 
   @override
@@ -42,7 +51,7 @@ class BagState extends BottomNavigationBarState {
 
 class FavoriteState extends BottomNavigationBarState {
   @override
-  final int index = 3;
+  final int index = 4;
   final String title = 'Favorite';
 
   @override
@@ -51,7 +60,7 @@ class FavoriteState extends BottomNavigationBarState {
 
 class ProfilePageState extends BottomNavigationBarState {
   @override
-  final int index = 4;
+  final int index = 5;
   final String title = 'Profile';
 
   @override

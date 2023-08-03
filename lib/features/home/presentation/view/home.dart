@@ -124,6 +124,7 @@ class _HomeState extends State<HomeView> {
                                 builder: (context) => ProductDetails(
                                   productSimpleEntity: newProducts[index],
                                   index: index,
+                                  isFromAuction: false,
                                 ),
                               ));
                         },

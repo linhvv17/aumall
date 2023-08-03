@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "allProducts": MessageLookupByLibrary.simpleMessage("All Products >>"),
         "appName": MessageLookupByLibrary.simpleMessage("AuMall"),
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
+        "auction": MessageLookupByLibrary.simpleMessage("Auction"),
         "badRequestError": MessageLookupByLibrary.simpleMessage(
             "This email has been used before"),
         "cacheError": MessageLookupByLibrary.simpleMessage("cache_error"),
@@ -89,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Address is required"),
         "emptybag": MessageLookupByLibrary.simpleMessage(
             "Look like you haven\'t added any product yet"),
+        "end": MessageLookupByLibrary.simpleMessage("End"),
         "enterLink": MessageLookupByLibrary.simpleMessage(
             "Please enter the code that was sent to your email. The Code is valid for 10 minutes."),
         "enterPassword":
@@ -155,8 +157,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "notValidConfirmPassword": MessageLookupByLibrary.simpleMessage(
             "Confirm Password must equal Password"),
         "notYetReview": MessageLookupByLibrary.simpleMessage("No reviews yet"),
+        "notauction":
+            MessageLookupByLibrary.simpleMessage("There is no auctions yet!"),
         "notfavorite":
             MessageLookupByLibrary.simpleMessage("There is No Favorite yet!"),
+        "now": MessageLookupByLibrary.simpleMessage("Now"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "oldpassword": MessageLookupByLibrary.simpleMessage("Old Password"),
         "oldpasswordEmpty":
@@ -251,6 +256,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unauthorizedError": MessageLookupByLibrary.simpleMessage(
             "UNAUTHORIZED: Invalid Input Data"),
         "unknownError": MessageLookupByLibrary.simpleMessage("unknown_error"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "updatePass": MessageLookupByLibrary.simpleMessage("Update Password"),
         "updatepassfail":
             MessageLookupByLibrary.simpleMessage("Update Password Failed"),

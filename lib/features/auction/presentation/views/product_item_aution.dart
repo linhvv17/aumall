@@ -9,19 +9,19 @@ import '../../../../core/utilities/mediaquery.dart';
 import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../shop/domain/entities/products_entity.dart';
-import '../bloc/favourite_bloc.dart';
+import '../bloc/auction_bloc.dart';
 
 
-class ProductItemAuMall extends StatefulWidget {
-  const ProductItemAuMall({super.key, required this.productFavoriteEntity});
+class ProductAuctionAuMall extends StatefulWidget {
+  const ProductAuctionAuMall({super.key, required this.productFavoriteEntity});
   final ProductAuMallEntity productFavoriteEntity;
 
 
   @override
-  State<StatefulWidget> createState() => _ProductItemAuMallState();
+  State<StatefulWidget> createState() => _ProductAuctionAuMallState();
 }
 
-class _ProductItemAuMallState extends State<ProductItemAuMall> {
+class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +53,9 @@ class _ProductItemAuMallState extends State<ProductItemAuMall> {
                     )
                   ],
                 ),
-                child: BlocConsumer<FavouriteBloc, FavouriteState>(
+                child: BlocConsumer<AuctionBloc, AuctionState>(
                   listener: (context, state) {
-                    if(state is AddToFavouriteState){
+                    if(state is AddToAuctionState){
                       showSnackbar(S.current.addfav,context, Colors.green);
                     }else if(state is RemoveFromFavoriteState){
                       showSnackbar(S.current.deletefav, context, Colors.green);
@@ -69,10 +69,10 @@ class _ProductItemAuMallState extends State<ProductItemAuMall> {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () {
-                            BlocProvider.of<FavouriteBloc>(context)
+                            BlocProvider.of<AuctionBloc>(context)
                                 .add(widget.productFavoriteEntity.isFavorite!
-                                ? RemoveFavoriteProduct(widget.productFavoriteEntity.id!)
-                                : AddToFavorite(
+                                ? RemoveAuctionProduct(widget.productFavoriteEntity.id!)
+                                : AddToAuction(
                               product: widget.productFavoriteEntity,
                               isFavourite: widget.productFavoriteEntity.isFavorite!,
                             ));

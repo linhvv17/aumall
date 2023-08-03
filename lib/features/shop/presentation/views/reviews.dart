@@ -120,7 +120,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                         ),
                         RatingBarIndicator(
                           itemSize: 45.0,
-                          rating: widget.product.ratingNumber!.toDouble(),
+                          rating: averageRate.toDouble(),
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,

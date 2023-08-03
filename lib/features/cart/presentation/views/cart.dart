@@ -14,7 +14,8 @@ import '../../../../generated/l10n.dart';
 import '../../../payment/presentation/bloc/payment_bloc.dart';
 
 class CartView extends StatefulWidget {
-  const CartView({super.key});
+  final bool isFromBottomBar;
+  const CartView({super.key, required this.isFromBottomBar});
 
   @override
   State<CartView> createState() => _CartViewState();
@@ -37,7 +38,7 @@ class _CartViewState extends State<CartView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: true,
+          automaticallyImplyLeading: widget.isFromBottomBar ? false : true,
           centerTitle: true,
           title: Text(
             S.current.mybag,
@@ -172,16 +173,17 @@ class _CartViewState extends State<CartView> {
                                           "${S.current.totalAmount}: ",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .headline6!
+                                              .titleLarge!
                                               .copyWith(
                                                   color: ColorManager.grey),
                                         ),
+
                                         FittedBox(
                                           child: Text(
-                                            '${BlocProvider.of<CartBloc>(context).totalAmount}  \$',
+                                            '${BlocProvider.of<CartBloc>(context).totalAmount.toInt()}  \$',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline6,
+                                                .titleLarge,
                                           ),
                                         )
                                       ],

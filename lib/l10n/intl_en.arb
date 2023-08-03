@@ -131,6 +131,7 @@
       "Please share your opinion\nabout the product",
   "next" : "Next",
   "shop" : "Shop",
+  "auction" : "Auction",
   "details" : "details",
   "changepass" : "Change Password",
   "favorite" : "Favorite",
@@ -183,5 +184,9 @@
   "countryHint" : "United States",
   "notYetReview" : "No reviews yet",
   "goToCart" : "Go to cart",
-  "dateOfBirth" : "Date of birth"
+  "dateOfBirth" : "Date of birth",
+  "now" : "Now",
+  "upcoming" : "Upcoming",
+  "end" : "End",
+  "notauction" : "There is no auctions yet!"
 }

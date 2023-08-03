@@ -1230,6 +1230,16 @@ class S {
     );
   }
 
+  /// `Auction`
+  String get auction {
+    return Intl.message(
+      'Auction',
+      name: 'auction',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `details`
   String get details {
     return Intl.message(
@@ -1735,6 +1745,46 @@ class S {
     return Intl.message(
       'Date of birth',
       name: 'dateOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Now`
+  String get now {
+    return Intl.message(
+      'Now',
+      name: 'now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upcoming`
+  String get upcoming {
+    return Intl.message(
+      'Upcoming',
+      name: 'upcoming',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End`
+  String get end {
+    return Intl.message(
+      'End',
+      name: 'end',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no auctions yet!`
+  String get notauction {
+    return Intl.message(
+      'There is no auctions yet!',
+      name: 'notauction',
       desc: '',
       args: [],
     );
