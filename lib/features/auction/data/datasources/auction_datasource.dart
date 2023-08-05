@@ -1,3 +1,5 @@
+import 'package:aumall/features/auction/data/models/auction_session_info_model.dart';
+
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/network/api_provider.dart';
 import '../../../../core/utilities/endpoints.dart';
@@ -6,6 +8,7 @@ import '../models/list_auction_model.dart';
 
 abstract class AuctionDatasource {
   Future<ListAuctionModel> getListAuction(GetAuctionParams getAuctionParams);
+  Future<AuctionSessionInfoModel> getAuctionSessionInfo(GetAuctionSessionInfoParams getAuctionSessionInfoParams);
   Future<bool> removeAuctionProduct(int idProduct);
   Future<bool> addAuctionProduct(int idProduct);
 }
@@ -56,6 +59,21 @@ class AuctionDatasourceImpl implements AuctionDatasource{
     );
 
     return response.statusCode == 200 ? true : false ;
+  }
+
+  @override
+  Future<AuctionSessionInfoModel> getAuctionSessionInfo(GetAuctionSessionInfoParams getAuctionSessionInfoParams) async {
+    final response = await apiProvider.get(
+        endPoint: userAuctionProductsAuMall,
+        token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
+        query: <String, dynamic> {
+          'status': '1',
+          'product_id': getAuctionSessionInfoParams.productAuctionId,
+        }
+    );
+    return AuctionSessionInfoModel.fromJson(
+        response.data['data']
+    );
   }
 
 }

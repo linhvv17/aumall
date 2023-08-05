@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("TIẾP TỤC MUA SẮM"),
         "country": MessageLookupByLibrary.simpleMessage("Quốc gia"),
         "countryHint": MessageLookupByLibrary.simpleMessage("Việt Nam"),
+        "currentBidPrice": MessageLookupByLibrary.simpleMessage("Giá cao nhất"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Địa chỉ hiện tại"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
@@ -245,6 +246,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sortBy": MessageLookupByLibrary.simpleMessage("Sắp xếp theo"),
         "stars": MessageLookupByLibrary.simpleMessage("sao"),
         "start": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
+        "startingPrice": MessageLookupByLibrary.simpleMessage("Giá khởi điểm"),
         "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
         "submitOrder":
             MessageLookupByLibrary.simpleMessage("Xác nhận đơn hàng"),

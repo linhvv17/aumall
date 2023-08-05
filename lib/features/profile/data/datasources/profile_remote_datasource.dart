@@ -12,6 +12,7 @@ import '../models/profile_model.dart';
 abstract class ProfileDatasource {
   Future<ProfileModel> getUserDetails();
   Future<ProfileModel> updateProfile(UpdateProfileParams params);
+  Future<bool> logOut();
   Future<ProfileModel> updatePassword(UpdatePassParnms parnms);
   Future<List<AddressModel>> getAddressList();
   Future<bool> addAddress(AddAddressParams addAddressParams);
@@ -112,6 +113,16 @@ class ProfileDataSourceImpl implements ProfileDatasource {
           key: 'token') ?? '',
     );
 
+    return true;
+  }
+
+  @override
+  Future<bool> logOut() async {
+    final response = await apiProvider.post(
+      endPoint: logoutAuMall,
+      token: PreferenceHelper.getDataFromSharedPreference(
+          key: 'token') ?? '',
+    );
     return true;
   }
 }

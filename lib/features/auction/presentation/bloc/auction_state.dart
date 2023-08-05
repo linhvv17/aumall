@@ -8,11 +8,16 @@ abstract class AuctionState extends Equatable {
 }
 
 class AuctionInitial extends AuctionState {}
+class GetInfoAuctionSessionLoading extends AuctionState {}
 class AuctionDataLoading extends AuctionState {}
 class AuctionDataErrorState extends AuctionState {
   final String message;
 
   const AuctionDataErrorState(this.message);
+}
+class AuctionSessionInfoDataLoaded extends AuctionState {
+  final AuctionSessionInfoEntity auctionSessionInfoEntity;
+  const AuctionSessionInfoDataLoaded(this.auctionSessionInfoEntity);
 }
 class AuctionDataLoaded extends AuctionState {
   final ListAuctionEntity listAuctionEntity;

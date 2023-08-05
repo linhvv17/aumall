@@ -115,7 +115,9 @@ class _AuctionViewState extends State<AuctionView> {
                                                           listAuction[index],
                                                       index: index,
                                                     ),
-                                                  ));
+                                                  )).then((value) => {
+
+                                              });
                                             },
                                             child:
                                                 // Container()

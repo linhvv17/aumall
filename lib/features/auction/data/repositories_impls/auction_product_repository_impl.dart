@@ -1,6 +1,7 @@
 import 'package:aumall/core/error/error_handler.dart';
 import 'package:aumall/core/error/failure.dart';
 import 'package:aumall/core/network/network_info.dart';
+import 'package:aumall/features/auction/domain/entities/auction_session_info_entity.dart';
 import 'package:aumall/generated/l10n.dart';
 import 'package:dartz/dartz.dart';
 
@@ -54,6 +55,22 @@ class AuctionRepositoryImpl extends AuctionBaseRepository {
         return right(data);
       } catch(error) {
         print("AuctionRepositoryImpl getAuctionList() catch ${error}");
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else{
+      return Left(OfflineFailure(S.current.noInternetError));
+    }
+  }
+
+  @override
+  Future<Either<Failure, AuctionSessionInfoEntity>> getAuctionSessionInfo(GetAuctionSessionInfoParams getAuctionSessionInfoParams) async {
+    if(await networkInfo.isConnected){
+      try {
+        final data = await auctionDatasource.getAuctionSessionInfo(getAuctionSessionInfoParams);
+        print("AuctionRepositoryImpl getAuctionSessionInfo() try ${data}");
+        return right(data);
+      } catch(error) {
+        print("AuctionRepositoryImpl getAuctionSessionInfo() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
     } else{

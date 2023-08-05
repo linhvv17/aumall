@@ -29,6 +29,7 @@ bool? isLoggedIN;
 
 const String baseURLAuMall  = "http://45.77.171.218:8080/api";
 const String loginAuMall  = "/auth/login";
+const String logoutAuMall  = "/user/logout";
 const String registerAuMall  = "/auth/register";
 const String profileAuMall  = "/user";
 const String bannerAuMall  = "/banner";
@@ -37,6 +38,7 @@ const String categoryAuMall  = "/category";
 const String productDetailAuMall  = "/product";
 const String allProductsAuMall  = "/products";
 const String auctionProductsAuMall  = "/product-auction";
+const String userAuctionProductsAuMall  = "/user-auctions";
 const String favoriteProductsAuMall  = "/product-wish-list";
 const String searchProductsAuMall  = "/search";
 const String shippingAddressAuMall  = "/shipping-address";

@@ -9,6 +9,7 @@ abstract class ProfileRepository {
   Future<Either<Failure, ProfileEntity>> getUserDetail();
   Future<Either<Failure, ProfileEntity>> updateProfile(
       UpdateProfileParams updateProfileParams);
+  Future<Either<Failure, bool>> logOut();
   Future<Either<Failure, ProfileEntity>> updatePassword(UpdatePassParnms params);
   Future<Either<Failure, List<AddressEntity>>> getAddressList();
   Future<Either<Failure, bool>> addAddress(AddAddressParams addAddressParams);

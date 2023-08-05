@@ -62,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("CONTINUE SHOPPING"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "countryHint": MessageLookupByLibrary.simpleMessage("United States"),
+        "currentBidPrice":
+            MessageLookupByLibrary.simpleMessage("Current Bid Price"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current Location"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of birth"),
@@ -243,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sortBy": MessageLookupByLibrary.simpleMessage("Sort by"),
         "stars": MessageLookupByLibrary.simpleMessage("Stars"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
+        "startingPrice": MessageLookupByLibrary.simpleMessage("Starting price"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "submitOrder": MessageLookupByLibrary.simpleMessage("Submit Order"),
         "success": MessageLookupByLibrary.simpleMessage("success"),

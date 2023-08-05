@@ -188,5 +188,7 @@
   "now" : "Đang diễn ra",
   "upcoming" : "Sắp diễn ra",
   "end" : "Đã kết thúc",
+  "startingPrice" : "Giá khởi điểm",
+   "currentBidPrice" : "Giá cao nhất",
   "notauction" : "Không có phiên đấu giá nào!"
 }

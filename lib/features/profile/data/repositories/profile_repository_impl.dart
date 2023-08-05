@@ -94,4 +94,18 @@ class ProfileRepositoryImpl implements ProfileRepository {
       return left( OfflineFailure(S.current.noInternetError));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> logOut() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final data = await profileDatasource.logOut();
+        return right(data);
+      } catch (error) {
+        return left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return left( OfflineFailure(S.current.noInternetError));
+    }
+  }
 }

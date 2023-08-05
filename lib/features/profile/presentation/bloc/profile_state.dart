@@ -10,6 +10,12 @@ abstract class ProfileState extends Equatable {
 class ProfileInitial extends ProfileState {}
 
 class ProfileLoadingState extends ProfileState {}
+class LogOutLoadingState extends ProfileState {}
+class LogOutSuccessState extends ProfileState {
+  final bool isSuccess;
+
+  const LogOutSuccessState(this.isSuccess);
+}
 
 class ProfileLoadedState extends ProfileState {
   final ProfileEntity data;

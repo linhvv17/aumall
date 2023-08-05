@@ -49,10 +49,9 @@ class ProfileView extends StatelessWidget {
         ],
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text(
-          S.current.myProfile,
-          style: const TextStyle(fontWeight: FontWeight.bold, color: ColorManager.dark)
-        ),
+        title: Text(S.current.myProfile,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: ColorManager.dark)),
       ),
       body: SafeArea(
         child: Padding(
@@ -70,8 +69,8 @@ class ProfileView extends StatelessWidget {
                       state.data.user!.avatar != null
                           ? CircleAvatar(
                               radius: 50,
-                              backgroundImage:
-                                  NetworkImage(state.data.user!.avatar.toString()),
+                              backgroundImage: NetworkImage(
+                                  state.data.user!.avatar.toString()),
                             )
                           : const CircleAvatar(
                               radius: 50,
@@ -108,16 +107,19 @@ class ProfileView extends StatelessWidget {
                         subtitle: S.current.edit,
                         ontab: () {
                           Navigator.pushNamed(context, AppRoutes.updateProfile,
-                              arguments: state.data.user).then((value) => {
-                            BlocProvider.of<ProfileBloc>(context).add(GetProfile())
-                          });
+                                  arguments: state.data.user)
+                              .then((value) => {
+                                    BlocProvider.of<ProfileBloc>(context)
+                                        .add(GetProfile())
+                                  });
                         },
                       ),
                       MYListTile(
                         title: S.current.myOrders,
                         subtitle: S.current.orders,
                         ontab: () {
-                          BlocProvider.of<OrderBloc>(context).add(GetAllOrders());
+                          BlocProvider.of<OrderBloc>(context)
+                              .add(GetAllOrders());
                           Navigator.pushNamed(context, AppRoutes.orders);
                         },
                       ),
@@ -125,41 +127,55 @@ class ProfileView extends StatelessWidget {
                         title: S.current.shippingAddresses,
                         subtitle: S.current.shippingAddressesDescription,
                         ontab: () {
-                          BlocProvider.of<OrderBloc>(context).add(GetAllOrders());
-                          Navigator.pushNamed(context, AppRoutes.addressList).then((value) => {
-                          BlocProvider.of<ProfileBloc>(context).add(GetProfile())
-                          });
+                          BlocProvider.of<OrderBloc>(context)
+                              .add(GetAllOrders());
+                          Navigator.pushNamed(context, AppRoutes.addressList)
+                              .then((value) => {
+                                    BlocProvider.of<ProfileBloc>(context)
+                                        .add(GetProfile())
+                                  });
                         },
                       ),
                       MYListTile(
                         title: S.current.changePassword,
                         subtitle: S.current.changePasswordsub,
                         ontab: () {
-                          Navigator.pushNamed(context, AppRoutes.updatePassword);
+                          Navigator.pushNamed(
+                              context, AppRoutes.updatePassword);
                         },
                       ),
-                      ListTile(
-                          onTap: () {
-                            //delete cache data of current user
-                            PreferenceHelper.saveDataInSharedPreference(key: 'IsLoggedIn', value: false);
-                            PreferenceHelper.removeData(key: 'token');
-                            Navigator.pushReplacementNamed(
-                                context, AppRoutes.login);
-
-                          },
-                          title: Text(
-                            S.current.logout,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyLarge!
-                                .copyWith(color: Colors.red),
-                          ),
-                          dense: true,
-                          trailing: const Icon(
-                            Icons.logout,
-                            size: 15,
-                            color: Colors.red,
-                          ))
+                      BlocListener<ProfileBloc, ProfileState>(
+                          listener: (context, state) {
+                        if (state is LogOutSuccessState) {
+                          print("state is LogOutSuccessState");
+                          //delete cache data of current user
+                          PreferenceHelper.saveDataInSharedPreference(
+                              key: 'IsLoggedIn', value: false);
+                          PreferenceHelper.removeData(key: 'token');
+                          Navigator.pushReplacementNamed(
+                              context, AppRoutes.login);
+                        }
+                      }, child: BlocBuilder<ProfileBloc, ProfileState>(
+                              builder: (context, state) {
+                        return ListTile(
+                            onTap: () {
+                              //call API logout
+                              BlocProvider.of<ProfileBloc>(context).add(LogOut());
+                            },
+                            title: Text(
+                              S.current.logout,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .copyWith(color: Colors.red),
+                            ),
+                            dense: true,
+                            trailing: const Icon(
+                              Icons.logout,
+                              size: 15,
+                              color: Colors.red,
+                            ));
+                      }))
                     ],
                   ),
                 );

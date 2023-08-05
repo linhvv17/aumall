@@ -10,6 +10,7 @@ import 'package:aumall/features/home/domain/usecases/get_product_detail_usecase.
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:aumall/features/profile/domain/usecases/add_address_usecase.dart';
+import 'package:aumall/features/profile/domain/usecases/logout_usecase.dart';
 import 'package:aumall/features/shop/domain/usecases/change_category_usecase.dart';
 import 'package:aumall/features/shop/domain/usecases/get_products_shop_usecase.dart';
 import 'package:aumall/features/shop/domain/usecases/search_products_usecase.dart';
@@ -40,6 +41,7 @@ import 'features/auction/data/repositories_impls/auction_product_repository_impl
 import 'features/auction/domain/repositories/auction_product_repository.dart';
 import 'features/auction/domain/usecases/add_auction_product_usecase.dart';
 import 'features/auction/domain/usecases/get_auction_product_usecase.dart';
+import 'features/auction/domain/usecases/get_auction_session_info_usecase.dart';
 import 'features/auction/domain/usecases/remove_auction_product_usecase.dart';
 import 'features/favorite/data/datasources/favorite_datasource.dart';
 import 'features/favorite/domain/usecases/add_favorite_product_usecase.dart';
@@ -102,12 +104,12 @@ Future<void> init() async {
   injector.registerFactory(() => BottomNavigationBarBloc());
   injector.registerFactory(() => ProductsBloc(injector(), injector(), injector(), injector(), injector(), injector(), injector()));
   injector.registerFactory(() => ProductDetailBloc(injector()));
-  injector.registerFactory(() => ProfileBloc(injector(), injector(), injector(), injector()));
+  injector.registerFactory(() => ProfileBloc(injector(), injector(), injector(), injector(), injector()));
   injector.registerFactory(() => UpdatePasswordBloc(injector()));
   injector.registerFactory(() => SendReviewBloc(injector(), injector()));
   injector.registerFactory(() => FavouriteBloc(injector(), injector(), injector()));
   injector.registerFactory(() => CartBloc());
-  injector.registerFactory(() => AuctionBloc(injector(), injector(), injector()));
+  injector.registerFactory(() => AuctionBloc(injector(), injector()));
   injector.registerFactory(() => ThemeBloc());
   injector.registerFactory(() => AddressCubit(injector(), injector()));
   injector.registerFactory(() => LocationBloc(injector(), injector()));
@@ -127,6 +129,7 @@ Future<void> init() async {
   injector.registerLazySingleton(() => GetProductsByTypeUseCase(injector()));
   injector.registerLazySingleton(() => GetFavoriteProductUseCase(injector()));
   injector.registerLazySingleton(() => GetAuctionProductUseCase(injector()));
+  injector.registerLazySingleton(() => GetAuctionSessionInfoUseCase(injector()));
   injector.registerLazySingleton(() => AddAuctionProductUseCase(injector()));
   injector.registerLazySingleton(() => RemoveAuctionProductUseCase(injector()));
   injector.registerLazySingleton(() => RemoveFavoriteProductUseCase(injector()));
@@ -140,6 +143,7 @@ Future<void> init() async {
   injector.registerLazySingleton(() => GetAddressListUseCase(injector()));
   injector.registerLazySingleton(() => AddAddressUseCase(injector()));
   injector.registerLazySingleton(() => UpdateUserDetailUsecase(injector()));
+  injector.registerLazySingleton(() => LogOutUseCase(injector()));
   injector.registerLazySingleton(() => UpdatePasswordUseCase(injector()));
   injector.registerLazySingleton(() => GetReviewsUseCase(injector()));
   injector.registerLazySingleton(() => SendReviewUseCase(injector()));

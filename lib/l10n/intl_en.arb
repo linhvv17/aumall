@@ -188,5 +188,7 @@
   "now" : "Now",
   "upcoming" : "Upcoming",
   "end" : "End",
+  "startingPrice" : "Starting price",
+  "currentBidPrice" : "Current Bid Price",
   "notauction" : "There is no auctions yet!"
 }

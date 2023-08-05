@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:aumall/features/profile/domain/entities/address_entity.dart';
 import 'package:aumall/features/profile/domain/repositories/profile_repository.dart';
 import 'package:aumall/features/profile/domain/usecases/add_address_usecase.dart';
+import 'package:aumall/features/profile/domain/usecases/logout_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloudinary_sdk/cloudinary_sdk.dart';
 import 'package:equatable/equatable.dart';
@@ -25,10 +26,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final UpdateUserDetailUsecase updateProfile;
   final GetAddressListUseCase getAddressListUseCase;
   final AddAddressUseCase addAddressUseCase;
+  final LogOutUseCase logOutUseCase;
   CloudinaryResponse? response;
 
   ProfileBloc(
-      this.getUserDetails, this.updateProfile, this.getAddressListUseCase, this.addAddressUseCase)
+      this.getUserDetails, this.updateProfile, this.getAddressListUseCase, this.addAddressUseCase, this.logOutUseCase)
       : super(ProfileInitial()) {
     on<GetProfile>((event, emit) async {
       emit(ProfileLoadingState());
@@ -40,6 +42,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         userEmail = success.user!.email;
         emit(ProfileLoadedState(success));
       });
+    });
+
+    on<LogOut>((event, emit) async {
+      emit(LogOutLoadingState());
+      final failureOrSuccess = await logOutUseCase(NoParams());
+      failureOrSuccess
+          .fold((failure) => emit(ProfileErrorState(failure.message)),
+              (success) {
+            emit(LogOutSuccessState(success));
+          });
     });
 
     on<UpdataProfileEvent>((event, emit) async {

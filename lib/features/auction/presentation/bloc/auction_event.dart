@@ -9,6 +9,11 @@ abstract class AuctionEvent extends Equatable {
 }
 
 
+class GetInfoAuctionSession extends AuctionEvent{
+  final int productId;
+  const GetInfoAuctionSession(this.productId);
+
+}
 class RemoveAuctionProduct extends AuctionEvent{
   final int productId;
   const RemoveAuctionProduct(this.productId);

@@ -8,6 +8,7 @@ abstract class ProfileEvent extends Equatable {
 }
 
 class GetProfile extends ProfileEvent {}
+class LogOut extends ProfileEvent {}
 class GetListAddress extends ProfileEvent {}
 class AddAddress extends ProfileEvent {
   final String name;

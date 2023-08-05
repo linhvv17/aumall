@@ -105,10 +105,15 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                           indicatorWeight: 3,
                           unselectedLabelColor: Colors.grey,
                           labelColor: Colors.black,
-                          controller: tabController,
+                          // controller: tabController,
                           tabs: categoryNames
                               .map((tabName) => Tab(child: Text(tabName)))
                               .toList(),
+                          onTap: (tabIndex) {
+                            BlocProvider.of<ProductsBloc>(context).add(ChangeCategory(
+                                tabController.index,
+                                categoriesEntity.categories[tabIndex].id));
+                          },
                         ),
                         Expanded(
                           child: GridView.builder(
@@ -244,6 +249,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                       productFavoriteEntity: newState
                                           .listProductAuMall
                                           .listProductAuMall[index],
+                                      isAuctionProduct: false,
                                     )));
                           },
                         ),

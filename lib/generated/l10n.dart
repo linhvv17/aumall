@@ -1780,6 +1780,26 @@ class S {
     );
   }
 
+  /// `Starting price`
+  String get startingPrice {
+    return Intl.message(
+      'Starting price',
+      name: 'startingPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Bid Price`
+  String get currentBidPrice {
+    return Intl.message(
+      'Current Bid Price',
+      name: 'currentBidPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `There is no auctions yet!`
   String get notauction {
     return Intl.message(

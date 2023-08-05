@@ -107,14 +107,14 @@ class _HomeState extends State<HomeView> {
                 ),
               ),
               SizedBox(
-                  height: kHeight(context) / 3,
+                  height: kHeight(context) *2 / 3,
                   child: GridView.builder(
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.zero,
                     itemCount: newProducts?.length,
                     gridDelegate:
                         SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                            height: kWidth(context) / 2, crossAxisCount: 1),
+                            height: kWidth(context) / 2, crossAxisCount: 2),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {

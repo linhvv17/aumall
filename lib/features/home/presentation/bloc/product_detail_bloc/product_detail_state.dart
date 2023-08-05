@@ -15,6 +15,9 @@ class ProductDetailInitial extends ProductDetailState {
 
 }
 
+class GetInfoAuctionLoading extends ProductDetailState {
+
+}
 class ProductDetailLoading extends ProductDetailState {
 
 }
