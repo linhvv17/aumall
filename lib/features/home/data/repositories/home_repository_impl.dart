@@ -72,12 +72,12 @@ class HomeRepositoryImpl extends HomeBaseRepository {
     if (await networkInfo.isConnected) {
       try {
         final data = await homeDatasource.getHomeData();
-        print('getProductDetail try}');
-        print('getProductDetail ${data}');
+        print('getHomeData try}');
+        print('getHomeData ${data}');
         // print('getProductDetail ${data.images}');
         return right(data);
       } catch (error) {
-        print('getProductDetail catch');
+        print('getHomeData catch');
         print(error.toString());
         return left(ErrorHandler.handle(error).failure);
       }

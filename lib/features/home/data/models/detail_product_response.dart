@@ -93,25 +93,25 @@ class ProductDetailDataModel {
     id = json['id'];
     userId = json['user_id'];
     addedBy = json['added_by'].toString() ?? '';//
-    title = json['title'];
-    description = json['description'];
+    title = json['title'].toString();
+    description = json['description'].toString();
     view = json['view'];
     videoProvider = json['video_provider'].toString()?? '';//
     videoUrl = json['video_url'].toString()?? '';//
-    content = json['content'];
+    content = json['content'].toString();
     categoryId = json['category_id'];
     brandId = json['brand_id'];
     madeInId = json['made_in_id'];
     thumbnail = json['thumbnail'];
     featured = json['featured'].toString()?? '';//
     flashSale = json['flash_sale'].toString()?? '';//
-    price = json['price'];
+    price = json['price'].toString();
     discount = json['discount'].toString()?? '';//
     reviewNumber = json['review_number'];
     ratingNumber = json['rating_number'];
     createdAt = DateTime.parse(json['created_at']);
-    updatedAt = json['updated_at'];
-    thumbnailUrl = json['thumbnail_url'];
+    updatedAt = json['updated_at'].toString();
+    thumbnailUrl = json['thumbnail_url'].toString();
     videoLink = json['video_link'].toString()?? '';//
     images = List.from(json['images']).map((e)=>Images.fromJson(e)).toList();
     brand = Brand.fromJson(json['brand']);
@@ -171,8 +171,8 @@ class Images {
   Images.fromJson(Map<String, dynamic> json){
     id = json['id'];
     productId = json['product_id'];
-    src = json['src'];
-    imageUrl = json['image_url'];
+    src = json['src'].toString();
+    imageUrl = json['image_url'].toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -201,10 +201,10 @@ class Brand {
 
   Brand.fromJson(Map<String, dynamic> json){
     id = json['id'];
-    name = json['name'];
-    alias = json['alias'];
-    image = json['image'] ?? '';
-    imageUrl = json['image_url'];
+    name = json['name'].toString();
+    alias = json['alias'].toString();
+    image = json['image'].toString() ?? '';
+    imageUrl = json['image_url'].toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -232,9 +232,9 @@ class MadeIn {
 
   MadeIn.fromJson(Map<String, dynamic> json){
     id = json['id'];
-    name = json['name'];
+    name = json['name'].toString();
     image = json['image'].toString() ?? '';
-    imageUrl = json['image_url'];
+    imageUrl = json['image_url'].toString();
   }
 
   Map<String, dynamic> toJson() {
@@ -317,11 +317,11 @@ class User {
 
   User.fromJson(Map<String, dynamic> json){
     id = json['id'];
-    name = json['name'] ?? "";
-    fullName = json['full_name'] ?? "";
+    name = json['name'].toString() ?? "";
+    fullName = json['full_name'].toString() ?? "";
     storeName = json['store_name'].toString() ?? "";
     shopName = json['shop_name'].toString() ?? "";
-    avatarUrl = json['avatar_url'] ?? "";
+    avatarUrl = json['avatar_url'].toString() ?? "";
     shop = json['shop'] != null ? Shop.fromJson(json['shop']) : null;
   }
 
@@ -373,18 +373,18 @@ class Shop {
   Shop.fromJson(Map<String, dynamic> json){
     id = json['id'];
     userId = json['user_id'];
-    name = json['name'] ?? "";
-    address = json['address'] ?? "";
-    contact = json['contact'] ?? "";
-    description = json['description'] ?? "";
-    banner = json['banner'] ?? "";
-    image = json['image'] ?? "";
+    name = json['name'].toString() ?? "";
+    address = json['address'].toString() ?? "";
+    contact = json['contact'].toString() ?? "";
+    description = json['description'].toString() ?? "";
+    banner = json['banner'].toString() ?? "";
+    image = json['image'].toString() ?? "";
     note = json['note'].toString() ?? "";
     status = json['status'];
-    createdAt = json['created_at'] ?? "";
-    updatedAt = json['updated_at'] ?? "";
-    bannerUrl = json['banner_url'] ?? "";
-    imageUrl = json['image_url'] ?? "";
+    createdAt = json['created_at'].toString() ?? "";
+    updatedAt = json['updated_at'].toString() ?? "";
+    bannerUrl = json['banner_url'].toString() ?? "";
+    imageUrl = json['image_url'].toString() ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -432,7 +432,7 @@ class Reviews {
     id = json['id'];
     productId = json['product_id'];
     userId = json['user_id'];
-    comment = json['comment'];
+    comment = json['comment'].toString();
     rating = json['rating'];
     createdAt = DateTime.parse(json['created_at']);
     userFullName = json['user_full_name'].toString();
@@ -511,22 +511,22 @@ class RelatedProducts {
     id = json['id'];
     userId = json['user_id'];
     addedBy = json['added_by'].toString() ?? '';//
-    title = json['title'];
-    description = json['description'];
+    title = json['title'].toString();
+    description = json['description'].toString();
     view = json['view'];
-    content = json['content'];
+    content = json['content'].toString();
     categoryId = json['category_id'];
     brandId = json['brand_id'];
     madeInId = json['made_in_id'];
-    thumbnail = json['thumbnail'];
+    thumbnail = json['thumbnail'].toString();
     featured = json['featured'].toString() ?? '';//
     flashSale = json['flash_sale'].toString() ?? '';//
-    price = json['price'];
+    price = json['price'].toString();
     discount = json['discount'].toString() ?? '';//
     reviewNumber = json['review_number'];
     ratingNumber = json['rating_number'];
-    createdAt = json['created_at'];
-    thumbnailUrl = json['thumbnail_url'];
+    createdAt = json['created_at'].toString();
+    thumbnailUrl = json['thumbnail_url'].toString();
     videoLink = json['video_link'].toString() ?? '';//
     images = List.from(json['images']).map((e)=>Images.fromJson(e)).toList();
     brand = Brand.fromJson(json['brand']);

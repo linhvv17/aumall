@@ -67,7 +67,7 @@ class _AddressListState extends State<AddressListView> {
                   height: kHeight(context) / 3,
                 ),
                 const CircularProgressIndicator(),
-                const Text("Đang tải dữ liệu ...")
+                Text(S.current.dataLoading)
               ],
             ),
           );

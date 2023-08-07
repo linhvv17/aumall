@@ -190,5 +190,6 @@
   "end" : "End",
   "startingPrice" : "Starting price",
   "currentBidPrice" : "Current Bid Price",
+  "dataLoading" : "Data loading ...",
   "notauction" : "There is no auctions yet!"
 }

@@ -66,6 +66,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "currentBidPrice": MessageLookupByLibrary.simpleMessage("Giá cao nhất"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Địa chỉ hiện tại"),
+        "dataLoading":
+            MessageLookupByLibrary.simpleMessage("Đang tải dữ liệu ..."),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "defaultError": MessageLookupByLibrary.simpleMessage(
             "Lỗi trong quá trình tải dữ liêụ"),

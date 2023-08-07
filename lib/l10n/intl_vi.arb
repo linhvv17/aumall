@@ -190,5 +190,6 @@
   "end" : "Đã kết thúc",
   "startingPrice" : "Giá khởi điểm",
    "currentBidPrice" : "Giá cao nhất",
+   "dataLoading" : "Đang tải dữ liệu ...",
   "notauction" : "Không có phiên đấu giá nào!"
 }

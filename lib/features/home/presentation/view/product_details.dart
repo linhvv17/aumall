@@ -196,204 +196,233 @@ class _ProductDetailsState extends State<ProductDetails>
                             top: Radius.circular(35),
                           ),
                         ),
+                        isScrollControlled: true,
                         context: context,
                         builder: (context) {
-                          return StatefulBuilder(
-                              builder: (context, setNewState) {
-                            return Column(
-                              children: [
-                                Container(
-                                  height: 80,
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30.0),
-                                      topRight: Radius.circular(30.0),
-                                    ),
-                                    color: Colors.deepOrangeAccent,
-                                  ),
-                                  child: const Center(
-                                      child: Text(
-                                    "Thông tin phiên đấu giá",
-                                    style: TextStyle(fontSize: 22),
-                                  )),
-                                ),
-                                BlocBuilder<AuctionBloc,
-                                        AuctionState>(
-                                    builder: (context, state) {
-                                  if (state is GetInfoAuctionSessionLoading) {
-                                    return const Center(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            height: 100,
-                                          ),
-                                          CircularProgressIndicator(),
-                                          Text("Đang tải dữ liệu ...")
-                                        ],
+                          return FractionallySizedBox(
+                            heightFactor: 0.7,
+                            child: StatefulBuilder(
+                                builder: (context, setNewState) {
+                              return Column(
+                                children: [
+                                  Container(
+                                    height: 80,
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(30.0),
+                                        topRight: Radius.circular(30.0),
                                       ),
-                                    );
-                                  }
-                                  if (state is AuctionSessionInfoDataLoaded) {
-                                    return Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: kWidth(context)*0.9,
-                                            height: 60,
-                                            decoration: ShapeDecoration(
-                                              color: const Color(0xFFF3F2F2),
-                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                      color: Colors.deepOrangeAccent,
+                                    ),
+                                    child: const Center(
+                                        child: Text(
+                                      "Thông tin phiên đấu giá",
+                                      style: TextStyle(fontSize: 22),
+                                    )),
+                                  ),
+                                  BlocBuilder<AuctionBloc,
+                                          AuctionState>(
+                                      builder: (context, state) {
+                                    if (state is GetInfoAuctionSessionLoading) {
+                                      return Center(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const SizedBox(
+                                              height: 100,
                                             ),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Column(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      S.current.startingPrice,
-                                                      style: const TextStyle(
-                                                        color: Color(0xFF001B2E),
-                                                        fontSize: 14,
-                                                        fontFamily: 'Domine',
-                                                        fontWeight: FontWeight.w700,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      '${double.parse(state.auctionSessionInfoEntity.product.price).toInt()} đ',
-                                                      style: const TextStyle(
-                                                        color: Color(0xFF001B2E),
-                                                        fontSize: 12,
-                                                        fontFamily: 'Nunito',
-                                                        fontWeight: FontWeight.w400,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Column(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      S.current.currentBidPrice,
-                                                      style: const TextStyle(
-                                                        color: Color(0xFF001B2E),
-                                                        fontSize: 14,
-                                                        fontFamily: 'Domine',
-                                                        fontWeight: FontWeight.w700,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      '${double.parse(state.auctionSessionInfoEntity.userAuctions.data[0].price).toInt()} đ',
-                                                      style: TextStyle(
-                                                        color: Color(0xFF001B2E),
-                                                        fontSize: 12,
-                                                        fontFamily: 'Nunito',
-                                                        fontWeight: FontWeight.w400,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: kWidth(context)*0.9,
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                              Row(
+                                            const CircularProgressIndicator(),
+                                            Text(S.current.dataLoading)
+                                          ],
+                                        ),
+                                      );
+                                    }
+                                    if (state is AuctionSessionInfoDataLoaded) {
+                                      return Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              width: kWidth(context)*0.9,
+                                              height: 60,
+                                              decoration: ShapeDecoration(
+                                                color: const Color(0xFFF3F2F2),
+                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  SizedBox(
-                                                    width: 17,
-                                                    height: 17,
-                                                    child: Stack(
-                                                      children: [
-                                                        Positioned(
-                                                          left: 0,
-                                                          top: 0,
-                                                          child: Opacity(
-                                                            opacity: 0.20,
-                                                            child: Container(
-                                                              width: 17,
-                                                              height: 17,
-                                                              decoration: const ShapeDecoration(
-                                                                color: Color(0xFFFB9905),
-                                                                shape: OvalBorder(),
-                                                              ),
-                                                            ),
-                                                          ),
+                                                  Column(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        S.current.startingPrice,
+                                                        style: const TextStyle(
+                                                          color: Color(0xFF001B2E),
+                                                          fontSize: 14,
+                                                          fontFamily: 'Domine',
+                                                          fontWeight: FontWeight.w700,
                                                         ),
-                                                        Positioned(
-                                                          left: 3,
-                                                          top: 3,
-                                                          child: Opacity(
-                                                            opacity: 0.80,
-                                                            child: Container(
-                                                              width: 11,
-                                                              height: 11,
-                                                              decoration: const ShapeDecoration(
-                                                                color: Color(0xFFFB9905),
-                                                                shape: OvalBorder(),
-                                                              ),
-                                                            ),
-                                                          ),
+                                                      ),
+                                                      Text(
+                                                        '${double.parse(state.auctionSessionInfoEntity.product.price).toInt()} đ',
+                                                        style: const TextStyle(
+                                                          color: Color(0xFF001B2E),
+                                                          fontSize: 12,
+                                                          fontFamily: 'Nunito',
+                                                          fontWeight: FontWeight.w400,
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  const Text(
-                                                    'Live Auction',
-                                                    style: TextStyle(
-                                                      color: Color(0xFF001B2E),
-                                                      fontSize: 18,
-                                                      fontFamily: 'Nunito',
-                                                      fontWeight: FontWeight.w400,
-                                                    ),
+                                                  Column(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        S.current.currentBidPrice,
+                                                        style: const TextStyle(
+                                                          color: Color(0xFF001B2E),
+                                                          fontSize: 14,
+                                                          fontFamily: 'Domine',
+                                                          fontWeight: FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        '${double.parse(state.auctionSessionInfoEntity.userAuctions.data[0].price).toInt()} đ',
+                                                        style: TextStyle(
+                                                          color: Color(0xFF001B2E),
+                                                          fontSize: 12,
+                                                          fontFamily: 'Nunito',
+                                                          fontWeight: FontWeight.w400,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                              Text(
-                                                '${state.auctionSessionInfoEntity.userAuctions.data.length} Bids made',
-                                                style: const TextStyle(
-                                                  color: Color(0xFF001B2E),
-                                                  fontSize: 18,
-                                                  fontFamily: 'Nunito',
-                                                  fontWeight: FontWeight.w400,
+                                            ),
+                                            SizedBox(
+                                              width: kWidth(context)*0.9,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 17,
+                                                      height: 17,
+                                                      child: Stack(
+                                                        children: [
+                                                          Positioned(
+                                                            left: 0,
+                                                            top: 0,
+                                                            child: Opacity(
+                                                              opacity: 0.20,
+                                                              child: Container(
+                                                                width: 17,
+                                                                height: 17,
+                                                                decoration: const ShapeDecoration(
+                                                                  color: Color(0xFFFB9905),
+                                                                  shape: OvalBorder(),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Positioned(
+                                                            left: 3,
+                                                            top: 3,
+                                                            child: Opacity(
+                                                              opacity: 0.80,
+                                                              child: Container(
+                                                                width: 11,
+                                                                height: 11,
+                                                                decoration: const ShapeDecoration(
+                                                                  color: Color(0xFFFB9905),
+                                                                  shape: OvalBorder(),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    const Text(
+                                                      'Live Auction',
+                                                      style: TextStyle(
+                                                        color: Color(0xFF001B2E),
+                                                        fontSize: 18,
+                                                        fontFamily: 'Nunito',
+                                                        fontWeight: FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
+                                                Text(
+                                                  '${state.auctionSessionInfoEntity.userAuctions.data.length} Bids made',
+                                                  style: const TextStyle(
+                                                    color: Color(0xFF001B2E),
+                                                    fontSize: 18,
+                                                    fontFamily: 'Nunito',
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                              ],
                                               ),
-                                            ],
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: ListView.builder(
-                                              padding: const EdgeInsets.symmetric(vertical: 22),
-                                              itemCount: state.auctionSessionInfoEntity.userAuctions.data.length,
-                                              itemBuilder: (context, index) {
-                                                return _buildItemUserAuction(state.auctionSessionInfoEntity.userAuctions.data[index]);
-                                              },
+                                            Expanded(
+                                              child: ListView.builder(
+                                                padding: const EdgeInsets.symmetric(vertical: 22),
+                                                itemCount: state.auctionSessionInfoEntity.userAuctions.data.length,
+                                                itemBuilder: (context, index) {
+                                                  return _buildItemUserAuction(state.auctionSessionInfoEntity.userAuctions.data[index]);
+                                                },
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  }
-                                  return const Text("Thông tin phiên đấu giá");
-                                }),
-                              ],
-                            );
-                          });
+                                          ],
+                                        ),
+                                      );
+                                    }
+                                    return const Text("Thông tin phiên đấu giá");
+                                  }),
+                                  SizedBox(
+
+                                    child: ListView(
+                                      // This next line does the trick.
+                                      scrollDirection: Axis.horizontal,
+                                      children: <Widget>[
+                                        _buildItemAuctionPrice(0),
+                                        _buildItemAuctionPrice(1),
+                                        _buildItemAuctionPrice(2),
+                                        _buildItemAuctionPrice(3),
+                                        _buildItemAuctionPrice(4),
+                                        _buildItemAuctionPrice(4),
+                                        _buildItemAuctionPrice(4),
+                                        _buildItemAuctionPrice(4),
+                                        _buildItemAuctionPrice(4),
+                                        _buildItemAuctionPrice(4),
+                                        _buildItemAuctionPrice(4),
+                                        _buildItemAuctionPrice(4),
+                                      ],
+                                    ),
+                                    height: 40,
+                                  ),
+                                  SizedBox(
+                                    height: 80,
+                                  ),
+                                ],
+                              );
+                            }),
+                          );
                         });
                   },
                 ),
@@ -800,6 +829,23 @@ class _ProductDetailsState extends State<ProductDetails>
           return Container();
         }
       }),
+    );
+  }
+
+
+  int selectedContainer = 0;
+
+  _buildItemAuctionPrice(int index) {
+    return Container(
+      color: selectedContainer == index ? Colors.white : Colors.orange,
+      height: 40,
+      child: IconButton(
+          icon: Text("${index+10} đ"),
+          onPressed: () {
+            setState(() {
+              selectedContainer = index;
+            });
+          }),
     );
   }
 

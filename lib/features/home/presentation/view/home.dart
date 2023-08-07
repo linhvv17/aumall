@@ -46,16 +46,16 @@ class _HomeState extends State<HomeView> {
         },
         child: BlocBuilder<HomeBloc, HomeLoadState>(builder: (context, state) {
           if (state is HomeStateLoading) {
-            return const Center(
+            return Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
-                  CircularProgressIndicator(),
-                  Text("Đang tải dữ liệu ...")
+                  const CircularProgressIndicator(),
+                  Text(S.current.dataLoading)
                 ],
               ),
             );

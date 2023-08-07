@@ -1800,6 +1800,16 @@ class S {
     );
   }
 
+  /// `Data loading ...`
+  String get dataLoading {
+    return Intl.message(
+      'Data loading ...',
+      name: 'dataLoading',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `There is no auctions yet!`
   String get notauction {
     return Intl.message(

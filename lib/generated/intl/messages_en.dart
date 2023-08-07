@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Current Bid Price"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current Location"),
+        "dataLoading": MessageLookupByLibrary.simpleMessage("Data loading ..."),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of birth"),
         "defaultError":
             MessageLookupByLibrary.simpleMessage("Error In Fetching Data"),
