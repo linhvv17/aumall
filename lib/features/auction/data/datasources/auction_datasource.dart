@@ -11,6 +11,7 @@ abstract class AuctionDatasource {
   Future<AuctionSessionInfoModel> getAuctionSessionInfo(GetAuctionSessionInfoParams getAuctionSessionInfoParams);
   Future<bool> removeAuctionProduct(int idProduct);
   Future<bool> addAuctionProduct(int idProduct);
+  Future<bool> actionAuction(int idProduct, String price);
 }
 
 class AuctionDatasourceImpl implements AuctionDatasource{
@@ -74,6 +75,21 @@ class AuctionDatasourceImpl implements AuctionDatasource{
     return AuctionSessionInfoModel.fromJson(
         response.data['data']
     );
+  }
+
+  @override
+  Future<bool> actionAuction(int idProduct, String price) async {
+    final dataSend = <String, dynamic> {
+      "product_id": 30,
+      "price" : 999000000
+    };
+    final response = await apiProvider.post(
+        endPoint: submitAuctionAuMall,
+        token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
+        data: dataSend
+    );
+
+    return response.statusCode == 200 ? true : false ;
   }
 
 }

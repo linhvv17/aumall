@@ -97,6 +97,7 @@ class ProductAuMallEntity extends Equatable {
   String? title;
   String? description;
   String? price;
+  String? priceStep;
   int? ratingNumber;
   int? reviewNumber;
   String? thumbnailUrl;
@@ -108,6 +109,7 @@ class ProductAuMallEntity extends Equatable {
   this.title,
   this.description,
   this.price,
+  this.priceStep,
   this.ratingNumber,
   this.reviewNumber,
   this.thumbnailUrl,
@@ -119,6 +121,7 @@ class ProductAuMallEntity extends Equatable {
     title = json['title'] ?? "0";
     description = json['description'] ?? "";
     price = json['price'] ?? "";
+    priceStep = json['price_step'] ?? "0";
     ratingNumber = json['rating_number'] ?? 0;
     reviewNumber = json['review_number'] ?? 0;
     thumbnailUrl = json['thumbnail_url'] ?? "";

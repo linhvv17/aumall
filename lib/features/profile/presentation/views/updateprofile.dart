@@ -33,10 +33,13 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
     emailController.text = widget.user.email;
     nameController.text = widget.user.name;
     mobileController.text = widget.user.phone.toString();
-
+    print("updateInfo ${widget.user.dateOfBirth.toString()}");
     var inputFormat = DateFormat('yyyy-MM-dd');
-    var date1 = inputFormat.parse(widget.user.dateOfBirth.toString());
-
+    var date1 = inputFormat.parse(
+        widget.user.dateOfBirth.toString() != "null" ?
+        widget.user.dateOfBirth.toString() :
+        "1995-02-15"
+    );
     var outputFormat = DateFormat('dd/MM/yyyy');
     var date2 = outputFormat.format(date1);
 

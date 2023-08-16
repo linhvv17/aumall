@@ -11,10 +11,15 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../generated/l10n.dart';
+import '../../../favorite/presentation/views/product_item_aumall.dart';
+import '../../../home/presentation/view/product_details.dart';
+import '../../../home/widgets/customGridView.dart';
 import '../../../payment/presentation/bloc/payment_bloc.dart';
+import '../../../shop/domain/entities/products_entity.dart';
 
 class CartView extends StatefulWidget {
   final bool isFromBottomBar;
+
   const CartView({super.key, required this.isFromBottomBar});
 
   @override
@@ -24,12 +29,11 @@ class CartView extends StatefulWidget {
 class _CartViewState extends State<CartView> {
   @override
   void initState() {
-    
     BlocProvider.of<CartBloc>(context).add(CartStarted());
     BlocProvider.of<LocationBloc>(context).add(GetCurrentLocation());
     BlocProvider.of<PaymentBloc>(context)
-                    .add(RequestAuth(dotenv.env['PAYMENT_API_KEY']!));
-    print("PreferenceHelper.getDataFromSharedPreference(key: "")");
+        .add(RequestAuth(dotenv.env['PAYMENT_API_KEY']!));
+    print("PreferenceHelper.getDataFromSharedPreference(key: " ")");
     print(PreferenceHelper.getDataFromSharedPreference(key: "keyUser"));
     super.initState();
   }
@@ -59,17 +63,15 @@ class _CartViewState extends State<CartView> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50)),
                 onPressed: () {
-                  if (BlocProvider.of<CartBloc>(context)
-                      .cartItems
-                      .isNotEmpty) {
+                  if (BlocProvider.of<CartBloc>(context).cartList.isNotEmpty) {
                     Navigator.pushNamed(context, AppRoutes.checkout);
-
 
                     BlocProvider.of<PaymentBloc>(context).add(
                       RequestOrder(
-                        BlocProvider.of<PaymentBloc>(context).PAYMOB_FIRST_TOKEN,
+                        BlocProvider.of<PaymentBloc>(context)
+                            .PAYMOB_FIRST_TOKEN,
                         (BlocProvider.of<CartBloc>(context).totalAmount +
-                            BlocProvider.of<LocationBloc>(context).delivery)
+                                BlocProvider.of<LocationBloc>(context).delivery)
                             .toString(),
                       ),
                     );
@@ -79,7 +81,7 @@ class _CartViewState extends State<CartView> {
                 },
                 label: BlocConsumer<CartBloc, CartState>(
                   listener: (context, state) {
-                    if (state is AddToCartState) {
+                    if (state is AddToCartSuccess) {
                       showSnackbar(
                           S.current.addedToCart, context, Colors.green);
                     }
@@ -89,7 +91,8 @@ class _CartViewState extends State<CartView> {
                       S.current.checkout.toUpperCase(),
                     );
                   },
-                ),),
+                ),
+              ),
             );
           }
           return const SizedBox();
@@ -98,112 +101,133 @@ class _CartViewState extends State<CartView> {
       body: Column(
         children: [
           Expanded(
-            child: BlocBuilder<CartBloc, CartState>(
-              builder: (context, state) {
-                if (state is CartLoading) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
+            child: BlocListener<CartBloc, CartState>(
+              listenWhen: (previous, current) {
+                // return true/false to determine whether or not
+                // to invoke listener with state
+                return current is RemoveProductInCartSuccess || current is UpdateProductInCartSuccess;
+              },
+              listener: (context, state) {
+                // do stuff here based on BlocA's state
+                if (state is RemoveProductInCartSuccess ||
+                    state is UpdateProductInCartSuccess) {
+                  BlocProvider.of<CartBloc>(context).add(CartStarted());
+                }
+              },
+              child: BlocBuilder<CartBloc, CartState>(
+                builder: (context, state) {
+                  if (state is CartLoading) {
+                    return Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                              height: kHeight(context) / 10,
-                              width: kWidth(context) / 10,
-                              child: const CircularProgressIndicator()),
+                          const CircularProgressIndicator(),
+                          Text(S.current.loading)
                         ],
                       ),
-                    ],
-                  );
-                }
-                if (state is CartLoaded) {
-                  if (state.items.isEmpty) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Center(child: LottieBuilder.asset('assets/images/empty.json')),
-                        ),
-                         Padding(
-                           padding: const EdgeInsets.all(8.0),
-                           child: Text(S.current.notCart,style: Theme.of(context).textTheme.titleMedium,),
-                         ),
-                      ],
                     );
                   }
-                  return Column(
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                          padding: const EdgeInsets.symmetric(vertical: 22),
-                          itemCount: state.items.length,
-                          itemBuilder: (context, index) {
-                            return CartItem(
-                              item: state.items[index],
-                              index: index,
-                            );
-                          },
-                        ),
-                      ),
-                      SafeArea(
-                        top: false,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 22),
-                          width: double.infinity,
-                          child: BlocBuilder<CartBloc, CartState>(
-                            builder: (context, state) {
-                              if (state is CartLoaded) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "${BlocProvider.of<CartBloc>(context).totalNumberItems} items",
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                        color: ColorManager.orangeLight,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "${S.current.totalAmount}: ",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge!
-                                              .copyWith(
-                                                  color: ColorManager.grey),
-                                        ),
-
-                                        FittedBox(
-                                          child: Text(
-                                            '${BlocProvider.of<CartBloc>(context).totalAmount.toInt()}  \$',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge,
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                );
-                              }
-                              return const SizedBox();
+                  if (state is CartDataErrorState) {
+                    return Center(child: Text(state.message));
+                  }
+                  if (state is CartDataLoaded) {
+                    if (state
+                        .listProductInCartEntity.listProductInCart.isEmpty) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Center(
+                                child: LottieBuilder.asset(
+                                    'assets/images/empty.json')),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              S.current.notCart,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    return Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                            padding: const EdgeInsets.symmetric(vertical: 22),
+                            itemCount: state.listProductInCartEntity
+                                .listProductInCart.length,
+                            itemBuilder: (context, index) {
+                              return CartItem(
+                                item: state.listProductInCartEntity
+                                    .listProductInCart[index],
+                                index: index,
+                              );
                             },
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: kHeight(context) / 12,
-                      )
-                    ],
-                  );
-                }
-                return const SizedBox();
-              },
+                        SafeArea(
+                          top: false,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 22),
+                            width: double.infinity,
+                            child: BlocBuilder<CartBloc, CartState>(
+                              builder: (context, state) {
+                                if (state is CartLoaded) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${BlocProvider.of<CartBloc>(context).totalNumberItems} items",
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                          color: ColorManager.orangeLight,
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "${S.current.totalAmount}: ",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleLarge!
+                                                .copyWith(
+                                                    color: ColorManager.grey),
+                                          ),
+                                          FittedBox(
+                                            child: Text(
+                                              '${BlocProvider.of<CartBloc>(context).totalAmount.toInt()}  \$',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge,
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  );
+                                }
+                                return const SizedBox();
+                              },
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: kHeight(context) / 12,
+                        )
+                      ],
+                    );
+                  }
+                  return const SizedBox();
+                },
+              ),
             ),
           ),
         ],

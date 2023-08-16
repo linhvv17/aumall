@@ -112,15 +112,9 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                           );
                           BlocProvider.of<OrderBloc>(context).add(
                             CreateNewOrder(
-                              BlocProvider.of<CartBloc>(context)
-                                  .totalAmount
-                                  .toInt(),
+                              1900000000,
                               BlocProvider.of<LocationBloc>(context).delivery,
-                              BlocProvider.of<CartBloc>(context)
-                                      .totalAmount
-                                      .toInt() +
-                                  BlocProvider.of<LocationBloc>(context)
-                                      .delivery,
+                              2500000000,
                               
                               phoneController.text,
                               BlocProvider.of<LocationBloc>(context)
@@ -140,7 +134,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                               BlocProvider.of<LocationBloc>(context)
                                   .currentAddress![0]
                                   .administrativeArea!,
-                              BlocProvider.of<CartBloc>(context).orderItems    
+                              BlocProvider.of<CartBloc>(context).orderItems
                             ),
                           );
                         }
@@ -374,7 +368,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                                     .copyWith(color: ColorManager.grey),
                               ),
                               Text(
-                                  '${BlocProvider.of<CartBloc>(context).totalAmount} \$',
+                                  '1000000000¢',
                                   style: Theme.of(context).textTheme.headline6),
                             ],
                           ),
@@ -410,7 +404,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                                     .copyWith(color: ColorManager.grey),
                               ),
                               Text(
-                                  '${BlocProvider.of<CartBloc>(context).totalAmount + BlocProvider.of<LocationBloc>(context).delivery} \$',
+                                  '15000000 \$',
                                   style: Theme.of(context).textTheme.headline6),
                             ],
                           ),

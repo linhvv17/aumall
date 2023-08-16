@@ -54,14 +54,6 @@ class ProfileDataSourceImpl implements ProfileDatasource {
 
     final response = await apiProvider.post(
       endPoint: updateProfileAuMall,
-      // data: {
-      //   "full_name": params.name,
-      //   "name": params.name,
-      //   "mobile": params.mobile,
-      //   "avatar": formData,
-      //   "date_or_birth": params.dateOfBirth,
-      //   "address": params.address,
-      // },
       data: formData,
       token: PreferenceHelper.getDataFromSharedPreference(
                             key: 'token') ?? '',

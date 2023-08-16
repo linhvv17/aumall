@@ -12,6 +12,7 @@ abstract class AuctionBaseRepository {
   Future<Either<Failure, AuctionSessionInfoEntity>> getAuctionSessionInfo(GetAuctionSessionInfoParams getAuctionSessionInfoParams);
   Future<Either<Failure, bool>> removeAuctionProduct(int idProduct);
   Future<Either<Failure, bool>> addAuctionProduct(int idProduct);
+  Future<Either<Failure, bool>> actionAuction(int idProduct, String price);
 }
 
 class GetAuctionParams {

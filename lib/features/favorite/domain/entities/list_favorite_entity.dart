@@ -10,3 +10,5 @@ class ListFavoriteEntity extends Equatable{
   List<Object?> get props => [];
 
 }
+
+

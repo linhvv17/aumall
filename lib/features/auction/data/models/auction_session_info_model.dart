@@ -149,12 +149,12 @@ class Product {
 
   Product.fromJson(Map<String, dynamic> json){
     id = json['id'];
-    title = json['title'];
-    publishedAt = json['published_at'];
-    expiredAt = json['expired_at'];
-    price = json['price'];
-    currentPrice = json['current_price'];
-    thumbnailUrl = json['thumbnail_url'];
+    title = json['title'].toString();
+    publishedAt = json['published_at'].toString();
+    expiredAt = json['expired_at'].toString();
+    price = json['price'].toString();
+    currentPrice = json['current_price'].toString();
+    thumbnailUrl = json['thumbnail_url'].toString();
     videoLink = json['video_link'].toString();
     isFavorite = json['is_favorite'];
     isWishList = json['is_wish_list'] ?? false;

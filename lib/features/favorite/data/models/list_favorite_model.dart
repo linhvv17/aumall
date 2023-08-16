@@ -19,5 +19,8 @@ class ListFavoriteModel extends ListFavoriteEntity {
         list
     );
   }
-
 }
+
+
+
+

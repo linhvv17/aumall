@@ -37,3 +37,8 @@ class AddAuctionSuccess extends AuctionState {
   final bool isSuccess;
   const AddAuctionSuccess(this.isSuccess);
 }
+
+class ActionAuctionSuccess extends AuctionState {
+  final bool isSuccess;
+  const ActionAuctionSuccess(this.isSuccess);
+}

@@ -1,22 +1,33 @@
 
 import 'package:aumall/features/cart/data/models/cart_product_model.dart';
+import 'package:aumall/features/cart/domain/entities/list_product_in_cart_entity.dart';
+import 'package:aumall/features/cart/domain/usecases/add_product_to_cart_usecase.dart';
+import 'package:aumall/features/cart/domain/usecases/get_product_in_cart_usecase.dart';
+import 'package:aumall/features/cart/domain/usecases/remove_product_in_cart_usecase.dart';
+import 'package:aumall/features/cart/domain/usecases/update_product_in_cart_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:aumall/features/shop/domain/entities/products_entity.dart';
 import '../../../../core/local/shared_preference.dart';
+import '../../../../core/usecase/usecase.dart';
 import '../../data/models/cart_model.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  List<CartProduct> cartItems = [];
-  List<CartProductModel> cartItemsProductModel = [];
+
   List<Map<String, dynamic>> orderItems = [];
   num totalAmount = 0;
   num totalNumberItems = 0;
+
+  List<ProductSimpleEntity> cartList = [];
+  final GetProductInCartUseCase getProductInCartUseCase;
+  final AddProductToCartUseCase addProductToCartUseCase;
+  final RemoveProductInCartUseCase removeProductInCartUseCase;
+  final UpdateProductInCartUseCase updateProductInCartUseCase;
 
 
   // final Box<CartProduct> itemBox = Hive.box<CartProduct>("product-cahce");
@@ -28,142 +39,58 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   );
 
 
-  CartBloc() : super(CartInitial()) {
-    on<CartStarted>((event, emit) {
-      if (state is CartInitial) {
-        emit(CartLoading());
-        List<CartProductModel> list = itemBoxCartProduct.values.toList();
-        cartItemsProductModel = list;
-
-        for (var element in list) {
-          totalAmount = totalAmount + element.amount * double.parse(element.price);
-          totalNumberItems = totalNumberItems + element.amount;
-        }
-
-        emit(CartLoaded(cartItemsProductModel, totalNumberItems));
-      }
+  CartBloc(this.getProductInCartUseCase, this.addProductToCartUseCase, this.removeProductInCartUseCase, this.updateProductInCartUseCase) : super(CartInitial()) {
+    on<CartStarted>((event, emit) async {
+      emit(CartLoading());
+      final failureOrSuccess = await getProductInCartUseCase(NoParams());
+      failureOrSuccess.fold(
+              (failure) => emit(CartDataErrorState(failure.message)),
+              (success) => emit(CartDataLoaded(success))
+      );
     });
 
 
 
-    on<AddProductToCart>((event, emit) {
-      emit(CartLoading());
-      //add to local store
-      CartProductModel cartProductModel = CartProductModel(
-          id: event.productAuMallEntity.id.toString(),
-          name: event.productAuMallEntity.title!,
-          description: event.productAuMallEntity.description!,
-          price: event.productAuMallEntity.price!,
-          ratings: event.productAuMallEntity.ratingNumber as num,
-          numOfReviews: event.productAuMallEntity.reviewNumber!,
-          productImage: event.productAuMallEntity.thumbnailUrl!,
-          isFavourite: event.productAuMallEntity.isFavorite!
-
+    on<AddProductToCart>((event, emit) async {
+      final failureOrSuccess = await addProductToCartUseCase(AddProductToCartUseCaseParams(1, idProduct: event.productId));
+      failureOrSuccess.fold(
+              (failure) => emit(CartDataErrorState(failure.message)),
+              (success) => emit(AddToCartSuccess(success))
       );
-      if(checkExitsItemProduct(cartProductModel)){
-
-        updateDataProductToHive(cartProductModel, event.index);
-      } else {
-        cartProductModel.amount = 1;
-        itemBoxCartProduct.put(cartProductModel.id, cartProductModel);
-      }
-
-      countNumberItemsAndTotalPriceForAll();
-      emit(AddToCartState());
-      emit(CartLoaded(itemBoxCartProduct.values.toList(), totalNumberItems));
     });
 
 
 
     on<RemoveFromCart>((event, emit) async {
       emit(CartLoading());
-      await itemBoxCartProduct.deleteAt(event.id);
-      countNumberItemsAndTotalPriceForAll();
-
-      emit(CartLoaded(itemBoxCartProduct.values.toList(), totalNumberItems));
+      final failureOrSuccess = await removeProductInCartUseCase(RemoveFavoriteProductUseCaseParams( idProduct: event.id));
+      failureOrSuccess.fold(
+              (failure) => emit(CartDataErrorState(failure.message)),
+              (success) => emit(RemoveProductInCartSuccess(success))
+      );
     });
 
     on<IncrementCount>((event, emit) async {
-      event.cartProduct.amount++;
-      //save to hive
-      updateDataProductToHive(event.cartProduct, event.index);
+      event.productInCartEntity.quantity++;
+      final failureOrSuccess = await updateProductInCartUseCase(UpdateProductInCartUseCaseParams(event.quantity, idProduct: event.productInCartEntity.productId));
+      failureOrSuccess.fold(
+              (failure) => emit(CartDataErrorState(failure.message)),
+              (success) => emit(UpdateProductInCartSuccess(success))
+      );
 
-      countNumberItemsAndTotalPriceForAll();
-
-      emit(IncrementCountState());
-      emit(CartLoaded(itemBoxCartProduct.values.toList(), totalNumberItems));
     });
     on<DecrementCount>((event, emit) async {
-      if (event.cartProduct.amount > 0) {
-        event.cartProduct.amount--;
+      event.productInCartEntity.quantity--;
+      final failureOrSuccess = await updateProductInCartUseCase(UpdateProductInCartUseCaseParams(event.quantity, idProduct: event.productInCartEntity.id));
+      failureOrSuccess.fold(
+              (failure) => emit(CartDataErrorState(failure.message)),
+          // (success) => emit(HomeStateDataLoaded(success)),
+              (success) => emit(UpdateProductInCartSuccess(success))
+      );
 
-        //save to hive
-        updateDataProductToHive(event.cartProduct, event.index);
-
-        if(event.cartProduct.amount == 0){
-          itemBoxCartProduct.delete(event.cartProduct.id);
-        }
-
-        countNumberItemsAndTotalPriceForAll();
-
-        emit(DecrementCountState());
-        emit(CartLoaded(itemBoxCartProduct.values.toList(), totalNumberItems));
-      }
     });
 
   }
 
-
-  Future<void> updateDataProductToHive(CartProductModel cartProductToUpdate, int index) async{
-
-
-    CartProductModel cartProductModel = CartProductModel(
-        id: cartProductToUpdate.id,
-        name: cartProductToUpdate.name,
-        description: cartProductToUpdate.description,
-        price: cartProductToUpdate.price,
-        ratings: cartProductToUpdate.ratings,
-        numOfReviews: cartProductToUpdate.numOfReviews,
-        productImage: cartProductToUpdate.productImage,
-        amount: cartProductToUpdate.amount);
-
-
-    CartProductModel? cartProductModelInStorage = itemBoxCartProduct.get(cartProductModel.id);
-
-    if(cartProductModelInStorage != null){
-      // cartProductModel.amount = cartProductModelInStorage.amount+1;
-      itemBoxCartProduct.put(cartProductModel.id, cartProductModel);
-    } else{
-      if (kDebugMode) {
-        print("AddToCart go to update Increment amount itemBox.get(cartProduct.id) = null");
-      }
-    }
-    if(cartProductToUpdate.amount == 0){
-      itemBoxCartProduct.deleteAt(index);
-    }
-  }
-
-
-  bool checkExitsItemProduct(CartProductModel cartProductToCheck) {
-    for (var element in cartItems) {
-      if(element.id == cartProductToCheck.id) {
-        cartProductToCheck.amount = element.amount + 1;
-        return true;
-      }
-    }
-    return false;
-  }
-
-
-  void countNumberItemsAndTotalPriceForAll(){
-    List<CartProductModel> list = itemBoxCartProduct.values.toList();
-    cartItemsProductModel = list;
-    totalAmount = 0;
-    totalNumberItems = 0;
-    for (var element in list) {
-      totalAmount = totalAmount + element.amount * double.parse(element.price);
-      totalNumberItems = totalNumberItems + element.amount;
-    }
-  }
 
 }

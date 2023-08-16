@@ -40,10 +40,14 @@ const String allProductsAuMall  = "/products";
 const String auctionProductsAuMall  = "/product-auction";
 const String userAuctionProductsAuMall  = "/user-auctions";
 const String favoriteProductsAuMall  = "/product-wish-list";
+const String cartProductsAuMall  = "/order";
+const String cartDetailProductsAuMall  = "/order-detail";
+const String removeProductsInCartAuMall  = "/remove-order-detail";
 const String searchProductsAuMall  = "/search";
 const String shippingAddressAuMall  = "/shipping-address";
 const String sendReviewAuMall  = "/product-review";
 const String reviewAuMall  = "/product-review";
 const String updatePasswordAuMall = '/users/password/update';
 const String updateProfileAuMall = '/user/update';
+const String submitAuctionAuMall = '/submit-auction';
 

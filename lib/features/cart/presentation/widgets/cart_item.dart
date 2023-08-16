@@ -1,4 +1,5 @@
 import 'package:aumall/features/cart/data/models/cart_product_model.dart';
+import 'package:aumall/features/cart/domain/entities/list_product_in_cart_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/features/cart/data/models/cart_model.dart';
@@ -7,12 +8,14 @@ import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/strings.dart';
 import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
+import '../../../shop/domain/entities/products_entity.dart';
 import '../bloc/cart_bloc.dart';
 
 class CartItem extends StatelessWidget {
   // final CartProduct item;
-  final CartProductModel item;
+  final ProductInCartEntity item;
   final int index;
+
   const CartItem({super.key, required this.item, required this.index});
 
   @override
@@ -32,7 +35,7 @@ class CartItem extends StatelessWidget {
             SizedBox(
               width: kWidth(context) * 0.25,
               child: Image.network(
-                item.productImage,
+                item.product.thumbnailUrl,
               ),
             ),
             Expanded(
@@ -46,29 +49,33 @@ class CartItem extends StatelessWidget {
                         SizedBox(
                           width: kWidth(context) * 0.5,
                           child: Text(
-                            item.name,
-                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: ColorManager.dark,),
+                            item.product.title,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      color: ColorManager.dark,
+                                    ),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                         ),
-                        Text(
-                          "item.category",
-                          style: Theme.of(context).textTheme.bodySmall!.copyWith(color: ColorManager.dark,)
-                        )
+                        Text("item.category",
+                            style:
+                                Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      color: ColorManager.dark,
+                                    ))
                       ],
                     ),
                     BlocListener<CartBloc, CartState>(
                       listener: (context, state) {
                         if (state is RemoveFromCart) {
-                          showSnackbar(S.current.removeFromCart, context,
-                              Colors.green);
+                          showSnackbar(
+                              S.current.removeFromCart, context, Colors.green);
                         }
                       },
                       child: IconButton(
                         onPressed: () async {
                           BlocProvider.of<CartBloc>(context)
-                              .add(RemoveFromCart(index));
+                              .add(RemoveFromCart(item.id));
                         },
                         icon: const Icon(
                           Icons.clear,
@@ -98,8 +105,17 @@ class CartItem extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: InkWell(
                                       onTap: () {
-                                        //giam 1
-                                            BlocProvider.of<CartBloc>(context).add(DecrementCount(item, index));
+
+                                        if (item.quantity == 1) {
+                                          //co 1 item thi xoa
+                                          BlocProvider.of<CartBloc>(context)
+                                              .add(RemoveFromCart(item.id));
+                                        } else {
+                                          //giam 1 item
+                                          BlocProvider.of<CartBloc>(context)
+                                              .add(DecrementCount(
+                                                  item, item.quantity - 1));
+                                        }
                                       },
                                       child: const Icon(
                                         Icons.remove,
@@ -110,8 +126,13 @@ class CartItem extends StatelessWidget {
                                   ),
                                 )),
                             Text(
-                              '${item.amount}',
-                              style: Theme.of(context).textTheme.headline6!.copyWith(color: ColorManager.dark,),
+                              '1',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(
+                                    color: ColorManager.dark,
+                                  ),
                             ),
                             Container(
                                 decoration: BoxDecoration(
@@ -124,8 +145,10 @@ class CartItem extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: InkWell(
                                       onTap: () {
-                                        //tang 1
-                                        BlocProvider.of<CartBloc>(context).add(IncrementCount(item, index));
+                                        //tang 1 item trong gio
+                                        BlocProvider.of<CartBloc>(context).add(
+                                            IncrementCount(
+                                                item, item.quantity + 1));
                                       },
                                       child: const Icon(
                                         Icons.add,
@@ -139,7 +162,7 @@ class CartItem extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'đ ${item.price}',
+                        'đ ${double.parse(item.amount).toInt()}',
                         style: const TextStyle(fontSize: 13),
                       )
                     ],

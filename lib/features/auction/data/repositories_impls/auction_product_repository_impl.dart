@@ -77,4 +77,20 @@ class AuctionRepositoryImpl extends AuctionBaseRepository {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> actionAuction(int idProduct, String price) async {
+    if(await networkInfo.isConnected){
+      try {
+        final data = await auctionDatasource.actionAuction(idProduct, price);
+        print("AuctionRepositoryImpl actionAuction() try ${data}");
+        return right(data);
+      } catch(error) {
+        print("AuctionRepositoryImpl actionAuction() catch ${error}");
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else{
+      return Left(OfflineFailure(S.current.noInternetError));
+    }
+  }
 }

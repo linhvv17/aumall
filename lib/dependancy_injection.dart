@@ -1,5 +1,9 @@
 import 'package:aumall/core/local/shared_preference.dart';
 import 'package:aumall/features/auction/presentation/bloc/auction_bloc.dart';
+import 'package:aumall/features/cart/data/datasource/cart_datasource.dart';
+import 'package:aumall/features/cart/data/repositories_impls/cart_repository_impl.dart';
+import 'package:aumall/features/cart/domain/repositories/cart_repository.dart';
+import 'package:aumall/features/cart/domain/usecases/remove_product_in_cart_usecase.dart';
 import 'package:aumall/features/favorite/data/repositories_impls/favorite_product_repository_impl.dart';
 import 'package:aumall/features/favorite/domain/repositories/favorite_product_repository.dart';
 import 'package:aumall/features/home/data/datasources/home_datasources.dart';
@@ -39,10 +43,14 @@ import 'core/network/paymentApiProvider.dart';
 import 'features/auction/data/datasources/auction_datasource.dart';
 import 'features/auction/data/repositories_impls/auction_product_repository_impl.dart';
 import 'features/auction/domain/repositories/auction_product_repository.dart';
+import 'features/auction/domain/usecases/action_auction_usecase.dart';
 import 'features/auction/domain/usecases/add_auction_product_usecase.dart';
 import 'features/auction/domain/usecases/get_auction_product_usecase.dart';
 import 'features/auction/domain/usecases/get_auction_session_info_usecase.dart';
 import 'features/auction/domain/usecases/remove_auction_product_usecase.dart';
+import 'features/cart/domain/usecases/add_product_to_cart_usecase.dart';
+import 'features/cart/domain/usecases/get_product_in_cart_usecase.dart';
+import 'features/cart/domain/usecases/update_product_in_cart_usecase.dart';
 import 'features/favorite/data/datasources/favorite_datasource.dart';
 import 'features/favorite/domain/usecases/add_favorite_product_usecase.dart';
 import 'features/favorite/domain/usecases/get_favorite_product_usecase.dart';
@@ -108,8 +116,8 @@ Future<void> init() async {
   injector.registerFactory(() => UpdatePasswordBloc(injector()));
   injector.registerFactory(() => SendReviewBloc(injector(), injector()));
   injector.registerFactory(() => FavouriteBloc(injector(), injector(), injector()));
-  injector.registerFactory(() => CartBloc());
-  injector.registerFactory(() => AuctionBloc(injector(), injector()));
+  injector.registerFactory(() => CartBloc(injector(), injector(), injector(), injector()));
+  injector.registerFactory(() => AuctionBloc(injector(), injector(), injector()));
   injector.registerFactory(() => ThemeBloc());
   injector.registerFactory(() => AddressCubit(injector(), injector()));
   injector.registerFactory(() => LocationBloc(injector(), injector()));
@@ -128,12 +136,17 @@ Future<void> init() async {
   injector.registerLazySingleton(() => GetProductsShopUseCase(injector()));
   injector.registerLazySingleton(() => GetProductsByTypeUseCase(injector()));
   injector.registerLazySingleton(() => GetFavoriteProductUseCase(injector()));
+  injector.registerLazySingleton(() => GetProductInCartUseCase(injector()));
   injector.registerLazySingleton(() => GetAuctionProductUseCase(injector()));
+  injector.registerLazySingleton(() => ActionAuctionUseCase(injector()));
   injector.registerLazySingleton(() => GetAuctionSessionInfoUseCase(injector()));
   injector.registerLazySingleton(() => AddAuctionProductUseCase(injector()));
   injector.registerLazySingleton(() => RemoveAuctionProductUseCase(injector()));
   injector.registerLazySingleton(() => RemoveFavoriteProductUseCase(injector()));
   injector.registerLazySingleton(() => AddFavoriteProductUseCase(injector()));
+  injector.registerLazySingleton(() => AddProductToCartUseCase(injector()));
+  injector.registerLazySingleton(() => UpdateProductInCartUseCase(injector()));
+  injector.registerLazySingleton(() => RemoveProductInCartUseCase(injector()));
   injector.registerLazySingleton(() => RegisterUseCase(injector()));
   injector.registerLazySingleton(() => ForgotPassUsecase(injector()));
   injector.registerLazySingleton(() => ResetPasswordUseCase(injector()));
@@ -159,6 +172,8 @@ Future<void> init() async {
           () => HomeRepositoryImpl(injector(), injector()));
   injector.registerLazySingleton<FavoriteBaseRepository>(
           () => FavoriteRepositoryImpl(injector(), injector()));
+  injector.registerLazySingleton<CartBaseRepository>(
+          () => CartRepositoryImpl(injector(), injector()));
   injector.registerLazySingleton<AuctionBaseRepository>(
           () => AuctionRepositoryImpl(injector(), injector()));
   injector.registerLazySingleton<RegisterBaseRepository>(
@@ -181,6 +196,8 @@ Future<void> init() async {
           () => HomeDatasourceImpl(injector()));
   injector.registerLazySingleton<FavoriteDatasource>(
           () => FavoriteDatasourceImpl(injector()));
+  injector.registerLazySingleton<CartDatasource>(
+          () => CartDatasourceImpl(injector()));
   injector.registerLazySingleton<AuctionDatasource>(
           () => AuctionDatasourceImpl(injector()));
   injector.registerLazySingleton<RegisterBaseDatasource>(

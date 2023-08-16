@@ -14,6 +14,13 @@ class GetInfoAuctionSession extends AuctionEvent{
   const GetInfoAuctionSession(this.productId);
 
 }
+class ActionAuction extends AuctionEvent{
+  final int productId;
+  final String price;
+  const ActionAuction(this.productId, this.price);
+
+}
+
 class RemoveAuctionProduct extends AuctionEvent{
   final int productId;
   const RemoveAuctionProduct(this.productId);
