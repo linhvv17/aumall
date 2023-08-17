@@ -37,19 +37,22 @@ class _AuctionViewState extends State<AuctionView> {
             bottom: TabBar(
               onTap: (tabIndex) {
                 switch (tabIndex) {
-                // Recent
+                  // Recent
                   case 0:
-                    BlocProvider.of<AuctionBloc>(context).add(const GetListAuctionProduct(2));
+                    BlocProvider.of<AuctionBloc>(context)
+                        .add(const GetListAuctionProduct(2));
                     break;
 
-                // Upcoming
+                  // Upcoming
                   case 1:
-                    BlocProvider.of<AuctionBloc>(context).add(const GetListAuctionProduct(1));
+                    BlocProvider.of<AuctionBloc>(context)
+                        .add(const GetListAuctionProduct(1));
                     break;
 
-                // Finished
+                  // Finished
                   case 2:
-                    BlocProvider.of<AuctionBloc>(context).add(const GetListAuctionProduct(3));
+                    BlocProvider.of<AuctionBloc>(context)
+                        .add(const GetListAuctionProduct(3));
                     break;
                 }
               },
@@ -73,6 +76,90 @@ class _AuctionViewState extends State<AuctionView> {
                       Text("Dang tai du lieu .....")
                     ],
                   ));
+                }
+                else if (state is AuctionDataLoaded) {
+                  List<ProductAuMallEntity> listAuction =
+                      state.listAuctionEntity.listAuction;
+                  return PageStorage(
+                    bucket: PageStorageBucket(),
+                    child: Column(
+                      children: [
+                        Expanded(
+                            child: listAuction.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      S.current.notauction,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  )
+                                : RefreshIndicator(
+                                    onRefresh: () async {
+                                      auctionBloc
+                                          .add(const GetListAuctionProduct(2));
+                                    },
+                                    child: GridView.builder(
+                                      physics:
+                                          const AlwaysScrollableScrollPhysics(
+                                              parent: BouncingScrollPhysics()),
+                                      itemCount: listAuction.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                              crossAxisCount: 2, height: 330),
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProductDetails(
+                                                          productSimpleEntity:
+                                                              listAuction[
+                                                                  index],
+                                                          index: index,
+                                                        ),
+                                                      ))
+                                                  .then((value) => {
+                                                        BlocProvider.of<
+                                                                    AuctionBloc>(
+                                                                context)
+                                                            .add(
+                                                                const GetListAuctionProduct(
+                                                                    2))
+                                                      });
+                                            },
+                                            child:
+                                                // Container()
+                                                ProductItemAuMall(
+                                              productFavoriteEntity:
+                                                  listAuction[index],
+                                              isAuctionProduct: true,
+                                            ));
+                                      },
+                                    ),
+                                  ))
+                      ],
+                    ),
+                  );
+                } else if (state is AuctionDataErrorState) {
+                  return Text(state.message);
+                } else {
+                  return Container();
+                }
+              }),
+              BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
+                if (state is AuctionDataLoading) {
+                  return const Center(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      Text("Dang tai du lieu .....")
+                    ],
+                  ));
                 } else if (state is AuctionDataLoaded) {
                   List<ProductAuMallEntity> listAuction =
                       state.listAuctionEntity.listAuction;
@@ -83,16 +170,17 @@ class _AuctionViewState extends State<AuctionView> {
                         Expanded(
                             child: listAuction.isEmpty
                                 ? Center(
-                                  child: Text(
-                                    S.current.notauction,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium,
-                                  ),
-                                )
+                                    child: Text(
+                                      S.current.notauction,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  )
                                 : RefreshIndicator(
                                     onRefresh: () async {
-                                      auctionBloc.add(const GetListAuctionProduct(2));
+                                      auctionBloc
+                                          .add(const GetListAuctionProduct(2));
                                     },
                                     child: GridView.builder(
                                       physics:
@@ -115,7 +203,12 @@ class _AuctionViewState extends State<AuctionView> {
                                                       index: index,
                                                     ),
                                                   )).then((value) => {
-
+                                                BlocProvider.of<
+                                                    AuctionBloc>(
+                                                    context)
+                                                    .add(
+                                                    const GetListAuctionProduct(
+                                                        2))
                                               });
                                             },
                                             child:
@@ -123,8 +216,7 @@ class _AuctionViewState extends State<AuctionView> {
                                                 ProductItemAuMall(
                                                     productFavoriteEntity:
                                                         listAuction[index],
-                                                  isAuctionProduct: true,
-                                                ));
+                                                    isAuctionProduct: true));
                                       },
                                     ),
                                   ))
@@ -158,89 +250,17 @@ class _AuctionViewState extends State<AuctionView> {
                         Expanded(
                             child: listAuction.isEmpty
                                 ? Center(
-                                  child: Text(
-                                    S.current.notauction,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium,
-                                  ),
-                                )
-                                : RefreshIndicator(
-                                    onRefresh: () async {
-                                      auctionBloc.add(const GetListAuctionProduct(2));
-                                    },
-                                    child: GridView.builder(
-                                      physics:
-                                          const AlwaysScrollableScrollPhysics(
-                                              parent: BouncingScrollPhysics()),
-                                      itemCount: listAuction.length,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                              crossAxisCount: 2, height: 330),
-                                      itemBuilder: (context, index) {
-                                        return InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ProductDetails(
-                                                      productSimpleEntity:
-                                                          listAuction[index],
-                                                      index: index,
-                                                    ),
-                                                  ));
-                                            },
-                                            child:
-                                                // Container()
-                                                ProductItemAuMall(
-                                                    productFavoriteEntity:
-                                                        listAuction[index],
-                                                    isAuctionProduct: true
-                                                ));
-                                      },
+                                    child: Text(
+                                      S.current.notauction,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
                                     ),
-                                  ))
-                      ],
-                    ),
-                  );
-                } else if (state is AuctionDataErrorState) {
-                  return Text(state.message);
-                } else {
-                  return Container();
-                }
-              }),
-              BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
-                if (state is AuctionDataLoading) {
-                  return const Center(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(),
-                      Text("Dang tai du lieu .....")
-                    ],
-                  ));
-                } else if (state is AuctionDataLoaded) {
-                  List<ProductAuMallEntity> listAuction =
-                      state.listAuctionEntity.listAuction;
-                  return PageStorage(
-                    bucket: PageStorageBucket(),
-                    child: Column(
-                      children: [
-                        Expanded(
-                            child: listAuction.isEmpty
-                                ? Center(
-                                  child: Text(
-                                    S.current.notauction,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium,
-                                  ),
-                                )
+                                  )
                                 : RefreshIndicator(
                                     onRefresh: () async {
-                                      auctionBloc.add(const GetListAuctionProduct(3));
+                                      auctionBloc
+                                          .add(const GetListAuctionProduct(3));
                                     },
                                     child: GridView.builder(
                                       physics:
@@ -262,15 +282,22 @@ class _AuctionViewState extends State<AuctionView> {
                                                           listAuction[index],
                                                       index: index,
                                                     ),
-                                                  ));
+                                                  )).then((value) => {
+                                                BlocProvider.of<
+                                                    AuctionBloc>(
+                                                    context)
+                                                    .add(
+                                                    const GetListAuctionProduct(
+                                                        2))
+                                              });
                                             },
                                             child:
                                                 // Container()
                                                 ProductItemAuMall(
-                                                    productFavoriteEntity:
-                                                        listAuction[index],
-                                                  isAuctionProduct: true,
-                                                ));
+                                              productFavoriteEntity:
+                                                  listAuction[index],
+                                              isAuctionProduct: true,
+                                            ));
                                       },
                                     ),
                                   ))
@@ -287,8 +314,4 @@ class _AuctionViewState extends State<AuctionView> {
           )),
     );
   }
-
-
-
-
 }
