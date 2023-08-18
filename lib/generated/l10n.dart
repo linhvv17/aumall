@@ -460,6 +460,16 @@ class S {
     );
   }
 
+  /// `Remember me `
+  String get saveAccount {
+    return Intl.message(
+      'Remember me ',
+      name: 'saveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login done successfully`
   String get loginsuccess {
     return Intl.message(

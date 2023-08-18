@@ -34,9 +34,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   // final Box<CartProductModel> itemBoxCartProduct = Hive.box<CartProductModel>("product-cache");
   // String nameProductCache = PreferenceHelper.getDataFromSharedPreference(key: "keyUser");
 
-  final Box<CartProductModel> itemBoxCartProduct = Hive.box<CartProductModel>(
-      PreferenceHelper.getDataFromSharedPreference(key: "keyUser")
-  );
+  // final Box<CartProductModel> itemBoxCartProduct = Hive.box<CartProductModel>(
+  //     PreferenceHelper.getDataFromSharedPreference(key: "keyUser")
+  // );
 
 
   CartBloc(this.getProductInCartUseCase, this.addProductToCartUseCase, this.removeProductInCartUseCase, this.updateProductInCartUseCase) : super(CartInitial()) {

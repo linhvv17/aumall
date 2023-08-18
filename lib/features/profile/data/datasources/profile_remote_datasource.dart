@@ -63,12 +63,12 @@ class ProfileDataSourceImpl implements ProfileDatasource {
 
   @override
   Future<ProfileModel> updatePassword(UpdatePassParnms params) async {
-    final response = await apiProvider.put(
-      endPoint: updatePasswordEndPoint,
+    final response = await apiProvider.post(
+      endPoint: changePasswordAuMall,
       data: {
-        'oldPassword': params.oldPassword,
-        'newPassword': params.newPassword,
-        'confirmPassword': params.confirmPassword,
+        'old_password': int.parse(params.oldPassword),
+        'new_password': int.parse(params.newPassword),
+        'new_password_confirm': int.parse(params.confirmPassword),
       },
       token: PreferenceHelper.getDataFromSharedPreference(
                             key: 'token') ?? '',
@@ -105,7 +105,7 @@ class ProfileDataSourceImpl implements ProfileDatasource {
           key: 'token') ?? '',
     );
 
-    return true;
+    return response.statusCode == 200 ? true : false;
   }
 
   @override
@@ -115,6 +115,6 @@ class ProfileDataSourceImpl implements ProfileDatasource {
       token: PreferenceHelper.getDataFromSharedPreference(
           key: 'token') ?? '',
     );
-    return true;
+    return response.statusCode == 200 ? true : false;
   }
 }

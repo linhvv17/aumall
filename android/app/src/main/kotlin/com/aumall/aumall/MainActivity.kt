@@ -1,4 +1,4 @@
-package com.au.aumall
+package com.aumall.aumall
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -81,8 +81,8 @@ class AuctionDatasourceImpl implements AuctionDatasource{
   Future<bool> actionAuction(int idProduct, String price) async {
     final dataSend = <String, dynamic> {
       "product_id": idProduct,
-      // "price" : double.parse(price).toInt()
-      "price" : 2925000000
+      "price" : double.parse(price).toInt()
+      // "price" : 2925000000
     };
     final response = await apiProvider.post(
         endPoint: submitAuctionAuMall,

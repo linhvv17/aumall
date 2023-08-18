@@ -48,6 +48,7 @@ const String shippingAddressAuMall  = "/shipping-address";
 const String sendReviewAuMall  = "/product-review";
 const String reviewAuMall  = "/product-review";
 const String updatePasswordAuMall = '/users/password/update';
+const String changePasswordAuMall = '/user/change-password';
 const String updateProfileAuMall = '/user/update';
 const String submitAuctionAuMall = '/submit-auction';
 

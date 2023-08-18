@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:889879832382:android:5f643a7028e8ce49be6e6f",
+        "mobilesdk_app_id": "1:889879832382:android:19359ad7ee460d04be6e6f",
         "android_client_info": {
-          "package_name": "com.au.aumall"
+          "package_name": "com.aumall.aumall"
         }
       },
       "oauth_client": [

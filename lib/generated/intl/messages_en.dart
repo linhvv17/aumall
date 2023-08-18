@@ -225,6 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "repeatpasswordEmpty": MessageLookupByLibrary.simpleMessage(
             "Confirm New Password is Required"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset Password"),
+        "saveAccount": MessageLookupByLibrary.simpleMessage("Remember me "),
         "saveAddress": MessageLookupByLibrary.simpleMessage("Save Address"),
         "savepass": MessageLookupByLibrary.simpleMessage("Save Password"),
         "search": MessageLookupByLibrary.simpleMessage("search"),

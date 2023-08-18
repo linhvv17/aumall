@@ -40,7 +40,7 @@ class _HomeState extends State<HomeView> {
           if (state is HomeErrorState) {
             //show popup direct to login
             if(state.message == S.current.unauthorizedError){
-              showAlertDialog();
+              showAlertDialogUnauthorizedError();
             }
           }
         },
@@ -280,7 +280,7 @@ class _HomeState extends State<HomeView> {
 
 
 
-  void showAlertDialog() {
+  void showAlertDialogUnauthorizedError() {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -298,8 +298,8 @@ class _HomeState extends State<HomeView> {
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   onPressed: () {
                     // Write code to delete item
-                    Navigator.pushReplacementNamed(
-                        context, AppRoutes.login);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, AppRoutes.login, ModalRoute.withName('/'));
                   },
                   child: const Text(
                     'Yes',

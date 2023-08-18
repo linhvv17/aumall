@@ -42,7 +42,7 @@ class AuctionBloc extends Bloc<AuctionEvent, AuctionState> {
     }) ;
 
     on<ActionAuction>((event, emit) async {
-      emit(GetInfoAuctionSessionLoading());
+      // emit(GetInfoAuctionSessionLoading());
       final failureOrSuccess = await actionAuctionUseCase(ActionAuctionProductUseCaseParams(idProduct: event.productId, price: event.price));
       failureOrSuccess.fold(
               (failure) => emit(AuctionDataErrorState(failure.message)),

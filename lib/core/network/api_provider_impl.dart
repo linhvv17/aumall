@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:aumall/core/network/api_provider.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
+import 'package:flutter/foundation.dart';
 import '../utilities/endpoints.dart';
 
 
@@ -27,8 +28,6 @@ class APIProviderImpl implements APIProvider {
       dio.options.connectTimeout = timeOut;
     }
 
-
-
     dio.options.headers = {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
       if (!isMultipart) 'Content-Type': 'application/json',
@@ -36,8 +35,10 @@ class APIProviderImpl implements APIProvider {
       if (token != null) 'Authorization':'Bearer $token',
       // 'lang': 'en',
     };
-    print('APIProviderImpl ${endPoint}');
-    print('APIProviderImpl Bearer $token');
+    if (kDebugMode) {
+      print('APIProviderImpl $endPoint');
+      print('APIProviderImpl Bearer $token');
+    }
 
 
     dio.interceptors.add(

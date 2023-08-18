@@ -46,6 +46,7 @@
   "enteremail" :
       "Please, enter your email address. You will receive a Code to create a new password via email.",
   "login" : "Login",
+  "saveAccount" : "Remember me ",
   "loginsuccess" : "Login done successfully",
   "updatepasssuccess" : "Update Password done successfully",
   "updatepassfail" : "Update Password Failed",

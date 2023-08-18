@@ -227,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "repeatpasswordEmpty": MessageLookupByLibrary.simpleMessage(
             "Yêu cầu xác nhận mật khẩu mới"),
         "reset": MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
+        "saveAccount": MessageLookupByLibrary.simpleMessage("Lưu tài khoản "),
         "saveAddress": MessageLookupByLibrary.simpleMessage("Lưu địa chỉ"),
         "savepass": MessageLookupByLibrary.simpleMessage("Lưu mật khẩu"),
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),

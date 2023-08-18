@@ -29,8 +29,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final LogOutUseCase logOutUseCase;
   CloudinaryResponse? response;
 
-  ProfileBloc(
-      this.getUserDetails, this.updateProfile, this.getAddressListUseCase, this.addAddressUseCase, this.logOutUseCase)
+  ProfileBloc(this.getUserDetails, this.updateProfile,
+      this.getAddressListUseCase, this.addAddressUseCase, this.logOutUseCase)
       : super(ProfileInitial()) {
     on<GetProfile>((event, emit) async {
       emit(ProfileLoadingState());
@@ -47,24 +47,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<LogOut>((event, emit) async {
       emit(LogOutLoadingState());
       final failureOrSuccess = await logOutUseCase(NoParams());
-      failureOrSuccess
-          .fold((failure) => emit(ProfileErrorState(failure.message)),
-              (success) {
-            emit(LogOutSuccessState(success));
-          });
+      failureOrSuccess.fold(
+          (failure) => emit(ProfileErrorState(failure.message)),
+          (success) => emit(LogOutSuccessState(success)));
     });
 
     on<UpdataProfileEvent>((event, emit) async {
       emit(UpdateProfileLoadingState());
-      final failureOrSuccess = await updateProfile(
-          UpdateProfileUsecaseParams(
-              event.fullName,
-              event.avatar,
-              event.fullName,
-              event.mobile,
-              event.dateOfBirth,
-              event.address
-          ));
+      final failureOrSuccess = await updateProfile(UpdateProfileUsecaseParams(
+          event.fullName,
+          event.avatar,
+          event.fullName,
+          event.mobile,
+          event.dateOfBirth,
+          event.address));
       failureOrSuccess
           .fold((failure) => emit(UpdateProfileErrorState(failure.message)),
               (success) {
@@ -79,7 +75,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final XFile? selectedImage =
           await imagePicker.pickImage(source: ImageSource.gallery);
       emit(PickedImageState(selectedImage!));
-
     });
 
     on<GetListAddress>((event, emit) async {
@@ -96,14 +91,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<AddAddress>((event, emit) async {
       emit(ProfileLoadingState());
 
-      final failureOrSuccess = await addAddressUseCase(
-        AddAddressParams(
-            event.name,
-            event.mobile,
-            event.address,
-            event.isDefault ? 1 : 0
-        )
-      );
+      final failureOrSuccess = await addAddressUseCase(AddAddressParams(
+          event.name, event.mobile, event.address, event.isDefault ? 1 : 0));
       failureOrSuccess.fold((failure) {
         emit(ProfileErrorState(failure.message));
       }, (success) {

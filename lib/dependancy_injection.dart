@@ -1,3 +1,4 @@
+import 'package:aumall/core/local/cecure_storage.dart';
 import 'package:aumall/core/local/shared_preference.dart';
 import 'package:aumall/features/auction/presentation/bloc/auction_bloc.dart';
 import 'package:aumall/features/cart/data/datasource/cart_datasource.dart';
@@ -75,7 +76,7 @@ import 'features/profile/data/repositories/profile_repository_impl.dart';
 import 'features/profile/domain/repositories/profile_repository.dart';
 import 'features/profile/domain/usecases/getUserDetail.dart';
 import 'features/profile/domain/usecases/get_address_list_usecase.dart';
-import 'features/profile/domain/usecases/updatePassword.dart';
+import 'features/profile/domain/usecases/update_password_usecase.dart';
 import 'features/profile/domain/usecases/updateProfile.dart';
 import 'features/profile/presentation/bloc/profile_bloc.dart';
 import 'features/profile/presentation/bloc/update_password_bloc.dart';
@@ -228,4 +229,5 @@ Future<void> init() async {
 
   //SharedPreference
   injector.registerLazySingleton<PreferenceHelper>(() => PreferenceHelper());
+  injector.registerLazySingleton<SecureStorage>(() => SecureStorage());
 }

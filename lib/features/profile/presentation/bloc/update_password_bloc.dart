@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../domain/entities/profile_entity.dart';
-import '../../domain/usecases/updatePassword.dart';
+import '../../domain/usecases/update_password_usecase.dart';
 
 part 'update_password_event.dart';
 part 'update_password_state.dart';

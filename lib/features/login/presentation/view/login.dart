@@ -1,4 +1,5 @@
 
+import 'package:aumall/core/local/cecure_storage.dart';
 import 'package:aumall/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,10 +25,18 @@ class _LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
   bool hidePass = true;
 
+  bool saveAccount = false;
+
 
   @override
   void initState() {
     super.initState();
+    loadAccountInfo();
+  }
+
+  void loadAccountInfo() async {
+    emailController.text = await SecureStorage().storage.read(key: "username") ?? "";
+    emailController.text = await SecureStorage().storage.read(key: "username") ?? "";
   }
 
   @override
@@ -102,6 +111,24 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       borderRadius: 16,
                       inputType: TextInputType.text),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        checkColor: Colors.white,  // color of tick Mark
+                        activeColor: Colors.deepOrange,
+                        value: saveAccount,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            saveAccount = value!;
+                          });
+                        },
+                      ),
+                      Text(S.current.saveAccount)
+                    ],
+                  ),
+                  const SizedBox(height: 10),
                   Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
@@ -138,6 +165,10 @@ class _LoginViewState extends State<LoginView> {
                               height: 50,
                               ontab: () {
                                 if (formKey.currentState!.validate()) {
+                                  if(saveAccount){
+                                    SecureStorage().storage.write(key: "username", value: emailController.text);
+                                    SecureStorage().storage.write(key: "password", value: passController.text);
+                                  }
                                   BlocProvider.of<LoginBloc>(context).add(
                                       UserLogin(emailController.text,
                                           passController.text));

@@ -46,6 +46,7 @@
   "enteremail" :
       "Vui lòng nhập địa chỉ email của bạn. Bạn sẽ nhận được Mã để tạo mật khẩu mới qua email.",
   "login" : "Đăng nhập ",
+  "saveAccount" : "Lưu tài khoản ",
   "loginsuccess" : "Đăng nhập thành công",
   "updatepasssuccess" : "Cập nhật mật khẩu thành công",
   "updatepassfail" : "Cập nhật mật khẩu thất bại",
