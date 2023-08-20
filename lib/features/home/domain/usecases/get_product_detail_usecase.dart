@@ -6,20 +6,19 @@ import 'package:dartz/dartz.dart';
 
 import '../entities/product_detail_entity.dart';
 
-class GetProductDetailUseCase extends BaseUsecase<ProductDetailEntity, GetProductDetailUseCaseParams>{
+class GetProductDetailUseCase
+    extends BaseUsecase<ProductDetailEntity, GetProductDetailUseCaseParams> {
   final HomeBaseRepository homeRepository;
   GetProductDetailUseCase(this.homeRepository);
 
   @override
   Future<Either<Failure, ProductDetailEntity>> call(params) async {
-    final response =  await homeRepository.getProductDetail(
-      GetProductDetailParams(id: params.idProduct)
-    );
+    final response = await homeRepository
+        .getProductDetail(GetProductDetailParams(id: params.idProduct));
     print('GetProductDetailUseCase ${response}');
     return response;
   }
 }
-
 
 class GetProductDetailUseCaseParams {
   final int idProduct;

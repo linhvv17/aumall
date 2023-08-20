@@ -10,15 +10,13 @@ class ListShopProductsModel extends ListProductShopEntity {
     print("ListShopProductsModel.fromJson json${json}");
     print("ListShopProductsModel.fromJson json data ${json['data']}");
 
-    List<ProductAuMallModel> list
-    = List<ProductAuMallModel>.from(
+    List<ProductAuMallModel> list = List<ProductAuMallModel>.from(
         json['data']['data'].map((x) => ProductAuMallModel.fromJson(x)));
 
-    print("ListShopProductsModel.fromJson json data List<ProductAuMallModel> ${list}");
-    print("ListShopProductsModel.fromJson json data List<ProductAuMallModel> ${list.length}");
-    return ListShopProductsModel(
-        list
-    );
+    print(
+        "ListShopProductsModel.fromJson json data List<ProductAuMallModel> ${list}");
+    print(
+        "ListShopProductsModel.fromJson json data List<ProductAuMallModel> ${list.length}");
+    return ListShopProductsModel(list);
   }
-
 }

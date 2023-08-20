@@ -5,17 +5,16 @@ class RegisterModel extends RegisterEntity {
       {required super.id,
       required super.name,
       required super.email,
-        // ,
+      // ,
       // required super.createdAt,
       // required super.role,
-      required super.token
-      });
+      required super.token});
   factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
-        id: json["id"]??"",
-        name: json["name"]??"",
-        email: json["email"]??"",
+        id: json["id"] ?? "",
+        name: json["name"] ?? "",
+        email: json["email"] ?? "",
         // createdAt: DateTime.parse(json["createdAt"]??""),
         // role: json["role"]??"",
-        token: json["token"]??"",
+        token: json["token"] ?? "",
       );
 }

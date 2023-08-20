@@ -13,7 +13,8 @@ class GetReviewsUseCase
   @override
   Future<Either<Failure, GetReviewsEntity>> call(
       GetReviewsUseCaseParams params) async {
-    return await productRepository.getReviews(GetReviewsParams(params.productId));
+    return await productRepository
+        .getReviews(GetReviewsParams(params.productId));
   }
 }
 

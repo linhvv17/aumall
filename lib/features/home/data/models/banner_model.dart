@@ -1,17 +1,13 @@
-
 import 'package:aumall/features/home/domain/entities/banner_entity.dart';
 import 'package:equatable/equatable.dart';
 
-class BannerModel extends BannerEntity{
+class BannerModel extends BannerEntity {
   const BannerModel(super.images);
   factory BannerModel.fromJson(Map<String, dynamic> json) {
     return BannerModel(
-      List<ImageModel>.from(
-          json['data'].map((x) => ImageModel.fromJson(x))),
+      List<ImageModel>.from(json['data'].map((x) => ImageModel.fromJson(x))),
     );
   }
-
-
 
   // factory BannerModel.fromJson(Map<String, dynamic> json) {
   //   print('BannerModel ${json}');
@@ -37,19 +33,13 @@ class BannerModel extends BannerEntity{
   //       listImage
   //   );
   // }
-
-
 }
 
 class ImageModel extends ImageEntity {
   const ImageModel(super.publicid, super.url);
   factory ImageModel.fromJson(Map<String, dynamic> json) =>
-      ImageModel(
-          json["id"].toString(),
-          json["image_url"].toString()
-      );
+      ImageModel(json["id"].toString(), json["image_url"].toString());
 }
-
 
 class ImageEntity extends Equatable {
   final String id;

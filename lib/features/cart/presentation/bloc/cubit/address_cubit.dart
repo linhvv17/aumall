@@ -31,7 +31,7 @@ class AddressCubit extends Cubit<AddressState> {
   ) async {
     emit(GetLocationLoadingState());
     final data = await placesDataSource.getPlaceDetailFromId(placeId, context);
-   location = LatLng(
+    location = LatLng(
         data.result.geometry.location.lat, data.result.geometry.location.lng);
     emit(GetLocationLoadedState(location: data));
 

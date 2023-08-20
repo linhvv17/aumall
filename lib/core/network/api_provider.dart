@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-abstract class APIProvider{
+abstract class APIProvider {
   Future<Response> post({
     String? baseUrl,
     required String endPoint,

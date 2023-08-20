@@ -13,49 +13,49 @@ class FavoriteRepositoryImpl extends FavoriteBaseRepository {
   FavoriteRepositoryImpl(this.networkInfo, this.favoriteDatasource);
 
   @override
-  Future<Either<Failure, ListFavoriteEntity>> getFavoriteList()  async {
-    if(await networkInfo.isConnected){
+  Future<Either<Failure, ListFavoriteEntity>> getFavoriteList() async {
+    if (await networkInfo.isConnected) {
       try {
         final data = await favoriteDatasource.getListFavorite();
         print("FavoriteRepositoryImpl getFavoriteList() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("FavoriteRepositoryImpl getFavoriteList() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
   Future<Either<Failure, bool>> removeFavoriteProduct(int idProduct) async {
-    if(await networkInfo.isConnected){
+    if (await networkInfo.isConnected) {
       try {
         final data = await favoriteDatasource.removeFavoriteProduct(idProduct);
         print("FavoriteRepositoryImpl getFavoriteList() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("FavoriteRepositoryImpl getFavoriteList() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
   Future<Either<Failure, bool>> addFavoriteProduct(int idProduct) async {
-    if(await networkInfo.isConnected){
+    if (await networkInfo.isConnected) {
       try {
         final data = await favoriteDatasource.addFavoriteProduct(idProduct);
         print("FavoriteRepositoryImpl getFavoriteList() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("FavoriteRepositoryImpl getFavoriteList() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-
 import '../../../core/colors/colors.dart';
 import '../../../core/utilities/mediaquery.dart';
 import '../../../generated/l10n.dart';
@@ -12,11 +11,7 @@ import '../../login/presentation/widgets/mainbutton.dart';
 
 class BannerAds extends StatefulWidget {
   final List images;
-  const BannerAds({
-    super.key,
-    required this.images
-  });
-
+  const BannerAds({super.key, required this.images});
 
   // images: [
   // ImageEntity(
@@ -53,13 +48,11 @@ class _BannerAdsState extends State<BannerAds> {
     );
   }
 
-
-
-  createListBanner (List images){
-    var banners  = <Image>[];
+  createListBanner(List images) {
+    var banners = <Image>[];
     // // var list = List<int>.generate(images.length, (i) =>i + 1 );
-    for (int i = 0 ; i  < images[0].length; i++) {
-      var img  = Image.network((widget.images[0][i] as ImageModel).src);
+    for (int i = 0; i < images[0].length; i++) {
+      var img = Image.network((widget.images[0][i] as ImageModel).src);
       print('createListBanner ${(widget.images[0][i] as ImageModel).src} ');
       banners.add(img);
     }
@@ -72,6 +65,4 @@ class _BannerAdsState extends State<BannerAds> {
     // banners.add(Image.network(imageURL2));
     return banners;
   }
-
-
 }

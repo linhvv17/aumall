@@ -34,7 +34,7 @@ class LoginRepositoryImpl implements LoginBaseRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return  Left(OfflineFailure(S.current.noInternetError));
+      return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 }

@@ -22,7 +22,7 @@ class MainButton extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .headline6!
-              .copyWith(color: ColorManager.white,fontWeight: FontWeight.bold),
+              .copyWith(color: ColorManager.white, fontWeight: FontWeight.bold),
         ),
       ),
     );

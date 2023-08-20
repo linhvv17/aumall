@@ -4,13 +4,16 @@ import '../../../../core/error/failure.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../repositories/cart_repository.dart';
 
-class RemoveProductInCartUseCase extends BaseUsecase<bool, RemoveFavoriteProductUseCaseParams>{
+class RemoveProductInCartUseCase
+    extends BaseUsecase<bool, RemoveFavoriteProductUseCaseParams> {
   final CartBaseRepository cartBaseRepository;
   RemoveProductInCartUseCase(this.cartBaseRepository);
 
   @override
-  Future<Either<Failure, bool>> call(RemoveFavoriteProductUseCaseParams params) async {
-    final response =  await cartBaseRepository.removeProductInCart(params.idProduct);
+  Future<Either<Failure, bool>> call(
+      RemoveFavoriteProductUseCaseParams params) async {
+    final response =
+        await cartBaseRepository.removeProductInCart(params.idProduct);
     return response;
   }
 }

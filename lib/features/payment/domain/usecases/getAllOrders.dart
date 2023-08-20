@@ -8,11 +8,9 @@ class GetAllOrderesUsecase implements BaseUsecase<AllOrdersEntity, NoParams> {
   final PaymentRepository paymentRepository;
 
   GetAllOrderesUsecase(this.paymentRepository);
-  
-  @override
-  Future<Either<Failure, AllOrdersEntity>> call(NoParams params)async{
- return await paymentRepository.getAllOrders(params);
-  }
- 
 
+  @override
+  Future<Either<Failure, AllOrdersEntity>> call(NoParams params) async {
+    return await paymentRepository.getAllOrders(params);
+  }
 }

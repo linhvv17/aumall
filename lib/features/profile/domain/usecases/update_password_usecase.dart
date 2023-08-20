@@ -13,7 +13,8 @@ class UpdatePasswordUseCase
   @override
   Future<Either<Failure, ProfileEntity>> call(
       UpdatePasswordUseCaseParams params) async {
-    return await profileRepository.updatePassword(UpdatePassParnms(params.oldPassword, params.newPassword, params.confirmPassword));
+    return await profileRepository.updatePassword(UpdatePassParnms(
+        params.oldPassword, params.newPassword, params.confirmPassword));
   }
 }
 

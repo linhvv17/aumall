@@ -105,7 +105,8 @@ class _CartViewState extends State<CartView> {
               listenWhen: (previous, current) {
                 // return true/false to determine whether or not
                 // to invoke listener with state
-                return current is RemoveProductInCartSuccess || current is UpdateProductInCartSuccess;
+                return current is RemoveProductInCartSuccess ||
+                    current is UpdateProductInCartSuccess;
               },
               listener: (context, state) {
                 // do stuff here based on BlocA's state

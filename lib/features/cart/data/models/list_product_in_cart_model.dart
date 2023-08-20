@@ -1,4 +1,3 @@
-
 import '../../../shop/data/models/products_model.dart';
 import '../../domain/entities/list_product_in_cart_entity.dart';
 
@@ -9,24 +8,18 @@ class ListProductInCartModel extends ListProductInCartEntity {
     print("ListProductInCartModel.fromJson json${json}");
     print("ListProductInCartModel.fromJson json data ${json['data']}");
 
-    List<ProductInCartModel> list
-    = List<ProductInCartModel>.from(
+    List<ProductInCartModel> list = List<ProductInCartModel>.from(
         json['data']['data'].map((x) => ProductInCartModel.fromJson(x)));
 
-    print("ListProductInCartModel.fromJson json data List<ProductFavoriteModel> ${list}");
-    print("ListProductInCartModel.fromJson json data List<ProductFavoriteModel> ${list.length}");
-    return ListProductInCartModel(
-        list
-    );
+    print(
+        "ListProductInCartModel.fromJson json data List<ProductFavoriteModel> ${list}");
+    print(
+        "ListProductInCartModel.fromJson json data List<ProductFavoriteModel> ${list.length}");
+    return ListProductInCartModel(list);
   }
-
 }
 
-
-
-
-
-class ProductInCartModel extends ProductInCartEntity{
+class ProductInCartModel extends ProductInCartEntity {
   ProductInCartModel(
     super.id,
     super.productId,
@@ -37,17 +30,16 @@ class ProductInCartModel extends ProductInCartEntity{
     super.product,
   );
 
-
   factory ProductInCartModel.fromJson(Map<String, dynamic> json) =>
       ProductInCartModel(
-    json['id'],
-    json['product_id'],
-    json['order_id'],
-    json['amount'],
-    json['quantity'],
-    json['created_at'],
-    ProductModel.fromJson(json['product']),
-  );
+        json['id'],
+        json['product_id'],
+        json['order_id'],
+        json['amount'],
+        json['quantity'],
+        json['created_at'],
+        ProductModel.fromJson(json['product']),
+      );
 
   // Map<String, dynamic> toJson() {
   //   final _data = <String, dynamic>{};
@@ -62,7 +54,7 @@ class ProductInCartModel extends ProductInCartEntity{
   // }
 }
 
-class ProductModel extends ProductEntity{
+class ProductModel extends ProductEntity {
   const ProductModel(
     super.id,
     super.title,
@@ -76,19 +68,18 @@ class ProductModel extends ProductEntity{
     // super.isWishList,
   );
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) =>
-      ProductModel(
-    json['id'],
-    json['title'],
-    json['thumbnail'],
-    json['price'],
-    json['discount'].toString(),
-    json['current_stock'].toString(),
-    json['thumbnail_url'],
-    json['video_link'].toString(),
-    json['is_favorite'],
-    // json['is_wish_list'] ?? false,
-  );
+  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+        json['id'],
+        json['title'],
+        json['thumbnail'],
+        json['price'],
+        json['discount'].toString(),
+        json['current_stock'].toString(),
+        json['thumbnail_url'],
+        json['video_link'].toString(),
+        json['is_favorite'],
+        // json['is_wish_list'] ?? false,
+      );
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};

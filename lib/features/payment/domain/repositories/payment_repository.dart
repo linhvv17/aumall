@@ -15,8 +15,7 @@ abstract class PaymentRepository {
       PaymentRequestParams params);
   Future<Either<Failure, NewOrderEntity>> createNewOrder(
       CreateNewOrderParams params);
-      Future<Either<Failure, AllOrdersEntity>> getAllOrders(
-      NoParams params);
+  Future<Either<Failure, AllOrdersEntity>> getAllOrders(NoParams params);
 }
 
 class RequestAuthParams {
@@ -85,5 +84,6 @@ class CreateNewOrderParams {
       this.country,
       this.status,
       this.id,
-      this.state, this.orderItems);
+      this.state,
+      this.orderItems);
 }

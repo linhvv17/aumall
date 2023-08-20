@@ -8,8 +8,11 @@ abstract class ProfileEvent extends Equatable {
 }
 
 class GetProfile extends ProfileEvent {}
+
 class LogOut extends ProfileEvent {}
+
 class GetListAddress extends ProfileEvent {}
+
 class AddAddress extends ProfileEvent {
   final String name;
   final String mobile;
@@ -27,8 +30,8 @@ class UpdataProfileEvent extends ProfileEvent {
   final String dateOfBirth;
   final String address;
 
-  const UpdataProfileEvent(this.name, this.avatar, this.fullName, this.mobile, this.dateOfBirth, this.address);}
-
-class UploadImage extends ProfileEvent {
-
+  const UpdataProfileEvent(this.name, this.avatar, this.fullName, this.mobile,
+      this.dateOfBirth, this.address);
 }
+
+class UploadImage extends ProfileEvent {}

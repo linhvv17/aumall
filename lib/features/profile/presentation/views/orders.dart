@@ -27,7 +27,7 @@ class OrdersView extends StatelessWidget {
             S.current.myOrders,
             style: Theme.of(context).textTheme.headline6,
           ),
-          bottom:  TabBar(
+          bottom: TabBar(
             tabs: [
               Tab(
                 text: S.current.activeOrders,
@@ -44,10 +44,12 @@ class OrdersView extends StatelessWidget {
               builder: (context, state) {
                 final bloc = BlocProvider.of<OrderBloc>(context);
                 if (state is AllOrdersLoaded) {
-                  return  bloc.activeOrders.isEmpty? LottieBuilder.asset('assets/images/empty.json') :ListView.builder(
-                    itemCount: bloc.activeOrders.length,
-                    itemBuilder: (context, index) => OrderCard(index: index)
-                  );
+                  return bloc.activeOrders.isEmpty
+                      ? LottieBuilder.asset('assets/images/empty.json')
+                      : ListView.builder(
+                          itemCount: bloc.activeOrders.length,
+                          itemBuilder: (context, index) =>
+                              OrderCard(index: index));
                 } else if (state is AllOrdersLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -63,10 +65,12 @@ class OrdersView extends StatelessWidget {
               builder: (context, state) {
                 final bloc = BlocProvider.of<OrderBloc>(context);
                 if (state is AllOrdersLoaded) {
-                  return bloc.pastOrders.isEmpty? LottieBuilder.asset('assets/images/empty.json') :ListView.builder(
-                    itemCount: bloc.pastOrders.length,
-                    itemBuilder: (context, index) => OrderCardPastOrders(index: index)
-                  );
+                  return bloc.pastOrders.isEmpty
+                      ? LottieBuilder.asset('assets/images/empty.json')
+                      : ListView.builder(
+                          itemCount: bloc.pastOrders.length,
+                          itemBuilder: (context, index) =>
+                              OrderCardPastOrders(index: index));
                 } else if (state is AllOrdersLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),

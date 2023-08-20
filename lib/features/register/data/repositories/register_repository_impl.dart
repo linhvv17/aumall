@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/error_handler.dart';
 import '../../../../core/error/failure.dart';
@@ -25,7 +24,7 @@ class RegisterRepositoryImpl implements RegisterBaseRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return  Left(OfflineFailure(S.current.noInternetError));
+      return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 }

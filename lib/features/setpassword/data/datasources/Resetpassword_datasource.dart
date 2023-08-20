@@ -1,4 +1,3 @@
-
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/network/api_provider.dart';
 import '../../../../core/utilities/endpoints.dart';
@@ -10,15 +9,13 @@ abstract class ResetPasswordDatasource {
 }
 
 class ResetPasswordDataSourceImpl implements ResetPasswordDatasource {
-
   final APIProvider apiProvider;
 
-  ResetPasswordDataSourceImpl( this.apiProvider);
+  ResetPasswordDataSourceImpl(this.apiProvider);
   @override
   Future<ResetPasswordModel> resetPassword(ResetPasswordParams params) async {
     final response = await apiProvider.put(
-        endPoint:
-            '$resetPasswordEndPoint$code',
+        endPoint: '$resetPasswordEndPoint$code',
         data: {
           "password": params.password,
           "confirmPassword": params.confirmPassword

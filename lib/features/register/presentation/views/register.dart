@@ -178,7 +178,7 @@ class _RegisterViewState extends State<RegisterView> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child:  Text(S.current.login),
+                        child: Text(S.current.login),
                       ),
                       Container(
                         width: 20,

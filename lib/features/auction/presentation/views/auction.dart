@@ -67,17 +67,16 @@ class _AuctionViewState extends State<AuctionView> {
             children: [
               BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
                 if (state is AuctionDataLoading) {
-                  return const Center(
+                  return Center(
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircularProgressIndicator(),
-                      Text("Dang tai du lieu .....")
+                      const CircularProgressIndicator(),
+                      Text(S.current.loading)
                     ],
                   ));
-                }
-                else if (state is AuctionDataLoaded) {
+                } else if (state is AuctionDataLoaded) {
                   List<ProductAuMallEntity> listAuction =
                       state.listAuctionEntity.listAuction;
                   return PageStorage(
@@ -151,13 +150,13 @@ class _AuctionViewState extends State<AuctionView> {
               }),
               BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
                 if (state is AuctionDataLoading) {
-                  return const Center(
+                  return Center(
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircularProgressIndicator(),
-                      Text("Dang tai du lieu .....")
+                      const CircularProgressIndicator(),
+                      Text(S.current.loading)
                     ],
                   ));
                 } else if (state is AuctionDataLoaded) {
@@ -194,22 +193,24 @@ class _AuctionViewState extends State<AuctionView> {
                                         return InkWell(
                                             onTap: () {
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ProductDetails(
-                                                      productSimpleEntity:
-                                                          listAuction[index],
-                                                      index: index,
-                                                    ),
-                                                  )).then((value) => {
-                                                BlocProvider.of<
-                                                    AuctionBloc>(
-                                                    context)
-                                                    .add(
-                                                    const GetListAuctionProduct(
-                                                        2))
-                                              });
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProductDetails(
+                                                          productSimpleEntity:
+                                                              listAuction[
+                                                                  index],
+                                                          index: index,
+                                                        ),
+                                                      ))
+                                                  .then((value) => {
+                                                        BlocProvider.of<
+                                                                    AuctionBloc>(
+                                                                context)
+                                                            .add(
+                                                                const GetListAuctionProduct(
+                                                                    2))
+                                                      });
                                             },
                                             child:
                                                 // Container()
@@ -231,13 +232,13 @@ class _AuctionViewState extends State<AuctionView> {
               }),
               BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
                 if (state is AuctionDataLoading) {
-                  return const Center(
+                  return Center(
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircularProgressIndicator(),
-                      Text("Dang tai du lieu .....")
+                      const CircularProgressIndicator(),
+                      Text(S.current.loading)
                     ],
                   ));
                 } else if (state is AuctionDataLoaded) {
@@ -274,22 +275,24 @@ class _AuctionViewState extends State<AuctionView> {
                                         return InkWell(
                                             onTap: () {
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ProductDetails(
-                                                      productSimpleEntity:
-                                                          listAuction[index],
-                                                      index: index,
-                                                    ),
-                                                  )).then((value) => {
-                                                BlocProvider.of<
-                                                    AuctionBloc>(
-                                                    context)
-                                                    .add(
-                                                    const GetListAuctionProduct(
-                                                        2))
-                                              });
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProductDetails(
+                                                          productSimpleEntity:
+                                                              listAuction[
+                                                                  index],
+                                                          index: index,
+                                                        ),
+                                                      ))
+                                                  .then((value) => {
+                                                        BlocProvider.of<
+                                                                    AuctionBloc>(
+                                                                context)
+                                                            .add(
+                                                                const GetListAuctionProduct(
+                                                                    2))
+                                                      });
                                             },
                                             child:
                                                 // Container()

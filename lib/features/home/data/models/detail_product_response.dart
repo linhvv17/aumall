@@ -10,11 +10,13 @@ class DetailProductResponse {
   late final ProductDetailDataModel data;
   late final List<RelatedProducts> relatedProducts;
 
-  DetailProductResponse.fromJson(Map<String, dynamic> json){
+  DetailProductResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     data = ProductDetailDataModel.fromJson(json['data']);
-    relatedProducts = List.from(json['relatedProducts']).map((e)=>RelatedProducts.fromJson(e)).toList();
+    relatedProducts = List.from(json['relatedProducts'])
+        .map((e) => RelatedProducts.fromJson(e))
+        .toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -22,7 +24,7 @@ class DetailProductResponse {
     _data['status'] = status;
     _data['message'] = message;
     _data['data'] = data.toJson();
-    _data['relatedProducts'] = relatedProducts.map((e)=>e.toJson()).toList();
+    _data['relatedProducts'] = relatedProducts.map((e) => e.toJson()).toList();
     return _data;
   }
 }
@@ -89,36 +91,37 @@ class ProductDetailDataModel {
   late final User user;
   late final List<Reviews> reviews;
 
-  ProductDetailDataModel.fromJson(Map<String, dynamic> json){
+  ProductDetailDataModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
-    addedBy = json['added_by'].toString() ?? '';//
+    addedBy = json['added_by'].toString() ?? ''; //
     title = json['title'].toString();
     description = json['description'].toString();
     view = json['view'];
-    videoProvider = json['video_provider'].toString()?? '';//
-    videoUrl = json['video_url'].toString()?? '';//
+    videoProvider = json['video_provider'].toString() ?? ''; //
+    videoUrl = json['video_url'].toString() ?? ''; //
     content = json['content'].toString();
     categoryId = json['category_id'];
     brandId = json['brand_id'];
     madeInId = json['made_in_id'];
     thumbnail = json['thumbnail'];
-    featured = json['featured'].toString()?? '';//
-    flashSale = json['flash_sale'].toString()?? '';//
+    featured = json['featured'].toString() ?? ''; //
+    flashSale = json['flash_sale'].toString() ?? ''; //
     price = json['price'].toString();
-    discount = json['discount'].toString()?? '';//
+    discount = json['discount'].toString() ?? ''; //
     reviewNumber = json['review_number'];
     ratingNumber = json['rating_number'];
     createdAt = DateTime.parse(json['created_at']);
     updatedAt = json['updated_at'].toString();
     thumbnailUrl = json['thumbnail_url'].toString();
-    videoLink = json['video_link'].toString()?? '';//
-    images = List.from(json['images']).map((e)=>Images.fromJson(e)).toList();
+    videoLink = json['video_link'].toString() ?? ''; //
+    images = List.from(json['images']).map((e) => Images.fromJson(e)).toList();
     brand = Brand.fromJson(json['brand']);
     madeIn = MadeIn.fromJson(json['made_in']);
     category = Category.fromJson(json['category']);
     user = User.fromJson(json['user']);
-    reviews = List.from(json['reviews']).map((e)=>Reviews.fromJson(e)).toList();
+    reviews =
+        List.from(json['reviews']).map((e) => Reviews.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -146,12 +149,12 @@ class ProductDetailDataModel {
     _data['updated_at'] = updatedAt;
     _data['thumbnail_url'] = thumbnailUrl;
     _data['video_link'] = videoLink;
-    _data['images'] = images.map((e)=>e.toJson()).toList();
+    _data['images'] = images.map((e) => e.toJson()).toList();
     _data['brand'] = brand.toJson();
     _data['made_in'] = madeIn.toJson();
     _data['category'] = category.toJson();
     _data['user'] = user.toJson();
-    _data['reviews'] = reviews.map((e)=>e.toJson()).toList();
+    _data['reviews'] = reviews.map((e) => e.toJson()).toList();
     return _data;
   }
 }
@@ -168,7 +171,7 @@ class Images {
   late final String src;
   late final String imageUrl;
 
-  Images.fromJson(Map<String, dynamic> json){
+  Images.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     productId = json['product_id'];
     src = json['src'].toString();
@@ -199,7 +202,7 @@ class Brand {
   late final String image;
   late final String imageUrl;
 
-  Brand.fromJson(Map<String, dynamic> json){
+  Brand.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'].toString();
     alias = json['alias'].toString();
@@ -230,7 +233,7 @@ class MadeIn {
   late final String image;
   late final String imageUrl;
 
-  MadeIn.fromJson(Map<String, dynamic> json){
+  MadeIn.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'].toString();
     image = json['image'].toString() ?? '';
@@ -255,7 +258,7 @@ class Category {
   late final int id;
   late final String name;
 
-  Category.fromJson(Map<String, dynamic> json){
+  Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
   }
@@ -315,7 +318,7 @@ class User {
   late final String? avatarUrl;
   late final Shop? shop;
 
-  User.fromJson(Map<String, dynamic> json){
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'].toString() ?? "";
     fullName = json['full_name'].toString() ?? "";
@@ -333,7 +336,7 @@ class User {
     _data['store_name'] = storeName;
     _data['shop_name'] = shopName;
     _data['avatar_url'] = avatarUrl;
-    _data['shop'] = shop !=null ? shop?.toJson() : null;
+    _data['shop'] = shop != null ? shop?.toJson() : null;
     return _data;
   }
 }
@@ -359,7 +362,7 @@ class Shop {
   late final int userId;
   late final String? name;
   late final String? address;
-  late final String ?contact;
+  late final String? contact;
   late final String? description;
   late final String? banner;
   late final String? image;
@@ -370,7 +373,7 @@ class Shop {
   late final String? bannerUrl;
   late final String? imageUrl;
 
-  Shop.fromJson(Map<String, dynamic> json){
+  Shop.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     name = json['name'].toString() ?? "";
@@ -407,7 +410,6 @@ class Shop {
   }
 }
 
-
 class Reviews {
   Reviews({
     required this.id,
@@ -428,7 +430,7 @@ class Reviews {
   late final String userFullName;
   late final User? user;
 
-  Reviews.fromJson(Map<String, dynamic> json){
+  Reviews.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     productId = json['product_id'];
     userId = json['user_id'];
@@ -507,10 +509,10 @@ class RelatedProducts {
   late final Category category;
   late final User user;
 
-  RelatedProducts.fromJson(Map<String, dynamic> json){
+  RelatedProducts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
-    addedBy = json['added_by'].toString() ?? '';//
+    addedBy = json['added_by'].toString() ?? ''; //
     title = json['title'].toString();
     description = json['description'].toString();
     view = json['view'];
@@ -519,16 +521,16 @@ class RelatedProducts {
     brandId = json['brand_id'];
     madeInId = json['made_in_id'];
     thumbnail = json['thumbnail'].toString();
-    featured = json['featured'].toString() ?? '';//
-    flashSale = json['flash_sale'].toString() ?? '';//
+    featured = json['featured'].toString() ?? ''; //
+    flashSale = json['flash_sale'].toString() ?? ''; //
     price = json['price'].toString();
-    discount = json['discount'].toString() ?? '';//
+    discount = json['discount'].toString() ?? ''; //
     reviewNumber = json['review_number'];
     ratingNumber = json['rating_number'];
     createdAt = json['created_at'].toString();
     thumbnailUrl = json['thumbnail_url'].toString();
-    videoLink = json['video_link'].toString() ?? '';//
-    images = List.from(json['images']).map((e)=>Images.fromJson(e)).toList();
+    videoLink = json['video_link'].toString() ?? ''; //
+    images = List.from(json['images']).map((e) => Images.fromJson(e)).toList();
     brand = Brand.fromJson(json['brand']);
     madeIn = MadeIn.fromJson(json['made_in']);
     category = Category.fromJson(json['category']);
@@ -557,7 +559,7 @@ class RelatedProducts {
     _data['created_at'] = createdAt;
     _data['thumbnail_url'] = thumbnailUrl;
     _data['video_link'] = videoLink;
-    _data['images'] = images.map((e)=>e.toJson()).toList();
+    _data['images'] = images.map((e) => e.toJson()).toList();
     _data['brand'] = brand.toJson();
     _data['made_in'] = madeIn.toJson();
     _data['category'] = category.toJson();
@@ -565,7 +567,6 @@ class RelatedProducts {
     return _data;
   }
 }
-
 
 class ListRelatedProducts {
   late List<RelatedProducts>? relatedProducts;
@@ -584,6 +585,5 @@ class ListRelatedProducts {
     // list = json.decode(response.body)['results']
     //     .map((data) => Model.fromJson(data))
     //     .toList();
-
   }
 }

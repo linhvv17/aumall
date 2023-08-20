@@ -35,11 +35,9 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
     mobileController.text = widget.user.phone.toString();
     print("updateInfo ${widget.user.dateOfBirth.toString()}");
     var inputFormat = DateFormat('yyyy-MM-dd');
-    var date1 = inputFormat.parse(
-        widget.user.dateOfBirth.toString() != "null" ?
-        widget.user.dateOfBirth.toString() :
-        "1995-02-15"
-    );
+    var date1 = inputFormat.parse(widget.user.dateOfBirth.toString() != "null"
+        ? widget.user.dateOfBirth.toString()
+        : "1995-02-15");
     var outputFormat = DateFormat('dd/MM/yyyy');
     var date2 = outputFormat.format(date1);
 
@@ -82,8 +80,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                           backgroundColor: ColorManager.grey,
                           child: CircularProgressIndicator(),
                         );
-                      }
-                      else if (state is ProfileLoadedState) {
+                      } else if (state is ProfileLoadedState) {
                         return Stack(children: [
                           SizedBox(
                             width: kWidth(context) * .25,
@@ -123,8 +120,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                             ),
                           )
                         ]);
-                      }
-                      else if (state is PickedImageState) {
+                      } else if (state is PickedImageState) {
                         return Stack(children: [
                           SizedBox(
                             width: kWidth(context) * .25,
@@ -164,8 +160,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                             ),
                           )
                         ]);
-                      }
-                      else if (state is ProfileUpdateState) {
+                      } else if (state is ProfileUpdateState) {
                         return Stack(children: [
                           SizedBox(
                             width: kWidth(context) * .25,
@@ -173,10 +168,9 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                           ),
                           CircleAvatar(
                             radius: 50,
-                            backgroundImage:
-                            NetworkImage(state
-                                .data.user!.avatar ==
-                                null
+                            backgroundImage: NetworkImage(state
+                                        .data.user!.avatar ==
+                                    null
                                 ? 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png'
                                 : state.data.user!.avatar.toString()),
                           ),
@@ -205,8 +199,7 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                             ),
                           )
                         ]);
-                      }
-                      else {
+                      } else {
                         return Stack(children: [
                           SizedBox(
                             width: kWidth(context) * .25,

@@ -4,14 +4,16 @@ import '../../../../core/error/failure.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../repositories/cart_repository.dart';
 
-
-class UpdateProductInCartUseCase extends BaseUsecase<bool, UpdateProductInCartUseCaseParams>{
+class UpdateProductInCartUseCase
+    extends BaseUsecase<bool, UpdateProductInCartUseCaseParams> {
   final CartBaseRepository _cartBaseRepository;
   UpdateProductInCartUseCase(this._cartBaseRepository);
 
   @override
-  Future<Either<Failure, bool>> call(UpdateProductInCartUseCaseParams params) async {
-    final response =  await _cartBaseRepository.updateProductToCart(params.idProduct, params.quantity);
+  Future<Either<Failure, bool>> call(
+      UpdateProductInCartUseCaseParams params) async {
+    final response = await _cartBaseRepository.updateProductToCart(
+        params.idProduct, params.quantity);
     return response;
   }
 }

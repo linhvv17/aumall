@@ -61,8 +61,7 @@ class OrderDetailsView extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Text(
-                '${S.current.deliveryAddress}: ${order.shippingInfo.address}'),
+            Text('${S.current.deliveryAddress}: ${order.shippingInfo.address}'),
             const SizedBox(
               height: 8,
             ),

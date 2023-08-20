@@ -1,3 +1,4 @@
+import 'package:aumall/core/usecase/usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
 import '../../../../core/error/failure.dart';
@@ -11,8 +12,7 @@ import '../usecases/get_specific_product.dart';
 
 abstract class ProductRepository {
   Future<Either<Failure, ListProductShopEntity>> getListProductByCategory(
-      GetShopDataDefaultParams getShopDataDefaultParams
-      );
+      GetShopDataDefaultParams getShopDataDefaultParams);
   Future<Either<Failure, CategoriesEntity>> getShopDefaultData(
       // GetShopDataDefaultParams getShopDataDefaultParams
       );
@@ -23,11 +23,16 @@ abstract class ProductRepository {
   Future<Either<Failure, GetReviewsEntity>> getReviews(GetReviewsParams params);
 
   Future<Either<Failure, ShopDataDefaultEntity>> getShopDataDefault();
-  Future<Either<Failure, ListProductShopEntity>> changeCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
-  Future<Either<Failure, ListProductShopEntity>> searchProducts(SearchProductsUseCaseParams searchProductsUseCaseParams);
-  Future<Either<Failure, ListProductShopEntity>> getProductsByType(GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams);
+  Future<Either<Failure, ListProductShopEntity>> changeCategory(
+      ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
+  Future<Either<Failure, ListProductShopEntity>> getProductsOfCategory(
+      GetProductsOfCategoryUseCaseParams getProductsOfCategoryUseCaseParams);
+  Future<Either<Failure, CategoriesEntity>> getCategories();
+  Future<Either<Failure, ListProductShopEntity>> searchProducts(
+      SearchProductsUseCaseParams searchProductsUseCaseParams);
+  Future<Either<Failure, ListProductShopEntity>> getProductsByType(
+      GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams);
 }
-
 
 class GetShopDataDefaultParams {
   final String categoryId;
@@ -38,7 +43,6 @@ class GetShopDataDefaultParams {
   GetShopDataDefaultParams(
       this.categoryId, this.minPrice, this.maxPrice, this.rate, this.keyword);
 }
-
 
 class GetProductParams {
   final String category;
@@ -60,9 +64,10 @@ class SendReviewParams {
 
 class SearchProductsUseCaseParams {
   final String keyWord;
-
-  SearchProductsUseCaseParams(this.keyWord);
+  final String categoryId;
+  SearchProductsUseCaseParams(this.keyWord, this.categoryId);
 }
+
 class GetProductsByTypeUseCaseParams {
   final String keyWord;
 
@@ -78,5 +83,15 @@ class GetReviewsParams {
 class ChangeCategoryUseCaseParams {
   final int categoryId;
 
-  ChangeCategoryUseCaseParams(this.categoryId,);
+  ChangeCategoryUseCaseParams(
+    this.categoryId,
+  );
+}
+
+class GetProductsOfCategoryUseCaseParams {
+  final int categoryId;
+
+  GetProductsOfCategoryUseCaseParams(
+    this.categoryId,
+  );
 }

@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -18,7 +17,7 @@ class RegisterDataSourceImpl implements RegisterBaseDatasource {
   RegisterDataSourceImpl(this.apiProvider);
   @override
   Future<RegisterModel> register(RegisterParams params) async {
-    final response = await apiProvider.post(endPoint:registerAuMall, data: {
+    final response = await apiProvider.post(endPoint: registerAuMall, data: {
       "full_name": params.name,
       "name": params.name,
       "email": params.email,

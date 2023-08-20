@@ -4,12 +4,10 @@ import 'package:equatable/equatable.dart';
 
 import '../../data/models/auction_session_info_model.dart';
 
-
-class AuctionSessionInfoEntity extends Equatable{
+class AuctionSessionInfoEntity extends Equatable {
   final Product product;
   final UserAuctions userAuctions;
   const AuctionSessionInfoEntity(this.product, this.userAuctions);
   @override
   List<Object?> get props => [];
-
 }

@@ -10,25 +10,22 @@ abstract class HomeLoadState extends Equatable {
   List<Object> get props => [];
 }
 
-class HomeStateInitial extends HomeLoadState {
+class HomeStateInitial extends HomeLoadState {}
 
-}
+class HomeStateLoading extends HomeLoadState {}
 
-class HomeStateLoading extends HomeLoadState {
-
-}
 class HomeStateGetDataSuccess extends HomeLoadState {
   BannerEntity? bannerEntity;
   ListProductHomeEntity? listProductHomeEntity;
 
-  HomeStateGetDataSuccess(this.bannerEntity,  this.listProductHomeEntity);
+  HomeStateGetDataSuccess(this.bannerEntity, this.listProductHomeEntity);
 }
 
 class HomeStateLoadedFullData extends HomeLoadState {
   BannerEntity? bannerEntity;
   ListProductHomeEntity? listProductHomeEntity;
 
-  HomeStateLoadedFullData(this.bannerEntity,  this.listProductHomeEntity);
+  HomeStateLoadedFullData(this.bannerEntity, this.listProductHomeEntity);
 
   // HomeStateLoadedFullData copyWith({
   //   BannerEntity? bannerEntity,
@@ -39,7 +36,6 @@ class HomeStateLoadedFullData extends HomeLoadState {
   //       listProductHomeEntity?? this.listProductHomeEntity
   //   );
   // }
-
 }
 
 class HomeErrorState extends HomeLoadState {

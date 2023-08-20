@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/core/utilities/routes.dart';
@@ -13,13 +12,13 @@ class SuccessView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: SizedBox(
-        width: kWidth(context)/1.12,
+        width: kWidth(context) / 1.12,
         height: kHeight(context) / 12,
         child: FloatingActionButton.extended(
             onPressed: () {
               Navigator.pushReplacementNamed(context, AppRoutes.layout);
             },
-            label:  Text(S.current.continueShopping)),
+            label: Text(S.current.continueShopping)),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

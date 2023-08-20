@@ -104,20 +104,21 @@ class _FavoriteViewState extends State<FavoriteView> {
                                         onTap: () {
                                           Navigator.push(
                                               context,
-                                          MaterialPageRoute(
-                                            builder: (context) => ProductDetails(
-                                              productSimpleEntity: listFavorite[index],
-                                              index: index,
-                                            ),
-                                          ));
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProductDetails(
+                                                  productSimpleEntity:
+                                                      listFavorite[index],
+                                                  index: index,
+                                                ),
+                                              ));
                                         },
                                         child:
                                             // Container()
                                             ProductItemAuMall(
                                                 productFavoriteEntity:
                                                     listFavorite[index],
-                                                isAuctionProduct: false
-                                            ));
+                                                isAuctionProduct: false));
                                   },
                                 ),
                               ))

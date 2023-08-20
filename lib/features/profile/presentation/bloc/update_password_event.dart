@@ -7,10 +7,11 @@ abstract class UpdatePasswordEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class UserUpdatePassword extends UpdatePasswordEvent{
+class UserUpdatePassword extends UpdatePasswordEvent {
   final String oldPassword;
   final String newPassword;
   final String confirmPassword;
 
-  const UserUpdatePassword(this.oldPassword, this.newPassword, this.confirmPassword);
+  const UserUpdatePassword(
+      this.oldPassword, this.newPassword, this.confirmPassword);
 }

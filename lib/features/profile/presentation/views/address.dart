@@ -14,7 +14,7 @@ class AddressView extends StatefulWidget {
   State<StatefulWidget> createState() => _AddressViewState();
 }
 
-class _AddressViewState extends State<AddressView>{
+class _AddressViewState extends State<AddressView> {
   final TextEditingController tfName = TextEditingController();
   final TextEditingController tfMobile = TextEditingController();
   final TextEditingController tfAddress = TextEditingController();
@@ -22,7 +22,7 @@ class _AddressViewState extends State<AddressView>{
   final TextEditingController tfCity = TextEditingController();
   final TextEditingController tfDefault = TextEditingController();
 
-  bool isChecked  = false ;
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +38,9 @@ class _AddressViewState extends State<AddressView>{
         body: BlocListener<ProfileBloc, ProfileState>(
           listener: (context, state) {
             // do stuff here based on BlocA's state
-            if(state is AddAddressSuccessState){
-              showSnackbar("Thêm địa chỉ giao hàng thành công !!!!!", context, Colors.red);
+            if (state is AddAddressSuccessState) {
+              showSnackbar("Thêm địa chỉ giao hàng thành công !!!!!", context,
+                  Colors.red);
               Navigator.of(context).pop();
             }
           },
@@ -71,8 +72,7 @@ class _AddressViewState extends State<AddressView>{
                       border: const OutlineInputBorder(),
                       enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide:
-                        BorderSide(color: Colors.white, width: 1.5),
+                        borderSide: BorderSide(color: Colors.white, width: 1.5),
                       ),
                       filled: true,
                       fillColor: Colors.white),
@@ -101,8 +101,7 @@ class _AddressViewState extends State<AddressView>{
                       border: const OutlineInputBorder(),
                       enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide:
-                        BorderSide(color: Colors.white, width: 1.5),
+                        borderSide: BorderSide(color: Colors.white, width: 1.5),
                       ),
                       filled: true,
                       fillColor: Colors.white),
@@ -131,8 +130,7 @@ class _AddressViewState extends State<AddressView>{
                       border: const OutlineInputBorder(),
                       enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide:
-                        BorderSide(color: Colors.white, width: 1.5),
+                        borderSide: BorderSide(color: Colors.white, width: 1.5),
                       ),
                       filled: true,
                       fillColor: Colors.white),
@@ -161,8 +159,7 @@ class _AddressViewState extends State<AddressView>{
                       border: const OutlineInputBorder(),
                       enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide:
-                        BorderSide(color: Colors.white, width: 1.5),
+                        borderSide: BorderSide(color: Colors.white, width: 1.5),
                       ),
                       filled: true,
                       fillColor: Colors.white),
@@ -191,21 +188,19 @@ class _AddressViewState extends State<AddressView>{
                       border: const OutlineInputBorder(),
                       enabledBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide:
-                        BorderSide(color: Colors.white, width: 1.5),
+                        borderSide: BorderSide(color: Colors.white, width: 1.5),
                       ),
                       filled: true,
                       fillColor: Colors.white),
                 ),
-
-
 
                 Row(
                   children: [
                     Checkbox(
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       checkColor: Colors.white,
-                      fillColor: MaterialStateProperty.all(Colors.deepOrangeAccent),
+                      fillColor:
+                          MaterialStateProperty.all(Colors.deepOrangeAccent),
                       value: isChecked,
                       onChanged: (bool? value) {
                         setState(() {
@@ -225,7 +220,6 @@ class _AddressViewState extends State<AddressView>{
                   ],
                 ),
 
-
                 Padding(
                   padding: const EdgeInsets.only(top: 28.0),
                   child: SizedBox(
@@ -234,27 +228,24 @@ class _AddressViewState extends State<AddressView>{
                     child: FloatingActionButton.extended(
                         backgroundColor: ColorManager.orangeLight,
                         elevation: 8,
-                        shape:
-                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40)),
                         onPressed: () {
                           BlocProvider.of<ProfileBloc>(context).add(AddAddress(
-                              tfName.value.text,
-                              tfMobile.value.text,
+                            tfName.value.text,
+                            tfMobile.value.text,
                             "${tfAddress.value.text} - ${tfProvince.value.text} - ${tfCity.value.text}",
-                              isChecked,
+                            isChecked,
                           ));
-
                         },
                         label: Text(
                           S.current.saveAddress.toUpperCase(),
                         )),
                   ),
                 ),
-
               ],
             ),
           ),
-        )
-    );
+        ));
   }
 }

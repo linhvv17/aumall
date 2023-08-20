@@ -59,7 +59,9 @@ class MapView extends StatelessWidget {
                 const Center(child: CircularProgressIndicator()),
               ],
             );
-          } else if (state is MapLoadedState || state is MapSelectedPosition || state is SelectMethodState) {
+          } else if (state is MapLoadedState ||
+              state is MapSelectedPosition ||
+              state is SelectMethodState) {
             return Stack(
               children: [
                 SizedBox(

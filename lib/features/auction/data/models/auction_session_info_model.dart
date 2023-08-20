@@ -1,4 +1,3 @@
-
 import 'package:aumall/features/auction/domain/entities/auction_session_info_entity.dart';
 import '../../../home/data/models/detail_product_response.dart';
 import '../../../shop/data/models/products_model.dart';
@@ -10,15 +9,9 @@ class AuctionSessionInfoModel extends AuctionSessionInfoEntity {
     print("AuctionSessionInfoModel.fromJson $json");
     Product product = Product.fromJson(json['product']);
     UserAuctions userAuctions = UserAuctions.fromJson(json['userAuctions']);
-    return AuctionSessionInfoModel(
-        product,
-      userAuctions
-    );
+    return AuctionSessionInfoModel(product, userAuctions);
   }
-
 }
-
-
 
 class AuctionSessionInfo {
   AuctionSessionInfo({
@@ -30,7 +23,7 @@ class AuctionSessionInfo {
   late final String message;
   late final UserAuctionData data;
 
-  AuctionSessionInfo.fromJson(Map<String, dynamic> json){
+  AuctionSessionInfo.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     data = UserAuctionData.fromJson(json['data']);
@@ -61,7 +54,7 @@ class UserAuctionData {
   late final DateTime createdAt;
   late final User user;
 
-  UserAuctionData.fromJson(Map<String, dynamic> json){
+  UserAuctionData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     productId = json['product_id'];
     userId = json['user_id'];
@@ -100,7 +93,7 @@ class User {
   late final String avatarUrl;
   late final Null shop;
 
-  User.fromJson(Map<String, dynamic> json){
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     fullName = json['full_name'];
     name = json['name'];
@@ -147,7 +140,7 @@ class Product {
   late final bool isFavorite;
   late final bool isWishList;
 
-  Product.fromJson(Map<String, dynamic> json){
+  Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'].toString();
     publishedAt = json['published_at'].toString();
@@ -184,17 +177,17 @@ class UserAuctions {
   late final int currentPage;
   late final List<UserAuctionData> data;
 
-
-  UserAuctions.fromJson(Map<String, dynamic> json){
+  UserAuctions.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
-    data = List.from(json['data']).map((e)=>UserAuctionData.fromJson(e)).toList();
-
+    data = List.from(json['data'])
+        .map((e) => UserAuctionData.fromJson(e))
+        .toList();
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['current_page'] = currentPage;
-    _data['data'] = data.map((e)=>e.toJson()).toList();
+    _data['data'] = data.map((e) => e.toJson()).toList();
     return _data;
   }
 }

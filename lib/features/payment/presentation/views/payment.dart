@@ -32,7 +32,6 @@ class _PaymentState extends State<Payment> {
     return Scaffold(
       body: Stack(children: [
         WebView(
-          
           initialUrl:
               "https://accept.paymob.com/api/acceptance/iframes/390170?payment_token=${BlocProvider.of<PaymentBloc>(context).FINAL_TOKEN_CARD}",
           javascriptMode: JavascriptMode.unrestricted,
@@ -50,11 +49,10 @@ class _PaymentState extends State<Payment> {
           right: 10,
           child: ElevatedButton.icon(
               onPressed: () {
-                
                 Navigator.pushReplacementNamed(context, AppRoutes.success);
               },
               icon: const Icon(Icons.navigate_next),
-              label:  Text(S.current.next)),
+              label: Text(S.current.next)),
         ),
       ]),
     );

@@ -20,7 +20,6 @@ class SortProduct extends StatefulWidget {
 class _SortProductState extends State<SortProduct> {
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Container(
@@ -77,20 +76,20 @@ class _SortProductState extends State<SortProduct> {
 
                                     // The color depends on this is selected or not
                                     color:
-                                    // widget.sortBys[index]
-                                    //             ['isSelected'] ==
-                                    //         true
-                                    index == widget.selectedIndex
-                                        ? Colors.amber
-                                        : Colors.white,
+                                        // widget.sortBys[index]
+                                        //             ['isSelected'] ==
+                                        //         true
+                                        index == widget.selectedIndex
+                                            ? Colors.amber
+                                            : Colors.white,
                                     child: ListTile(
                                       onTap: () {
                                         print("AAAAAAAAAAAAAAAA");
                                         print(widget.sortBys[index]['key']);
                                         Navigator.pop(context);
-                                        BlocProvider.of<ProductsBloc>(context).add(
-                                            GetProductsByType(widget.sortBys[index]['key'])
-                                        );
+                                        BlocProvider.of<ProductsBloc>(context)
+                                            .add(GetProductsByType(
+                                                widget.sortBys[index]['key']));
                                         // if this item isn't selected yet, "isSelected": false -> true
                                         // If this item already is selected: "isSelected": true -> false
                                         setNewState(() {
@@ -114,10 +113,3 @@ class _SortProductState extends State<SortProduct> {
     );
   }
 }
-
-
-
-
-
-
-

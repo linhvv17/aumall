@@ -11,21 +11,15 @@ abstract class ProductDetailState extends Equatable {
   List<Object> get props => [];
 }
 
-class ProductDetailInitial extends ProductDetailState {
+class ProductDetailInitial extends ProductDetailState {}
 
-}
+class GetInfoAuctionLoading extends ProductDetailState {}
 
-class GetInfoAuctionLoading extends ProductDetailState {
-
-}
-class ProductDetailLoading extends ProductDetailState {
-
-}
+class ProductDetailLoading extends ProductDetailState {}
 
 class ProductDetailLoaded extends ProductDetailState {
   final ProductDetailEntity productDetailEntity;
   const ProductDetailLoaded(this.productDetailEntity);
-
 }
 
 class ProductDetailErrorState extends ProductDetailState {
@@ -33,5 +27,3 @@ class ProductDetailErrorState extends ProductDetailState {
 
   const ProductDetailErrorState(this.message);
 }
-
-

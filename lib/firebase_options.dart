@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '889879832382',
     projectId: 'aumall-7869e',
     storageBucket: 'aumall-7869e.appspot.com',
-    iosClientId: '889879832382-l58u452hr3lp0rq29drdqf2d5fb3uv9t.apps.googleusercontent.com',
+    iosClientId:
+        '889879832382-l58u452hr3lp0rq29drdqf2d5fb3uv9t.apps.googleusercontent.com',
     iosBundleId: 'com.au.aumall.aumall',
   );
 }

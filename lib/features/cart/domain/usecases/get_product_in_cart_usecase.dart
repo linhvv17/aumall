@@ -5,14 +5,14 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecase/usecase.dart';
 
-
-class GetProductInCartUseCase extends BaseUsecase<ListProductInCartEntity, NoParams>{
+class GetProductInCartUseCase
+    extends BaseUsecase<ListProductInCartEntity, NoParams> {
   final CartBaseRepository cartBaseRepository;
   GetProductInCartUseCase(this.cartBaseRepository);
 
   @override
   Future<Either<Failure, ListProductInCartEntity>> call(NoParams params) async {
-    final response =  await cartBaseRepository.getProductInCartList();
+    final response = await cartBaseRepository.getProductInCartList();
     return response;
   }
 }

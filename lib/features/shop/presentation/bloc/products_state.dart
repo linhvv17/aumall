@@ -10,84 +10,59 @@ abstract class ProductsState extends Equatable {
 class GetProductsShopLoadedState extends ProductsState {
   final ListProductShopEntity listProductShopEntity;
 
-  const GetProductsShopLoadedState(this.listProductShopEntity,);
+  const GetProductsShopLoadedState(
+    this.listProductShopEntity,
+  );
 
   @override
-  List<Object> get props => [
-    listProductShopEntity
-  ];
+  List<Object> get props => [listProductShopEntity];
 }
-
 
 class ProductsSearchStateDataLoaded extends ProductsState {
-
   final ListProductShopEntity listProductAuMall;
 
-
   const ProductsSearchStateDataLoaded(
-  {this.listProductAuMall =  const ListProductShopEntity([])}
-      );
-
+      {this.listProductAuMall = const ListProductShopEntity([])});
 
   ProductsSearchStateDataLoaded copyWith(
-  {
-    ListProductShopEntity? listProductAuMall}
-      ){
+      {ListProductShopEntity? listProductAuMall}) {
     return ProductsSearchStateDataLoaded(
-      listProductAuMall: listProductAuMall ?? this.listProductAuMall
-    );
+        listProductAuMall: listProductAuMall ?? this.listProductAuMall);
   }
 
-
   @override
-  List<Object> get props => [
-    listProductAuMall
-  ];
-
+  List<Object> get props => [listProductAuMall];
 }
 
-
 class ProductsStateDataLoaded extends ProductsState {
-
   final CategoriesEntity categoriesEntity;
   final ListProductShopEntity listProductAuMall;
 
-
   const ProductsStateDataLoaded(
-  {this.categoriesEntity =  const CategoriesEntity([]),
-  this.listProductAuMall =  const ListProductShopEntity([])}
-      );
-
+      {this.categoriesEntity = const CategoriesEntity([]),
+      this.listProductAuMall = const ListProductShopEntity([])});
 
   ProductsStateDataLoaded copyWith(
-  {CategoriesEntity? categoriesEntity,
-    ListProductShopEntity? listProductAuMall}
-      ){
+      {CategoriesEntity? categoriesEntity,
+      ListProductShopEntity? listProductAuMall}) {
     return ProductsStateDataLoaded(
-      categoriesEntity: categoriesEntity ?? this.categoriesEntity,
-      listProductAuMall: listProductAuMall ?? this.listProductAuMall
-    );
+        categoriesEntity: categoriesEntity ?? this.categoriesEntity,
+        listProductAuMall: listProductAuMall ?? this.listProductAuMall);
   }
 
-
   @override
-  List<Object> get props => [
-    categoriesEntity,
-    listProductAuMall
-  ];
-
+  List<Object> get props => [categoriesEntity, listProductAuMall];
 }
-
 
 class GetShopDefaultDataLoadedState extends ProductsState {
   final CategoriesEntity categoriesEntity;
 
-  const GetShopDefaultDataLoadedState(this.categoriesEntity,);
+  const GetShopDefaultDataLoadedState(
+    this.categoriesEntity,
+  );
 }
 
-class AllProductsLoadingState extends ProductsState {
-
-}
+class AllProductsLoadingState extends ProductsState {}
 
 class AllProductsLoadedState extends ProductsState {
   final ProductsEntity data;
@@ -129,7 +104,6 @@ class ProductsErrorState extends ProductsState {
   const ProductsErrorState(this.message);
 }
 
-
 class SpecificProductsLoadingState extends ProductsState {}
 
 class SpecificProductsLoadedState extends ProductsState {
@@ -139,7 +113,7 @@ class SpecificProductsLoadedState extends ProductsState {
 }
 
 class SpecificProductsErrorState extends ProductsState {
-final String message;
+  final String message;
 
   const SpecificProductsErrorState(this.message);
 }
@@ -150,7 +124,28 @@ class OpenSearchInitialState extends ProductsState {}
 
 class OpenSearchState extends ProductsState {}
 
+class ShopLoadDataErrorState extends ProductsState {
+  final String message;
+  const ShopLoadDataErrorState(this.message);
+}
 
+class ShopLoadingData extends ProductsState {
+  const ShopLoadingData();
+}
+
+class ShopLoadingDataProducts extends ProductsState {
+  const ShopLoadingDataProducts();
+}
+
+class ShopLoadListCategoriesSuccess extends ProductsState {
+  final CategoriesEntity categoriesEntity;
+  const ShopLoadListCategoriesSuccess(this.categoriesEntity);
+}
+
+class ShopLoadProductsSuccessWithFilter extends ProductsState {
+  final ListProductShopEntity listProductShopEntity;
+  const ShopLoadProductsSuccessWithFilter(this.listProductShopEntity);
+}
 
 class ChangCategorySuccessState extends ProductsState {
   final ListProductShopEntity listProductAuMall;
@@ -158,11 +153,8 @@ class ChangCategorySuccessState extends ProductsState {
   const ChangCategorySuccessState(this.listProductAuMall);
 
   @override
-  List<Object> get props => [
-    listProductAuMall
-  ];
+  List<Object> get props => [listProductAuMall];
 }
-
 
 class GetProductsByTypeSuccessState extends ProductsState {
   final ListProductShopEntity listProductAuMall;
@@ -170,14 +162,12 @@ class GetProductsByTypeSuccessState extends ProductsState {
   const GetProductsByTypeSuccessState(this.listProductAuMall);
 
   @override
-  List<Object> get props => [
-    listProductAuMall
-  ];
+  List<Object> get props => [listProductAuMall];
 }
-
-
 
 class GetShopDataDefaultSuccessState extends ProductsState {
   final ShopDataDefaultEntity shopDataDefaultEntity;
-  const GetShopDataDefaultSuccessState(this.shopDataDefaultEntity,);
+  const GetShopDataDefaultSuccessState(
+    this.shopDataDefaultEntity,
+  );
 }

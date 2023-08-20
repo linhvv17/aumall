@@ -31,7 +31,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -59,7 +59,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -76,7 +76,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -104,7 +104,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -118,7 +118,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 }

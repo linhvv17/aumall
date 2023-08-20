@@ -5,11 +5,7 @@ abstract class ForgetpasswordAndeVerifyEmailState extends Equatable {
 
   @override
   List<Object> get props => [];
-
-  
 }
-
-
 
 class ForgetpasswordLoadingState extends ForgetpasswordAndeVerifyEmailState {}
 
@@ -25,6 +21,6 @@ class ForgetpasswordErrorState extends ForgetpasswordAndeVerifyEmailState {
   const ForgetpasswordErrorState(this.message);
 }
 
-class ForgotStausState extends ForgetpasswordAndeVerifyEmailState{}
+class ForgotStausState extends ForgetpasswordAndeVerifyEmailState {}
 
-class VerifyStausState extends ForgetpasswordAndeVerifyEmailState{}
+class VerifyStausState extends ForgetpasswordAndeVerifyEmailState {}

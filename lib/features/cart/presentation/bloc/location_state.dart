@@ -26,6 +26,4 @@ class MapErrorState extends LocationState {
   const MapErrorState(this.message);
 }
 
-class SelectMethodState extends LocationState{
-  
-}
+class SelectMethodState extends LocationState {}

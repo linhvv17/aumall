@@ -15,15 +15,13 @@ class UpdateUserDetailUsecase
   @override
   Future<Either<Failure, ProfileEntity>> call(
       UpdateProfileUsecaseParams params) async {
-    return await profileRepository.updateProfile(
-        UpdateProfileParams(
-            params.name,
-            params.mobile,
-            params.avatar,
-            params.fullName,
-            params.dateOfBirth,
-            params.address
-        ));
+    return await profileRepository.updateProfile(UpdateProfileParams(
+        params.name,
+        params.mobile,
+        params.avatar,
+        params.fullName,
+        params.dateOfBirth,
+        params.address));
   }
 }
 
@@ -35,5 +33,6 @@ class UpdateProfileUsecaseParams {
   final String dateOfBirth;
   final String address;
 
-  UpdateProfileUsecaseParams(this.name, this.avatar, this.fullName, this.mobile, this.dateOfBirth, this.address);
+  UpdateProfileUsecaseParams(this.name, this.avatar, this.fullName, this.mobile,
+      this.dateOfBirth, this.address);
 }

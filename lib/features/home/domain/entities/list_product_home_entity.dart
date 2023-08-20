@@ -4,10 +4,9 @@ import 'package:equatable/equatable.dart';
 
 import '../../data/models/list_product_home_model.dart';
 
-class ListProductHomeEntity extends Equatable{
+class ListProductHomeEntity extends Equatable {
   final ListProductHomeData listProductHomeData;
   const ListProductHomeEntity(this.listProductHomeData);
   @override
   List<Object?> get props => [];
-
 }

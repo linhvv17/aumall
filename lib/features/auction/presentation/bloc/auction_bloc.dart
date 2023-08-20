@@ -17,38 +17,41 @@ part 'auction_state.dart';
 class AuctionBloc extends Bloc<AuctionEvent, AuctionState> {
   List<ProductSimpleEntity> favouriteList = [];
   final GetAuctionProductUseCase getAuctionProductUseCase;
-  final GetAuctionSessionInfoUseCase  getAuctionSessionInfoUseCase;
-  final ActionAuctionUseCase  actionAuctionUseCase;
+  final GetAuctionSessionInfoUseCase getAuctionSessionInfoUseCase;
+  final ActionAuctionUseCase actionAuctionUseCase;
 
-  AuctionBloc(this.getAuctionProductUseCase, this.getAuctionSessionInfoUseCase, this.actionAuctionUseCase) : super(AuctionInitial()) {
+  AuctionBloc(this.getAuctionProductUseCase, this.getAuctionSessionInfoUseCase,
+      this.actionAuctionUseCase)
+      : super(AuctionInitial()) {
     on<GetListAuctionProduct>((event, emit) async {
       emit(AuctionDataLoading());
-      final failureOrSuccess = await getAuctionProductUseCase(GetAuctionParams( typeAuction: event.typeAuction));
+      final failureOrSuccess = await getAuctionProductUseCase(
+          GetAuctionParams(typeAuction: event.typeAuction));
       failureOrSuccess.fold(
-              (failure) => emit(AuctionDataErrorState(failure.message)),
+          (failure) => emit(AuctionDataErrorState(failure.message)),
           // (success) => emit(HomeStateDataLoaded(success)),
-              (success) => emit(AuctionDataLoaded(success))
-      );
+          (success) => emit(AuctionDataLoaded(success)));
     });
 
     on<GetInfoAuctionSession>((event, emit) async {
       emit(GetInfoAuctionSessionLoading());
-      final failureOrSuccess = await getAuctionSessionInfoUseCase(GetAuctionSessionInfoParams( productAuctionId: event.productId));
+      final failureOrSuccess = await getAuctionSessionInfoUseCase(
+          GetAuctionSessionInfoParams(productAuctionId: event.productId));
       failureOrSuccess.fold(
-              (failure) => emit(AuctionDataErrorState(failure.message)),
+          (failure) => emit(AuctionDataErrorState(failure.message)),
           // (success) => emit(HomeStateDataLoaded(success)),
-              (success) => emit(AuctionSessionInfoDataLoaded(success))
-      );
-    }) ;
+          (success) => emit(AuctionSessionInfoDataLoaded(success)));
+    });
 
     on<ActionAuction>((event, emit) async {
       // emit(GetInfoAuctionSessionLoading());
-      final failureOrSuccess = await actionAuctionUseCase(ActionAuctionProductUseCaseParams(idProduct: event.productId, price: event.price));
+      final failureOrSuccess = await actionAuctionUseCase(
+          ActionAuctionProductUseCaseParams(
+              idProduct: event.productId, price: event.price));
       failureOrSuccess.fold(
-              (failure) => emit(AuctionDataErrorState(failure.message)),
+          (failure) => emit(AuctionDataErrorState(failure.message)),
           // (success) => emit(HomeStateDataLoaded(success)),
-              (success) => emit(ActionAuctionSuccess(success))
-      );
-    }) ;
+          (success) => emit(ActionAuctionSuccess(success)));
+    });
   }
 }

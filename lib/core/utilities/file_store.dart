@@ -34,19 +34,19 @@ class FileStorage {
     return directory;
   }
 
-  static Future<File> writeCounter(String bytes,String name) async {
+  static Future<File> writeCounter(String bytes, String name) async {
     final path = await _localPath;
     // Create a file for the path of
     // device and file name with extension
-    File file= File('$path/$name');;
+    File file = File('$path/$name');
+    ;
     print("Save file");
 
     // Write the data in the file you have created
     return file.writeAsString(bytes);
   }
 
-  static Future<void> requestPermission() async{
-
+  static Future<void> requestPermission() async {
     final permissionStatus = await Permission.storage.status;
     if (permissionStatus.isDenied) {
       // Here just ask for the permission for the first time
@@ -64,6 +64,5 @@ class FileStorage {
     } else {
       // Do stuff that require permission here
     }
-
   }
 }

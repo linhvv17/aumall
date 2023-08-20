@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 
 import '../entities/list_favorite_entity.dart';
 
-
 abstract class FavoriteBaseRepository {
   Future<Either<Failure, ListFavoriteEntity>> getFavoriteList();
   Future<Either<Failure, bool>> removeFavoriteProduct(int idProduct);

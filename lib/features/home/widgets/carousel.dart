@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-
 import '../../../core/colors/colors.dart';
 import '../../../core/utilities/mediaquery.dart';
 import '../data/models/detail_product_response.dart';
@@ -57,7 +56,9 @@ class _CarouselState extends State<Carousel> {
             },
           ),
         ),
-        const SizedBox(height: 10,),
+        const SizedBox(
+          height: 10,
+        ),
         //slides
         CarouselSlider.builder(
           itemCount: widget.images.length,
@@ -76,7 +77,6 @@ class _CarouselState extends State<Carousel> {
             viewportFraction: 0.27,
             height: 100,
           ),
-
           itemBuilder: (context, index, i) => Material(
             child: InkWell(
               onTap: () {
@@ -86,13 +86,12 @@ class _CarouselState extends State<Carousel> {
                 pageController!.jumpToPage(current);
               },
               child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(),
-
-                ),
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                  ),
                   child: Image.network(
-                widget.images[index].imageUrl!,
-              )),
+                    widget.images[index].imageUrl!,
+                  )),
             ),
           ),
         )

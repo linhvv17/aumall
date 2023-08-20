@@ -14,8 +14,8 @@ class SearchWidget extends StatefulWidget {
 class _SearchWidgetState extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
-    final formkey = GlobalKey<FormFieldState>();
-    final searchControler = TextEditingController();
+    final formKey = GlobalKey<FormFieldState>();
+    final searchController = TextEditingController();
     final bloc = BlocProvider.of<ProductsBloc>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -33,16 +33,15 @@ class _SearchWidgetState extends State<SearchWidget> {
                   child: bloc.searchFolded
                       ? const SizedBox()
                       : Form(
-                          key: formkey,
+                          key: formKey,
                           child: TextFormField(
-                            controller: searchControler,
+                            controller: searchController,
                             decoration: InputDecoration(
                                 prefixIcon: IconButton(
                                     onPressed: () {
-
-
-                                      bloc.add(SearchProduct(searchControler.text));
-
+                                      bloc.add(SearchProduct(
+                                          searchController.text,
+                                          bloc.currentCategoryId.toString()));
                                     },
                                     icon: const Icon(Icons.search)),
                                 hintText: 'Search',

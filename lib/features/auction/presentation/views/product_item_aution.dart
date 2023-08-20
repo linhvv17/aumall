@@ -11,27 +11,26 @@ import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../shop/domain/entities/products_entity.dart';
 import '../bloc/auction_bloc.dart';
 
-
 class ProductAuctionAuMall extends StatefulWidget {
   const ProductAuctionAuMall({super.key, required this.productFavoriteEntity});
   final ProductAuMallEntity productFavoriteEntity;
-
 
   @override
   State<StatefulWidget> createState() => _ProductAuctionAuMallState();
 }
 
 class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Container(
         decoration: BoxDecoration(
-            color: BlocProvider.of<ThemeBloc>(context).themeData== appThemeData[AppTheme.lightTheme]
+            color: BlocProvider.of<ThemeBloc>(context).themeData ==
+                    appThemeData[AppTheme.lightTheme]
                 ? ColorManager.white
-                : Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(15)),
+                : Colors.white.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(15)),
         child: Stack(
           children: [
             Image.network(
@@ -41,7 +40,7 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
             ),
             Positioned(
               left: kWidth(context) * 0.34,
-              bottom: kHeight(context) *0.008,
+              bottom: kHeight(context) * 0.008,
               child: Container(
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
@@ -55,9 +54,9 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
                 ),
                 child: BlocConsumer<AuctionBloc, AuctionState>(
                   listener: (context, state) {
-                    if(state is AddToAuctionState){
-                      showSnackbar(S.current.addfav,context, Colors.green);
-                    }else if(state is RemoveFromFavoriteState){
+                    if (state is AddToAuctionState) {
+                      showSnackbar(S.current.addfav, context, Colors.green);
+                    } else if (state is RemoveFromFavoriteState) {
                       showSnackbar(S.current.deletefav, context, Colors.green);
                     }
                   },
@@ -69,32 +68,35 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () {
-                            BlocProvider.of<AuctionBloc>(context)
-                                .add(widget.productFavoriteEntity.isFavorite!
-                                ? RemoveAuctionProduct(widget.productFavoriteEntity.id!)
-                                : AddToAuction(
-                              product: widget.productFavoriteEntity,
-                              isFavourite: widget.productFavoriteEntity.isFavorite!,
-                            ));
+                            BlocProvider.of<AuctionBloc>(context).add(
+                                widget.productFavoriteEntity.isFavorite!
+                                    ? RemoveAuctionProduct(
+                                        widget.productFavoriteEntity.id!)
+                                    : AddToAuction(
+                                        product: widget.productFavoriteEntity,
+                                        isFavourite: widget
+                                            .productFavoriteEntity.isFavorite!,
+                                      ));
                             setState(() {
-                              print('setState bf ${widget.productFavoriteEntity.isFavorite}');
-                              widget.productFavoriteEntity.isFavorite = !widget.productFavoriteEntity.isFavorite!;
-                              print('setState at ${widget.productFavoriteEntity.isFavorite}');
+                              print(
+                                  'setState bf ${widget.productFavoriteEntity.isFavorite}');
+                              widget.productFavoriteEntity.isFavorite =
+                                  !widget.productFavoriteEntity.isFavorite!;
+                              print(
+                                  'setState at ${widget.productFavoriteEntity.isFavorite}');
                             });
                           },
-                          child:
-                          widget.productFavoriteEntity.isFavorite!
-                              ?
-                          const Icon(
-                            Icons.favorite,
-                            size: 20.0,
-                            color: ColorManager.orangeLight,
-                          )
+                          child: widget.productFavoriteEntity.isFavorite!
+                              ? const Icon(
+                                  Icons.favorite,
+                                  size: 20.0,
+                                  color: ColorManager.orangeLight,
+                                )
                               : const Icon(
-                            Icons.favorite_outline,
-                            size: 20.0,
-                            color: ColorManager.grey,
-                          ),
+                                  Icons.favorite_outline,
+                                  size: 20.0,
+                                  color: ColorManager.grey,
+                                ),
                         ),
                       ),
                     );
@@ -113,8 +115,11 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
                       children: [
                         RatingBarIndicator(
                           itemSize: 25.0,
-                          rating: widget.productFavoriteEntity.ratingNumber != null ?
-                          widget.productFavoriteEntity.ratingNumber!.toDouble() : 0.0,
+                          rating:
+                              widget.productFavoriteEntity.ratingNumber != null
+                                  ? widget.productFavoriteEntity.ratingNumber!
+                                      .toDouble()
+                                  : 0.0,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,
@@ -124,9 +129,10 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
                         const SizedBox(width: 4.0),
                         Text(
                           '(${widget.productFavoriteEntity.reviewNumber})',
-                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            color: Colors.grey,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall!.copyWith(
+                                    color: Colors.grey,
+                                  ),
                         ),
                       ],
                     ),
@@ -141,8 +147,8 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
                     Text(
                       widget.productFavoriteEntity.title!,
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     const SizedBox(height: 6.0),
                     Text.rich(

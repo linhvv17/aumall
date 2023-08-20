@@ -1,7 +1,5 @@
-enum VerifyStatus{
-  forgotPassword,
-  verifyEmail
-}
+enum VerifyStatus { forgotPassword, verifyEmail }
+
 enum AppTheme {
   lightTheme,
   darkTheme,

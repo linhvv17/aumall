@@ -23,9 +23,11 @@ class ProductItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Container(
         decoration: BoxDecoration(
-            color: BlocProvider.of<ThemeBloc>(context).themeData== appThemeData[AppTheme.lightTheme]
-                    ? ColorManager.white
-                    : Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(15)),
+            color: BlocProvider.of<ThemeBloc>(context).themeData ==
+                    appThemeData[AppTheme.lightTheme]
+                ? ColorManager.white
+                : Colors.white.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(15)),
         child: Stack(
           children: [
             Image.network(
@@ -49,11 +51,11 @@ class ProductItem extends StatelessWidget {
                 ),
                 child: BlocConsumer<FavouriteBloc, FavouriteState>(
                   listener: (context, state) {
-                   if(state is AddToFavouriteState){
-                       showSnackbar(S.current.addfav,context, Colors.green);
-                }else if(state is RemoveFromFavoriteState){
-                    showSnackbar(S.current.deletefav, context, Colors.green);
-                }
+                    if (state is AddToFavouriteState) {
+                      showSnackbar(S.current.addfav, context, Colors.green);
+                    } else if (state is RemoveFromFavoriteState) {
+                      showSnackbar(S.current.deletefav, context, Colors.green);
+                    }
                   },
                   builder: (context, state) {
                     return CircleAvatar(
@@ -63,14 +65,13 @@ class ProductItem extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () {
-                             // BlocProvider.of<FavouriteBloc>(context).add(
-                             //    AddToFavorite(
-                             //        product: product,
-                             //        isFavourite: product.isFavourite,
-                             //        ));
+                            // BlocProvider.of<FavouriteBloc>(context).add(
+                            //    AddToFavorite(
+                            //        product: product,
+                            //        isFavourite: product.isFavourite,
+                            //        ));
                           },
-                          child:
-                          const Icon(
+                          child: const Icon(
                             Icons.favorite,
                             size: 20.0,
                             color: ColorManager.orangeLight,
@@ -104,8 +105,9 @@ class ProductItem extends StatelessWidget {
                       children: [
                         RatingBarIndicator(
                           itemSize: 25.0,
-                          rating: product.ratingNumber != null ?
-                          product.ratingNumber!.toDouble() : 0.0,
+                          rating: product.ratingNumber != null
+                              ? product.ratingNumber!.toDouble()
+                              : 0.0,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,

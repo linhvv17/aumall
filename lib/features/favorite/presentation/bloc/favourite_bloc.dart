@@ -13,10 +13,12 @@ part 'favourite_state.dart';
 class FavouriteBloc extends Bloc<FavoriteEvent, FavouriteState> {
   List<ProductSimpleEntity> favouriteList = [];
   final GetFavoriteProductUseCase getFavoriteProductUseCase;
-  final AddFavoriteProductUseCase  addFavoriteProductUseCase;
-  final RemoveFavoriteProductUseCase  removeFavoriteProductUseCase;
+  final AddFavoriteProductUseCase addFavoriteProductUseCase;
+  final RemoveFavoriteProductUseCase removeFavoriteProductUseCase;
 
-  FavouriteBloc(this.getFavoriteProductUseCase, this.removeFavoriteProductUseCase, this.addFavoriteProductUseCase) : super(FavouriteInitial()) {
+  FavouriteBloc(this.getFavoriteProductUseCase,
+      this.removeFavoriteProductUseCase, this.addFavoriteProductUseCase)
+      : super(FavouriteInitial()) {
     on<AddToFavorite>((event, emit) async {
       print('click FavouriteBloc AddToFavorite');
       emit(FavouriteInitial());
@@ -35,35 +37,31 @@ class FavouriteBloc extends Bloc<FavoriteEvent, FavouriteState> {
       //   }
       // }
 
-
-      final failureOrSuccess = await addFavoriteProductUseCase(AddFavoriteProductUseCaseParams(idProduct: event.product.id!));
+      final failureOrSuccess = await addFavoriteProductUseCase(
+          AddFavoriteProductUseCaseParams(idProduct: event.product.id!));
       failureOrSuccess.fold(
-              (failure) => emit(FavouriteDataErrorState(failure.message)),
+          (failure) => emit(FavouriteDataErrorState(failure.message)),
           // (success) => emit(HomeStateDataLoaded(success)),
-              (success) => emit(AddFavoriteSuccess(success))
-      );
-
-
+          (success) => emit(AddFavoriteSuccess(success)));
     });
     on<GetListFavoriteProduct>((event, emit) async {
       emit(FavouriteDataLoading());
       final failureOrSuccess = await getFavoriteProductUseCase(NoParams());
       failureOrSuccess.fold(
-              (failure) => emit(FavouriteDataErrorState(failure.message)),
+          (failure) => emit(FavouriteDataErrorState(failure.message)),
           // (success) => emit(HomeStateDataLoaded(success)),
-              (success) => emit(FavouriteDataLoaded(success))
-      );
+          (success) => emit(FavouriteDataLoaded(success)));
     });
 
     on<RemoveFavoriteProduct>((event, emit) async {
       print('click FavouriteBloc RemoveFavoriteProduct');
       emit(FavouriteDataLoading());
-      final failureOrSuccess = await removeFavoriteProductUseCase(RemoveFavoriteProductUseCaseParams(idProduct: event.productId));
+      final failureOrSuccess = await removeFavoriteProductUseCase(
+          RemoveFavoriteProductUseCaseParams(idProduct: event.productId));
       failureOrSuccess.fold(
-              (failure) => emit(FavouriteDataErrorState(failure.message)),
+          (failure) => emit(FavouriteDataErrorState(failure.message)),
           // (success) => emit(HomeStateDataLoaded(success)),
-              (success) => emit(RemoveFavoriteSuccess(success))
-      );
+          (success) => emit(RemoveFavoriteSuccess(success)));
     });
   }
 }

@@ -192,5 +192,8 @@
   "startingPrice" : "Starting price",
   "currentBidPrice" : "Current Bid Price",
   "dataLoading" : "Data loading ...",
-  "notauction" : "There is no auctions yet!"
+  "notauction" : "There is no auctions yet!",
+  "noProducts" : "There is no products yet!",
+  "auction" : "Auction"
+
 }

@@ -6,24 +6,17 @@ import 'package:equatable/equatable.dart';
 import '../../data/models/list_product_home_model.dart';
 import '../../domain/entities/product_detail_entity.dart';
 
-class ProductDetailModel extends ProductDetailEntity{
-  const ProductDetailModel(
-      super.productDetailData,
-      super.relatedProducts
-      );
-  
+class ProductDetailModel extends ProductDetailEntity {
+  const ProductDetailModel(super.productDetailData, super.relatedProducts);
+
   factory ProductDetailModel.fromJson(Map<String, dynamic> json) {
     print('ProductDetailModel.fromJson $json');
     return ProductDetailModel(
         ProductDetailDataModel.fromJson(json['data']),
         // ListRelatedProducts(relatedProducts: []),
-        ListRelatedProducts.fromJson(json)
-    );
+        ListRelatedProducts.fromJson(json));
   }
-  
-  
 }
-
 
 // class ProductDetailData {
 //   int? id;
@@ -179,16 +172,6 @@ class ProductDetailModel extends ProductDetailEntity{
 //   }
 // }
 
-
-
-
-
-
-
-
-
-
-
 class ProductDetail {
   int? status;
   String? message;
@@ -257,34 +240,34 @@ class Data {
 
   Data(
       {this.id,
-        this.userId,
-        this.addedBy,
-        this.title,
-        this.description,
-        this.view,
-        this.videoProvider,
-        this.videoUrl,
-        this.content,
-        this.categoryId,
-        this.brandId,
-        this.madeInId,
-        this.thumbnail,
-        this.featured,
-        this.flashSale,
-        this.price,
-        this.discount,
-        this.reviewNumber,
-        this.ratingNumber,
-        this.createdAt,
-        this.updatedAt,
-        this.thumbnailUrl,
-        this.videoLink,
-        this.images,
-        this.brand,
-        this.madeIn,
-        this.category,
-        this.user,
-        this.reviews});
+      this.userId,
+      this.addedBy,
+      this.title,
+      this.description,
+      this.view,
+      this.videoProvider,
+      this.videoUrl,
+      this.content,
+      this.categoryId,
+      this.brandId,
+      this.madeInId,
+      this.thumbnail,
+      this.featured,
+      this.flashSale,
+      this.price,
+      this.discount,
+      this.reviewNumber,
+      this.ratingNumber,
+      this.createdAt,
+      this.updatedAt,
+      this.thumbnailUrl,
+      this.videoLink,
+      this.images,
+      this.brand,
+      this.madeIn,
+      this.category,
+      this.user,
+      this.reviews});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -318,7 +301,7 @@ class Data {
     }
     brand = json['brand'] != null ? new Brand.fromJson(json['brand']) : null;
     madeIn =
-    json['made_in'] != null ? new MadeIn.fromJson(json['made_in']) : null;
+        json['made_in'] != null ? new MadeIn.fromJson(json['made_in']) : null;
     category = json['category'] != null
         ? new Category.fromJson(json['category'])
         : null;
@@ -512,20 +495,20 @@ class Reviews {
 
   Reviews(
       {this.id,
-        this.productId,
-        this.userId,
-        this.comment,
-        this.rating,
-        this.createdAt,
-        this.userFullName,
-        this.user});
+      this.productId,
+      this.userId,
+      this.comment,
+      this.rating,
+      this.createdAt,
+      this.userFullName,
+      this.user});
 
   Reviews.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     productId = json['product_id'];
     userId = json['user_id'];
     comment = json['comment'];
-    rating = json['rating'] ;
+    rating = json['rating'];
     createdAt = json['created_at'] as String;
     userFullName = json['user_full_name'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
@@ -601,30 +584,30 @@ class RelatedProduct {
 
   RelatedProduct(
       {this.id,
-        this.userId,
-        this.addedBy,
-        this.title,
-        this.description,
-        this.view,
-        this.content,
-        this.categoryId,
-        this.brandId,
-        this.madeInId,
-        this.thumbnail,
-        this.featured,
-        this.flashSale,
-        this.price,
-        this.discount,
-        this.reviewNumber,
-        this.ratingNumber,
-        this.createdAt,
-        this.thumbnailUrl,
-        this.videoLink,
-        this.images,
-        this.brand,
-        this.madeIn,
-        this.category,
-        this.user});
+      this.userId,
+      this.addedBy,
+      this.title,
+      this.description,
+      this.view,
+      this.content,
+      this.categoryId,
+      this.brandId,
+      this.madeInId,
+      this.thumbnail,
+      this.featured,
+      this.flashSale,
+      this.price,
+      this.discount,
+      this.reviewNumber,
+      this.ratingNumber,
+      this.createdAt,
+      this.thumbnailUrl,
+      this.videoLink,
+      this.images,
+      this.brand,
+      this.madeIn,
+      this.category,
+      this.user});
 
   RelatedProduct.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -655,7 +638,7 @@ class RelatedProduct {
     }
     brand = json['brand'] != null ? new Brand.fromJson(json['brand']) : null;
     madeIn =
-    json['made_in'] != null ? new MadeIn.fromJson(json['made_in']) : null;
+        json['made_in'] != null ? new MadeIn.fromJson(json['made_in']) : null;
     category = json['category'] != null
         ? new Category.fromJson(json['category'])
         : null;

@@ -39,9 +39,7 @@ class _AddressListState extends State<AddressListView> {
         ),
         centerTitle: true,
       ),
-      body:
-          BlocBuilder<ProfileBloc, ProfileState>(
-              builder: (context, state) {
+      body: BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
         if (state is GetAddressListLoadedState) {
           return state.data.isEmpty
               ? const Center(child: Text("Bạn chưa có đia chỉ giao hàng nào!!"))
@@ -57,28 +55,26 @@ class _AddressListState extends State<AddressListView> {
                 );
         }
         if (state is ProfileErrorState) {
-          return  Text(state.message);
+          return Text(state.message);
         }
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: kHeight(context) / 3,
-                ),
-                const CircularProgressIndicator(),
-                Text(S.current.dataLoading)
-              ],
-            ),
-          );
-
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: kHeight(context) / 3,
+              ),
+              const CircularProgressIndicator(),
+              Text(S.current.dataLoading)
+            ],
+          ),
+        );
       }),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.address).then((value) => {
-          BlocProvider.of<ProfileBloc>(context).add(GetListAddress())
-          });
+          Navigator.pushNamed(context, AppRoutes.address).then((value) =>
+              {BlocProvider.of<ProfileBloc>(context).add(GetListAddress())});
         },
         foregroundColor: Colors.white,
         backgroundColor: Colors.deepOrangeAccent,

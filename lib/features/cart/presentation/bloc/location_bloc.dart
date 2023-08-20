@@ -129,17 +129,17 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
       currentIndex = event.index;
       switch (event.index) {
         case 0:
-         delivery = 15; 
-           break;
-         case 1:
-         delivery = 20; 
+          delivery = 15;
           break;
-           case 2:
-         delivery = 10; 
+        case 1:
+          delivery = 20;
+          break;
+        case 2:
+          delivery = 10;
           break;
         default:
       }
-      
+
       emit(SelectMethodState());
     });
   }

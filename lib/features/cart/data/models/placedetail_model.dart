@@ -1,10 +1,9 @@
-
 class PlaceDetail {
   final Result result;
 
   PlaceDetail(this.result);
   factory PlaceDetail.fromJson(Map<String, dynamic> json) => PlaceDetail(
-       Result.fromJson(json['result']) ,
+        Result.fromJson(json['result']),
       );
 }
 
@@ -13,7 +12,7 @@ class Result {
 
   Result(this.geometry);
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-       Geometry.fromJson(json['geometry']) ,
+        Geometry.fromJson(json['geometry']),
       );
 }
 
@@ -22,7 +21,7 @@ class Geometry {
 
   Geometry(this.location);
   factory Geometry.fromJson(Map<String, dynamic> json) => Geometry(
-       Location.fromJson(json['location']),
+        Location.fromJson(json['location']),
       );
 }
 

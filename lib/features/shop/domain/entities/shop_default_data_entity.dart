@@ -45,7 +45,7 @@ class ProductEntity extends Equatable {
     required this.user,
     required this.reviews,
     this.isFavourite = false,
-    this.qouantity=1,
+    this.qouantity = 1,
   });
 
   @override
@@ -84,9 +84,12 @@ class ReviewEntity extends Equatable {
   final String? comment;
   // final DateTime? createdAt;
   const ReviewEntity(
-      this.user, this.name, this.rating, this.comment,
-      // this.createdAt
-      );
+    this.user,
+    this.name,
+    this.rating,
+    this.comment,
+    // this.createdAt
+  );
 
   @override
   List<Object?> get props => [user, name, rating, comment];
@@ -101,15 +104,14 @@ class ProductFavoriteEntity extends Equatable {
   int? reviewNumber;
   String? thumbnailUrl;
 
-
-  ProductFavoriteEntity(
-  {this.id,
-  this.title,
-  this.description,
-  this.price,
-  this.ratingNumber,
-  this.reviewNumber,
-  this.thumbnailUrl,
+  ProductFavoriteEntity({
+    this.id,
+    this.title,
+    this.description,
+    this.price,
+    this.ratingNumber,
+    this.reviewNumber,
+    this.thumbnailUrl,
   });
 
   ProductFavoriteEntity.fromJson(Map<String, dynamic> json) {
@@ -123,10 +125,8 @@ class ProductFavoriteEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-    id, title, description, price,ratingNumber, reviewNumber,thumbnailUrl
-  ];
-
+  List<Object?> get props =>
+      [id, title, description, price, ratingNumber, reviewNumber, thumbnailUrl];
 }
 
 class ProductSimpleEntity extends Equatable {
@@ -152,51 +152,51 @@ class ProductSimpleEntity extends Equatable {
   String? videoLink;
   // Category? category;
 
-  ProductSimpleEntity(
-      {this.id,
-        this.userId,
-        this.addedBy,
-        this.title,
-        this.description,
-        this.content,
-        this.categoryId,
-        this.brandId,
-        this.madeInId,
-        this.thumbnail,
-        this.featured,
-        this.flashSale,
-        this.price,
-        this.isFavorite,
-        this.discount,
-        this.reviewNumber,
-        this.ratingNumber,
-        this.createdAt,
-        this.thumbnailUrl,
-        this.videoLink,
-        // this.category
-      });
+  ProductSimpleEntity({
+    this.id,
+    this.userId,
+    this.addedBy,
+    this.title,
+    this.description,
+    this.content,
+    this.categoryId,
+    this.brandId,
+    this.madeInId,
+    this.thumbnail,
+    this.featured,
+    this.flashSale,
+    this.price,
+    this.isFavorite,
+    this.discount,
+    this.reviewNumber,
+    this.ratingNumber,
+    this.createdAt,
+    this.thumbnailUrl,
+    this.videoLink,
+    // this.category
+  });
 
   ProductSimpleEntity.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    userId = json['user_id']?? 0;
+    userId = json['user_id'] ?? 0;
     addedBy = json['added_by'] ?? "";
-    title = json['title']?? "";
-    description = json['description']?? "";
-    content = json['content']?? "";
-    categoryId = json['category_id']?? "";
-    brandId = json['brand_id']?? "";
-    madeInId = json['made_in_id']?? "";
-    thumbnail = json['thumbnail']?? "";
-    featured = json['featured']?? "";
-    flashSale = json['flash_sale']?? "";
-    price = json['price']?? "";
+    title = json['title'] ?? "";
+    description = json['description'] ?? "";
+    content = json['content'] ?? "";
+    categoryId = json['category_id'] ?? "";
+    brandId = json['brand_id'] ?? "";
+    madeInId = json['made_in_id'] ?? "";
+    thumbnail = json['thumbnail'] ?? "";
+    featured = json['featured'] ?? "";
+    flashSale = json['flash_sale'] ?? "";
+    price = json['price'] ?? "";
     isFavorite = json['is_favorite'] ?? false;
-    discount = json['discount']?? "";
+    discount = json['discount'] ?? "";
     reviewNumber = json['review_number'] ?? 0;
     ratingNumber = json['rating_number'] ?? 0;
     createdAt = json['created_at'] as String ?? "";
-    thumbnailUrl = json['thumbnail_url']?? "";
-    videoLink = json['video_link']?? "";
+    thumbnailUrl = json['thumbnail_url'] ?? "";
+    videoLink = json['video_link'] ?? "";
     // category = json['category'] != null
     //     ? Category.fromJson(json['category'])
     //     : Category(id: 1, name: "NULL");

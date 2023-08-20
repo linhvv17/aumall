@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
-import '../../../../core/utilities/strings.dart';
 import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/mainbutton.dart';
 import '../bloc/products_bloc.dart';
@@ -126,9 +124,8 @@ class FilterProduct extends StatelessWidget {
                                           bloc.rateValue = v;
                                         });
                                       },
-                                      divisions:4,
+                                      divisions: 4,
                                     ),
-                           
                                     SizedBox(
                                       width: kWidth(context) / 2,
                                       child: BlocProvider.value(
@@ -137,26 +134,24 @@ class FilterProduct extends StatelessWidget {
                                             text: S.current.apply,
                                             ontab: () {
                                               setState(() {
-                                                bloc.add(
-                                                    GetProductsByFilter(
-                                                        bloc.priceSelectRange
-                                                            .start
+                                                bloc.add(GetProductsByFilter(
+                                                    bloc.priceSelectRange.start
+                                                        .round()
+                                                        .toString(),
+                                                    bloc.priceSelectRange.end
+                                                        .round()
+                                                        .toString(),
+                                                    bloc.rateValue == 0
+                                                        ? '-1'
+                                                        : bloc.rateValue
                                                             .round()
                                                             .toString(),
-                                                        bloc.priceSelectRange
-                                                            .end
-                                                            .round()
-                                                            .toString(),
-                                                        bloc.rateValue == 0
-                                                            ? '-1'
-                                                            : bloc.rateValue
-                                                                .round()
-                                                                .toString()
-                                                        ));
+                                                    bloc.currentCategoryId
+                                                        .toString()));
                                               });
                                               Navigator.pop(context);
                                             },
-                                            height: kHeight(context)/15),
+                                            height: kHeight(context) / 15),
                                       ),
                                     ),
                                   ],

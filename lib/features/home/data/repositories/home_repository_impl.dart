@@ -26,7 +26,7 @@ class HomeRepositoryImpl extends HomeBaseRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return  Left(OfflineFailure(S.current.noInternetError));
+      return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -37,22 +37,25 @@ class HomeRepositoryImpl extends HomeBaseRepository {
       try {
         final data = await homeDatasource.getListProductHome();
         print('getListProductHome ${data}');
-        print('getListProductHome ${data.listProductHomeData.newProducts?.length}');
+        print(
+            'getListProductHome ${data.listProductHomeData.newProducts?.length}');
         return right(data);
       } catch (error) {
         print('getListProductHome: catch: ${error.toString()}');
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return  Left(OfflineFailure(S.current.noInternetError));
+      return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, ProductDetailEntity>> getProductDetail(GetProductDetailParams getProductDetailParams) async {
+  Future<Either<Failure, ProductDetailEntity>> getProductDetail(
+      GetProductDetailParams getProductDetailParams) async {
     if (await networkInfo.isConnected) {
       try {
-        final data = await homeDatasource.getProductDetail(getProductDetailParams);
+        final data =
+            await homeDatasource.getProductDetail(getProductDetailParams);
         print('getProductDetail try}');
         print('getProductDetail ${data}');
         print('getProductDetail ${data.productDetailData}');
@@ -63,12 +66,12 @@ class HomeRepositoryImpl extends HomeBaseRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return  Left(OfflineFailure(S.current.noInternetError));
+      return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, HomeDataEntity>> getHomeData() async  {
+  Future<Either<Failure, HomeDataEntity>> getHomeData() async {
     if (await networkInfo.isConnected) {
       try {
         final data = await homeDatasource.getHomeData();
@@ -82,8 +85,7 @@ class HomeRepositoryImpl extends HomeBaseRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return  Left(OfflineFailure(S.current.noInternetError));
+      return Left(OfflineFailure(S.current.noInternetError));
     }
   }
-
 }

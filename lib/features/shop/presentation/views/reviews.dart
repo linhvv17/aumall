@@ -69,7 +69,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                 ),
                 SizedBox(
                   width: kWidth(context) / 3.7,
-                  child:  FittedBox(
+                  child: FittedBox(
                     child: Text(
                       S.current.writereview,
                     ),
@@ -86,20 +86,15 @@ class _ReviewsViewState extends State<ReviewsView> {
               if (state is GetAllReviewsLoadingState) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is GetAllReviewsLoadedState) {
-
-
                 var averageRate = 0.0;
                 var totalRate = 0.0;
 
-                if(state.listReviews.isNotEmpty){
-                  for(int i = 0; i < state.listReviews.length; i++ ){
+                if (state.listReviews.isNotEmpty) {
+                  for (int i = 0; i < state.listReviews.length; i++) {
                     totalRate = totalRate + state.listReviews[i]!.rating!;
                   }
-                  averageRate = totalRate/state.listReviews.length;
+                  averageRate = totalRate / state.listReviews.length;
                 }
-
-
-
 
                 return Column(
                   children: [
@@ -137,7 +132,8 @@ class _ReviewsViewState extends State<ReviewsView> {
                                     itemCount: state.listReviews.length,
                                     itemBuilder: (context, index) {
                                       return Padding(
-                                        padding: const EdgeInsets.only(top: 8.0),
+                                        padding:
+                                            const EdgeInsets.only(top: 8.0),
                                         child: Stack(children: [
                                           SizedBox(
                                             height: kHeight(context) / 4.2,
@@ -160,7 +156,9 @@ class _ReviewsViewState extends State<ReviewsView> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(state.listReviews[index].name.toString()),
+                                                    Text(state
+                                                        .listReviews[index].name
+                                                        .toString()),
                                                     Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
@@ -168,8 +166,11 @@ class _ReviewsViewState extends State<ReviewsView> {
                                                       children: [
                                                         RatingBarIndicator(
                                                           itemSize: 20.0,
-                                                          rating: state.listReviews[index].rating!.toDouble(),
-
+                                                          rating: state
+                                                              .listReviews[
+                                                                  index]
+                                                              .rating!
+                                                              .toDouble(),
                                                           itemBuilder:
                                                               (context, _) =>
                                                                   const Icon(
@@ -179,39 +180,46 @@ class _ReviewsViewState extends State<ReviewsView> {
                                                           direction:
                                                               Axis.horizontal,
                                                         ),
-
                                                         Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
                                                           children: [
                                                             Text(
-                                                              DateFormat.yMMMEd()
-                                                                  .format(
-                                                                  state.listReviews[index].createdAt!
-                                                              ),
+                                                              DateFormat
+                                                                      .yMMMEd()
+                                                                  .format(state
+                                                                      .listReviews[
+                                                                          index]
+                                                                      .createdAt!),
                                                               // DateFormat.Hms().format(state.listReviews[index].createdAt!),
                                                               // state.listReviews[index].createdAt!.toString(),
-                                                              style: Theme.of(context)
+                                                              style: Theme.of(
+                                                                      context)
                                                                   .textTheme
                                                                   .bodyLarge!
                                                                   .copyWith(
-                                                                      color:
-                                                                          ColorManager
-                                                                              .grey),
+                                                                      color: ColorManager
+                                                                          .grey),
                                                             ),
                                                             Text(
                                                               // DateFormat.yMMMEd()
                                                               //     .format(
                                                               //     state.listReviews[index].createdAt!
                                                               // ),
-                                                              DateFormat.Hms().format(state.listReviews[index].createdAt!),
+                                                              DateFormat.Hms()
+                                                                  .format(state
+                                                                      .listReviews[
+                                                                          index]
+                                                                      .createdAt!),
                                                               // state.listReviews[index].createdAt!.toString(),
-                                                              style: Theme.of(context)
+                                                              style: Theme.of(
+                                                                      context)
                                                                   .textTheme
                                                                   .bodyLarge!
                                                                   .copyWith(
-                                                                      color:
-                                                                          ColorManager
-                                                                              .grey),
+                                                                      color: ColorManager
+                                                                          .grey),
                                                             ),
                                                           ],
                                                         )
@@ -223,8 +231,8 @@ class _ReviewsViewState extends State<ReviewsView> {
                                                     Expanded(
                                                       child: Text(
                                                         maxLines: 7,
-                                                        overflow:
-                                                            TextOverflow.ellipsis,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         state.listReviews[index]
                                                             .comment!,
                                                         textAlign:
@@ -237,7 +245,10 @@ class _ReviewsViewState extends State<ReviewsView> {
                                             ),
                                           ),
                                           CircleAvatar(
-                                            backgroundImage: NetworkImage( state.listReviews[index].user!.avatarUrl!),
+                                            backgroundImage: NetworkImage(state
+                                                .listReviews[index]
+                                                .user!
+                                                .avatarUrl!),
                                           ),
                                         ]),
                                       );

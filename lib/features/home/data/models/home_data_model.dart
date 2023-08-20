@@ -1,9 +1,8 @@
-
 import 'package:aumall/features/home/domain/entities/banner_entity.dart';
 import 'package:aumall/features/home/domain/entities/home_data_entity.dart';
 import 'package:equatable/equatable.dart';
 
-class HomeDataModel extends HomeDataEntity{
+class HomeDataModel extends HomeDataEntity {
   const HomeDataModel(super.images, super.listProductHomeData);
 
   // factory BannerModel.fromJson(Map<String, dynamic> json) {
@@ -30,6 +29,4 @@ class HomeDataModel extends HomeDataEntity{
   //       listImage
   //   );
   // }
-
-
 }

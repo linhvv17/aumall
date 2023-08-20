@@ -3,7 +3,8 @@ import '../../../../core/error/failure.dart';
 import '../entities/resetpassword_entity.dart';
 
 abstract class ResetPasswordRepository {
-  Future<Either<Failure, ResetPasswordEntity>> resetPassword(ResetPasswordParams params);
+  Future<Either<Failure, ResetPasswordEntity>> resetPassword(
+      ResetPasswordParams params);
 }
 
 class ResetPasswordParams {

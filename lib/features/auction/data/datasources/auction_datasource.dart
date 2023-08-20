@@ -8,89 +8,76 @@ import '../models/list_auction_model.dart';
 
 abstract class AuctionDatasource {
   Future<ListAuctionModel> getListAuction(GetAuctionParams getAuctionParams);
-  Future<AuctionSessionInfoModel> getAuctionSessionInfo(GetAuctionSessionInfoParams getAuctionSessionInfoParams);
+  Future<AuctionSessionInfoModel> getAuctionSessionInfo(
+      GetAuctionSessionInfoParams getAuctionSessionInfoParams);
   Future<bool> removeAuctionProduct(int idProduct);
   Future<bool> addAuctionProduct(int idProduct);
   Future<bool> actionAuction(int idProduct, String price);
 }
 
-class AuctionDatasourceImpl implements AuctionDatasource{
+class AuctionDatasourceImpl implements AuctionDatasource {
   final APIProvider apiProvider;
   AuctionDatasourceImpl(this.apiProvider);
   @override
-  Future<ListAuctionModel> getListAuction(GetAuctionParams getAuctionParams) async{
+  Future<ListAuctionModel> getListAuction(
+      GetAuctionParams getAuctionParams) async {
     final response = await apiProvider.get(
         endPoint: auctionProductsAuMall,
         token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
-        query: <String, dynamic> {
+        query: <String, dynamic>{
           'status': '1',
           'auction_type': getAuctionParams.typeAuction,
-        }
-    );
-    return ListAuctionModel.fromJson(
-        response.data
-    );
+        });
+    return ListAuctionModel.fromJson(response.data);
   }
 
   @override
   Future<bool> removeAuctionProduct(int idProduct) async {
-    final dataSend = <String, dynamic> {
-      "product_id": idProduct,
-       "type" : 2
-    };
+    final dataSend = <String, dynamic>{"product_id": idProduct, "type": 2};
     final response = await apiProvider.post(
         endPoint: allProductsAuMall,
         token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
-      data: dataSend
-    );
+        data: dataSend);
 
-    return response.statusCode == 200 ? true : false ;
+    return response.statusCode == 200 ? true : false;
   }
 
   @override
   Future<bool> addAuctionProduct(int idProduct) async {
-    final dataSend = <String, dynamic> {
-      "product_id": idProduct,
-      "type" : 1
-    };
+    final dataSend = <String, dynamic>{"product_id": idProduct, "type": 1};
     final response = await apiProvider.post(
         endPoint: allProductsAuMall,
         token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
-        data: dataSend
-    );
+        data: dataSend);
 
-    return response.statusCode == 200 ? true : false ;
+    return response.statusCode == 200 ? true : false;
   }
 
   @override
-  Future<AuctionSessionInfoModel> getAuctionSessionInfo(GetAuctionSessionInfoParams getAuctionSessionInfoParams) async {
+  Future<AuctionSessionInfoModel> getAuctionSessionInfo(
+      GetAuctionSessionInfoParams getAuctionSessionInfoParams) async {
     final response = await apiProvider.get(
         endPoint: userAuctionProductsAuMall,
         token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
-        query: <String, dynamic> {
+        query: <String, dynamic>{
           'status': '1',
           'product_id': getAuctionSessionInfoParams.productAuctionId,
-        }
-    );
-    return AuctionSessionInfoModel.fromJson(
-        response.data['data']
-    );
+        });
+    return AuctionSessionInfoModel.fromJson(response.data['data']);
   }
 
   @override
   Future<bool> actionAuction(int idProduct, String price) async {
-    final dataSend = <String, dynamic> {
+    final dataSend = <String, dynamic>{
       "product_id": idProduct,
-      "price" : double.parse(price).toInt()
+      "price": double.parse(price).toInt()
       // "price" : 2925000000
     };
     final response = await apiProvider.post(
         endPoint: submitAuctionAuMall,
         token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
-        data: dataSend
-    );
+        data: dataSend);
 
-    return response.statusCode == 200 ? true : false ;
+    return response.statusCode == 200 ? true : false;
   }
-
 }

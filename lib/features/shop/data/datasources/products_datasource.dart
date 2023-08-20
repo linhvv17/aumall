@@ -19,16 +19,24 @@ abstract class ProductsDatasource {
   Future<ProductsModel> getAllProductsFromTxt();
   Future<ProductsModel> getSpecificProductFromTxt(GetProductParams params);
   Future<CategoriesModel> getShopDefaultData();
-  Future<ListShopProductsModel> getListProductByCategory(GetShopDataDefaultParams getShopDataDefaultParams);
+  Future<ListShopProductsModel> getListProductByCategory(
+      GetShopDataDefaultParams getShopDataDefaultParams);
   Future<ProductsModel> getAllProducts();
   Future<ProductsModel> getAllProductsAuMall();
   Future<ResponseModel> sendReview(SendReviewParams params);
   Future<GetReviewsEntity> getReviews(GetReviewsParams params);
   Future<ShopDataDefaultModel> getShopDataDefault();
-  Future<ListShopProductsModel> changCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
-  Future<ListShopProductsModel> searchProducts(SearchProductsUseCaseParams searchProductsUseCaseParams);
-  Future<ListShopProductsModel> getProductsByType(GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams);
-  Future<ListShopProductsModel> getProductsByFilter(GetProductByFilterUseCaseParams params);
+  Future<CategoriesModel> getCategories();
+  Future<ListShopProductsModel> getProductsOfCategory(
+      GetProductsOfCategoryUseCaseParams getProductsOfCategoryUseCaseParams);
+  Future<ListShopProductsModel> changCategory(
+      ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
+  Future<ListShopProductsModel> searchProducts(
+      SearchProductsUseCaseParams searchProductsUseCaseParams);
+  Future<ListShopProductsModel> getProductsByType(
+      GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams);
+  Future<ListShopProductsModel> getProductsByFilter(
+      GetProductByFilterUseCaseParams params);
 }
 
 class ProductsDatasourceImpl implements ProductsDatasource {
@@ -49,10 +57,9 @@ class ProductsDatasourceImpl implements ProductsDatasource {
     final response = await apiProvider.get(
         endPoint: allProductsAuMall,
         token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
-      query: <String, dynamic> {
-    'status': '1',
-    }
-    );
+        query: <String, dynamic>{
+          'status': '1',
+        });
 
     print('getAllProductsAuMall ${response.data}');
     return ProductsModel.fromJson(response.data);
@@ -64,16 +71,16 @@ class ProductsDatasourceImpl implements ProductsDatasource {
     return ProductsModel.fromJson(response.data);
   }
 
-
   @override
-  Future<ProductsModel> getSpecificProductFromTxt(GetProductParams params) async {
+  Future<ProductsModel> getSpecificProductFromTxt(
+      GetProductParams params) async {
     print('getSpecificProductFromTxt:');
     print('getSpecificProductFromTxt: ${params.category}');
-    final data = await rootBundle.loadString('assets/txt/${params.category.toLowerCase()}.txt');
+    final data = await rootBundle
+        .loadString('assets/txt/${params.category.toLowerCase()}.txt');
     final body = json.decode(data);
     return ProductsModel.fromJson(body);
   }
-
 
   @override
   Future<ResponseModel> sendReview(SendReviewParams params) async {
@@ -91,21 +98,17 @@ class ProductsDatasourceImpl implements ProductsDatasource {
 
   @override
   Future<GetReviewsEntity> getReviews(GetReviewsParams params) async {
-
     final response = await apiProvider.get(
-      // endPoint: "$productDetailAuMall/${params.productId}",
-      endPoint: reviewAuMall,
-        query: <String, dynamic> {
-          'product_id': params.productId ,
+        // endPoint: "$productDetailAuMall/${params.productId}",
+        endPoint: reviewAuMall,
+        query: <String, dynamic>{
+          'product_id': params.productId,
         },
-      // endPoint: "$reviewEndPoint?id=${params.productId}",
+        // endPoint: "$reviewEndPoint?id=${params.productId}",
         token:
-        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? ''
-    );
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
-    return GetReviewsModel.fromJson(
-        response.data
-    );
+    return GetReviewsModel.fromJson(response.data);
   }
 
   @override
@@ -119,16 +122,14 @@ class ProductsDatasourceImpl implements ProductsDatasource {
         //   // 'rating': params.rating,
         // },
         token:
-        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
     print('getShopDefaultData getShopDefaultData: ${response.data}');
 
     CategoriesModel categoriesModel = CategoriesModel.fromJson(response.data);
 
-
-
     final params = <String, dynamic>{
-      'status' : "1",
+      'status': "1",
       'category_id': categoriesModel.categories[0].id.toString(),
     };
 
@@ -136,25 +137,21 @@ class ProductsDatasourceImpl implements ProductsDatasource {
         endPoint: allProductsAuMall,
         query: params,
         token:
-        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
-
-
-    ListShopProductsModel.fromJson(
-        responseProducts.data
-    );
-
+    ListShopProductsModel.fromJson(responseProducts.data);
 
     return CategoriesModel.fromJson(response.data);
   }
 
   @override
-  Future<ListShopProductsModel> getListProductByCategory(GetShopDataDefaultParams getShopDataDefaultParams) async {
-
-    print('getListProductByCategory categoryId : ${getShopDataDefaultParams.categoryId}');
+  Future<ListShopProductsModel> getListProductByCategory(
+      GetShopDataDefaultParams getShopDataDefaultParams) async {
+    print(
+        'getListProductByCategory categoryId : ${getShopDataDefaultParams.categoryId}');
 
     final params = <String, dynamic>{
-      'status' : "1",
+      'status': "1",
       'category_id': getShopDataDefaultParams.categoryId.toString(),
     };
 
@@ -162,110 +159,96 @@ class ProductsDatasourceImpl implements ProductsDatasource {
         endPoint: allProductsAuMall,
         query: params,
         token:
-        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
-
-
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
     print('final json : ${responseProducts.data}');
 
-
-
-    return ListShopProductsModel.fromJson(
-        responseProducts.data
-    );
-
-
-
+    return ListShopProductsModel.fromJson(responseProducts.data);
   }
 
   @override
   Future<ShopDataDefaultModel> getShopDataDefault() async {
-
     //get list categories
     final responseCategories = await apiProvider.get(
         endPoint: categoryAuMall,
-        token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
-    CategoriesModel categoriesModel = CategoriesModel.fromJson(responseCategories.data);
-
+        token:
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+    CategoriesModel categoriesModel =
+        CategoriesModel.fromJson(responseCategories.data);
 
     ////get list products by categories
     final params = <String, dynamic>{
-      'status' : "1",
+      'status': "1",
       'category_id': categoriesModel.categories[0].id.toString(),
     };
     final responseProducts = await apiProvider.get(
         endPoint: allProductsAuMall,
         query: params,
         token:
-        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
-
-
-    ListShopProductsModel listShopProductsModel = ListShopProductsModel.fromJson(
-        responseProducts.data
-    );
-
+    ListShopProductsModel listShopProductsModel =
+        ListShopProductsModel.fromJson(responseProducts.data);
 
     return ShopDataDefaultModel(categoriesModel, listShopProductsModel);
   }
 
   @override
-  Future<ListShopProductsModel> changCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams) async {
+  Future<ListShopProductsModel> changCategory(
+      ChangeCategoryUseCaseParams changeCategoryUseCaseParams) async {
     final params = <String, dynamic>{
-      'status' : "1",
+      'status': "1",
       'category_id': changeCategoryUseCaseParams.categoryId.toString(),
     };
     final responseProducts = await apiProvider.get(
         endPoint: allProductsAuMall,
         query: params,
         token:
-        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
-    return ListShopProductsModel.fromJson(
-        responseProducts.data
-    );
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+    return ListShopProductsModel.fromJson(responseProducts.data);
   }
 
   @override
-  Future<ListShopProductsModel> searchProducts(SearchProductsUseCaseParams searchProductsUseCaseParams) async {
-
+  Future<ListShopProductsModel> searchProducts(
+      SearchProductsUseCaseParams searchProductsUseCaseParams) async {
     final params = <String, dynamic>{
       'keyword': searchProductsUseCaseParams.keyWord,
+      'category_id': searchProductsUseCaseParams.categoryId,
     };
     final responseProducts = await apiProvider.get(
         endPoint: searchProductsAuMall,
         query: params,
         token:
-        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
     print("searchProducts ${responseProducts.data.toString()}");
 
-    return ListShopProductsModel.fromJson(
-        responseProducts.data
-    );
+    return ListShopProductsModel.fromJson(responseProducts.data);
   }
 
   @override
-  Future<ListShopProductsModel> getProductsByFilter(GetProductByFilterUseCaseParams getProductByFilterUseCaseParams) async {
+  Future<ListShopProductsModel> getProductsByFilter(
+      GetProductByFilterUseCaseParams getProductByFilterUseCaseParams) async {
     final params = <String, dynamic>{
-      'status' : "1",
+      'status': "1",
       'min_price': getProductByFilterUseCaseParams.minPrice,
       'max_price': getProductByFilterUseCaseParams.maxPrice,
+      'category_id': getProductByFilterUseCaseParams.categoryId,
     };
     final responseProducts = await apiProvider.get(
         endPoint: allProductsAuMall,
         query: params,
         token:
-        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
     print("getProductsByFilter ${responseProducts.data.toString()}");
 
-    return ListShopProductsModel.fromJson(
-        responseProducts.data
-    );
+    return ListShopProductsModel.fromJson(responseProducts.data);
   }
 
   @override
-  Future<ListShopProductsModel> getProductsByType(GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams) async {
+  Future<ListShopProductsModel> getProductsByType(
+      GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams) async {
     final params = <String, dynamic>{
       'status': 1,
       getProductsByTypeUseCaseParams.keyWord: 1,
@@ -274,18 +257,43 @@ class ProductsDatasourceImpl implements ProductsDatasource {
         endPoint: allProductsAuMall,
         query: params,
         token:
-        PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
     print("searchProducts ${responseProducts.data.toString()}");
 
-    return ListShopProductsModel.fromJson(
-        responseProducts.data
-    );
+    return ListShopProductsModel.fromJson(responseProducts.data);
+  }
+
+  @override
+  Future<CategoriesModel> getCategories() async {
+    //get list categories
+    final responseCategories = await apiProvider.get(
+        endPoint: categoryAuMall,
+        token:
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+    CategoriesModel categoriesModel =
+        CategoriesModel.fromJson(responseCategories.data);
+    return categoriesModel;
+  }
+
+  @override
+  Future<ListShopProductsModel> getProductsOfCategory(
+      GetProductsOfCategoryUseCaseParams
+          getProductsOfCategoryUseCaseParams) async {
+    ////get list products by categories
+    final params = <String, dynamic>{
+      'status': "1",
+      'category_id': getProductsOfCategoryUseCaseParams.categoryId.toString(),
+    };
+    final responseProducts = await apiProvider.get(
+        endPoint: allProductsAuMall,
+        query: params,
+        token:
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+
+    ListShopProductsModel listShopProductsModel =
+        ListShopProductsModel.fromJson(responseProducts.data);
+
+    return listShopProductsModel;
   }
 }
-
-
-
-
-
-

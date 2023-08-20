@@ -112,30 +112,28 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                           );
                           BlocProvider.of<OrderBloc>(context).add(
                             CreateNewOrder(
-                              1900000000,
-                              BlocProvider.of<LocationBloc>(context).delivery,
-                              2500000000,
-                              
-                              phoneController.text,
-                              BlocProvider.of<LocationBloc>(context)
-                                  .currentAddress![0]
-                                  .postalCode!,
-                              BlocProvider.of<LocationBloc>(context)
-                                  .currentAddress![0]
-                                  .street!,
-                              BlocProvider.of<LocationBloc>(context)
-                                  .currentAddress![0]
-                                  .locality!,
-                              BlocProvider.of<LocationBloc>(context)
-                                  .currentAddress![0]
-                                  .country!,
-                              "succeeded",
-                              const Uuid().v4(),
-                              BlocProvider.of<LocationBloc>(context)
-                                  .currentAddress![0]
-                                  .administrativeArea!,
-                              BlocProvider.of<CartBloc>(context).orderItems
-                            ),
+                                1900000000,
+                                BlocProvider.of<LocationBloc>(context).delivery,
+                                2500000000,
+                                phoneController.text,
+                                BlocProvider.of<LocationBloc>(context)
+                                    .currentAddress![0]
+                                    .postalCode!,
+                                BlocProvider.of<LocationBloc>(context)
+                                    .currentAddress![0]
+                                    .street!,
+                                BlocProvider.of<LocationBloc>(context)
+                                    .currentAddress![0]
+                                    .locality!,
+                                BlocProvider.of<LocationBloc>(context)
+                                    .currentAddress![0]
+                                    .country!,
+                                "succeeded",
+                                const Uuid().v4(),
+                                BlocProvider.of<LocationBloc>(context)
+                                    .currentAddress![0]
+                                    .administrativeArea!,
+                                BlocProvider.of<CartBloc>(context).orderItems),
                           );
                         }
                       },
@@ -163,7 +161,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                     Navigator.pushNamed(context, AppRoutes.mapview);
                   },
                   icon: const Icon(Icons.add),
-                  label:  Text(S.current.addNew),
+                  label: Text(S.current.addNew),
                 ),
               ],
             ),
@@ -367,8 +365,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                                     .bodyLarge!
                                     .copyWith(color: ColorManager.grey),
                               ),
-                              Text(
-                                  '1000000000¢',
+                              Text('1000000000¢',
                                   style: Theme.of(context).textTheme.headline6),
                             ],
                           ),
@@ -403,8 +400,7 @@ class _AddNewAddressViewState extends State<AddNewAddressView> {
                                     .bodyLarge!
                                     .copyWith(color: ColorManager.grey),
                               ),
-                              Text(
-                                  '15000000 \$',
+                              Text('15000000 \$',
                                   style: Theme.of(context).textTheme.headline6),
                             ],
                           ),

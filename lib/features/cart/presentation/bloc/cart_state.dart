@@ -6,6 +6,7 @@ abstract class CartState extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 class CartInitial extends CartState {}
 
 class AddToCartState extends CartState {}
@@ -14,7 +15,7 @@ class CartLoading extends CartState {}
 
 class CartLoaded extends CartState {
   final List items;
-  final num  totalNumberItems;
+  final num totalNumberItems;
   const CartLoaded(this.items, this.totalNumberItems);
 }
 
@@ -33,6 +34,7 @@ class AddToCartSuccess extends CartState {
   final bool isSuccess;
   const AddToCartSuccess(this.isSuccess);
 }
+
 class RemoveProductInCartSuccess extends CartState {
   final bool isSuccess;
   const RemoveProductInCartSuccess(this.isSuccess);
@@ -43,9 +45,6 @@ class UpdateProductInCartSuccess extends CartState {
   const UpdateProductInCartSuccess(this.isSuccess);
 }
 
-class IncrementCountState extends CartState {
+class IncrementCountState extends CartState {}
 
-}
-class DecrementCountState extends CartState {
-  
-}
+class DecrementCountState extends CartState {}

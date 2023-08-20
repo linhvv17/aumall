@@ -37,7 +37,8 @@ class _DeliveryMethodCardState extends State<DeliveryMethodCard> {
     return Stack(children: [
       InkWell(
         onTap: () {
-          BlocProvider.of<LocationBloc>(context).add(SelectMethod(widget.index));
+          BlocProvider.of<LocationBloc>(context)
+              .add(SelectMethod(widget.index));
         },
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -63,7 +64,8 @@ class _DeliveryMethodCardState extends State<DeliveryMethodCard> {
       Positioned(
           right: 15,
           top: 10,
-          child: BlocProvider.of<LocationBloc>(context).currentIndex==widget.index
+          child: BlocProvider.of<LocationBloc>(context).currentIndex ==
+                  widget.index
               ? SizedBox(
                   width: 40,
                   height: 30,

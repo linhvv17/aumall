@@ -14,10 +14,10 @@ class RegisterUseCase
   @override
   Future<Either<Failure, RegisterEntity>> call(params) async {
     return await registerBaseRepository.register(RegisterParams(
-        name: params.name,
-        email: params.email,
-        password: params.password,
-        ));
+      name: params.name,
+      email: params.email,
+      password: params.password,
+    ));
   }
 }
 
@@ -25,11 +25,10 @@ class RegisterUseCaseParams {
   final String name;
   final String email;
   final String password;
-  
 
-  RegisterUseCaseParams(
-      {required this.name,
-      required this.email,
-      required this.password,
+  RegisterUseCaseParams({
+    required this.name,
+    required this.email,
+    required this.password,
   });
 }

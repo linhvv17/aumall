@@ -10,7 +10,8 @@ abstract class ProfileRepository {
   Future<Either<Failure, ProfileEntity>> updateProfile(
       UpdateProfileParams updateProfileParams);
   Future<Either<Failure, bool>> logOut();
-  Future<Either<Failure, ProfileEntity>> updatePassword(UpdatePassParnms params);
+  Future<Either<Failure, ProfileEntity>> updatePassword(
+      UpdatePassParnms params);
   Future<Either<Failure, List<AddressEntity>>> getAddressList();
   Future<Either<Failure, bool>> addAddress(AddAddressParams addAddressParams);
 }
@@ -23,7 +24,8 @@ class UpdateProfileParams {
   final String dateOfBirth;
   final String address;
 
-  UpdateProfileParams(this.name, this.mobile, this.avatar, this.fullName, this.dateOfBirth, this.address);
+  UpdateProfileParams(this.name, this.mobile, this.avatar, this.fullName,
+      this.dateOfBirth, this.address);
 }
 
 class UpdatePassParnms {
@@ -40,10 +42,5 @@ class AddAddressParams {
   final String address;
   final int addressDefault;
 
-  AddAddressParams(
-      this.name,
-      this.mobile,
-      this.address,
-      this.addressDefault
-      );
+  AddAddressParams(this.name, this.mobile, this.address, this.addressDefault);
 }

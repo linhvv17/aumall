@@ -10,24 +10,25 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCase loginUseCase;
-  
+
   LoginBloc(
     this.loginUseCase,
   ) : super(LoginInitialState()) {
     on<UserLogin>((event, emit) async {
       emit(LoginLoadingState());
-      
-        final failureOrSuccess = await loginUseCase(
+
+      final failureOrSuccess = await loginUseCase(
           LoginUseCaseParams(email: event.email, password: event.password));
-           failureOrSuccess.fold(
-          (failure) => emit(LoginErrorState(failure.message)),
+      failureOrSuccess.fold((failure) => emit(LoginErrorState(failure.message)),
           (success) {
-            print('aaaaaaaaaaaaaaa ${success}');
-            print('aaaaaaaaaaaaaaa ${(success as LoginEntity).id}');
-            print('aaaaaaaaaaaaaaa ${(success as LoginEntity).name}');
-            PreferenceHelper.saveDataInSharedPreference(key: "keyUser", value: "${(success as LoginEntity).id}-${success.name}");
-            emit(LoginFinishedState(data: success));
-          });
+        print('aaaaaaaaaaaaaaa ${success}');
+        print('aaaaaaaaaaaaaaa ${(success as LoginEntity).id}');
+        print('aaaaaaaaaaaaaaa ${(success as LoginEntity).name}');
+        PreferenceHelper.saveDataInSharedPreference(
+            key: "keyUser",
+            value: "${(success as LoginEntity).id}-${success.name}");
+        emit(LoginFinishedState(data: success));
+      });
     });
   }
 }

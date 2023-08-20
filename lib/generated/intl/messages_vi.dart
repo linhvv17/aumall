@@ -37,7 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tất cả sản phẩm >>"),
         "appName": MessageLookupByLibrary.simpleMessage("AuMall"),
         "apply": MessageLookupByLibrary.simpleMessage("Áp dụng"),
-        "auction": MessageLookupByLibrary.simpleMessage("Đấu giá"),
+        "auction": MessageLookupByLibrary.simpleMessage("Đấu giá ngay!"),
         "badRequestError": MessageLookupByLibrary.simpleMessage(
             "Email này đã được sử dụng trước đây"),
         "cacheError": MessageLookupByLibrary.simpleMessage("Lỗi cache"),
@@ -154,6 +154,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noContent": MessageLookupByLibrary.simpleMessage("Không có nội dung"),
         "noInternetError": MessageLookupByLibrary.simpleMessage(
             "Hãy kiểm tra kết nối Internet"),
+        "noProducts":
+            MessageLookupByLibrary.simpleMessage("Không có sản phầm nào!"),
         "notCart": MessageLookupByLibrary.simpleMessage(
             "Không có sản phẩm nào trong giỏ hàng!"),
         "notFoundError":

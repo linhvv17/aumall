@@ -28,7 +28,7 @@ class PreferenceHelper {
     return await sharedPreferences.remove(key);
   }
 
-  static Future clearData(){
+  static Future clearData() {
     return sharedPreferences.clear();
   }
 }

@@ -8,28 +8,25 @@ abstract class AuctionEvent extends Equatable {
   List<Object> get props => [];
 }
 
-
-class GetInfoAuctionSession extends AuctionEvent{
+class GetInfoAuctionSession extends AuctionEvent {
   final int productId;
   const GetInfoAuctionSession(this.productId);
-
 }
-class ActionAuction extends AuctionEvent{
+
+class ActionAuction extends AuctionEvent {
   final int productId;
   final String price;
   const ActionAuction(this.productId, this.price);
-
 }
 
-class RemoveAuctionProduct extends AuctionEvent{
+class RemoveAuctionProduct extends AuctionEvent {
   final int productId;
   const RemoveAuctionProduct(this.productId);
-
 }
-class GetListAuctionProduct extends AuctionEvent{
+
+class GetListAuctionProduct extends AuctionEvent {
   final int typeAuction;
   const GetListAuctionProduct(this.typeAuction);
-
 }
 
 class AddToAuction extends AuctionEvent {

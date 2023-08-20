@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:aumall/core/error/failure.dart';
 
-
-abstract class BaseUsecase<T,Params>{
-Future<Either<Failure,T>> call(Params params);
+abstract class BaseUsecase<T, Params> {
+  Future<Either<Failure, T>> call(Params params);
 }
+
 class NoParams {}

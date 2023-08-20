@@ -5,7 +5,10 @@ class AllOrdersEntity extends Equatable {
 
   final List<AllOrderEntity> orders;
 
-  const AllOrdersEntity(this.success, this.orders, );
+  const AllOrdersEntity(
+    this.success,
+    this.orders,
+  );
 
   @override
   List<Object> get props => [success, orders];

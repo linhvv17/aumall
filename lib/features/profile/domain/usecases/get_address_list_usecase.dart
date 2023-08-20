@@ -1,4 +1,3 @@
-
 import 'package:aumall/features/profile/domain/entities/address_entity.dart';
 import 'package:dartz/dartz.dart';
 
@@ -7,7 +6,8 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/profile_entity.dart';
 import '../repositories/profile_repository.dart';
 
-class GetAddressListUseCase implements BaseUsecase<List<AddressEntity>, NoParams> {
+class GetAddressListUseCase
+    implements BaseUsecase<List<AddressEntity>, NoParams> {
   final ProfileRepository profileRepository;
 
   GetAddressListUseCase(this.profileRepository);

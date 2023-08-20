@@ -33,7 +33,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       final profile = CacheManager().getItem("user-info");
       if (profile != null) return right(profile);
 
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -48,7 +48,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -63,7 +63,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -77,12 +77,13 @@ class ProfileRepositoryImpl implements ProfileRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, bool>> addAddress(AddAddressParams addAddressParams) async {
+  Future<Either<Failure, bool>> addAddress(
+      AddAddressParams addAddressParams) async {
     if (await networkInfo.isConnected) {
       try {
         final data = await profileDatasource.addAddress(addAddressParams);
@@ -91,7 +92,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -105,7 +106,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 }

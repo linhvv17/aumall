@@ -9,18 +9,13 @@ class ListFavoriteModel extends ListFavoriteEntity {
     print("ListFavoriteModel.fromJson json${json}");
     print("ListFavoriteModel.fromJson json data ${json['data']}");
 
-    List<ProductAuMallModel> list
-    = List<ProductAuMallModel>.from(
+    List<ProductAuMallModel> list = List<ProductAuMallModel>.from(
         json['data']['data'].map((x) => ProductAuMallModel.fromJson(x)));
 
-    print("ListFavoriteModel.fromJson json data List<ProductFavoriteModel> ${list}");
-    print("ListFavoriteModel.fromJson json data List<ProductFavoriteModel> ${list.length}");
-    return ListFavoriteModel(
-        list
-    );
+    print(
+        "ListFavoriteModel.fromJson json data List<ProductFavoriteModel> ${list}");
+    print(
+        "ListFavoriteModel.fromJson json data List<ProductFavoriteModel> ${list.length}");
+    return ListFavoriteModel(list);
   }
 }
-
-
-
-

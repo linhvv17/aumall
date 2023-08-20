@@ -2,8 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-
-
 import 'package:aumall/core/utilities/endpoints.dart';
 import 'package:aumall/features/cart/data/models/placedetail_model.dart';
 import '../models/suggession_model.dart';
@@ -29,7 +27,7 @@ class PlacesDatasourceImpl implements PlacesDataSource {
       String query, BuildContext context) async {
     final response = await dio.get(
         '$placesAutocompeleteUrlPath?input=$query&sessiontoken=$sessionToken&types=establishment&language=ar|en&key=$apiKey');
-  
+
     return PlacesModel.fromJson(response.data).suggestions;
   }
 

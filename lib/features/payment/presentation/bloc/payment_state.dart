@@ -25,7 +25,6 @@ class PaymentAuthError extends PaymentState {
   });
 }
 
-
 class PaymentOrderFinished extends PaymentState {
   final OrderRequest data;
 
@@ -38,7 +37,6 @@ class PaymentOrderError extends PaymentState {
     required this.error,
   });
 }
-
 
 class PaymentRequestFinished extends PaymentState {
   final PaymentRequestEntity data;

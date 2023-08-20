@@ -25,7 +25,7 @@ class ResetPasswordRepositoryImpl implements ResetPasswordRepository {
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return  Left(OfflineFailure(S.current.noInternetError));
+      return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 }

@@ -12,7 +12,8 @@ class RequestAuthUsecase
   @override
   Future<Either<Failure, AuthRequestEntity>> call(
       RequestAuthUseCaseParams params) async {
-    return await paymentRepository.requestAuth(RequestAuthParams(params.apiKey));
+    return await paymentRepository
+        .requestAuth(RequestAuthParams(params.apiKey));
   }
 }
 

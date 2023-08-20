@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 class ResponseEntity extends Equatable {
@@ -6,8 +5,7 @@ class ResponseEntity extends Equatable {
   final String? message;
 
   const ResponseEntity(this.success, this.message);
-  
+
   @override
-  
   List<Object?> get props => [success, message];
 }

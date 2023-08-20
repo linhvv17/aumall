@@ -12,8 +12,9 @@ class GetReviewsEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-    // success,
-    reviews];
+        // success,
+        reviews
+      ];
 }
 
 class GetReviewEntity extends Equatable {
@@ -23,11 +24,13 @@ class GetReviewEntity extends Equatable {
   final String? comment;
   final DateTime? createdAt;
   const GetReviewEntity(
-      this.user,
-      this.name, this.rating, this.comment, this.createdAt,);
+    this.user,
+    this.name,
+    this.rating,
+    this.comment,
+    this.createdAt,
+  );
 
   @override
-  List<Object?> get props => [
-    user,
-    name, rating, comment];
+  List<Object?> get props => [user, name, rating, comment];
 }

@@ -6,13 +6,13 @@ import 'package:dartz/dartz.dart';
 
 import '../entities/home_data_entity.dart';
 
-class GetHomeDataUseCase extends BaseUsecase<HomeDataEntity, NoParams>{
+class GetHomeDataUseCase extends BaseUsecase<HomeDataEntity, NoParams> {
   final HomeBaseRepository homeRepository;
   GetHomeDataUseCase(this.homeRepository);
 
   @override
   Future<Either<Failure, HomeDataEntity>> call(NoParams params) async {
-    final response =  await homeRepository.getHomeData();
+    final response = await homeRepository.getHomeData();
     return response;
   }
 }

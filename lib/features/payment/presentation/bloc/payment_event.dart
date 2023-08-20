@@ -21,7 +21,7 @@ class RequestOrder extends PaymentEvent {
 }
 
 class RequestPayment extends PaymentEvent {
-    final String token;
+  final String token;
   final String totlaPrice;
   final String orderId;
   final String firstName;
@@ -34,5 +34,17 @@ class RequestPayment extends PaymentEvent {
   final String state;
   final String integrationId;
 
-  const RequestPayment(this.token, this.totlaPrice, this.orderId, this.firstName, this.lastName, this.phone, this.email, this.street, this.city, this.country, this.state, this.integrationId);
+  const RequestPayment(
+      this.token,
+      this.totlaPrice,
+      this.orderId,
+      this.firstName,
+      this.lastName,
+      this.phone,
+      this.email,
+      this.street,
+      this.city,
+      this.country,
+      this.state,
+      this.integrationId);
 }

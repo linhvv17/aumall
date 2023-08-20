@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class AddressCard extends StatelessWidget {
   final int index;
   final AddressEntity addressEntity;
-  const AddressCard({super.key, required this.index, required this.addressEntity});
+  const AddressCard(
+      {super.key, required this.index, required this.addressEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AddressCard extends StatelessWidget {
               )
             ],
           ),
-          child:   Padding(
+          child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,9 +44,7 @@ class AddressCard extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: (){
-
-                      },
+                      onPressed: () {},
                       child: const Text(
                         'Edit',
                         textAlign: TextAlign.right,
@@ -80,7 +79,9 @@ class AddressCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    addressEntity.defaultAddress! ? const CheckboxCustom2():const CheckboxCustom(),
+                    addressEntity.defaultAddress!
+                        ? const CheckboxCustom2()
+                        : const CheckboxCustom(),
                     const Text(
                       'Use as the shipping address',
                       style: TextStyle(
@@ -99,7 +100,6 @@ class AddressCard extends StatelessWidget {
   }
 }
 
-
 class CheckboxCustom extends StatefulWidget {
   const CheckboxCustom({super.key});
 
@@ -108,11 +108,9 @@ class CheckboxCustom extends StatefulWidget {
 }
 
 class _CheckboxCustomState extends State<CheckboxCustom> {
-  bool isChecked  = false ;
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
-
-
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
@@ -138,16 +136,9 @@ class _CheckboxCustomState extends State<CheckboxCustom> {
           });
         },
       ),
-    )
-      ;
+    );
   }
 }
-
-
-
-
-
-
 
 class CheckboxCustom2 extends StatefulWidget {
   const CheckboxCustom2({super.key});
@@ -157,11 +148,9 @@ class CheckboxCustom2 extends StatefulWidget {
 }
 
 class _CheckboxCustom2State extends State<CheckboxCustom2> {
-  bool isChecked  = true ;
+  bool isChecked = true;
   @override
   Widget build(BuildContext context) {
-
-
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
@@ -187,7 +176,6 @@ class _CheckboxCustom2State extends State<CheckboxCustom2> {
           });
         },
       ),
-    )
-    ;
+    );
   }
 }

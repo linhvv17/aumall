@@ -32,10 +32,9 @@ class ProductsRepositoryImpl implements ProductRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return  Left(OfflineFailure(S.current.noInternetError));
+      return Left(OfflineFailure(S.current.noInternetError));
     }
   }
-
 
   @override
   Future<Either<Failure, ResponseEntity>> sendReview(
@@ -49,7 +48,7 @@ class ProductsRepositoryImpl implements ProductRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -65,12 +64,12 @@ class ProductsRepositoryImpl implements ProductRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, CategoriesEntity>> getShopDefaultData() async  {
+  Future<Either<Failure, CategoriesEntity>> getShopDefaultData() async {
     if (await networkInfo.isConnected) {
       try {
         // print('getShopDefaultData: ${getShopDataDefaultParams.categoryId}');
@@ -81,23 +80,26 @@ class ProductsRepositoryImpl implements ProductRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, ListProductShopEntity>> getListProductByCategory(GetShopDataDefaultParams getShopDataDefaultParams) async {
+  Future<Either<Failure, ListProductShopEntity>> getListProductByCategory(
+      GetShopDataDefaultParams getShopDataDefaultParams) async {
     if (await networkInfo.isConnected) {
       try {
-        print('getListProductByCategory: ${getShopDataDefaultParams.categoryId}');
-        final data = await productsDatasource.getListProductByCategory(getShopDataDefaultParams);
+        print(
+            'getListProductByCategory: ${getShopDataDefaultParams.categoryId}');
+        final data = await productsDatasource
+            .getListProductByCategory(getShopDataDefaultParams);
         // final data = await productsDatasource.getSpecificProductFromTxt(params);
         return right(data);
       } catch (error) {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
@@ -111,40 +113,45 @@ class ProductsRepositoryImpl implements ProductRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, ListProductShopEntity>> changeCategory(ChangeCategoryUseCaseParams changeCategoryUseCaseParams) async {
+  Future<Either<Failure, ListProductShopEntity>> changeCategory(
+      ChangeCategoryUseCaseParams changeCategoryUseCaseParams) async {
     if (await networkInfo.isConnected) {
       try {
-        final data = await productsDatasource.changCategory(changeCategoryUseCaseParams);
+        final data =
+            await productsDatasource.changCategory(changeCategoryUseCaseParams);
         return right(data);
       } catch (error) {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, ListProductShopEntity>> searchProducts(SearchProductsUseCaseParams searchProductsUseCaseParams)async {
+  Future<Either<Failure, ListProductShopEntity>> searchProducts(
+      SearchProductsUseCaseParams searchProductsUseCaseParams) async {
     if (await networkInfo.isConnected) {
       try {
-        final data = await productsDatasource.searchProducts(searchProductsUseCaseParams);
+        final data = await productsDatasource
+            .searchProducts(searchProductsUseCaseParams);
         return right(data);
       } catch (error) {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, ListProductShopEntity>> getProductByFilter(GetProductByFilterUseCaseParams params) async {
+  Future<Either<Failure, ListProductShopEntity>> getProductByFilter(
+      GetProductByFilterUseCaseParams params) async {
     if (await networkInfo.isConnected) {
       try {
         final data = await productsDatasource.getProductsByFilter(params);
@@ -153,23 +160,54 @@ class ProductsRepositoryImpl implements ProductRepository {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, ListProductShopEntity>> getProductsByType(GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams) async {
+  Future<Either<Failure, ListProductShopEntity>> getProductsByType(
+      GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams) async {
     if (await networkInfo.isConnected) {
       try {
-        final data = await productsDatasource.getProductsByType(getProductsByTypeUseCaseParams);
+        final data = await productsDatasource
+            .getProductsByType(getProductsByTypeUseCaseParams);
         return right(data);
       } catch (error) {
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
-      return left( OfflineFailure(S.current.noInternetError));
+      return left(OfflineFailure(S.current.noInternetError));
     }
   }
 
+  @override
+  Future<Either<Failure, CategoriesEntity>> getCategories() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final data = await productsDatasource.getCategories();
+        return right(data);
+      } catch (error) {
+        return left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return left(OfflineFailure(S.current.noInternetError));
+    }
+  }
 
+  @override
+  Future<Either<Failure, ListProductShopEntity>> getProductsOfCategory(
+      GetProductsOfCategoryUseCaseParams
+          getProductsOfCategoryUseCaseParams) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final data = await productsDatasource
+            .getProductsOfCategory(getProductsOfCategoryUseCaseParams);
+        return right(data);
+      } catch (error) {
+        return left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return left(OfflineFailure(S.current.noInternetError));
+    }
+  }
 }

@@ -153,6 +153,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noContent": MessageLookupByLibrary.simpleMessage("no_content"),
         "noInternetError": MessageLookupByLibrary.simpleMessage(
             "Please Check Your Internet Connection"),
+        "noProducts":
+            MessageLookupByLibrary.simpleMessage("There is no products yet!"),
         "notCart": MessageLookupByLibrary.simpleMessage(
             "There is No Products in Bag yet!"),
         "notFoundError":

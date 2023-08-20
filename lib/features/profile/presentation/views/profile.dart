@@ -118,7 +118,8 @@ class ProfileView extends StatelessWidget {
                           title: S.current.editPersonalInfo,
                           subtitle: S.current.edit,
                           ontab: () {
-                            Navigator.pushNamed(context, AppRoutes.updateProfile,
+                            Navigator.pushNamed(
+                                    context, AppRoutes.updateProfile,
                                     arguments: state.data.user)
                                 .then((value) => {
                                       BlocProvider.of<ProfileBloc>(context)
@@ -158,25 +159,26 @@ class ProfileView extends StatelessWidget {
                         ),
                         BlocBuilder<ProfileBloc, ProfileState>(
                             builder: (context, state) {
-                              return ListTile(
-                                  onTap: () {
-                                    //call API logout
-                                    BlocProvider.of<ProfileBloc>(context).add(LogOut());
-                                  },
-                                  title: Text(
-                                    S.current.logout,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(color: Colors.red),
-                                  ),
-                                  dense: true,
-                                  trailing: const Icon(
-                                    Icons.logout,
-                                    size: 15,
-                                    color: Colors.red,
-                                  ));
-                            })
+                          return ListTile(
+                              onTap: () {
+                                //call API logout
+                                BlocProvider.of<ProfileBloc>(context)
+                                    .add(LogOut());
+                              },
+                              title: Text(
+                                S.current.logout,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(color: Colors.red),
+                              ),
+                              dense: true,
+                              trailing: const Icon(
+                                Icons.logout,
+                                size: 15,
+                                color: Colors.red,
+                              ));
+                        })
                       ],
                     ),
                   );

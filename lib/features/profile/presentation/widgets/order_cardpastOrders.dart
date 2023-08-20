@@ -14,7 +14,7 @@ class OrderCardPastOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      final bloc = BlocProvider.of<OrderBloc>(context);
+    final bloc = BlocProvider.of<OrderBloc>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Container(
@@ -51,10 +51,10 @@ class OrderCardPastOrders extends StatelessWidget {
                 children: [
                   OutlinedButton(
                     onPressed: () {
-                       Navigator.pushNamed(context, AppRoutes.orderDetails,
+                      Navigator.pushNamed(context, AppRoutes.orderDetails,
                           arguments: bloc.pastOrders[index]);
                     },
-                    child:  Text(S.current.viewdetails),
+                    child: Text(S.current.viewdetails),
                   ),
                   Row(
                     children: [

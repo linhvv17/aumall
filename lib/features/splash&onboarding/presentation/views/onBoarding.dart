@@ -117,10 +117,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                             children: [
                               TextButton(
                                 onPressed: () {
-                         PreferenceHelper.saveDataInSharedPreference(
-                                  key: "IsSkippedOnBoarding", value: true);
-                              Navigator.pushReplacementNamed(
-                                  context, AppRoutes.splash);
+                                  PreferenceHelper.saveDataInSharedPreference(
+                                      key: "IsSkippedOnBoarding", value: true);
+                                  Navigator.pushReplacementNamed(
+                                      context, AppRoutes.splash);
                                 },
                                 style: TextButton.styleFrom(
                                   elevation: 0,
@@ -157,7 +157,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                                       fontSize:
                                           (kWidth(context) <= 550) ? 13 : 17),
                                 ),
-                                child:  Text(S.current.next),
+                                child: Text(S.current.next),
                               ),
                             ],
                           ),

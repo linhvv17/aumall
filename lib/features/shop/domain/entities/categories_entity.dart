@@ -4,16 +4,14 @@ class CategoriesEntity extends Equatable {
   final List<CategoryEntity> categories;
 
   const CategoriesEntity(
-      this.categories,
-      );
+    this.categories,
+  );
 
   @override
   List<Object> get props => [categories];
 }
 
-
 class CategoryEntity extends Equatable {
-
   final int id;
   final String name;
   final String alias;

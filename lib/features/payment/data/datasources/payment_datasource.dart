@@ -73,8 +73,7 @@ class PaymentDataSourceImpl implements PaymentDataSource {
   Future<NewOrderModel> createNewOrder(CreateNewOrderParams params) async {
     final response = await apiBaseProvider.post(
         endPoint: newOrderEndPoint,
-        token: PreferenceHelper.getDataFromSharedPreference(
-                            key: 'token') ?? '',
+        token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
         data: ({
           "itemsPrice": params.itemsPrice,
           "shippingPrice": params.shippingPrice,
@@ -96,8 +95,9 @@ class PaymentDataSourceImpl implements PaymentDataSource {
   @override
   Future<AllOrdersModel> getAllOrders(NoParams params) async {
     final response = await apiBaseProvider.get(
-        endPoint: getAllOrdersEndPoint, token: PreferenceHelper.getDataFromSharedPreference(
-                            key: 'token') ?? "");
+        endPoint: getAllOrdersEndPoint,
+        token:
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? "");
     return AllOrdersModel.fromJson(response.data);
   }
 }

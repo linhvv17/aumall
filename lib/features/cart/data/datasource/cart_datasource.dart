@@ -10,58 +10,54 @@ abstract class CartDatasource {
   Future<bool> updateProductToCart(int idProduct, int quantity);
 }
 
-class CartDatasourceImpl implements CartDatasource{
+class CartDatasourceImpl implements CartDatasource {
   final APIProvider apiProvider;
   CartDatasourceImpl(this.apiProvider);
   @override
-  Future<ListProductInCartModel> getListProductInCart() async{
+  Future<ListProductInCartModel> getListProductInCart() async {
     final response = await apiProvider.get(
         endPoint: cartDetailProductsAuMall,
-        token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
-    return ListProductInCartModel.fromJson(
-        response.data
-    );
+        token:
+            PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
+    return ListProductInCartModel.fromJson(response.data);
   }
 
   @override
   Future<bool> removeProductInCart(int idProduct) async {
     final response = await apiProvider.post(
-        endPoint: "$removeProductsInCartAuMall/$idProduct",
-        token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
+      endPoint: "$removeProductsInCartAuMall/$idProduct",
+      token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
     );
 
-    return response.statusCode == 200 ? true : false ;
+    return response.statusCode == 200 ? true : false;
   }
 
   @override
   Future<bool> addProductToCart(int idProduct, int quantity) async {
-    final dataSend = <String, dynamic> {
+    final dataSend = <String, dynamic>{
       "product_id": idProduct,
-      "quantity" : quantity
+      "quantity": quantity
     };
     final response = await apiProvider.post(
         endPoint: cartProductsAuMall,
         token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
-        data: dataSend
-    );
+        data: dataSend);
 
-    return response.statusCode == 200 ? true : false ;
+    return response.statusCode == 200 ? true : false;
   }
 
   @override
   Future<bool> updateProductToCart(int idProduct, int quantity) async {
-    final dataSend = <String, dynamic> {
+    final dataSend = <String, dynamic>{
       "product_id": idProduct,
-      "quantity" : quantity,
-      "type" : 1
+      "quantity": quantity,
+      "type": 1
     };
     final response = await apiProvider.post(
         endPoint: cartProductsAuMall,
         token: PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '',
-        data: dataSend
-    );
+        data: dataSend);
 
-    return response.statusCode == 200 ? true : false ;
+    return response.statusCode == 200 ? true : false;
   }
-
 }

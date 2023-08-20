@@ -32,7 +32,6 @@ class SearchLocation extends LocationEvent {
 }
 
 class SelectMethod extends LocationEvent {
-
   final int index;
-  const SelectMethod( this.index);
+  const SelectMethod(this.index);
 }

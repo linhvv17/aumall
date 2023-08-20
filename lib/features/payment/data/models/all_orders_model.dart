@@ -2,8 +2,9 @@ import '../../domain/entities/all_orders_entity.dart';
 
 class AllOrdersModel extends AllOrdersEntity {
   const AllOrdersModel(super.success, super.order);
-  factory AllOrdersModel.fromJson(Map<String, dynamic> json) =>
-      AllOrdersModel(json['success'], List<OrderModel>.from(json['orders'].map((x)=>OrderModel.fromJson(x))) );
+  factory AllOrdersModel.fromJson(Map<String, dynamic> json) => AllOrdersModel(
+      json['success'],
+      List<OrderModel>.from(json['orders'].map((x) => OrderModel.fromJson(x))));
 }
 
 class OrderModel extends AllOrderEntity {
@@ -25,7 +26,7 @@ class OrderModel extends AllOrderEntity {
           json['orderItems'].map((x) => OrderItemModel.fromJson(x))),
       json['user'],
       PaymentInfoModel.fromJson(json['paymentInfo']),
-    DateTime.parse(json['paidAt']),
+      DateTime.parse(json['paidAt']),
       json['itemsPrice'],
       json['shippingPrice'],
       json['totalPrice'],

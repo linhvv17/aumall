@@ -32,6 +32,7 @@ class ProductEntity extends Equatable {
   final List<ReviewEntity>? reviews;
   int qouantity = 1;
   bool isFavourite = false;
+
   ProductEntity({
     required this.id,
     required this.name,
@@ -45,7 +46,7 @@ class ProductEntity extends Equatable {
     required this.user,
     required this.reviews,
     this.isFavourite = false,
-    this.qouantity=1,
+    this.qouantity = 1,
   });
 
   @override
@@ -82,14 +83,34 @@ class ReviewEntity extends Equatable {
   final String? name;
   final num? rating;
   final String? comment;
+
   // final DateTime? createdAt;
   const ReviewEntity(
-      this.user, this.name, this.rating, this.comment,
-      // this.createdAt
-      );
+    this.user,
+    this.name,
+    this.rating,
+    this.comment,
+    // this.createdAt
+  );
 
   @override
   List<Object?> get props => [user, name, rating, comment];
+}
+
+class CategoryOfProductEntity extends Equatable {
+  const CategoryOfProductEntity(
+    this.id,
+    this.name,
+  );
+
+  final int? id;
+  final String? name;
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+      ];
 }
 
 class ProductAuMallEntity extends Equatable {
@@ -102,37 +123,31 @@ class ProductAuMallEntity extends Equatable {
   int? reviewNumber;
   String? thumbnailUrl;
   bool? isFavorite;
-
+  CategoryOfProductEntity? categoryOfProductEntity;
 
   ProductAuMallEntity(
-  {this.id,
-  this.title,
-  this.description,
-  this.price,
-  this.priceStep,
-  this.ratingNumber,
-  this.reviewNumber,
-  this.thumbnailUrl,
-  this.isFavorite,
-  });
-
-  ProductAuMallEntity.fromJson(Map<String, dynamic> json) {
-    id = json['id'] ?? 0;
-    title = json['title'] ?? "0";
-    description = json['description'] ?? "";
-    price = json['price'] ?? "";
-    priceStep = json['price_step'] ?? "0";
-    ratingNumber = json['rating_number'] ?? 0;
-    reviewNumber = json['review_number'] ?? 0;
-    thumbnailUrl = json['thumbnail_url'] ?? "";
-    isFavorite = json['is_favorite'] ?? false;
-  }
+      {this.id,
+      this.title,
+      this.description,
+      this.price,
+      this.priceStep,
+      this.ratingNumber,
+      this.reviewNumber,
+      this.thumbnailUrl,
+      this.isFavorite,
+      this.categoryOfProductEntity});
 
   @override
   List<Object?> get props => [
-    id, title, description, price,ratingNumber, reviewNumber,thumbnailUrl, isFavorite
-  ];
-
+        id,
+        title,
+        description,
+        price,
+        ratingNumber,
+        reviewNumber,
+        thumbnailUrl,
+        isFavorite
+      ];
 }
 
 class ProductSimpleEntity extends Equatable {
@@ -156,53 +171,54 @@ class ProductSimpleEntity extends Equatable {
   String? createdAt;
   String? thumbnailUrl;
   String? videoLink;
+
   // Category? category;
 
-  ProductSimpleEntity(
-      {this.id,
-        this.userId,
-        this.addedBy,
-        this.title,
-        this.description,
-        this.content,
-        this.categoryId,
-        this.brandId,
-        this.madeInId,
-        this.thumbnail,
-        this.featured,
-        this.flashSale,
-        this.price,
-        this.isFavorite,
-        this.discount,
-        this.reviewNumber,
-        this.ratingNumber,
-        this.createdAt,
-        this.thumbnailUrl,
-        this.videoLink,
-        // this.category
-      });
+  ProductSimpleEntity({
+    this.id,
+    this.userId,
+    this.addedBy,
+    this.title,
+    this.description,
+    this.content,
+    this.categoryId,
+    this.brandId,
+    this.madeInId,
+    this.thumbnail,
+    this.featured,
+    this.flashSale,
+    this.price,
+    this.isFavorite,
+    this.discount,
+    this.reviewNumber,
+    this.ratingNumber,
+    this.createdAt,
+    this.thumbnailUrl,
+    this.videoLink,
+    // this.category
+  });
 
   ProductSimpleEntity.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
-    userId = json['user_id']?? 0;
+    userId = json['user_id'] ?? 0;
     addedBy = json['added_by'] ?? "";
-    title = json['title']?? "";
-    description = json['description']?? "";
-    content = json['content']?? "";
-    categoryId = json['category_id']?? "";
-    brandId = json['brand_id']?? "";
-    madeInId = json['made_in_id']?? "";
-    thumbnail = json['thumbnail']?? "";
-    featured = json['featured']?? "";
-    flashSale = json['flash_sale']?? "";
-    price = json['price']?? "";
+    title = json['title'] ?? "";
+    description = json['description'] ?? "";
+    content = json['content'] ?? "";
+    categoryId = json['category_id'] ?? "";
+    brandId = json['brand_id'] ?? "";
+    madeInId = json['made_in_id'] ?? "";
+    thumbnail = json['thumbnail'] ?? "";
+    featured = json['featured'] ?? "";
+    flashSale = json['flash_sale'] ?? "";
+    price = json['price'] ?? "";
     isFavorite = json['is_favorite'] ?? false;
-    discount = json['discount']?? "";
+    discount = json['discount'] ?? "";
     reviewNumber = json['review_number'] ?? 0;
     ratingNumber = json['rating_number'] ?? 0;
     createdAt = json['created_at'] as String ?? "";
-    thumbnailUrl = json['thumbnail_url']?? "";
-    videoLink = json['video_link']?? "";
+    thumbnailUrl = json['thumbnail_url'] ?? "";
+    videoLink = json['video_link'] ?? "";
     // category = json['category'] != null
     //     ? Category.fromJson(json['category'])
     //     : Category(id: 1, name: "NULL");

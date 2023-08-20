@@ -8,6 +8,7 @@ abstract class AddressState extends Equatable {
 }
 
 class AddressInitial extends AddressState {}
+
 class SearchListLoadingState extends AddressState {}
 
 class SearchListLoadedState extends AddressState {
@@ -39,8 +40,3 @@ class GetLocationErrorState extends AddressState {
     required this.message,
   });
 }
-
-
-
-
-

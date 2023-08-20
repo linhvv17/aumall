@@ -1,9 +1,9 @@
 import 'package:aumall/features/payment/domain/entities/new_order_entity.dart';
 
 class NewOrderModel extends NewOrderEntity {
-  const NewOrderModel(super.success, super.order,super.message);
-  factory NewOrderModel.fromJson(Map<String, dynamic> json) =>
-      NewOrderModel(json['success'], OrderModel.fromJson(json['order']),json['message']);
+  const NewOrderModel(super.success, super.order, super.message);
+  factory NewOrderModel.fromJson(Map<String, dynamic> json) => NewOrderModel(
+      json['success'], OrderModel.fromJson(json['order']), json['message']);
 }
 
 class OrderModel extends OrderEntity {

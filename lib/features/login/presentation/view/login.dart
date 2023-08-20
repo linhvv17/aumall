@@ -1,4 +1,3 @@
-
 import 'package:aumall/core/local/cecure_storage.dart';
 import 'package:aumall/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,6 @@ class _LoginViewState extends State<LoginView> {
 
   bool saveAccount = false;
 
-
   @override
   void initState() {
     super.initState();
@@ -35,8 +33,10 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void loadAccountInfo() async {
-    emailController.text = await SecureStorage().storage.read(key: "username") ?? "";
-    emailController.text = await SecureStorage().storage.read(key: "username") ?? "";
+    emailController.text =
+        await SecureStorage().storage.read(key: "username") ?? "";
+    emailController.text =
+        await SecureStorage().storage.read(key: "username") ?? "";
   }
 
   @override
@@ -55,9 +55,12 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       Text(
                         S.current.login,
-                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: ColorManager.dark),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium!
+                            .copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: ColorManager.dark),
                       ),
                     ],
                   ),
@@ -116,7 +119,7 @@ class _LoginViewState extends State<LoginView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Checkbox(
-                        checkColor: Colors.white,  // color of tick Mark
+                        checkColor: Colors.white, // color of tick Mark
                         activeColor: Colors.deepOrange,
                         value: saveAccount,
                         onChanged: (bool? value) {
@@ -145,12 +148,11 @@ class _LoginViewState extends State<LoginView> {
                         PreferenceHelper.saveDataInSharedPreference(
                             key: "IsLoggedIn", value: true);
                         PreferenceHelper.saveDataInSharedPreference(
-                            key: "token", value: state.data.token).then((value) =>
-                        {
-                        Navigator.pushReplacementNamed(
-                        context, AppRoutes.layout)
-                        });
-
+                                key: "token", value: state.data.token)
+                            .then((value) => {
+                                  Navigator.pushReplacementNamed(
+                                      context, AppRoutes.layout)
+                                });
                       } else if (state is LoginErrorState) {
                         showSnackbar(state.message, context, Colors.red);
                       } else if (state is LoginFinishedState) {
@@ -165,9 +167,13 @@ class _LoginViewState extends State<LoginView> {
                               height: 50,
                               ontab: () {
                                 if (formKey.currentState!.validate()) {
-                                  if(saveAccount){
-                                    SecureStorage().storage.write(key: "username", value: emailController.text);
-                                    SecureStorage().storage.write(key: "password", value: passController.text);
+                                  if (saveAccount) {
+                                    SecureStorage().storage.write(
+                                        key: "username",
+                                        value: emailController.text);
+                                    SecureStorage().storage.write(
+                                        key: "password",
+                                        value: passController.text);
                                   }
                                   BlocProvider.of<LoginBloc>(context).add(
                                       UserLogin(emailController.text,
@@ -176,8 +182,6 @@ class _LoginViewState extends State<LoginView> {
 
                                 // Navigator.pushReplacementNamed(
                                 //     context, AppRoutes.layout);
-
-
                               });
                     },
                   ),

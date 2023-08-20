@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-abstract class PaymentAPIProvider{
+abstract class PaymentAPIProvider {
   Future<Response> post({
     String? baseUrl,
     required String endPoint,

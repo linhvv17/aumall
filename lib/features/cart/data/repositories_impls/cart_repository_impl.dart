@@ -15,67 +15,70 @@ class CartRepositoryImpl extends CartBaseRepository {
   final CartDatasource cartDatasource;
   CartRepositoryImpl(this.networkInfo, this.cartDatasource);
 
-
   @override
-  Future<Either<Failure, bool>> addProductToCart(int idProduct, int quantity) async {
-    if(await networkInfo.isConnected){
+  Future<Either<Failure, bool>> addProductToCart(
+      int idProduct, int quantity) async {
+    if (await networkInfo.isConnected) {
       try {
         final data = await cartDatasource.addProductToCart(idProduct, quantity);
         print("FavoriteRepositoryImpl getFavoriteList() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("FavoriteRepositoryImpl getFavoriteList() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, ListProductInCartEntity>> getProductInCartList() async {
-    if(await networkInfo.isConnected){
+  Future<Either<Failure, ListProductInCartEntity>>
+      getProductInCartList() async {
+    if (await networkInfo.isConnected) {
       try {
         final data = await cartDatasource.getListProductInCart();
         print("CartRepositoryImpl getProductInCartList() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("CartRepositoryImpl getProductInCartList() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
   Future<Either<Failure, bool>> removeProductInCart(int idProduct) async {
-    if(await networkInfo.isConnected){
+    if (await networkInfo.isConnected) {
       try {
         final data = await cartDatasource.removeProductInCart(idProduct);
         print("FavoriteRepositoryImpl getFavoriteList() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("FavoriteRepositoryImpl getFavoriteList() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, bool>> updateProductToCart(int idProduct, int quantity) async {
-    if(await networkInfo.isConnected){
+  Future<Either<Failure, bool>> updateProductToCart(
+      int idProduct, int quantity) async {
+    if (await networkInfo.isConnected) {
       try {
-        final data = await cartDatasource.updateProductToCart(idProduct, quantity);
+        final data =
+            await cartDatasource.updateProductToCart(idProduct, quantity);
         print("FavoriteRepositoryImpl getFavoriteList() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("FavoriteRepositoryImpl getFavoriteList() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }

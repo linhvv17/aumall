@@ -18,8 +18,7 @@ List<OnBoardingContents> contents = [
   OnBoardingContents(
     title: S.current.onBoardingTitle1,
     image: "assets/images/1.png",
-    desc:
-        S.current.onBoardingSubTitle1,
+    desc: S.current.onBoardingSubTitle1,
   ),
   OnBoardingContents(
     title: S.current.onBoardingTitle2,
@@ -34,7 +33,6 @@ List<OnBoardingContents> contents = [
   OnBoardingContents(
     title: S.current.onBoardingTitle4,
     image: "assets/images/delivery.png",
-    desc:
-        S.current.onBoardingSubTitle4,
+    desc: S.current.onBoardingSubTitle4,
   ),
 ];

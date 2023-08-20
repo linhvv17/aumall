@@ -20,8 +20,10 @@ class OrderCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: Container(
         width: kWidth(context),
-        height:kHeight(context)>=800? kHeight(context) / 6: kHeight(context) / 3.5,
-        decoration: BoxDecoration( 
+        height: kHeight(context) >= 800
+            ? kHeight(context) / 6
+            : kHeight(context) / 3.5,
+        decoration: BoxDecoration(
             color: ColorManager.white,
             boxShadow: kElevationToShadow[6],
             borderRadius: BorderRadius.circular(10)),
@@ -35,20 +37,29 @@ class OrderCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormat.yMMMEd().format(bloc.activeOrders[index].paidAt),
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: ColorManager.dark,)
-                  ),
+                      DateFormat.yMMMEd()
+                          .format(bloc.activeOrders[index].paidAt),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: ColorManager.dark,
+                          )),
                   Text('${bloc.activeOrders[index].itemsPrice} \$',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: ColorManager.dark,))
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: ColorManager.dark,
+                          ))
                 ],
               ),
               Text(
                 "Order ID #${bloc.activeOrders[index].id}",
-                style: Theme.of(context).textTheme.labelSmall!.copyWith(color: ColorManager.dark,),
+                style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                      color: ColorManager.dark,
+                    ),
               ),
-              Text("Shipping To : ${bloc.activeOrders[index].shippingInfo.city}"
-                  .toUpperCase(),
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: ColorManager.dark,)),
+              Text(
+                  "Shipping To : ${bloc.activeOrders[index].shippingInfo.city}"
+                      .toUpperCase(),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: ColorManager.dark,
+                      )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -57,7 +68,7 @@ class OrderCard extends StatelessWidget {
                       Navigator.pushNamed(context, AppRoutes.orderDetails,
                           arguments: bloc.activeOrders[index]);
                     },
-                    child:  Text(S.current.viewdetails),
+                    child: Text(S.current.viewdetails),
                   ),
                   Row(
                     children: [
@@ -69,10 +80,11 @@ class OrderCard extends StatelessWidget {
                       const SizedBox(
                         width: 4,
                       ),
-                      Text(
-                        "Processing",
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: ColorManager.dark,)
-                      )
+                      Text("Processing",
+                          style:
+                              Theme.of(context).textTheme.bodySmall!.copyWith(
+                                    color: ColorManager.dark,
+                                  ))
                     ],
                   )
                 ],

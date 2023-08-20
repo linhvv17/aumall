@@ -15,81 +15,85 @@ class AuctionRepositoryImpl extends AuctionBaseRepository {
   AuctionRepositoryImpl(this.networkInfo, this.auctionDatasource);
 
   @override
-  Future<Either<Failure, ListAuctionEntity>> getAuctionList(GetAuctionParams getAuctionParams)  async {
-    if(await networkInfo.isConnected){
+  Future<Either<Failure, ListAuctionEntity>> getAuctionList(
+      GetAuctionParams getAuctionParams) async {
+    if (await networkInfo.isConnected) {
       try {
         final data = await auctionDatasource.getListAuction(getAuctionParams);
         print("AuctionRepositoryImpl getAuctionList() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("AuctionRepositoryImpl getAuctionList() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
   Future<Either<Failure, bool>> removeAuctionProduct(int idProduct) async {
-    if(await networkInfo.isConnected){
+    if (await networkInfo.isConnected) {
       try {
         final data = await auctionDatasource.removeAuctionProduct(idProduct);
         print("AuctionRepositoryImpl getAuctionList() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("AuctionRepositoryImpl getAuctionList() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
   Future<Either<Failure, bool>> addAuctionProduct(int idProduct) async {
-    if(await networkInfo.isConnected){
+    if (await networkInfo.isConnected) {
       try {
         final data = await auctionDatasource.addAuctionProduct(idProduct);
         print("AuctionRepositoryImpl getAuctionList() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("AuctionRepositoryImpl getAuctionList() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, AuctionSessionInfoEntity>> getAuctionSessionInfo(GetAuctionSessionInfoParams getAuctionSessionInfoParams) async {
-    if(await networkInfo.isConnected){
+  Future<Either<Failure, AuctionSessionInfoEntity>> getAuctionSessionInfo(
+      GetAuctionSessionInfoParams getAuctionSessionInfoParams) async {
+    if (await networkInfo.isConnected) {
       try {
-        final data = await auctionDatasource.getAuctionSessionInfo(getAuctionSessionInfoParams);
+        final data = await auctionDatasource
+            .getAuctionSessionInfo(getAuctionSessionInfoParams);
         print("AuctionRepositoryImpl getAuctionSessionInfo() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("AuctionRepositoryImpl getAuctionSessionInfo() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }
 
   @override
-  Future<Either<Failure, bool>> actionAuction(int idProduct, String price) async {
-    if(await networkInfo.isConnected){
+  Future<Either<Failure, bool>> actionAuction(
+      int idProduct, String price) async {
+    if (await networkInfo.isConnected) {
       try {
         final data = await auctionDatasource.actionAuction(idProduct, price);
         print("AuctionRepositoryImpl actionAuction() try ${data}");
         return right(data);
-      } catch(error) {
+      } catch (error) {
         print("AuctionRepositoryImpl actionAuction() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
-    } else{
+    } else {
       return Left(OfflineFailure(S.current.noInternetError));
     }
   }

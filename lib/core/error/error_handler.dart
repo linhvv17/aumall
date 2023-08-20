@@ -5,7 +5,6 @@ import 'package:aumall/core/error/failure.dart';
 import '../../generated/l10n.dart';
 import '../utilities/strings.dart';
 
-
 enum DataSource {
   SUCCESS,
   NO_CONTENT,
@@ -29,8 +28,8 @@ class ErrorHandler implements Exception {
   ErrorHandler.handle(dynamic error) {
     if (error is DioError) {
       failure = _handleError(error);
-    }else{
-      failure=DataSource.DEFAULT.getFailure();
+    } else {
+      failure = DataSource.DEFAULT.getFailure();
     }
   }
 
@@ -69,35 +68,33 @@ extension DataSourceExtension on DataSource {
   Failure getFailure() {
     switch (this) {
       case DataSource.BAD_REQUEST:
-        return  ServerFailure( ResponseMessage.BAD_REQUEST, );
+        return ServerFailure(
+          ResponseMessage.BAD_REQUEST,
+        );
       case DataSource.FORBIDDEN:
-        return  ServerFailure( ResponseMessage.FORBIDDEN);
+        return ServerFailure(ResponseMessage.FORBIDDEN);
       case DataSource.UNAUTHORISED:
-        return  ServerFailure( ResponseMessage.UNAUTHORISED);
+        return ServerFailure(ResponseMessage.UNAUTHORISED);
       case DataSource.NOT_FOUND:
-        return  ServerFailure( ResponseMessage.NOT_FOUND);
+        return ServerFailure(ResponseMessage.NOT_FOUND);
       case DataSource.INTERNAL_SERVER_ERROR:
-        return  ServerFailure(
-            ResponseMessage.INTERNAL_SERVER_ERROR);
+        return ServerFailure(ResponseMessage.INTERNAL_SERVER_ERROR);
       case DataSource.CONNECT_TIMEOUT:
-        return  ServerFailure(
-            ResponseMessage.CONNECT_TIMEOUT);
+        return ServerFailure(ResponseMessage.CONNECT_TIMEOUT);
       case DataSource.CANCEL:
-        return  ServerFailure( ResponseMessage.CANCEL);
+        return ServerFailure(ResponseMessage.CANCEL);
       case DataSource.RECEIVE_TIMEOUT:
-        return  ServerFailure(
-             ResponseMessage.RECEIVE_TIMEOUT);
+        return ServerFailure(ResponseMessage.RECEIVE_TIMEOUT);
       case DataSource.SEND_TIMEOUT:
-        return  ServerFailure( ResponseMessage.SEND_TIMEOUT);
+        return ServerFailure(ResponseMessage.SEND_TIMEOUT);
       case DataSource.CACHE_ERROR:
-        return  ServerFailure( ResponseMessage.CACHE_ERROR);
+        return ServerFailure(ResponseMessage.CACHE_ERROR);
       case DataSource.NO_INTERNET_CONNECTION:
-        return  ServerFailure(
-            ResponseMessage.NO_INTERNET_CONNECTION);
+        return ServerFailure(ResponseMessage.NO_INTERNET_CONNECTION);
       case DataSource.DEFAULT:
-        return  ServerFailure( ResponseMessage.DEFAULT);
+        return ServerFailure(ResponseMessage.DEFAULT);
       default:
-        return  ServerFailure( ResponseMessage.DEFAULT);
+        return ServerFailure(ResponseMessage.DEFAULT);
     }
   }
 }
@@ -127,34 +124,30 @@ class ResponseCode {
 class ResponseMessage {
   // API status codes
   // API response codes
-  static  String SUCCESS = S.current.success; // success with data
-  static  String NO_CONTENT =
-      S.current.noContent; // success with no content
-  static  String BAD_REQUEST =
+  static String SUCCESS = S.current.success; // success with data
+  static String NO_CONTENT = S.current.noContent; // success with no content
+  static String BAD_REQUEST =
       S.current.badRequestError; // failure, api rejected our request
-  static  String FORBIDDEN =
+  static String FORBIDDEN =
       S.current.forbiddenError; // failure,  api rejected our request
-  static  String UNAUTHORISED =
+  static String UNAUTHORISED =
       S.current.unauthorizedError; // failure, user is not authorised
-  static  String NOT_FOUND = AppStrings
+  static String NOT_FOUND = AppStrings
       .notFoundError; // failure, API url is not correct and not found in api side.
-  static  String INTERNAL_SERVER_ERROR =
+  static String INTERNAL_SERVER_ERROR =
       S.current.internalServerError; // failure, a crash happened in API side.
 
   // local responses codes
-  static  String DEFAULT =
-      S.current.defaultError; // unknown error happened
-  static  String CONNECT_TIMEOUT =
+  static String DEFAULT = S.current.defaultError; // unknown error happened
+  static String CONNECT_TIMEOUT =
       S.current.timeoutError; // issue in connectivity
-  static  String CANCEL =
-      S.current.defaultError; // API request was cancelled
-  static  String RECEIVE_TIMEOUT =
+  static String CANCEL = S.current.defaultError; // API request was cancelled
+  static String RECEIVE_TIMEOUT =
       S.current.timeoutError; //  issue in connectivity
-  static  String SEND_TIMEOUT =
-      S.current.timeoutError; //  issue in connectivity
-  static  String CACHE_ERROR = AppStrings
+  static String SEND_TIMEOUT = S.current.timeoutError; //  issue in connectivity
+  static String CACHE_ERROR = AppStrings
       .defaultError; //  issue in getting data from local data source (cache)
-  static  String NO_INTERNET_CONNECTION =
+  static String NO_INTERNET_CONNECTION =
       S.current.noInternetError; // issue in connectivity
 }
 

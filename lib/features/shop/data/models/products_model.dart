@@ -21,19 +21,11 @@ class ProductAuMallModel extends ProductAuMallEntity {
     required super.ratingNumber,
     required super.thumbnailUrl,
     required super.isFavorite,
-    // required super.category,
+    required super.categoryOfProductEntity,
     required super.reviewNumber,
   });
 
   factory ProductAuMallModel.fromJson(Map<String, dynamic> json) {
-    print("ProductFavoriteModel.fromJson ${json['id']}");
-    print("ProductFavoriteModel.fromJson ${json['title']}");
-    print("ProductFavoriteModel.fromJson ${json['description']}");
-    print("ProductFavoriteModel.fromJson ${json['price']}");
-    print("ProductFavoriteModel.fromJson ${json['rating_number']}");
-    print("ProductFavoriteModel.fromJson ${json['review_number']}");
-    print("ProductFavoriteModel.fromJson ${json['thumbnail_url']}");
-
     return ProductAuMallModel(
       id: json['id'],
       title: json['title'] ?? "",
@@ -41,7 +33,8 @@ class ProductAuMallModel extends ProductAuMallEntity {
       price: json['price'] ?? "",
       priceStep: json['price_step'] ?? "0",
       ratingNumber: json['rating_number'] ?? 0,
-      // category: json['category'],
+      categoryOfProductEntity:
+          CategoryOfProductModel.fromJson(json['category']),
       reviewNumber: json['review_number'] ?? 0,
       thumbnailUrl: json['thumbnail_url'] ?? "",
       isFavorite: json['is_favorite'] ?? false,
@@ -125,15 +118,32 @@ class ImageModel extends ImageEntity {
 
 class ReviewModel extends ReviewEntity {
   const ReviewModel(
-      super.user, super.name, super.rating, super.comment,
-      // super.createdAt
-      );
+    super.user,
+    super.name,
+    super.rating,
+    super.comment,
+    // super.createdAt
+  );
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) => ReviewModel(
-      json["user_full_name"] ?? "",
-      json['user_full_name'] ?? "",
-      json['rating'] ?? 0,
-      json['comment'] ?? "",
-      // DateTime.parse(json['createdAt'] as String)
-  );
+        json["user_full_name"] ?? "",
+        json['user_full_name'] ?? "",
+        json['rating'] ?? 0,
+        json['comment'] ?? "",
+        // DateTime.parse(json['createdAt'] as String)
+      );
+}
+
+class CategoryOfProductModel extends CategoryOfProductEntity {
+  const CategoryOfProductModel(super.id, super.name);
+
+  factory CategoryOfProductModel.fromJson(Map<String, dynamic> json) =>
+      CategoryOfProductModel(json['id'], json['name'].toString());
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    return data;
+  }
 }

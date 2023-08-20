@@ -6,11 +6,12 @@ abstract class OrderEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
- class CreateNewOrder extends OrderEvent{
-    final int itemsPrice;
+
+class CreateNewOrder extends OrderEvent {
+  final int itemsPrice;
   final int shippingPrice;
   final int totlaPrice;
-   final List<Map<String, dynamic>> orderItems;
+  final List<Map<String, dynamic>> orderItems;
   final String phone;
   final String pinCode;
   final String address;
@@ -20,7 +21,19 @@ abstract class OrderEvent extends Equatable {
   final String id;
   final String state;
 
-  const CreateNewOrder(this.itemsPrice, this.shippingPrice, this.totlaPrice, this.phone, this.pinCode, this.address, this.city, this.country, this.status, this.id, this.state, this.orderItems);
- }
+  const CreateNewOrder(
+      this.itemsPrice,
+      this.shippingPrice,
+      this.totlaPrice,
+      this.phone,
+      this.pinCode,
+      this.address,
+      this.city,
+      this.country,
+      this.status,
+      this.id,
+      this.state,
+      this.orderItems);
+}
 
- class GetAllOrders extends OrderEvent{}
+class GetAllOrders extends OrderEvent {}

@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failure.dart';
@@ -7,7 +6,7 @@ import '../entities/forgotpassword_entity.dart';
 import '../repositories/forgotpassword_repository.dart';
 
 class ForgotPassUsecase
-    implements BaseUsecase <ForgotPasswordEntity , ForgetPasswordUsecaseParams> {
+    implements BaseUsecase<ForgotPasswordEntity, ForgetPasswordUsecaseParams> {
   final ForgotPasswordRepo forgotPasswordRepo;
 
   ForgotPassUsecase(this.forgotPasswordRepo);

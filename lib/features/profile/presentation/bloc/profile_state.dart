@@ -10,7 +10,9 @@ abstract class ProfileState extends Equatable {
 class ProfileInitial extends ProfileState {}
 
 class ProfileLoadingState extends ProfileState {}
+
 class LogOutLoadingState extends ProfileState {}
+
 class LogOutSuccessState extends ProfileState {
   final bool isSuccess;
 
@@ -28,20 +30,23 @@ class ProfileErrorState extends ProfileState {
 
   const ProfileErrorState(this.message);
 }
+
 class UpdateProfileLoadingState extends ProfileState {}
-class UploadImagesLoadingState extends ProfileState {
-  
-}
+
+class UploadImagesLoadingState extends ProfileState {}
+
 class ProfileUpdateState extends ProfileState {
   final ProfileEntity data;
 
   const ProfileUpdateState(this.data);
 }
+
 class UpdateProfileErrorState extends ProfileState {
   final String message;
 
   const UpdateProfileErrorState(this.message);
 }
+
 class PickedImageState extends ProfileState {
   // final CloudinaryResponse image;
   final XFile xFileToUpload;

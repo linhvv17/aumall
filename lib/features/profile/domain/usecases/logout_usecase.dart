@@ -7,15 +7,12 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/profile_entity.dart';
 import '../repositories/profile_repository.dart';
 
-class LogOutUseCase
-    implements BaseUsecase<bool, NoParams> {
+class LogOutUseCase implements BaseUsecase<bool, NoParams> {
   final ProfileRepository profileRepository;
 
   LogOutUseCase(this.profileRepository);
   @override
-  Future<Either<Failure, bool>> call(
-      NoParams params) async {
+  Future<Either<Failure, bool>> call(NoParams params) async {
     return await profileRepository.logOut();
   }
 }
-

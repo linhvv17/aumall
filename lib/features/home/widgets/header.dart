@@ -53,8 +53,8 @@ class HomeHeader extends StatelessWidget {
             ),
             SizedBox(
                 width: 200,
-                child: MainButton(
-                    text: S.current.check, height: 40, ontab: () {}))
+                child:
+                    MainButton(text: S.current.check, height: 40, ontab: () {}))
           ],
         ),
       ),

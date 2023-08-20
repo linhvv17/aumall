@@ -4,7 +4,6 @@ import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import '../utilities/endpoints.dart';
 
-
 class APIProviderImpl implements APIProvider {
   final Dio dio = Dio(
     BaseOptions(
@@ -32,7 +31,7 @@ class APIProviderImpl implements APIProvider {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
       if (!isMultipart) 'Content-Type': 'application/json',
       if (!isMultipart) 'Accept': 'application/json',
-      if (token != null) 'Authorization':'Bearer $token',
+      if (token != null) 'Authorization': 'Bearer $token',
       // 'lang': 'en',
     };
     if (kDebugMode) {
@@ -40,14 +39,12 @@ class APIProviderImpl implements APIProvider {
       print('APIProviderImpl Bearer $token');
     }
 
-
     dio.interceptors.add(
       DioLoggingInterceptor(
         level: Level.body,
         compact: false,
       ),
     );
-
 
     return await dio.get(
       endPoint,

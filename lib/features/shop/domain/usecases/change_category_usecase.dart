@@ -7,16 +7,15 @@ import '../entities/products_entity.dart';
 import '../entities/shop_data_default_entity.dart';
 import '../repositories/product_repository.dart';
 
-class ChangeCategoryUseCase extends BaseUsecase<ListProductShopEntity,ChangeCategoryUseCaseParams > {
+class ChangeCategoryUseCase
+    extends BaseUsecase<ListProductShopEntity, ChangeCategoryUseCaseParams> {
   final ProductRepository productRepository;
 
   ChangeCategoryUseCase(this.productRepository);
-  
+
   @override
-  Future<Either<Failure, ListProductShopEntity>> call(ChangeCategoryUseCaseParams params) async {
-   return await productRepository.changeCategory(params);
+  Future<Either<Failure, ListProductShopEntity>> call(
+      ChangeCategoryUseCaseParams params) async {
+    return await productRepository.changeCategory(params);
   }
 }
-
-
-

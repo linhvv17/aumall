@@ -11,7 +11,8 @@ abstract class HomeBaseRepository {
   Future<Either<Failure, HomeDataEntity>> getHomeData();
   Future<Either<Failure, BannerEntity>> getBannerAds();
   Future<Either<Failure, ListProductHomeEntity>> getListProductHome();
-  Future<Either<Failure, ProductDetailEntity>> getProductDetail(GetProductDetailParams getProductDetailParams);
+  Future<Either<Failure, ProductDetailEntity>> getProductDetail(
+      GetProductDetailParams getProductDetailParams);
 }
 
 class GetProductDetailParams {

@@ -105,7 +105,6 @@ class CartItem extends StatelessWidget {
                                     color: Colors.transparent,
                                     child: InkWell(
                                       onTap: () {
-
                                         if (item.quantity == 1) {
                                           //co 1 item thi xoa
                                           BlocProvider.of<CartBloc>(context)

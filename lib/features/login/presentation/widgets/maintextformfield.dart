@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class MainTFF extends StatelessWidget {
   const MainTFF({
     Key? key,
@@ -8,7 +7,7 @@ class MainTFF extends StatelessWidget {
     this.suffix,
     this.max,
     required this.controller,
-required this.validate,
+    required this.validate,
     required this.isPassword,
     required this.borderRadius,
     this.readOnly,
@@ -31,20 +30,20 @@ required this.validate,
   final String? labelText;
   final TextAlign? textAlign;
   final Function()? suffixPressed;
- final String? Function(String?)? validate;
+  final String? Function(String?)? validate;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-  elevation: 1.5,
-      child: TextFormField(  
-        maxLines:max ,
+      elevation: 1.5,
+      child: TextFormField(
+        maxLines: max,
         obscureText: isPassword,
         keyboardType: inputType,
         controller: controller,
         validator: validate,
         decoration: InputDecoration(
-          alignLabelWithHint: true,
+            alignLabelWithHint: true,
             suffixIcon: suffix,
             prefixIcon: prefix,
             contentPadding:

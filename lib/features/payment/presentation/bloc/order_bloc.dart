@@ -42,11 +42,17 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       final failureOrSuccess = await getAllOrderesUsecase(NoParams());
       failureOrSuccess.fold((failure) => emit(AllOrdersError(failure.message)),
           (success) {
-        pastOrders = success.orders.where(
-          (element) => element.orderStatus == "Delivered",
-        ).toList() ;
+        pastOrders = success.orders
+            .where(
+              (element) => element.orderStatus == "Delivered",
+            )
+            .toList();
         print(pastOrders);
-        activeOrders =success.orders.where((element) => element.orderStatus=='Processing',).toList();
+        activeOrders = success.orders
+            .where(
+              (element) => element.orderStatus == 'Processing',
+            )
+            .toList();
         emit(AllOrdersLoaded(success));
       });
     });

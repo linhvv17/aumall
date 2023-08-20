@@ -6,9 +6,10 @@ abstract class ResetPasswordEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
- class ConfirmPassword extends ResetPasswordEvent{
-   final String password;
+
+class ConfirmPassword extends ResetPasswordEvent {
+  final String password;
   final String confirmPassword;
 
   const ConfirmPassword(this.password, this.confirmPassword);
- }
+}

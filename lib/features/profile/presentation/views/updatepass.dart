@@ -35,7 +35,7 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back_ios)),
-        title:  Text(
+        title: Text(
           S.current.changePassword,
           style: TextStyle(color: ColorManager.dark),
         ),
@@ -74,7 +74,7 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
                           Navigator.pushNamed(
                               context, AppRoutes.forgotPassword);
                         },
-                        child:  Text(S.current.forgetPassword))),
+                        child: Text(S.current.forgetPassword))),
                 MainTFF(
                     labelText: S.current.newpassword,
                     hintText: S.current.newpassword,
@@ -115,7 +115,8 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
                 const SizedBox(height: 30),
                 BlocConsumer<UpdatePasswordBloc, UpdatePasswordState>(
                   listener: (context, state) {
-                    if (state is UpdatePasswordLoaded && state.data.status == '200') {
+                    if (state is UpdatePasswordLoaded &&
+                        state.data.status == '200') {
                       showSnackbar(S.current.updatepasssuccess, context,
                           ColorManager.green);
                     } else if (state is UpdatePasswordError) {
@@ -133,10 +134,12 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
                             ontab: () {
                               if (formKey.currentState!.validate()) {
                                 BlocProvider.of<UpdatePasswordBloc>(context)
-                                    .add(UserUpdatePassword(
-                                        oldpassController.text,
-                                        newpassController.text,
-                                        repeatpassController.text),);
+                                    .add(
+                                  UserUpdatePassword(
+                                      oldpassController.text,
+                                      newpassController.text,
+                                      repeatpassController.text),
+                                );
                               }
                             });
                   },

@@ -5,26 +5,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/usecases/get_product_detail_usecase.dart';
 
-class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>{
+class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   final GetProductDetailUseCase getProductDetailUseCase;
-  ProductDetailBloc(this.getProductDetailUseCase) : super(ProductDetailLoading()){
-   on<GetProductDetailData>((event, emit) async {
-     emit(ProductDetailLoading());
+  ProductDetailBloc(this.getProductDetailUseCase)
+      : super(ProductDetailLoading()) {
+    on<GetProductDetailData>((event, emit) async {
+      emit(ProductDetailLoading());
 
-     final failureOrSuccess = await getProductDetailUseCase(
-       GetProductDetailUseCaseParams(idProduct: event.idProduct)
-     );
+      final failureOrSuccess = await getProductDetailUseCase(
+          GetProductDetailUseCaseParams(idProduct: event.idProduct));
 
-     failureOrSuccess.fold(
-             (failure) => emit(ProductDetailErrorState(failure.message)),
-             (success) => emit(ProductDetailLoaded(
-               ProductDetailEntity(
-                 success.productDetailData,
-                 success.relatedProducts
-               )
-             ))
-     );
-   }) ;
+      failureOrSuccess.fold(
+          (failure) => emit(ProductDetailErrorState(failure.message)),
+          (success) => emit(ProductDetailLoaded(ProductDetailEntity(
+              success.productDetailData, success.relatedProducts))));
+    });
   }
-
 }

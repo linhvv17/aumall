@@ -7,16 +7,15 @@ import '../entities/products_entity.dart';
 import '../entities/shop_data_default_entity.dart';
 import '../repositories/product_repository.dart';
 
-class GetProductsByTypeUseCase extends BaseUsecase<ListProductShopEntity,GetProductsByTypeUseCaseParams > {
+class GetProductsByTypeUseCase
+    extends BaseUsecase<ListProductShopEntity, GetProductsByTypeUseCaseParams> {
   final ProductRepository productRepository;
 
   GetProductsByTypeUseCase(this.productRepository);
-  
+
   @override
-  Future<Either<Failure, ListProductShopEntity>> call(GetProductsByTypeUseCaseParams params) async {
-   return await productRepository.getProductsByType(params);
+  Future<Either<Failure, ListProductShopEntity>> call(
+      GetProductsByTypeUseCaseParams params) async {
+    return await productRepository.getProductsByType(params);
   }
 }
-
-
-

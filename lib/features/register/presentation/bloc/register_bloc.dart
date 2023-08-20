@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../domain/entities/register_entity.dart';
@@ -14,10 +13,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<UserRegister>((event, emit) async {
       emit(RegisterLoadingState());
       final failureOrSuccess = await registerUseCase(RegisterUseCaseParams(
-          name: event.name,
-          email: event.email,
-          password: event.password,
-         ));
+        name: event.name,
+        email: event.email,
+        password: event.password,
+      ));
       failureOrSuccess.fold(
           (failure) => emit(RegisterErrorState(failure.message)),
           (success) => emit(RegisterFinishedState(data: success)));

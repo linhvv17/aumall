@@ -1,19 +1,15 @@
-
 // ignore_for_file: overridden_fields
 
 part of 'bottomNavigationBar_bloc.dart';
 
 abstract class BottomNavigationBarState extends Equatable {
   const BottomNavigationBarState();
-  final int index =0;
+  final int index = 0;
   @override
   List<Object> get props => [];
 }
 
-
-
 class HomeState extends BottomNavigationBarState {
-
   @override
   final int index = 0;
   final String title = 'Home';

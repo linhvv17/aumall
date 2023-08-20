@@ -1,4 +1,3 @@
-
 import 'package:aumall/features/home/domain/entities/banner_entity.dart';
 import 'package:aumall/features/shop/data/models/products_model.dart';
 import 'package:equatable/equatable.dart';
@@ -15,8 +14,7 @@ import '../../domain/entities/list_product_home_entity.dart';
 //   }
 // }
 
-class ListProductHomeModel extends ListProductHomeEntity{
-
+class ListProductHomeModel extends ListProductHomeEntity {
   const ListProductHomeModel(super.listProductHomeData);
 
   factory ListProductHomeModel.fromJson(Map<String, dynamic> json) {
@@ -25,14 +23,13 @@ class ListProductHomeModel extends ListProductHomeEntity{
   }
 }
 
-
 class ListProductHomeDataEntity {
   final List<ProductModelSimple>? newProducts;
   final List<ProductModelSimple>? comingSoonProducts;
   final List<ProductModelSimple>? suggestionProducts;
 
-  const ListProductHomeDataEntity(this.newProducts, this.comingSoonProducts, this.suggestionProducts);
-
+  const ListProductHomeDataEntity(
+      this.newProducts, this.comingSoonProducts, this.suggestionProducts);
 }
 
 class ListProductHomeData {
@@ -40,7 +37,10 @@ class ListProductHomeData {
   late List<ProductAuMallModel>? comingSoonProducts;
   late List<ProductAuMallModel>? suggestionProducts;
 
-  ListProductHomeData({required this.newProducts, required this.comingSoonProducts, required this.suggestionProducts});
+  ListProductHomeData(
+      {required this.newProducts,
+      required this.comingSoonProducts,
+      required this.suggestionProducts});
 
   ListProductHomeData.fromJson(Map<String, dynamic> json) {
     if (json['newProducts'] != null) {
@@ -62,13 +62,9 @@ class ListProductHomeData {
       });
     }
   }
-
 }
 
-
-
-
-class NewProducts{
+class NewProducts {
   int? id;
   int? userId;
   Null? addedBy;
@@ -92,25 +88,25 @@ class NewProducts{
 
   NewProducts(
       {this.id,
-        this.userId,
-        this.addedBy,
-        this.title,
-        this.description,
-        this.content,
-        this.categoryId,
-        this.brandId,
-        this.madeInId,
-        this.thumbnail,
-        this.featured,
-        this.flashSale,
-        this.price,
-        this.discount,
-        this.reviewNumber,
-        this.ratingNumber,
-        this.createdAt,
-        this.thumbnailUrl,
-        this.videoLink,
-        this.category});
+      this.userId,
+      this.addedBy,
+      this.title,
+      this.description,
+      this.content,
+      this.categoryId,
+      this.brandId,
+      this.madeInId,
+      this.thumbnail,
+      this.featured,
+      this.flashSale,
+      this.price,
+      this.discount,
+      this.reviewNumber,
+      this.ratingNumber,
+      this.createdAt,
+      this.thumbnailUrl,
+      this.videoLink,
+      this.category});
 
   NewProducts.fromJson(Map<String, dynamic> json) {
     id = json['id'];

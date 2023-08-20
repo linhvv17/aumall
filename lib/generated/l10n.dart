@@ -1829,6 +1829,16 @@ class S {
       args: [],
     );
   }
+
+  /// `There is no products yet!`
+  String get noProducts {
+    return Intl.message(
+      'There is no products yet!',
+      name: 'noProducts',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

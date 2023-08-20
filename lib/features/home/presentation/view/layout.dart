@@ -55,20 +55,20 @@ class _LayoutPageState extends State<LayoutPage> {
                 case 1:
                   BlocProvider.of<BottomNavigationBarBloc>(context)
                       .add(LoadShop());
-                  BlocProvider.of<ProductsBloc>(context).add(
-                      GetSpecificProduct(
-                          BlocProvider.of<ProductsBloc>(context).categoriesEntity[0].name,
-                          '0',
-                          '100000',
-                          '-1',
-                          ''
-                      )
-                  );
+                  BlocProvider.of<ProductsBloc>(context).add(GetSpecificProduct(
+                      BlocProvider.of<ProductsBloc>(context)
+                          .categoriesEntity[0]
+                          .name,
+                      '0',
+                      '100000',
+                      '-1',
+                      ''));
                   break;
                 case 2:
                   BlocProvider.of<BottomNavigationBarBloc>(context)
                       .add(LoadAuction());
-                  BlocProvider.of<AuctionBloc>(context).add(const GetListAuctionProduct(2));
+                  BlocProvider.of<AuctionBloc>(context)
+                      .add(const GetListAuctionProduct(2));
                   break;
                 case 3:
                   BlocProvider.of<BottomNavigationBarBloc>(context)
@@ -89,7 +89,7 @@ class _LayoutPageState extends State<LayoutPage> {
                       .add(LoadHome());
               }
             },
-            items:  [
+            items: [
               BottomNavigationBarItem(
                   icon: const Icon(Icons.home_outlined),
                   label: S.current.home,
@@ -125,8 +125,10 @@ class _LayoutPageState extends State<LayoutPage> {
                 return const ShopView();
               } else if (state is AuctionSelectState) {
                 return const AuctionView();
-              }else if (state is BagState) {
-                return const CartView(isFromBottomBar: true,);
+              } else if (state is BagState) {
+                return const CartView(
+                  isFromBottomBar: true,
+                );
               } else if (state is FavoriteState) {
                 return const FavoriteView();
               } else if (state is ProfilePageState) {

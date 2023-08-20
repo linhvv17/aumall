@@ -4,22 +4,23 @@ class LocalNotificationService {
   final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   Future<void> setup() async {
-    const androidInitializationSetting = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidInitializationSetting =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
     const iosInitializationSetting = DarwinInitializationSettings();
     const initSettings = InitializationSettings(
-        android: androidInitializationSetting, iOS: iosInitializationSetting,
+      android: androidInitializationSetting,
+      iOS: iosInitializationSetting,
     );
     await _flutterLocalNotificationsPlugin.initialize(
-        initSettings,
+      initSettings,
     );
   }
-
 
   void showLocalNotification(String title, String body) {
     const androidNotificationDetail = AndroidNotificationDetails(
         '0', // channel Id
         'general' // channel Name
-    );
+        );
     const iosNotificatonDetail = DarwinNotificationDetails();
     const notificationDetails = NotificationDetails(
       iOS: iosNotificatonDetail,
@@ -27,5 +28,4 @@ class LocalNotificationService {
     );
     _flutterLocalNotificationsPlugin.show(0, title, body, notificationDetails);
   }
-
 }

@@ -8,17 +8,17 @@ class ShopDefaultDataResponse {
   late final String message;
   late final List<Data> data;
 
-  ShopDefaultDataResponse.fromJson(Map<String, dynamic> json){
+  ShopDefaultDataResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = List.from(json['data']).map((e)=>Data.fromJson(e)).toList();
+    data = List.from(json['data']).map((e) => Data.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['status'] = status;
     _data['message'] = message;
-    _data['data'] = data.map((e)=>e.toJson()).toList();
+    _data['data'] = data.map((e) => e.toJson()).toList();
     return _data;
   }
 }
@@ -39,13 +39,14 @@ class Data {
   late final int? priority;
   late final List<Childes> childes;
 
-  Data.fromJson(Map<String, dynamic> json){
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     alias = json['alias'];
-    description = json['description'] ??'';
+    description = json['description'] ?? '';
     priority = json['priority'] ?? 0;
-    childes = List.from(json['childes']).map((e)=>Childes.fromJson(e)).toList();
+    childes =
+        List.from(json['childes']).map((e) => Childes.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -55,7 +56,7 @@ class Data {
     data['alias'] = alias;
     data['description'] = description;
     data['priority'] = priority;
-    data['childes'] = childes.map((e)=>e.toJson()).toList();
+    data['childes'] = childes.map((e) => e.toJson()).toList();
     return data;
   }
 }
@@ -78,14 +79,15 @@ class Childes {
   late final int parentId;
   late final List<Childes> childes;
 
-  Childes.fromJson(Map<String, dynamic> json){
+  Childes.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     alias = json['alias'];
     description = json['alias'] ?? '';
     priority = json['alias'] ?? 1;
     parentId = json['parent_id'];
-    childes = List.from(json['childes']).map((e)=>Childes.fromJson(e)).toList();
+    childes =
+        List.from(json['childes']).map((e) => Childes.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -96,7 +98,7 @@ class Childes {
     data['description'] = description;
     data['priority'] = priority;
     data['parent_id'] = parentId;
-    data['childes'] = childes.map((e)=>e.toJson()).toList();
+    data['childes'] = childes.map((e) => e.toJson()).toList();
     return data;
   }
 }

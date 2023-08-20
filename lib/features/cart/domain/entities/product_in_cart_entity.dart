@@ -8,20 +8,14 @@ class ProductInCartEntity extends Equatable {
   final String createdAt;
   final ProductEntity productEntity;
 
-  const ProductInCartEntity(
-      this.id,
-      this.productId,
-      this.amount,
-      this.quantity,
-      this.createdAt,
-      this.productEntity
-      );
+  const ProductInCartEntity(this.id, this.productId, this.amount, this.quantity,
+      this.createdAt, this.productEntity);
 
   @override
   List<Object> get props => [];
 }
 
-class ProductEntity extends Equatable{
+class ProductEntity extends Equatable {
   final String id;
   final String title;
   final String thumbnail;
@@ -33,9 +27,18 @@ class ProductEntity extends Equatable{
   final String isFavorite;
   final String isWishList;
 
-  const ProductEntity(this.id, this.title, this.thumbnail, this.price, this.discount, this.currentStock, this.thumbnailUrl, this.videoLink, this.isFavorite, this.isWishList);
+  const ProductEntity(
+      this.id,
+      this.title,
+      this.thumbnail,
+      this.price,
+      this.discount,
+      this.currentStock,
+      this.thumbnailUrl,
+      this.videoLink,
+      this.isFavorite,
+      this.isWishList);
 
   @override
   List<Object?> get props => [];
-
 }

@@ -5,13 +5,16 @@ import '../../../../core/usecase/usecase.dart';
 import '../entities/list_favorite_entity.dart';
 import '../repositories/favorite_product_repository.dart';
 
-class AddFavoriteProductUseCase extends BaseUsecase<bool, AddFavoriteProductUseCaseParams>{
+class AddFavoriteProductUseCase
+    extends BaseUsecase<bool, AddFavoriteProductUseCaseParams> {
   final FavoriteBaseRepository favoriteBaseRepository;
   AddFavoriteProductUseCase(this.favoriteBaseRepository);
 
   @override
-  Future<Either<Failure, bool>> call(AddFavoriteProductUseCaseParams params) async {
-    final response =  await favoriteBaseRepository.addFavoriteProduct(params.idProduct);
+  Future<Either<Failure, bool>> call(
+      AddFavoriteProductUseCaseParams params) async {
+    final response =
+        await favoriteBaseRepository.addFavoriteProduct(params.idProduct);
     return response;
   }
 }

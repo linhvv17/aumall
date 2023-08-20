@@ -39,7 +39,7 @@ class _HomeState extends State<HomeView> {
           // do stuff here based on BlocA's state
           if (state is HomeErrorState) {
             //show popup direct to login
-            if(state.message == S.current.unauthorizedError){
+            if (state.message == S.current.unauthorizedError) {
               showAlertDialogUnauthorizedError();
             }
           }
@@ -107,7 +107,7 @@ class _HomeState extends State<HomeView> {
                 ),
               ),
               SizedBox(
-                  height: kHeight(context) *2 / 3,
+                  height: kHeight(context) * 2 / 3,
                   child: GridView.builder(
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.zero,
@@ -278,15 +278,14 @@ class _HomeState extends State<HomeView> {
     ));
   }
 
-
-
   void showAlertDialogUnauthorizedError() {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Lỗi xác thực'),
-            content:  Text("${S.current.unauthorizedError} \nHãy đăng nhập lại để tiếp tục sử dụng"),
+            content: Text(
+                "${S.current.unauthorizedError} \nHãy đăng nhập lại để tiếp tục sử dụng"),
             actions: [
               ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: Colors.green),
@@ -308,6 +307,4 @@ class _HomeState extends State<HomeView> {
           );
         });
   }
-
-
 }
