@@ -13,13 +13,25 @@ class LoginUseCase extends BaseUsecase<LoginEntity, LoginUseCaseParams> {
   @override
   Future<Either<Failure, LoginEntity>> call(params) async {
     return await loginBaseRepository
-        .login(LoginParams(email: params.email, password: params.password));
+        .login(LoginParams(
+        email: params.email,
+        password: params.password,
+        deviceToken: params.deviceToken,
+        tokenType: params.tokenType
+    ));
   }
 }
 
 class LoginUseCaseParams {
   final String email;
   final String password;
+  final String deviceToken;
+  final int tokenType;
 
-  LoginUseCaseParams({required this.email, required this.password});
+  LoginUseCaseParams({
+    required this.email,
+    required this.password,
+    required this.deviceToken,
+    required this.tokenType,
+});
 }

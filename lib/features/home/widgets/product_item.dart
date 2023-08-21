@@ -14,9 +14,14 @@ import '../../login/presentation/widgets/alert_snackbar.dart';
 import '../../shop/domain/entities/products_entity.dart';
 import '../data/models/product_detail_model.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductItem extends StatefulWidget {
   const ProductItem({super.key, required this.product});
-  final RelatedProducts product;
+  final ProductAuMallEntity product;
+  @override
+  State<StatefulWidget> createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem>{
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,14 +29,14 @@ class ProductItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: BlocProvider.of<ThemeBloc>(context).themeData ==
-                    appThemeData[AppTheme.lightTheme]
+                appThemeData[AppTheme.lightTheme]
                 ? ColorManager.white
                 : Colors.white.withOpacity(0.2),
             borderRadius: BorderRadius.circular(15)),
         child: Stack(
           children: [
             Image.network(
-              product.thumbnailUrl!,
+              widget.product.thumbnailUrl!,
               width: 200,
               height: 200,
             ),
@@ -65,28 +70,38 @@ class ProductItem extends StatelessWidget {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () {
-                            // BlocProvider.of<FavouriteBloc>(context).add(
-                            //    AddToFavorite(
-                            //        product: product,
-                            //        isFavourite: product.isFavourite,
-                            //        ));
+                            BlocProvider.of<FavouriteBloc>(context)
+                                .add(widget.product.isFavorite!
+                                ? RemoveFavoriteProduct(widget.product.id!)
+                                : AddToFavorite(
+                              product: widget.product,
+                              isFavourite: widget.product.isFavorite!,
+                            ));
+
+                            setState(() {
+                              print('setState bf ${widget.product.isFavorite}');
+                              widget.product.isFavorite =
+                              !widget.product.isFavorite!;
+                              print('setState at ${widget.product.isFavorite}');
+                            });
                           },
-                          child: const Icon(
+                          child:
+                          // const Icon(
+                          //   Icons.favorite,
+                          //   size: 20.0,
+                          //   color: ColorManager.orangeLight,
+                          // ),
+                          widget.product.isFavorite!
+                              ? const Icon(
                             Icons.favorite,
                             size: 20.0,
                             color: ColorManager.orangeLight,
+                          )
+                              : const Icon(
+                            Icons.favorite_outline,
+                            size: 20.0,
+                            color: ColorManager.grey,
                           ),
-                          // product.isFavourite
-                          //     ? const Icon(
-                          //         Icons.favorite,
-                          //         size: 20.0,
-                          //         color: ColorManager.orangeLight,
-                          //       )
-                          //     : const Icon(
-                          //         Icons.favorite_outline,
-                          //         size: 20.0,
-                          //         color: ColorManager.grey,
-                          //       ),
                         ),
                       ),
                     );
@@ -105,8 +120,8 @@ class ProductItem extends StatelessWidget {
                       children: [
                         RatingBarIndicator(
                           itemSize: 25.0,
-                          rating: product.ratingNumber != null
-                              ? product.ratingNumber!.toDouble()
+                          rating: widget.product.ratingNumber != null
+                              ? widget.product.ratingNumber!.toDouble()
                               : 0.0,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
@@ -116,33 +131,33 @@ class ProductItem extends StatelessWidget {
                         ),
                         const SizedBox(width: 4.0),
                         Text(
-                          '(${product.reviewNumber})',
+                          '(${widget.product.reviewNumber})',
                           style: Theme.of(context).textTheme.caption!.copyWith(
-                                color: Colors.grey,
-                              ),
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 8.0),
                     // Text(
-                    //   product.category,
+                    //   widget.product.category,
                     //   style: Theme.of(context).textTheme.caption!.copyWith(
                     //         color: ColorManager.grey,
                     //       ),
                     // ),
                     const SizedBox(height: 6.0),
                     Text(
-                      product.title!,
+                      widget.product.title!,
                       style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 6.0),
                     Text.rich(
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: '${product.price} \$',
+                            text: '${widget.product.price} \$',
                             style: Theme.of(context)
                                 .textTheme
                                 .subtitle2!

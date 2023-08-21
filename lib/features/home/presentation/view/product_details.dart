@@ -575,17 +575,18 @@ class _ProductDetailsState extends State<ProductDetails>
                         itemCount: state.productDetailEntity.relatedProducts!
                             .relatedProducts?.length,
                         itemBuilder: (context, index) {
+                          ProductAuMallEntity productAuMallEntity = state.productDetailEntity.relatedProducts!.relatedProducts![index];
                           return InkWell(
                             onTap: () {
-                              // Navigator.pushReplacement(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) => ProductDetails(
-                              //         product: widget.products[index],
-                              //         products: widget.products,
-                              //         index: index,
-                              //       ),
-                              //     ));
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductDetails(
+                                      index: index,
+                                      productSimpleEntity : productAuMallEntity,
+                                      isFromAuction: false,
+                                    ),
+                                  ));
                             },
                             child: SizedBox(
                                 width: kWidth(context) / 2,

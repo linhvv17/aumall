@@ -35,8 +35,8 @@ class _LoginViewState extends State<LoginView> {
   void loadAccountInfo() async {
     emailController.text =
         await SecureStorage().storage.read(key: "username") ?? "";
-    emailController.text =
-        await SecureStorage().storage.read(key: "username") ?? "";
+    passController.text =
+        await SecureStorage().storage.read(key: "password") ?? "";
   }
 
   @override

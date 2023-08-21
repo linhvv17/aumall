@@ -64,6 +64,7 @@ class _AuctionViewState extends State<AuctionView> {
             ),
           ),
           body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
                 if (state is AuctionDataLoading) {

@@ -1,3 +1,7 @@
+import 'package:aumall/features/shop/domain/entities/products_entity.dart';
+
+import '../../../shop/data/models/products_model.dart';
+
 class DetailProductResponse {
   DetailProductResponse({
     required this.status,
@@ -569,13 +573,13 @@ class RelatedProducts {
 }
 
 class ListRelatedProducts {
-  late List<RelatedProducts>? relatedProducts;
+  late List<ProductAuMallModel>? relatedProducts;
   ListRelatedProducts({required this.relatedProducts});
   ListRelatedProducts.fromJson(Map<String, dynamic> json) {
     if (['relatedProducts'] != null) {
-      relatedProducts = <RelatedProducts>[];
+      relatedProducts = <ProductAuMallModel>[];
       json['relatedProducts'].forEach((v) {
-        relatedProducts!.add(RelatedProducts.fromJson(v));
+        relatedProducts!.add(ProductAuMallModel.fromJson(v));
       });
     }
 

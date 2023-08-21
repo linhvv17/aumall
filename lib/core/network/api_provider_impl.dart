@@ -2,12 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:aumall/core/network/api_provider.dart';
 import 'package:dio_logging_interceptor/dio_logging_interceptor.dart';
 import 'package:flutter/foundation.dart';
+import '../../configs/app_flavor.dart';
 import '../utilities/endpoints.dart';
 
 class APIProviderImpl implements APIProvider {
   final Dio dio = Dio(
     BaseOptions(
-      baseUrl: baseURLAuMall,
+      baseUrl: FlavorConfig.instance.values.baseUrl,
       receiveDataWhenStatusError: true,
       connectTimeout: 5000,
     ),

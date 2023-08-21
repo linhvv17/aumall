@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../../../../core/local/shared_preference.dart';
 import '../../domain/entities/login_entity.dart';
@@ -16,17 +19,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) : super(LoginInitialState()) {
     on<UserLogin>((event, emit) async {
       emit(LoginLoadingState());
-
+      final tokenFCM = await FirebaseMessaging.instance.getToken();
       final failureOrSuccess = await loginUseCase(
-          LoginUseCaseParams(email: event.email, password: event.password));
+          LoginUseCaseParams(
+              email: event.email,
+              password: event.password,
+              deviceToken: tokenFCM.toString(),
+              tokenType: Platform.isIOS ? 1 : 2
+          ));
       failureOrSuccess.fold((failure) => emit(LoginErrorState(failure.message)),
           (success) {
-        print('aaaaaaaaaaaaaaa ${success}');
-        print('aaaaaaaaaaaaaaa ${(success as LoginEntity).id}');
-        print('aaaaaaaaaaaaaaa ${(success as LoginEntity).name}');
         PreferenceHelper.saveDataInSharedPreference(
             key: "keyUser",
-            value: "${(success as LoginEntity).id}-${success.name}");
+            value: "${(success).id}-${success.name}");
         emit(LoginFinishedState(data: success));
       });
     });

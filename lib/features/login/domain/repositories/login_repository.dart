@@ -10,6 +10,13 @@ abstract class LoginBaseRepository {
 class LoginParams {
   final String email;
   final String password;
+  final String deviceToken;
+  final int tokenType;
 
-  LoginParams({required this.email, required this.password});
+  LoginParams({
+    required this.email,
+    required this.password,
+    required this.deviceToken,
+    required this.tokenType,
+  });
 }

@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:aumall/features/auction/presentation/bloc/auction_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
-import 'package:aumall/features/shop/presentation/bloc/categories/categories_bloc.dart';
 import 'package:aumall/local_notification_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -18,6 +17,8 @@ import 'package:aumall/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:aumall/features/cart/presentation/bloc/cubit/address_cubit.dart';
 import 'package:aumall/features/cart/presentation/bloc/location_bloc.dart';
 import 'package:aumall/features/payment/presentation/bloc/order_bloc.dart';
+import 'configs/app_configs.dart';
+import 'configs/app_flavor.dart';
 import 'core/local/shared_preference.dart';
 import 'core/theme/theme_service.dart';
 import 'dependancy_injection.dart';
@@ -42,26 +43,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
-
   print("Handling a background message: ${message.messageId}");
 }
-
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await init();
-  await PreferenceHelper.init();
-  await Hive.initFlutter();
-  await CacheManager().init();
-  await CartLocalDataSourceManager().init();
-  await ThemeDatabaseService.checkDatabaseExists();
-  await dotenv.load(fileName: ".env");
-  await Firebase.initializeApp();
-  await LocalNotificationService().setup();
+  await configMain(Flavor.prod);
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatefulWidget {
@@ -72,7 +64,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   Future<void> setupInteractedMessage() async {
+
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
@@ -89,6 +83,7 @@ class _MyAppState extends State<MyApp> {
     print("FCMToken $fcmToken");
 
     _handleAndroidFCMWhenOpenApp();
+
   }
 
   void _handleAndroidFCMWhenOpenApp() async {
@@ -96,18 +91,16 @@ class _MyAppState extends State<MyApp> {
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'high_importance_channel', // id
       'High Importance Notifications', // title
-      description:
-          'This channel is used for important notifications.', // description
+      description: 'This channel is used for important notifications.', // description
       importance: Importance.max,
     );
 
     //Create the channel on the device (if a channel with an id already exists, it will be updated):
     final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -135,7 +128,9 @@ class _MyAppState extends State<MyApp> {
     });
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   }
+  
 
   @override
   void initState() {
@@ -145,6 +140,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -170,9 +166,6 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => injector<ProductsBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => injector<CategoriesBloc>(),
         ),
         BlocProvider(
           create: (context) => injector<ProfileBloc>(),
@@ -219,6 +212,7 @@ class _MyAppState extends State<MyApp> {
             initialRoute: isSkipedOnBoarding != null
                 ? AppRoutes.splash
                 : AppRoutes.onBoarding,
+
             localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,

@@ -89,6 +89,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     automaticallyImplyLeading: false,
+                    centerTitle: true,
                     bottom: PreferredSize(
                       preferredSize: const Size.fromHeight(100),
                       child: Column(
@@ -192,6 +193,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                                                             listProductShopEntity.listProductAuMall[index],
                                                                         index:
                                                                             index,
+                                                                                isFromAuction: false,
                                                                       ),
                                                                     ))
                                                                 .then(

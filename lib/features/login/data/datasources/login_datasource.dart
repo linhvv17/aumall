@@ -18,11 +18,13 @@ class LoginDatasourceImpl implements LoginDatasource {
     final response = await apiProvider.post(endPoint: loginAuMall, data: {
       "email": params.email,
       "password": params.password,
+      "device_token": params.deviceToken,
+      "token_type": params.tokenType,
     });
-    if (kDebugMode) {
-      print("login ${response.data}");
-      print("login ${response.statusCode}");
-    }
+    // if (kDebugMode) {
+    //   print("login ${response.data}");
+    //   print("login ${response.statusCode}");
+    // }
     return LoginModel.fromJson(response.data);
   }
 }
