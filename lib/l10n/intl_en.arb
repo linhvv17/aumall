@@ -194,6 +194,9 @@
   "dataLoading" : "Data loading ...",
   "notauction" : "There is no auctions yet!",
   "noProducts" : "There is no products yet!",
-  "auction" : "Auction"
+  "auction" : "Auction",
+  "notification" : "Notification",
+  "noNotification" : "There is no notification yet!",
+  "noUserAuction" : "No one has entered the auction yet!"
 
 }

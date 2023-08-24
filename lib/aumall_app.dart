@@ -1,4 +1,5 @@
 
+import 'package:aumall/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -184,6 +185,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => injector<ThemeBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => injector<NotificationBloc>(),
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(

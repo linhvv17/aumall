@@ -14,6 +14,11 @@ import 'package:aumall/features/home/domain/usecases/get_banner_usecase.dart';
 import 'package:aumall/features/home/domain/usecases/get_product_detail_usecase.dart';
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
+import 'package:aumall/features/notification/data/datasources/notification_datasource.dart';
+import 'package:aumall/features/notification/data/repositories_impls/notification_repository_impl.dart';
+import 'package:aumall/features/notification/domain/repositories/notification_repository.dart';
+import 'package:aumall/features/notification/domain/usecases/get_list_notification_usecase.dart';
+import 'package:aumall/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:aumall/features/profile/domain/usecases/add_address_usecase.dart';
 import 'package:aumall/features/profile/domain/usecases/logout_usecase.dart';
 import 'package:aumall/features/shop/domain/usecases/change_category_usecase.dart';
@@ -70,6 +75,7 @@ import 'features/login/data/repositories/login_repostory_impl.dart';
 import 'features/login/domain/repositories/login_repository.dart';
 import 'features/login/domain/usecases/login_usecase.dart';
 import 'features/login/presentation/bloc/login_bloc.dart';
+import 'features/notification/domain/usecases/get_detail_notification_usecase.dart';
 import 'features/payment/domain/usecases/requestOrder_Usecase.dart';
 import 'features/payment/domain/usecases/requestPayment_Usecase.dart';
 import 'features/profile/data/datasources/profile_remote_datasource.dart';
@@ -142,6 +148,7 @@ Future<void> init() async {
   injector
       .registerFactory(() => PaymentBloc(injector(), injector(), injector()));
   injector.registerFactory(() => OrderBloc(injector(), injector()));
+  injector.registerFactory(() => NotificationBloc(injector(), injector()));
   //Usecase
   injector.registerLazySingleton(() => LoginUseCase(injector()));
   injector.registerLazySingleton(() => GetBannerUseCase(injector()));
@@ -188,6 +195,12 @@ Future<void> init() async {
   injector.registerLazySingleton(() => RequestPaymentUsecase(injector()));
   injector.registerLazySingleton(() => CreateNewOrderUsecase(injector()));
   injector.registerLazySingleton(() => GetAllOrderesUsecase(injector()));
+  //notification
+  injector.registerLazySingleton(() => GetListNotificationUseCase(injector()));
+  injector.registerLazySingleton(() => GetDetailNotificationUseCase(injector()));
+
+
+
   //Repository
   injector.registerLazySingleton<LoginBaseRepository>(
       () => LoginRepositoryImpl(injector(), injector()));
@@ -211,6 +224,8 @@ Future<void> init() async {
       () => ProfileRepositoryImpl(injector(), injector()));
   injector.registerLazySingleton<PaymentRepository>(
       () => PaymentRepositoryImpl(injector(), injector()));
+  injector.registerLazySingleton<NotificationBaseRepository>(
+          () => NotificationRepositoryImpl(injector(), injector()));
 
   //DataSource
   injector.registerLazySingleton<LoginDatasource>(
@@ -237,6 +252,8 @@ Future<void> init() async {
       .registerLazySingleton<PlacesDataSource>(() => PlacesDatasourceImpl());
   injector.registerLazySingleton<PaymentDataSource>(
       () => PaymentDataSourceImpl(injector(), injector()));
+  injector.registerLazySingleton<NotificationDatasource>(
+          () => NotificationDatasourceImpl(injector()));
 
   //---Core---//
   //API Provider

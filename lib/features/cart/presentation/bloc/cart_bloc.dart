@@ -76,7 +76,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       event.productInCartEntity.quantity--;
       final failureOrSuccess = await updateProductInCartUseCase(
           UpdateProductInCartUseCaseParams(event.quantity,
-              idProduct: event.productInCartEntity.id));
+              idProduct: event.productInCartEntity.productId));
       failureOrSuccess.fold(
           (failure) => emit(CartDataErrorState(failure.message)),
           // (success) => emit(HomeStateDataLoaded(success)),

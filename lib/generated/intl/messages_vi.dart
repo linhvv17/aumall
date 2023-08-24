@@ -154,8 +154,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "noContent": MessageLookupByLibrary.simpleMessage("Không có nội dung"),
         "noInternetError": MessageLookupByLibrary.simpleMessage(
             "Hãy kiểm tra kết nối Internet"),
+        "noNotification":
+            MessageLookupByLibrary.simpleMessage("Không có thông báo nào!"),
         "noProducts":
             MessageLookupByLibrary.simpleMessage("Không có sản phầm nào!"),
+        "noUserAuction": MessageLookupByLibrary.simpleMessage(
+            "Chưa có ai tham gia đấu giá!"),
         "notCart": MessageLookupByLibrary.simpleMessage(
             "Không có sản phẩm nào trong giỏ hàng!"),
         "notFoundError":
@@ -167,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Không có phiên đấu giá nào!"),
         "notfavorite": MessageLookupByLibrary.simpleMessage(
             "Không có sản phẩm nào trong mục yêu thích!"),
+        "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "now": MessageLookupByLibrary.simpleMessage("Đang diễn ra"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "oldpassword": MessageLookupByLibrary.simpleMessage("Mật khẩu cũ"),

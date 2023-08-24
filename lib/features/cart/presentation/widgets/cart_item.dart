@@ -1,14 +1,10 @@
-import 'package:aumall/features/cart/data/models/cart_product_model.dart';
 import 'package:aumall/features/cart/domain/entities/list_product_in_cart_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:aumall/features/cart/data/models/cart_model.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
-import '../../../../core/utilities/strings.dart';
 import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
-import '../../../shop/domain/entities/products_entity.dart';
 import '../bloc/cart_bloc.dart';
 
 class CartItem extends StatelessWidget {
@@ -125,7 +121,7 @@ class CartItem extends StatelessWidget {
                                   ),
                                 )),
                             Text(
-                              '1',
+                              item.quantity.toString(),
                               style: Theme.of(context)
                                   .textTheme
                                   .titleLarge!

@@ -575,7 +575,10 @@ class _ProductDetailsState extends State<ProductDetails>
                         itemCount: state.productDetailEntity.relatedProducts!
                             .relatedProducts?.length,
                         itemBuilder: (context, index) {
-                          ProductAuMallEntity productAuMallEntity = state.productDetailEntity.relatedProducts!.relatedProducts![index];
+                          ProductAuMallEntity productAuMallEntity = state
+                              .productDetailEntity
+                              .relatedProducts!
+                              .relatedProducts![index];
                           return InkWell(
                             onTap: () {
                               Navigator.pushReplacement(
@@ -583,7 +586,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   MaterialPageRoute(
                                     builder: (context) => ProductDetails(
                                       index: index,
-                                      productSimpleEntity : productAuMallEntity,
+                                      productSimpleEntity: productAuMallEntity,
                                       isFromAuction: false,
                                     ),
                                   ));
@@ -727,8 +730,15 @@ class _ProductDetailsState extends State<ProductDetails>
                                     ),
                                     state.auctionSessionInfoEntity.userAuctions
                                             .data.isEmpty
-                                        ? const Text(
-                                            "Gia hien tai bang gia khoi diem")
+                                        ? Text(
+                                            '${double.parse(state.auctionSessionInfoEntity.product.price).toInt()} đ',
+                                            style: const TextStyle(
+                                              color: Color(0xFF001B2E),
+                                              fontSize: 12,
+                                              fontFamily: 'Nunito',
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          )
                                         : Text(
                                             '${double.parse(state.auctionSessionInfoEntity.userAuctions.data[0].price).toInt()} đ',
                                             style: const TextStyle(
@@ -815,9 +825,9 @@ class _ProductDetailsState extends State<ProductDetails>
                           ),
                           state.auctionSessionInfoEntity.userAuctions.data
                                   .isEmpty
-                              ? const Expanded(
+                              ? Expanded(
                                   child: Center(
-                                    child: Text("Chua co ai tham gia dau gia"),
+                                    child: Text(S.current.noUserAuction),
                                   ),
                                 )
                               : Expanded(

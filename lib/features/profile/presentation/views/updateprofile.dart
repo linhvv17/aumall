@@ -358,13 +358,10 @@ class _UpdateProfileViewState extends State<UpdateProfileView> {
                               height: 50,
                               ontab: () {
                                 print("UPLOADTOSERVER ${nameController.text}");
-                                print("UPLOADTOSERVER ${nameController.text}");
-                                print(
-                                    "UPLOADTOSERVER ${mobileController.text}");
-                                print(
-                                    "UPLOADTOSERVER ${dateOfBirthController.text}");
-                                print(
-                                    "UPLOADTOSERVER ${addressController.text}");
+                                print("UPLOADTOSERVER ${emailController.text}");
+                                print("UPLOADTOSERVER ${mobileController.text}");
+                                print("UPLOADTOSERVER ${dateOfBirthController.text}");
+                                print("UPLOADTOSERVER ${addressController.text}");
                                 if (formKey.currentState!.validate()) {
                                   BlocProvider.of<ProfileBloc>(context)
                                       .add(UpdataProfileEvent(

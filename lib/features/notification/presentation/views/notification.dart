@@ -6,52 +6,44 @@ import 'package:aumall/features/favorite/presentation/bloc/favourite_bloc.dart';
 import 'package:aumall/features/home/widgets/customGridView.dart';
 import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
-import '../../../home/widgets/product_item.dart';
 import '../../../shop/domain/entities/products_entity.dart';
+import '../bloc/notification_bloc.dart';
+import 'notification_item.dart';
 
-class FavoriteView extends StatefulWidget {
-  const FavoriteView({super.key});
+class NotificationView extends StatefulWidget {
+  const NotificationView({super.key});
 
   @override
-  State<FavoriteView> createState() => _FavoriteViewState();
+  State<NotificationView> createState() => _NotificationViewState();
 }
 
-class _FavoriteViewState extends State<FavoriteView> {
+class _NotificationViewState extends State<NotificationView> {
   @override
   void initState() {
-    BlocProvider.of<FavouriteBloc>(context).add(GetListFavoriteProduct());
+    BlocProvider.of<NotificationBloc>(context).add(GetListNotification());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     // final favouriteList = BlocProvider.of<FavouriteBloc>(context).favouriteList;
-    final favouriteBloc = BlocProvider.of<FavouriteBloc>(context);
+    final notificationBloc = BlocProvider.of<NotificationBloc>(context);
     return Scaffold(
         appBar: AppBar(
             automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
-              S.current.favorite,
+              S.current.notification,
               style: Theme.of(context).textTheme.headline6,
             )),
         body: BlocListener<FavouriteBloc, FavouriteState>(
           listenWhen: (previous, current) {
-            // return true/false to determine whether or not
-            // to invoke listener with state
-            return current is RemoveFavoriteSuccess;
+            return true;
           },
-          listener: (context, state) {
-            // do stuff here based on BlocA's state
-            if (state is RemoveFavoriteSuccess) {
-              if (state.isSuccess) {
-                favouriteBloc.add(GetListFavoriteProduct());
-              }
-            }
-          },
-          child: BlocBuilder<FavouriteBloc, FavouriteState>(
+          listener: (context, state) {},
+          child: BlocBuilder<NotificationBloc, NotificationState>(
               builder: (context, state) {
-            if (state is FavouriteDataLoading) {
+            if (state is NotificationDataLoading) {
               return const Center(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,15 +53,15 @@ class _FavoriteViewState extends State<FavoriteView> {
                   Text("Dang tai du lieu .....")
                 ],
               ));
-            } else if (state is FavouriteDataLoaded) {
-              List<ProductAuMallEntity> listFavorite =
-                  state.listFavoriteEntity.listFavorite;
+            } else if (state is NotificationDataLoaded) {
+              final listNotification =
+                  state.listNotificationEntity.listNotification;
               return PageStorage(
                 bucket: PageStorageBucket(),
                 child: Column(
                   children: [
                     Expanded(
-                        child: listFavorite.isEmpty
+                        child: listNotification.isEmpty
                             ? Column(
                                 children: [
                                   Expanded(
@@ -80,7 +72,7 @@ class _FavoriteViewState extends State<FavoriteView> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      S.current.notfavorite,
+                                      S.current.noNotification,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium,
@@ -90,43 +82,43 @@ class _FavoriteViewState extends State<FavoriteView> {
                               )
                             : RefreshIndicator(
                                 onRefresh: () async {
-                                  favouriteBloc.add(GetListFavoriteProduct());
+                                  notificationBloc.add(GetListNotification());
                                 },
                                 child: GridView.builder(
                                   physics: const AlwaysScrollableScrollPhysics(
                                       parent: BouncingScrollPhysics()),
-                                  itemCount: listFavorite.length,
+                                  itemCount: listNotification.length,
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
                                           crossAxisCount: 2, height: 330),
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                         onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProductDetails(
-                                                  productSimpleEntity:
-                                                      listFavorite[index],
-                                                  index: index,
-                                                      isFromAuction: false,
-                                                ),
-                                              ));
+                                          // Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           ProductDetails(
+                                          //         productSimpleEntity:
+                                          //             listNotification[index],
+                                          //         index: index,
+                                          //             isFromAuction: false,
+                                          //       ),
+                                          //     ));
                                         },
                                         child:
                                             // Container()
-                                            ProductItemAuMall(
-                                                productFavoriteEntity:
-                                                    listFavorite[index],
-                                                isAuctionProduct: false));
+                                            NotificationItem(
+                                          notificationEntity:
+                                              listNotification[index],
+                                        ));
                                   },
                                 ),
                               ))
                   ],
                 ),
               );
-            } else if (state is FavouriteDataErrorState) {
+            } else if (state is NotificationDataErrorState) {
               return Text(state.message);
             } else {
               return Container();

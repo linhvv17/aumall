@@ -119,6 +119,7 @@ class _AuctionViewState extends State<AuctionView> {
                                                               listAuction[
                                                                   index],
                                                           index: index,
+                                                              isFromAuction: true,
                                                         ),
                                                       ))
                                                   .then((value) => {

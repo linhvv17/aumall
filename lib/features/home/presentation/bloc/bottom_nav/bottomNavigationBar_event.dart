@@ -26,6 +26,10 @@ class LoadBag extends BottomNavigationBarEvent {
   @override
   List<Object> get props => [];
 }
+class LoadNotification extends BottomNavigationBarEvent {
+  @override
+  List<Object> get props => [];
+}
 
 class LoadFavorite extends BottomNavigationBarEvent {
   @override

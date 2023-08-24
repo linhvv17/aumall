@@ -153,8 +153,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "noContent": MessageLookupByLibrary.simpleMessage("no_content"),
         "noInternetError": MessageLookupByLibrary.simpleMessage(
             "Please Check Your Internet Connection"),
+        "noNotification": MessageLookupByLibrary.simpleMessage(
+            "There is no notification yet!"),
         "noProducts":
             MessageLookupByLibrary.simpleMessage("There is no products yet!"),
+        "noUserAuction": MessageLookupByLibrary.simpleMessage(
+            "No one has entered the auction yet!"),
         "notCart": MessageLookupByLibrary.simpleMessage(
             "There is No Products in Bag yet!"),
         "notFoundError":
@@ -166,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("There is no auctions yet!"),
         "notfavorite":
             MessageLookupByLibrary.simpleMessage("There is No Favorite yet!"),
+        "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "now": MessageLookupByLibrary.simpleMessage("Now"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "oldpassword": MessageLookupByLibrary.simpleMessage("Old Password"),

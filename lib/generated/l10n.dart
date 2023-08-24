@@ -1839,6 +1839,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Notification`
+  String get notification {
+    return Intl.message(
+      'Notification',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no notification yet!`
+  String get noNotification {
+    return Intl.message(
+      'There is no notification yet!',
+      name: 'noNotification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No one has entered the auction yet!`
+  String get noUserAuction {
+    return Intl.message(
+      'No one has entered the auction yet!',
+      name: 'noUserAuction',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

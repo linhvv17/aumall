@@ -1,4 +1,5 @@
 import 'package:aumall/features/auction/presentation/views/auction.dart';
+import 'package:aumall/features/notification/presentation/views/notification.dart';
 import 'package:aumall/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ import '../../../auction/presentation/bloc/auction_bloc.dart';
 import '../../../cart/presentation/bloc/location_bloc.dart';
 import '../../../cart/presentation/views/cart.dart';
 import '../../../favorite/presentation/views/favorite.dart';
+import '../../../notification/presentation/bloc/notification_bloc.dart';
 import '../../../profile/presentation/bloc/profile_bloc.dart';
 import '../../../profile/presentation/views/profile.dart';
 import '../../../shop/presentation/bloc/products_bloc.dart';
@@ -71,10 +73,15 @@ class _LayoutPageState extends State<LayoutPage> {
                   BlocProvider.of<AuctionBloc>(context)
                       .add(const GetListAuctionProduct(2));
                   break;
+                // case 3:
+                //   BlocProvider.of<BottomNavigationBarBloc>(context)
+                //       .add(LoadBag());
+                //   BlocProvider.of<CartBloc>(context).add(CartStarted());
+                //   break;
                 case 3:
                   BlocProvider.of<BottomNavigationBarBloc>(context)
-                      .add(LoadBag());
-                  BlocProvider.of<CartBloc>(context).add(CartStarted());
+                      .add(LoadNotification());
+                  BlocProvider.of<NotificationBloc>(context).add(GetListNotification());
                   break;
                 case 4:
                   BlocProvider.of<BottomNavigationBarBloc>(context)
@@ -103,10 +110,14 @@ class _LayoutPageState extends State<LayoutPage> {
                   icon: const Icon(Icons.price_change_outlined),
                   label: S.current.auction,
                   activeIcon: const Icon(Icons.price_change)),
+              // BottomNavigationBarItem(
+              //     icon: const Icon(Icons.shopping_bag_outlined),
+              //     label: S.current.mybag,
+              //     activeIcon: const Icon(Icons.shopping_bag)),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.shopping_bag_outlined),
-                  label: S.current.mybag,
-                  activeIcon: const Icon(Icons.shopping_bag)),
+                  icon: const Icon(Icons.notifications_active_outlined),
+                  label: S.current.notification,
+                  activeIcon: const Icon(Icons.notifications_active)),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.favorite_border_outlined),
                 label: S.current.favorite,
@@ -126,10 +137,9 @@ class _LayoutPageState extends State<LayoutPage> {
                 return const ShopView();
               } else if (state is AuctionSelectState) {
                 return const AuctionView();
-              } else if (state is BagState) {
-                return const CartView(
-                  isFromBottomBar: true,
-                );
+              }
+              else if (state is NotifiState) {
+                return const NotificationView();
               } else if (state is FavoriteState) {
                 return const FavoriteView();
               } else if (state is ProfilePageState) {
