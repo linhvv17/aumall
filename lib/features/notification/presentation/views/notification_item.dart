@@ -1,19 +1,5 @@
 import 'package:aumall/features/notification/domain/entities/notification_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:aumall/core/theme/bloc/theme_bloc.dart';
-import '../../../../core/colors/colors.dart';
-import '../../../../core/theme/theme_data.dart';
-import '../../../../core/utilities/enums.dart';
-import '../../../../core/utilities/mediaquery.dart';
-import '../../../../core/utilities/routes.dart';
-import '../../../../core/utilities/utils.dart';
-import '../../../../generated/l10n.dart';
-import '../../../home/presentation/view/product_details.dart';
-import '../../../login/presentation/widgets/alert_snackbar.dart';
-import '../../../shop/domain/entities/products_entity.dart';
-import '../bloc/notification_bloc.dart';
 
 class NotificationItem extends StatefulWidget {
   final NotificationEntity notificationEntity;
@@ -28,19 +14,29 @@ class _NotificationItemState extends State<NotificationItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Container(
+        color: widget.notificationEntity.isReaded ? Colors.white : Colors.grey.shade400,
         child: Row(
           children: [
-            Image.network(
-              widget.notificationEntity.thumbnail,
-              width: 30,
-              height: 30,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.network(
+                widget.notificationEntity.thumbnail,
+                width: 40,
+                height: 40,
+              ),
             ),
             Column(
               children: [
-                Text(widget.notificationEntity.title),
-                Text(widget.notificationEntity.description),
+                Text(
+                    widget.notificationEntity.title,
+                  maxLines: 2,
+                ),
+                Text(
+                    widget.notificationEntity.description,
+                  maxLines: 10,
+                ),
               ],
             ),
           ],

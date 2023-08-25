@@ -84,36 +84,62 @@ class _NotificationViewState extends State<NotificationView> {
                                 onRefresh: () async {
                                   notificationBloc.add(GetListNotification());
                                 },
-                                child: GridView.builder(
-                                  physics: const AlwaysScrollableScrollPhysics(
-                                      parent: BouncingScrollPhysics()),
-                                  itemCount: listNotification.length,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                          crossAxisCount: 2, height: 330),
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                        onTap: () {
-                                          // Navigator.push(
-                                          //     context,
-                                          //     MaterialPageRoute(
-                                          //       builder: (context) =>
-                                          //           ProductDetails(
-                                          //         productSimpleEntity:
-                                          //             listNotification[index],
-                                          //         index: index,
-                                          //             isFromAuction: false,
-                                          //       ),
-                                          //     ));
+                                child:
+                                    ListView.builder(
+                                      itemCount: listNotification.length,
+                                           itemBuilder: (context, index) {
+                                          return InkWell(
+                                              onTap: () {
+                                                // Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //       builder: (context) =>
+                                                //           ProductDetails(
+                                                //         productSimpleEntity:
+                                                //             listNotification[index],
+                                                //         index: index,
+                                                //             isFromAuction: false,
+                                                //       ),
+                                                //     ));
+                                              },
+                                              child: NotificationItem(
+                                                notificationEntity:
+                                                    listNotification[index],
+                                              ));
                                         },
-                                        child:
-                                            // Container()
-                                            NotificationItem(
-                                          notificationEntity:
-                                              listNotification[index],
-                                        ));
-                                  },
-                                ),
+                                    )
+
+
+                                // GridView.builder(
+                                //   physics: const AlwaysScrollableScrollPhysics(
+                                //       parent: BouncingScrollPhysics()),
+                                //   itemCount: listNotification.length,
+                                //   gridDelegate:
+                                //       const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                //           crossAxisCount: 2, height: 330),
+                                //   itemBuilder: (context, index) {
+                                //     return InkWell(
+                                //         onTap: () {
+                                //           // Navigator.push(
+                                //           //     context,
+                                //           //     MaterialPageRoute(
+                                //           //       builder: (context) =>
+                                //           //           ProductDetails(
+                                //           //         productSimpleEntity:
+                                //           //             listNotification[index],
+                                //           //         index: index,
+                                //           //             isFromAuction: false,
+                                //           //       ),
+                                //           //     ));
+                                //         },
+                                //         child: NotificationItem(
+                                //           notificationEntity:
+                                //               listNotification[index],
+                                //         ));
+                                //   },
+                                // ),
+
+
                               ))
                   ],
                 ),
