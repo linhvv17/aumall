@@ -22,15 +22,19 @@ class LoginRepositoryImpl implements LoginBaseRepository {
   Future<Either<Failure, LoginEntity>> login(LoginParams params) async {
     if (await networkInfo.isConnected) {
       try {
-        print('aaaaaaaaaaaaaaa');
+        print('LoginRepositoryImpl try');
+        print('LoginRepositoryImpl try ${params.email}');
+        print('LoginRepositoryImpl try ${params.password}');
+        print('LoginRepositoryImpl try ${params.deviceToken}');
+        print('LoginRepositoryImpl try ${params.tokenType}');
         final response = await loginDatasource.login(params);
-        print('aaaaaaaaaaaaaaa ${response.message}');
+        print('LoginRepositoryImpl ${response.message}');
         return right(response);
       } catch (error) {
         if (kDebugMode) {
           print(error);
         }
-        print('bbbbbbbbbbbb');
+        print('LoginRepositoryImpl catch (error) ');
         return left(ErrorHandler.handle(error).failure);
       }
     } else {
