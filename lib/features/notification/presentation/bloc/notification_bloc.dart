@@ -31,7 +31,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     on<GetDetailNotification>((event, emit) async {
       emit(NotificationDataLoading());
       final failureOrSuccess = await _getDetailNotificationUseCase(
-          DetailNotificationUseCaseParams(id: 1)
+          DetailNotificationUseCaseParams(id: event.id)
       );
       failureOrSuccess.fold(
           (failure) => emit(NotificationDataErrorState(failure.message)),

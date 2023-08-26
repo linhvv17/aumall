@@ -197,5 +197,6 @@
   "auction" : "Đấu giá ngay!",
   "notification" : "Thông báo",
   "noNotification" : "Không có thông báo nào!",
+  "close" : "Đóng",
   "noUserAuction" : "Chưa có ai tham gia đấu giá!"
 }

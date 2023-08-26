@@ -27,17 +27,23 @@ class _NotificationItemState extends State<NotificationItem> {
                 height: 40,
               ),
             ),
-            Column(
-              children: [
-                Text(
-                    widget.notificationEntity.title,
-                  maxLines: 2,
-                ),
-                Text(
-                    widget.notificationEntity.description,
-                  maxLines: 10,
-                ),
-              ],
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                      widget.notificationEntity.title,
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      fontSize: 16
+                    ),
+                  ),
+                  Text(
+                      widget.notificationEntity.description,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -80,12 +80,12 @@ class _LayoutPageState extends State<LayoutPage> {
                 //   break;
                 case 3:
                   BlocProvider.of<BottomNavigationBarBloc>(context)
-                      .add(LoadNotification());
-                  BlocProvider.of<NotificationBloc>(context).add(GetListNotification());
+                      .add(LoadFavorite());
                   break;
                 case 4:
                   BlocProvider.of<BottomNavigationBarBloc>(context)
-                      .add(LoadFavorite());
+                      .add(LoadNotification());
+                  BlocProvider.of<NotificationBloc>(context).add(GetListNotification());
                   break;
                 case 5:
                   BlocProvider.of<BottomNavigationBarBloc>(context)
@@ -115,14 +115,14 @@ class _LayoutPageState extends State<LayoutPage> {
               //     label: S.current.mybag,
               //     activeIcon: const Icon(Icons.shopping_bag)),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.notifications_active_outlined),
-                  label: S.current.notification,
-                  activeIcon: const Icon(Icons.notifications_active)),
-              BottomNavigationBarItem(
                 icon: const Icon(Icons.favorite_border_outlined),
                 label: S.current.favorite,
                 activeIcon: const Icon(Icons.favorite),
               ),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.notifications_active_outlined),
+                  label: S.current.notification,
+                  activeIcon: const Icon(Icons.notifications_active)),
               BottomNavigationBarItem(
                   icon: const Icon(Icons.person_outline),
                   label: S.current.myProfile,

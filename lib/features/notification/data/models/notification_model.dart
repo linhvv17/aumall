@@ -6,6 +6,17 @@ class NotificationModel extends NotificationEntity {
 
 
   factory NotificationModel.fromJson(Map<String, dynamic> json){
+    print("NotificationModel.fromJson $json");
+    print("NotificationModel.fromJson ${json['id']}");
+    print("NotificationModel.fromJson ${json['title']}");
+    print("NotificationModel.fromJson ${json['thumbnail']}");
+    print("NotificationModel.fromJson ${json['description']}");
+    print("NotificationModel.fromJson ${json['status']}");
+    print("NotificationModel.fromJson ${json['publish_at']}");
+    print("NotificationModel.fromJson ${json['created_at']}");
+    print("NotificationModel.fromJson ${json['created_at_format']}");
+    print("NotificationModel.fromJson ${json['is_readed']}");
+
     return NotificationModel(
         id : json['id'],
         title : json['title'],
@@ -14,8 +25,8 @@ class NotificationModel extends NotificationEntity {
     status : json['status'],
     publishAt : json['publish_at'],
     createdAt : json['created_at'],
-    createdAtFormat : json['created_at_format'],
-    isReaded : json['is_readed'],
+    createdAtFormat : json['created_at_format'] ?? "",
+    isReaded : json['is_readed'] ?? true,
     );
   }
 

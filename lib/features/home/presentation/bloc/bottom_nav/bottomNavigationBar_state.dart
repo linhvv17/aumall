@@ -44,24 +44,24 @@ class AuctionSelectState extends BottomNavigationBarState {
 //   @override
 //   List<Object> get props => [index, title];
 // }
-class NotifiState extends BottomNavigationBarState {
-  @override
-  final int index = 3;
-  final String title = 'Notification';
 
-  @override
-  List<Object> get props => [index, title];
-}
 
 class FavoriteState extends BottomNavigationBarState {
   @override
-  final int index = 4;
+  final int index = 3;
   final String title = 'Favorite';
 
   @override
   List<Object> get props => [index, title];
 }
+class NotifiState extends BottomNavigationBarState {
+  @override
+  final int index = 4;
+  final String title = 'Notification';
 
+  @override
+  List<Object> get props => [index, title];
+}
 class ProfilePageState extends BottomNavigationBarState {
   @override
   final int index = 5;

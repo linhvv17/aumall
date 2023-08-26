@@ -9,6 +9,9 @@ abstract class NotificationEvent extends Equatable {
 }
 
 class GetListNotification extends NotificationEvent {}
-class GetDetailNotification extends NotificationEvent {}
+class GetDetailNotification extends NotificationEvent {
+  final int id;
+  const GetDetailNotification({required this.id});
+}
 
 

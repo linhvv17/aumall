@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "checkout": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "city": MessageLookupByLibrary.simpleMessage("Thành phố"),
         "cityHint": MessageLookupByLibrary.simpleMessage("Hà Nội"),
+        "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "code": MessageLookupByLibrary.simpleMessage("Mã Code"),
         "codeEmpty": MessageLookupByLibrary.simpleMessage("Mã được yêu cầu"),
         "codeLink": MessageLookupByLibrary.simpleMessage("Mã được yêu cầu"),

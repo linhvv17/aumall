@@ -1860,6 +1860,16 @@ class S {
     );
   }
 
+  /// `Close`
+  String get close {
+    return Intl.message(
+      'Close',
+      name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No one has entered the auction yet!`
   String get noUserAuction {
     return Intl.message(

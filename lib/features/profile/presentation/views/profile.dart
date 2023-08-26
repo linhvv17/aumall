@@ -1,8 +1,6 @@
-import 'package:aumall/features/cart/data/datasource/local_datasource.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 import 'package:aumall/features/payment/presentation/bloc/order_bloc.dart';
 import '../../../../core/colors/colors.dart';
@@ -13,6 +11,7 @@ import '../../../../core/theme/theme_service.dart';
 import '../../../../core/utilities/enums.dart';
 import '../../../../core/utilities/routes.dart';
 import '../../../../generated/l10n.dart';
+import '../../../cart/presentation/bloc/cart_bloc.dart';
 import '../bloc/profile_bloc.dart';
 import '../widgets/listtile.dart';
 
@@ -134,6 +133,14 @@ class ProfileView extends StatelessWidget {
                             BlocProvider.of<OrderBloc>(context)
                                 .add(GetAllOrders());
                             Navigator.pushNamed(context, AppRoutes.orders);
+                          },
+                        ),
+                        MYListTile(
+                          title: S.current.mybag,
+                          subtitle: S.current.mybag,
+                          ontab: () {
+                            BlocProvider.of<CartBloc>(context).add(CartStarted());
+                            Navigator.pushNamed(context, AppRoutes.cart);
                           },
                         ),
                         MYListTile(

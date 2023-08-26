@@ -25,10 +25,10 @@ class NotificationDatasourceImpl implements NotificationDatasource {
   @override
   Future<NotificationModel> getDetailNotification(int id) async {
     final response = await apiProvider.get(
-        endPoint: "$notificationAuMall/id",
+        endPoint: "$notificationAuMall/$id",
         token:
         PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
-    return NotificationModel.fromJson(response.data);
+    return NotificationModel.fromJson(response.data['data']);
   }
 
 

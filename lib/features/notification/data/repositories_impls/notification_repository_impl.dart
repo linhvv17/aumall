@@ -35,10 +35,10 @@ class NotificationRepositoryImpl extends NotificationBaseRepository {
     if (await networkInfo.isConnected) {
       try {
         final data = await notificationDatasource.getDetailNotification(idNotification);
-        print("NotificationRepositoryImpl getNotificationList() try ${data}");
+        print("NotificationRepositoryImpl getDetailNotification() try ${data}");
         return right(data);
       } catch (error) {
-        print("NotificationRepositoryImpl getNotificationList() catch ${error}");
+        print("NotificationRepositoryImpl getDetailNotification() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {

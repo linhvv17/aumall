@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "checkout": MessageLookupByLibrary.simpleMessage("Checkout"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "cityHint": MessageLookupByLibrary.simpleMessage("Chino Hills"),
+        "close": MessageLookupByLibrary.simpleMessage("Close"),
         "code": MessageLookupByLibrary.simpleMessage("Code"),
         "codeEmpty": MessageLookupByLibrary.simpleMessage("Code is required"),
         "codeLink": MessageLookupByLibrary.simpleMessage("Code is required"),
