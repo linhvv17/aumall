@@ -157,7 +157,7 @@ class ProductDetailDataModel {
     _data['brand'] = brand.toJson();
     _data['made_in'] = madeIn.toJson();
     _data['category'] = category.toJson();
-    _data['user'] = user.toJson();
+    _data['user'] = user!.toJson();
     _data['reviews'] = reviews.map((e) => e.toJson()).toList();
     return _data;
   }

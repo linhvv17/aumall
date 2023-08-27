@@ -190,6 +190,7 @@ class _HomeState extends State<HomeView> {
                                   productSimpleEntity:
                                       comingSoonProducts![index],
                                   index: index,
+                                  isFromAuction: false,
                                 ),
                               ));
                         },

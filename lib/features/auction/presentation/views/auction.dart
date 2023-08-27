@@ -137,6 +137,7 @@ class _AuctionViewState extends State<AuctionView> {
                                               productFavoriteEntity:
                                                   listAuction[index],
                                               isAuctionProduct: true,
+                                                  typeProduct: 1,
                                             ));
                                       },
                                     ),
@@ -219,7 +220,9 @@ class _AuctionViewState extends State<AuctionView> {
                                                 ProductItemAuMall(
                                                     productFavoriteEntity:
                                                         listAuction[index],
-                                                    isAuctionProduct: true));
+                                                    isAuctionProduct: true,
+                                                  typeProduct: 2,
+                                                ));
                                       },
                                     ),
                                   ))
@@ -285,6 +288,7 @@ class _AuctionViewState extends State<AuctionView> {
                                                               listAuction[
                                                                   index],
                                                           index: index,
+                                                              isFromAuction: true,
                                                         ),
                                                       ))
                                                   .then((value) => {
@@ -302,6 +306,7 @@ class _AuctionViewState extends State<AuctionView> {
                                               productFavoriteEntity:
                                                   listAuction[index],
                                               isAuctionProduct: true,
+                                                  typeProduct: 3,
                                             ));
                                       },
                                     ),

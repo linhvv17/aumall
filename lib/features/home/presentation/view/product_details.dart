@@ -403,7 +403,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 decoration: ShapeDecoration(
                                   image: DecorationImage(
                                     image: NetworkImage(productDetailData
-                                        .user.avatarUrl
+                                        .user!.avatarUrl
                                         .toString()),
                                     fit: BoxFit.cover,
                                   ),
@@ -419,7 +419,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    productDetailData.user.shopName.toString(),
+                                    productDetailData.user!.shopName.toString(),
                                     style: const TextStyle(
                                       color: Color(0xFF393F42),
                                       fontSize: 16,
@@ -429,7 +429,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   ),
                                   const SizedBox(height: 3),
                                   Text(
-                                    productDetailData.user.name.toString(),
+                                    productDetailData.user!.name.toString(),
                                     style: const TextStyle(
                                       color: Color(0xFF939393),
                                       fontSize: 12,

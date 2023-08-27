@@ -17,8 +17,9 @@ import '../bloc/favourite_bloc.dart';
 class ProductItemAuMall extends StatefulWidget {
   final ProductAuMallEntity productFavoriteEntity;
   bool? isAuctionProduct;
+  int? typeProduct;
   ProductItemAuMall(
-      {super.key, required this.productFavoriteEntity, this.isAuctionProduct});
+      {super.key, required this.productFavoriteEntity, this.isAuctionProduct, this.typeProduct});
 
   @override
   State<StatefulWidget> createState() => _ProductItemAuMallState();
@@ -181,7 +182,7 @@ class _ProductItemAuMallState extends State<ProductItemAuMall> {
                               width: kWidth(context) * 0.4,
                               height: 30,
                               decoration: ShapeDecoration(
-                                color: Colors.deepOrangeAccent,
+                                color:  (widget.typeProduct! == 1)? Colors.deepOrangeAccent:(widget.typeProduct! == 2)? Colors.blue: Colors.yellow ,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
@@ -189,18 +190,26 @@ class _ProductItemAuMallState extends State<ProductItemAuMall> {
                               child: Center(child: Text(S.current.auction)),
                             ),
                             onTap: () {
+                              //1: now
+                              (widget.typeProduct! == 1) ?
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ProductDetails(
                                       productSimpleEntity:
-                                          widget.productFavoriteEntity,
+                                      widget.productFavoriteEntity,
                                       index: 1,
                                       isFromAuction: widget.isAuctionProduct!
                                           ? true
                                           : false,
                                     ),
-                                  ));
+                                  )) :
+                              //2: coming
+                              (widget.typeProduct! == 2) ?
+                              showDialogCanNotAuction(2) :
+                              //3: finished
+                              showDialogCanNotAuction(3)
+                              ;
                             },
                           )
                         : Container()
@@ -212,5 +221,28 @@ class _ProductItemAuMallState extends State<ProductItemAuMall> {
         ),
       ),
     );
+  }
+
+
+  void showDialogCanNotAuction(int type) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(type == 2 ? 'Phiên đấu giá chưa diễn ra'
+            : 'Phiên đấu giá đã kết thúc'),
+            content:
+             Text(type == 2 ? 'Hãy quay lại khi phiên đấu giá bắt đầu'
+                 : 'Rất tiếc. Hãy tham khảo sản phẩm khác của chúng tôi'),
+            actions: [
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Đã hiểu')),
+            ],
+          );
+        });
   }
 }
