@@ -121,7 +121,7 @@ class _ProductItemState extends State<ProductItem>{
                         RatingBarIndicator(
                           itemSize: 25.0,
                           rating: widget.product.ratingNumber != null
-                              ? widget.product.ratingNumber!.toDouble()
+                              ? double.parse(widget.product.ratingNumber!)
                               : 0.0,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,

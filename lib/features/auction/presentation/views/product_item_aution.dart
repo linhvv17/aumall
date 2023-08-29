@@ -117,8 +117,7 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
                           itemSize: 25.0,
                           rating:
                               widget.productFavoriteEntity.ratingNumber != null
-                                  ? widget.productFavoriteEntity.ratingNumber!
-                                      .toDouble()
+                                  ? double.parse(widget.productFavoriteEntity.ratingNumber!)
                                   : 0.0,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,

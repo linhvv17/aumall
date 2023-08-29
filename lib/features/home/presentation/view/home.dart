@@ -55,6 +55,7 @@ class _HomeState extends State<HomeView> {
                     height: 100,
                   ),
                   const CircularProgressIndicator(),
+                  SizedBox(height: 10,),
                   Text(S.current.dataLoading)
                 ],
               ),

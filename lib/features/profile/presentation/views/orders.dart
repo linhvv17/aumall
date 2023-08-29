@@ -38,50 +38,52 @@ class OrdersView extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: <Widget>[
-            BlocBuilder<OrderBloc, OrderState>(
-              builder: (context, state) {
-                final bloc = BlocProvider.of<OrderBloc>(context);
-                if (state is AllOrdersLoaded) {
-                  return bloc.activeOrders.isEmpty
-                      ? LottieBuilder.asset('assets/images/empty.json')
-                      : ListView.builder(
-                          itemCount: bloc.activeOrders.length,
-                          itemBuilder: (context, index) =>
-                              OrderCard(index: index));
-                } else if (state is AllOrdersLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is AllOrdersError) {
-                  return Text(state.message);
-                } else {
-                  return const SizedBox();
-                }
-              },
-            ),
-            BlocBuilder<OrderBloc, OrderState>(
-              builder: (context, state) {
-                final bloc = BlocProvider.of<OrderBloc>(context);
-                if (state is AllOrdersLoaded) {
-                  return bloc.pastOrders.isEmpty
-                      ? LottieBuilder.asset('assets/images/empty.json')
-                      : ListView.builder(
-                          itemCount: bloc.pastOrders.length,
-                          itemBuilder: (context, index) =>
-                              OrderCardPastOrders(index: index));
-                } else if (state is AllOrdersLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is AllOrdersError) {
-                  return Text(state.message);
-                } else {
-                  return const SizedBox();
-                }
-              },
-            ),
+            Center(child: Text("Tính năng này đang phát triển")),
+            Center(child: Text("Tính năng này đang phát triển")),
+            // BlocBuilder<OrderBloc, OrderState>(
+            //   builder: (context, state) {
+            //     final bloc = BlocProvider.of<OrderBloc>(context);
+            //     if (state is AllOrdersLoaded) {
+            //       return bloc.activeOrders.isEmpty
+            //           ? LottieBuilder.asset('assets/images/empty.json')
+            //           : ListView.builder(
+            //               itemCount: bloc.activeOrders.length,
+            //               itemBuilder: (context, index) =>
+            //                   OrderCard(index: index));
+            //     } else if (state is AllOrdersLoading) {
+            //       return const Center(
+            //         child: CircularProgressIndicator(),
+            //       );
+            //     } else if (state is AllOrdersError) {
+            //       return Text(state.message);
+            //     } else {
+            //       return const SizedBox();
+            //     }
+            //   },
+            // ),
+            // BlocBuilder<OrderBloc, OrderState>(
+            //   builder: (context, state) {
+            //     final bloc = BlocProvider.of<OrderBloc>(context);
+            //     if (state is AllOrdersLoaded) {
+            //       return bloc.pastOrders.isEmpty
+            //           ? LottieBuilder.asset('assets/images/empty.json')
+            //           : ListView.builder(
+            //               itemCount: bloc.pastOrders.length,
+            //               itemBuilder: (context, index) =>
+            //                   OrderCardPastOrders(index: index));
+            //     } else if (state is AllOrdersLoading) {
+            //       return const Center(
+            //         child: CircularProgressIndicator(),
+            //       );
+            //     } else if (state is AllOrdersError) {
+            //       return Text(state.message);
+            //     } else {
+            //       return const SizedBox();
+            //     }
+            //   },
+            // ),
           ],
         ),
       ),

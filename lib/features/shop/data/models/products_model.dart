@@ -32,7 +32,7 @@ class ProductAuMallModel extends ProductAuMallEntity {
       description: json['description'] ?? "",
       price: json['price'] ?? "",
       priceStep: json['price_step'] ?? "0",
-      ratingNumber: json['rating_number'] ?? 0,
+      ratingNumber: json['rating_number'] ?? "0",
       categoryOfProductEntity:
           CategoryOfProductModel.fromJson(json['category']),
       reviewNumber: json['review_number'] ?? 0,

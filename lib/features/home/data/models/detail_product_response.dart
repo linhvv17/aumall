@@ -83,7 +83,7 @@ class ProductDetailDataModel {
   late final String price;
   late final String discount;
   late final int reviewNumber;
-  late final int ratingNumber;
+  late final String ratingNumber;
   late final DateTime createdAt;
   late final String updatedAt;
   late final String thumbnailUrl;
@@ -114,7 +114,7 @@ class ProductDetailDataModel {
     price = json['price'].toString();
     discount = json['discount'].toString() ?? ''; //
     reviewNumber = json['review_number'];
-    ratingNumber = json['rating_number'];
+    ratingNumber = json['rating_number'] ?? "0";
     createdAt = DateTime.parse(json['created_at']);
     updatedAt = json['updated_at'].toString();
     thumbnailUrl = json['thumbnail_url'].toString();
@@ -503,7 +503,7 @@ class RelatedProducts {
   late final String price;
   late final String discount;
   late final int reviewNumber;
-  late final int ratingNumber;
+  late final String ratingNumber;
   late final String createdAt;
   late final String thumbnailUrl;
   late final String videoLink;

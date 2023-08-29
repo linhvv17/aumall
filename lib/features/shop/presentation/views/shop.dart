@@ -58,6 +58,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const CircularProgressIndicator(),
+              SizedBox(height: 10,),
               Text(S.current.dataLoading)
             ],
           ),
@@ -125,13 +126,14 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                         (category) => BlocBuilder<ProductsBloc, ProductsState>(
                             builder: (context, state) {
                           if (state is ShopLoadingDataProducts) {
-                            return const Center(
+                            return  Center(
                                 child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                CircularProgressIndicator(),
-                                Text("Dang tai du lieu .....")
+                                const CircularProgressIndicator(),
+                                SizedBox(height: 10,),
+                                Text(S.current.dataLoading)
                               ],
                             ));
                           }

@@ -39,7 +39,7 @@ class ReviewCard extends StatelessWidget {
                   children: [
                     RatingBarIndicator(
                       itemSize: 20.0,
-                      rating: product.ratingNumber.toDouble(),
+                      rating: double.parse(product.ratingNumber),
                       itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,

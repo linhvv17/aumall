@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:aumall/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/routes.dart';
@@ -403,7 +404,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 decoration: ShapeDecoration(
                                   image: DecorationImage(
                                     image: NetworkImage(productDetailData
-                                        .user!.avatarUrl
+                                        .user.shop!.imageUrl
                                         .toString()),
                                     fit: BoxFit.cover,
                                   ),
@@ -441,17 +442,44 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                             ],
                           ),
-                          const SizedBox(width: 77),
+                          const SizedBox(width: 37),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20.0),
+                            child: InkWell(
+                                child: const Column(
+                                  children: [
+                                    Icon(
+                                        Icons.call,
+                                      size: 40,
+                                    ),
+                                    Text(
+                                      'Hotline',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 14,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onTap: () {
+                                  //show dialog confirm call
+
+                                  showPopUpConfirmCall(
+                                      productDetailData.user.shop!.contact!);
+                                }),
+                          ),
                           Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 32, vertical: 10),
                             decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                side: const BorderSide(
-                                    width: 0.50, color: Color(0xFFD9D9D9)),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                            ),
+                                shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                      width: 0.50, color: Color(0xFFD9D9D9)),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                color: Colors.deepOrangeAccent),
                             child: const Row(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -460,7 +488,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                 Text(
                                   'Follow',
                                   style: TextStyle(
-                                    color: Color(0xFF393F42),
+                                    color: Colors.black,
                                     fontSize: 14,
                                     fontFamily: 'Inter',
                                     fontWeight: FontWeight.w500,
@@ -667,6 +695,7 @@ class _ProductDetailsState extends State<ProductDetails>
                             height: 100,
                           ),
                           const CircularProgressIndicator(),
+                          SizedBox(height: 10,),
                           Text(S.current.dataLoading)
                         ],
                       ),
@@ -1029,6 +1058,32 @@ class _ProductDetailsState extends State<ProductDetails>
         ),
       ),
     );
+  }
+
+  void showPopUpConfirmCall(String phone) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Gọi vào số Hotline'),
+            content:
+                Text("Bạn có muốn gọi vào số Hotline ${phone} để nhận tư vấn!"),
+            actions: [
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Huỷ bỏ')),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  onPressed: () => {launchUrl(Uri.parse("tel://$phone"))},
+                  child: const Text(
+                    'Xác nhận',
+                  )),
+            ],
+          );
+        });
   }
 
   void showPopUpConfirmAuction(int productId, String price) {

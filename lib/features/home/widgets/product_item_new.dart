@@ -183,7 +183,7 @@ class _NewProductItemState extends State<NewProductItem> {
                       children: [
                         RatingBarIndicator(
                           itemSize: 25.0,
-                          rating: widget.product.ratingNumber!.toDouble(),
+                          rating: double.parse(widget.product.ratingNumber!),
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,

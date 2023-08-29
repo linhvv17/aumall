@@ -52,13 +52,14 @@ class _FavoriteViewState extends State<FavoriteView> {
           child: BlocBuilder<FavouriteBloc, FavouriteState>(
               builder: (context, state) {
             if (state is FavouriteDataLoading) {
-              return const Center(
+              return  Center(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(),
-                  Text("Dang tai du lieu .....")
+                  const CircularProgressIndicator(),
+                  SizedBox(height: 10,),
+                  Text(S.current.dataLoading)
                 ],
               ));
             } else if (state is FavouriteDataLoaded) {

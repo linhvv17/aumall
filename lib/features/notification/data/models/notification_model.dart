@@ -19,12 +19,12 @@ class NotificationModel extends NotificationEntity {
 
     return NotificationModel(
         id : json['id'],
-        title : json['title'],
-        thumbnail : json['thumbnail'],
-    description : json['description'],
+        title : json['title'].toString(),
+        thumbnail : json['thumbnail'].toString(),
+    description : json['description'].toString(),
     status : json['status'],
-    publishAt : json['publish_at'],
-    createdAt : json['created_at'],
+    publishAt : json['publish_at'].toString(),
+    createdAt : json['created_at'].toString(),
     createdAtFormat : json['created_at_format'] ?? "",
     isReaded : json['is_readed'] ?? true,
     );

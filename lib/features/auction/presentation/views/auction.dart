@@ -74,7 +74,8 @@ class _AuctionViewState extends State<AuctionView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const CircularProgressIndicator(),
-                      Text(S.current.loading)
+                      SizedBox(height: 10,),
+                      Text(S.current.dataLoading)
                     ],
                   ));
                 } else if (state is AuctionDataLoaded) {
@@ -159,7 +160,8 @@ class _AuctionViewState extends State<AuctionView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const CircularProgressIndicator(),
-                      Text(S.current.loading)
+                      SizedBox(height: 10,),
+                      Text(S.current.dataLoading)
                     ],
                   ));
                 } else if (state is AuctionDataLoaded) {
@@ -243,7 +245,8 @@ class _AuctionViewState extends State<AuctionView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const CircularProgressIndicator(),
-                      Text(S.current.loading)
+                      SizedBox(height: 10,),
+                      Text(S.current.dataLoading)
                     ],
                   ));
                 } else if (state is AuctionDataLoaded) {

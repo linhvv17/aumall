@@ -119,7 +119,7 @@ class ProductAuMallEntity extends Equatable {
   String? description;
   String? price;
   String? priceStep;
-  int? ratingNumber;
+  String? ratingNumber;
   int? reviewNumber;
   String? thumbnailUrl;
   bool? isFavorite;
@@ -167,7 +167,7 @@ class ProductSimpleEntity extends Equatable {
   bool? isFavorite;
   String? discount;
   int? reviewNumber;
-  int? ratingNumber;
+  String? ratingNumber;
   String? createdAt;
   String? thumbnailUrl;
   String? videoLink;
@@ -215,7 +215,7 @@ class ProductSimpleEntity extends Equatable {
     isFavorite = json['is_favorite'] ?? false;
     discount = json['discount'] ?? "";
     reviewNumber = json['review_number'] ?? 0;
-    ratingNumber = json['rating_number'] ?? 0;
+    ratingNumber = json['rating_number'] ?? "0";
     createdAt = json['created_at'] as String ?? "";
     thumbnailUrl = json['thumbnail_url'] ?? "";
     videoLink = json['video_link'] ?? "";
