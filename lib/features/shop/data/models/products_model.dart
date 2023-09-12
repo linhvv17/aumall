@@ -22,6 +22,7 @@ class ProductAuMallModel extends ProductAuMallEntity {
     required super.thumbnailUrl,
     required super.isFavorite,
     required super.categoryOfProductEntity,
+    required super.userEntity,
     required super.reviewNumber,
   });
 
@@ -38,6 +39,7 @@ class ProductAuMallModel extends ProductAuMallEntity {
       reviewNumber: json['review_number'] ?? 0,
       thumbnailUrl: json['thumbnail_url'] ?? "",
       isFavorite: json['is_favorite'] ?? false,
+      userEntity: json['user'] != null ? UserModel.fromJson(json['user']) : null,
     );
   }
 }
@@ -146,4 +148,40 @@ class CategoryOfProductModel extends CategoryOfProductEntity {
     data['name'] = name;
     return data;
   }
+}
+
+class ShopModel extends ShopEntity{
+  const ShopModel(super.id, super.userId, super.name, super.address, super.contact, super.description, super.banner, super.image, super.note, super.status, super.createdAt, super.updatedAt, super.bannerUrl, super.imageUrl);
+
+  factory ShopModel.fromJson(Map<String, dynamic> json) =>
+      ShopModel(
+        json['id'],
+        json['user_id'],
+        json['name'].toString(),
+        json['address'].toString(),
+        json['contact'].toString(),
+        json['description'].toString(),
+        json['banner'].toString(),
+        json['image'].toString(),
+        json['note'].toString(),
+        json['status'],
+        json['created_at'].toString(),
+        json['updated_at'].toString(),
+        json['banner_url'].toString(),
+        json['image_url'].toString(),
+      );
+}
+
+class UserModel extends UserShopEntity {
+  const UserModel (super.id, super.name, super.fullName, super.storeName, super.shopName, super.avatarUrl, super.shop);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      UserModel(
+          json['id'],
+          json['name'].toString(),
+          json['full_name'].toString(),
+          json['store_name'].toString(),
+          json['shop_name'].toString(),
+          json['avatar_url'].toString(),
+          ShopModel.fromJson(json['shop']),
+      );
 }

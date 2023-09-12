@@ -55,12 +55,13 @@ class _HomeState extends State<HomeView> {
                     height: 100,
                   ),
                   const CircularProgressIndicator(),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Text(S.current.dataLoading)
                 ],
               ),
             );
-          } else if (state is HomeStateGetDataSuccess) {
+          }
+          else if (state is HomeStateGetDataSuccess) {
             final newProducts =
                 state.listProductHomeEntity!.listProductHomeData.newProducts;
 
@@ -129,11 +130,8 @@ class _HomeState extends State<HomeView> {
                                 ),
                               ));
                         },
-                        child: Hero(
-                          tag: '$index',
-                          child: NewProductItem(
-                            product: newProducts![index],
-                          ),
+                        child: NewProductItem(
+                          product: newProducts![index],
                         ),
                       );
                     },
@@ -195,11 +193,8 @@ class _HomeState extends State<HomeView> {
                                 ),
                               ));
                         },
-                        child: Hero(
-                          tag: '$index',
-                          child: NewProductItem(
-                            product: newProducts![index],
-                          ),
+                        child: NewProductItem(
+                          product: newProducts![index],
                         ),
                       );
                     },
@@ -239,7 +234,7 @@ class _HomeState extends State<HomeView> {
                 ),
               ),
               SizedBox(
-                  height: kHeight(context) / 3,
+                  height: kHeight(context) / 2.5,
                   child: GridView.builder(
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.zero,
@@ -260,11 +255,8 @@ class _HomeState extends State<HomeView> {
                                 ),
                               ));
                         },
-                        child: Hero(
-                          tag: '$index',
-                          child: NewProductItem(
-                            product: newProducts![index],
-                          ),
+                        child: NewProductItem(
+                          product: newProducts![index],
                         ),
                       );
                     },

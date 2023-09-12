@@ -13,6 +13,7 @@ import '../../domain/entities/products_entity.dart';
 import '../bloc/categories/categories_bloc.dart';
 import '../bloc/products_bloc.dart';
 import '../widgets/filter.dart';
+import '../widgets/item_shop_and_product.dart';
 import '../widgets/search.dart';
 import '../widgets/sort_by.dart';
 
@@ -58,7 +59,9 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const CircularProgressIndicator(),
-              SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Text(S.current.dataLoading)
             ],
           ),
@@ -73,17 +76,6 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
         return DefaultTabController(
             length: listCategory.length,
             child: Scaffold(
-                // appBar: PreferredSize(
-                //     preferredSize: const Size.fromHeight(50),
-                //     child: SafeArea(
-                //       child: AppBar(
-                //         title: Text(
-                //           S.current.shop,
-                //           style: Theme.of(context).textTheme.headlineSmall,
-                //         ),
-                //         automaticallyImplyLeading: false,
-                //       ),
-                //     )),
                 appBar: AppBar(
                     title: Text(
                       S.current.shop,
@@ -126,13 +118,15 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                         (category) => BlocBuilder<ProductsBloc, ProductsState>(
                             builder: (context, state) {
                           if (state is ShopLoadingDataProducts) {
-                            return  Center(
+                            return Center(
                                 child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const CircularProgressIndicator(),
-                                SizedBox(height: 10,),
+                                const SizedBox(
+                                  height: 10,
+                                ),
                                 Text(S.current.dataLoading)
                               ],
                             ));
@@ -148,75 +142,102 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                               child: Column(
                                 children: [
                                   Expanded(
-                                      child:
-                                          listProductShopEntity
-                                                  .listProductAuMall.isEmpty
-                                              ? Center(
-                                                  child: Text(
-                                                    S.current.noProducts,
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .titleMedium,
-                                                  ),
-                                                )
-                                              : RefreshIndicator(
-                                                  onRefresh: () async {
-                                                    BlocProvider.of<
-                                                                ProductsBloc>(
-                                                            context)
-                                                        .add(
-                                                            GetListProductOfCategory(
-                                                                category.id));
-                                                  },
-                                                  child: GridView.builder(
-                                                    physics:
-                                                        const AlwaysScrollableScrollPhysics(
-                                                            parent:
-                                                                BouncingScrollPhysics()),
-                                                    itemCount:
-                                                        listProductShopEntity
-                                                            .listProductAuMall
-                                                            .length,
-                                                    gridDelegate:
-                                                        const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                                            crossAxisCount: 2,
-                                                            height: 330),
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      return InkWell(
-                                                          onTap: () {
-                                                            Navigator.push(
-                                                                    context,
-                                                                    MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              ProductDetails(
-                                                                        productSimpleEntity:
-                                                                            listProductShopEntity.listProductAuMall[index],
-                                                                        index:
-                                                                            index,
-                                                                                isFromAuction: false,
-                                                                      ),
-                                                                    ))
-                                                                .then(
-                                                                    (value) => {
-                                                                          BlocProvider.of<ProductsBloc>(context)
-                                                                              .add(GetListProductOfCategory(category.id))
-                                                                        });
-                                                          },
-                                                          child:
-                                                              // Container()
-                                                              ProductItemAuMall(
-                                                            productFavoriteEntity:
-                                                                listProductShopEntity
-                                                                        .listProductAuMall[
-                                                                    index],
-                                                            isAuctionProduct:
-                                                                false,
-                                                          ));
-                                                    },
-                                                  ),
-                                                ))
+                                      child: listProductShopEntity
+                                              .listProductAuMall.isEmpty
+                                          ? Center(
+                                              child: Text(
+                                                S.current.noProducts,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium,
+                                              ),
+                                            )
+                                          : RefreshIndicator(
+                                              onRefresh: () async {
+                                              BlocProvider.of<ProductsBloc>(
+                                                      context)
+                                                  .add(GetListProductOfCategory(
+                                                      category.id));
+                                            }, child:
+                                                  // ItemShopAndProduct(
+                                                  // shop: listProductShopEntity.listProductAuMall[0].userEntity!.shop!!,
+                                                  // productAuMallEntities: listProductShopEntity.listProductAuMall,
+                                                  //
+                                                  // )
+                                                  ListView.builder(
+                                                    itemCount: listProductShopEntity
+                                                        .listProductAuMall.length,
+                                                      itemBuilder:
+                                                      (context, index) {
+
+                                              return ItemShopAndProduct(
+                                                shop: listProductShopEntity
+                                                    .listProductAuMall[index]
+                                                    .userEntity!
+                                                    .shop!,
+                                                productAuMallEntities:
+                                                    listProductShopEntity
+                                                        .listProductAuMall,
+                                              );
+                                            })
+
+                                              // GridView.builder(
+                                              //   physics:
+                                              //       const AlwaysScrollableScrollPhysics(
+                                              //           parent:
+                                              //               BouncingScrollPhysics()),
+                                              //   itemCount:
+                                              //       listProductShopEntity
+                                              //           .listProductAuMall
+                                              //           .length,
+                                              //   gridDelegate:
+                                              //       const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                              //           crossAxisCount: 1,
+                                              //           height: 330),
+                                              //   itemBuilder:
+                                              //       (context, index) {
+                                              //     return
+                                              //       ItemShopAndProduct(
+                                              //         shop: listProductShopEntity.listProductAuMall[index].userEntity!.shop!!,
+                                              //         productAuMallEntities: listProductShopEntity.listProductAuMall,
+                                              //
+                                              //       );
+                                              //     Text(listProductShopEntity.listProductAuMall[index].userEntity!.shop!.name!);
+                                              //       InkWell(
+                                              //         onTap: () {
+                                              //           Navigator.push(
+                                              //                   context,
+                                              //                   MaterialPageRoute(
+                                              //                     builder:
+                                              //                         (context) =>
+                                              //                             ProductDetails(
+                                              //                       productSimpleEntity:
+                                              //                           listProductShopEntity.listProductAuMall[index],
+                                              //                       index:
+                                              //                           index,
+                                              //                               isFromAuction: false,
+                                              //                     ),
+                                              //                   ))
+                                              //               .then(
+                                              //                   (value) => {
+                                              //                         BlocProvider.of<ProductsBloc>(context)
+                                              //                             .add(GetListProductOfCategory(category.id))
+                                              //                       });
+                                              //         },
+                                              //         child:
+                                              //             // Container()
+                                              //             ProductItemAuMall(
+                                              //           productFavoriteEntity:
+                                              //               listProductShopEntity
+                                              //                       .listProductAuMall[
+                                              //                   index],
+                                              //           isAuctionProduct:
+                                              //               false,
+                                              //         ));
+                                              //   },
+                                              // ),
+
+                                              ))
                                 ],
                               ),
                             );
