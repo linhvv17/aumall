@@ -132,6 +132,7 @@ class _HomeState extends State<HomeView> {
                         },
                         child: NewProductItem(
                           product: newProducts![index],
+                          typeProduct: 1,
                         ),
                       );
                     },
@@ -194,7 +195,8 @@ class _HomeState extends State<HomeView> {
                               ));
                         },
                         child: NewProductItem(
-                          product: newProducts![index],
+                          product: comingSoonProducts![index],
+                          typeProduct: 2,
                         ),
                       );
                     },
@@ -256,7 +258,8 @@ class _HomeState extends State<HomeView> {
                               ));
                         },
                         child: NewProductItem(
-                          product: newProducts![index],
+                          product: suggestionProducts![index],
+                          typeProduct: 3,
                         ),
                       );
                     },

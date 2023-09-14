@@ -146,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty": MessageLookupByLibrary.simpleMessage("Name is required"),
         "nameError": MessageLookupByLibrary.simpleMessage(
             "Name should have more than 3 characters"),
+        "newComingSoon": MessageLookupByLibrary.simpleMessage("Coming Soon"),
         "newText": MessageLookupByLibrary.simpleMessage("New"),
         "newpassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "newpasswordEmpty":
@@ -261,6 +262,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success": MessageLookupByLibrary.simpleMessage("success"),
         "successMsg": MessageLookupByLibrary.simpleMessage(
             "Your order will be delivered soon.\nThank you for choosing our app!"),
+        "suggestText": MessageLookupByLibrary.simpleMessage("Suggest"),
         "summery": MessageLookupByLibrary.simpleMessage("Summary:"),
         "timeoutError": MessageLookupByLibrary.simpleMessage("timeout_error"),
         "todaySuggestProducts":

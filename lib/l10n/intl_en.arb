@@ -29,6 +29,8 @@
   "comingSoonProducts" : "Products coming soon",
   "todaySuggestProducts" : "Today's Suggestions",
   "newText" : "New",
+  "newComingSoon" : "Coming Soon",
+    "suggestText" : "Suggest",
   "oldpassword" : "Old Password",
   "newpassword" : "New Password",
   "repeatpassword" : "Confirm New Password",

@@ -76,6 +76,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
         return DefaultTabController(
             length: listCategory.length,
             child: Scaffold(
+              backgroundColor: Colors.grey.shade200,
                 appBar: AppBar(
                     title: Text(
                       S.current.shop,
@@ -154,32 +155,36 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                             )
                                           : RefreshIndicator(
                                               onRefresh: () async {
-                                              BlocProvider.of<ProductsBloc>(
-                                                      context)
-                                                  .add(GetListProductOfCategory(
-                                                      category.id));
-                                            }, child:
+                                                BlocProvider.of<ProductsBloc>(
+                                                        context)
+                                                    .add(
+                                                        GetListProductOfCategory(
+                                                            category.id));
+                                              },
+                                              child:
                                                   // ItemShopAndProduct(
                                                   // shop: listProductShopEntity.listProductAuMall[0].userEntity!.shop!!,
                                                   // productAuMallEntities: listProductShopEntity.listProductAuMall,
                                                   //
                                                   // )
                                                   ListView.builder(
-                                                    itemCount: listProductShopEntity
-                                                        .listProductAuMall.length,
+                                                      itemCount:
+                                                          listProductShopEntity
+                                                              .listProductAuMall
+                                                              .length,
                                                       itemBuilder:
-                                                      (context, index) {
-
-                                              return ItemShopAndProduct(
-                                                shop: listProductShopEntity
-                                                    .listProductAuMall[index]
-                                                    .userEntity!
-                                                    .shop!,
-                                                productAuMallEntities:
-                                                    listProductShopEntity
-                                                        .listProductAuMall,
-                                              );
-                                            })
+                                                          (context, index) {
+                                                        return ItemShopAndProduct(
+                                                          shop: listProductShopEntity
+                                                              .listProductAuMall[
+                                                                  index]
+                                                              .userEntity!
+                                                              .shop!,
+                                                          productAuMallEntities:
+                                                              listProductShopEntity
+                                                                  .listProductAuMall,
+                                                        );
+                                                      })
 
                                               // GridView.builder(
                                               //   physics:

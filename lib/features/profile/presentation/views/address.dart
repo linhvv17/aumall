@@ -44,206 +44,208 @@ class _AddressViewState extends State<AddressView> {
               Navigator.of(context).pop();
             }
           },
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //Name
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                  child: Text(
-                    S.of(context).fullName,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade500),
-                  ),
-                ),
-                TextField(
-                  controller: tfName,
-                  decoration: InputDecoration(
-                      hintText: S.current.fullNameHint,
-                      hintStyle: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey.shade500),
-                      border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide(color: Colors.white, width: 1.5),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white),
-                ),
-
-                //Mobile
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                  child: Text(
-                    S.of(context).phone,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade500),
-                  ),
-                ),
-                TextField(
-                  controller: tfMobile,
-                  decoration: InputDecoration(
-                      hintText: S.current.phone,
-                      hintStyle: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey.shade500),
-                      border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide(color: Colors.white, width: 1.5),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white),
-                ),
-
-                //Address
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                  child: Text(
-                    S.of(context).address,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade500),
-                  ),
-                ),
-                TextField(
-                  controller: tfAddress,
-                  decoration: InputDecoration(
-                      hintText: S.current.addressHint,
-                      hintStyle: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey.shade500),
-                      border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide(color: Colors.white, width: 1.5),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white),
-                ),
-
-                //Province
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                  child: Text(
-                    S.of(context).province,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade500),
-                  ),
-                ),
-                TextField(
-                  controller: tfProvince,
-                  decoration: InputDecoration(
-                      hintText: S.current.provinceHint,
-                      hintStyle: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey.shade500),
-                      border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide(color: Colors.white, width: 1.5),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white),
-                ),
-
-                //City
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                  child: Text(
-                    S.of(context).city,
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade500),
-                  ),
-                ),
-                TextField(
-                  controller: tfCity,
-                  decoration: InputDecoration(
-                      hintText: S.current.cityHint,
-                      hintStyle: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey.shade500),
-                      border: const OutlineInputBorder(),
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        borderSide: BorderSide(color: Colors.white, width: 1.5),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white),
-                ),
-
-                Row(
-                  children: [
-                    Checkbox(
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      checkColor: Colors.white,
-                      fillColor:
-                          MaterialStateProperty.all(Colors.deepOrangeAccent),
-                      value: isChecked,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          isChecked = value!;
-                        });
-                      },
-                    ),
-                    const Text(
-                      'Đặt làm địa chỉ giao hàng mặc định',
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Name
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                    child: Text(
+                      S.of(context).fullName,
+                      textAlign: TextAlign.start,
                       style: TextStyle(
-                        color: Color(0xFF222222),
-                        fontSize: 14,
-                        fontFamily: 'Metropolis',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    )
-                  ],
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.only(top: 28.0),
-                  child: SizedBox(
-                    width: kWidth(context),
-                    height: kHeight(context) / 14,
-                    child: FloatingActionButton.extended(
-                        backgroundColor: ColorManager.orangeLight,
-                        elevation: 8,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40)),
-                        onPressed: () {
-                          BlocProvider.of<ProfileBloc>(context).add(AddAddress(
-                            tfName.value.text,
-                            tfMobile.value.text,
-                            "${tfAddress.value.text} - ${tfProvince.value.text} - ${tfCity.value.text}",
-                            isChecked,
-                          ));
-                        },
-                        label: Text(
-                          S.current.saveAddress.toUpperCase(),
-                        )),
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey.shade500),
+                    ),
                   ),
-                ),
-              ],
+                  TextField(
+                    controller: tfName,
+                    decoration: InputDecoration(
+                        hintText: S.current.fullNameHint,
+                        hintStyle: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade500),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.white, width: 1.5),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white),
+                  ),
+
+                  //Mobile
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                    child: Text(
+                      S.of(context).phone,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey.shade500),
+                    ),
+                  ),
+                  TextField(
+                    controller: tfMobile,
+                    decoration: InputDecoration(
+                        hintText: S.current.phone,
+                        hintStyle: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade500),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.white, width: 1.5),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white),
+                  ),
+
+                  //Address
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                    child: Text(
+                      S.of(context).address,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey.shade500),
+                    ),
+                  ),
+                  TextField(
+                    controller: tfAddress,
+                    decoration: InputDecoration(
+                        hintText: S.current.addressHint,
+                        hintStyle: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade500),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.white, width: 1.5),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white),
+                  ),
+
+                  //Province
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                    child: Text(
+                      S.of(context).province,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey.shade500),
+                    ),
+                  ),
+                  TextField(
+                    controller: tfProvince,
+                    decoration: InputDecoration(
+                        hintText: S.current.provinceHint,
+                        hintStyle: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade500),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.white, width: 1.5),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white),
+                  ),
+
+                  //City
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                    child: Text(
+                      S.of(context).city,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey.shade500),
+                    ),
+                  ),
+                  TextField(
+                    controller: tfCity,
+                    decoration: InputDecoration(
+                        hintText: S.current.cityHint,
+                        hintStyle: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade500),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Colors.white, width: 1.5),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white),
+                  ),
+
+                  Row(
+                    children: [
+                      Checkbox(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        checkColor: Colors.white,
+                        fillColor:
+                            MaterialStateProperty.all(Colors.deepOrangeAccent),
+                        value: isChecked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isChecked = value!;
+                          });
+                        },
+                      ),
+                      const Text(
+                        'Đặt làm địa chỉ giao hàng mặc định',
+                        style: TextStyle(
+                          color: Color(0xFF222222),
+                          fontSize: 14,
+                          fontFamily: 'Metropolis',
+                          fontWeight: FontWeight.w400,
+                        ),
+                      )
+                    ],
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 28.0),
+                    child: SizedBox(
+                      width: kWidth(context),
+                      height: kHeight(context) / 14,
+                      child: FloatingActionButton.extended(
+                          backgroundColor: ColorManager.orangeLight,
+                          elevation: 8,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40)),
+                          onPressed: () {
+                            BlocProvider.of<ProfileBloc>(context).add(AddAddress(
+                              tfName.value.text,
+                              tfMobile.value.text,
+                              "${tfAddress.value.text} - ${tfProvince.value.text} - ${tfCity.value.text}",
+                              isChecked,
+                            ));
+                          },
+                          label: Text(
+                            S.current.saveAddress.toUpperCase(),
+                          )),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ));

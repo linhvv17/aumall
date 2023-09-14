@@ -310,6 +310,26 @@ class S {
     );
   }
 
+  /// `Coming Soon`
+  String get newComingSoon {
+    return Intl.message(
+      'Coming Soon',
+      name: 'newComingSoon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suggest`
+  String get suggestText {
+    return Intl.message(
+      'Suggest',
+      name: 'suggestText',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Old Password`
   String get oldpassword {
     return Intl.message(

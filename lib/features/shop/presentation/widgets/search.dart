@@ -46,6 +46,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     icon: const Icon(Icons.search)),
                                 hintText: 'Search',
                                 border: InputBorder.none),
+                            onEditingComplete: (){
+                              bloc.add(SearchProduct(
+                                  searchController.text,
+                                  bloc.currentCategoryId.toString()));
+                            },
                           ),
                         )),
               IconButton(

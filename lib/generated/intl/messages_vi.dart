@@ -147,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty": MessageLookupByLibrary.simpleMessage("Tên được yêu cầu"),
         "nameError": MessageLookupByLibrary.simpleMessage(
             "Tên phải có nhiều hơn 3 ký tự"),
+        "newComingSoon": MessageLookupByLibrary.simpleMessage("Sắp về"),
         "newText": MessageLookupByLibrary.simpleMessage("Mới"),
         "newpassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
         "newpasswordEmpty":
@@ -264,6 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "success": MessageLookupByLibrary.simpleMessage("success"),
         "successMsg": MessageLookupByLibrary.simpleMessage(
             "Đơn hàng của bạn sẽ sớm được giao.\nCảm ơn bạn đã chọn ứng dụng của chúng tôi!"),
+        "suggestText": MessageLookupByLibrary.simpleMessage("Gợi ý"),
         "summery": MessageLookupByLibrary.simpleMessage("Tổng:"),
         "timeoutError": MessageLookupByLibrary.simpleMessage("Lỗi time out"),
         "todaySuggestProducts":

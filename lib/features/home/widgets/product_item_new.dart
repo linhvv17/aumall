@@ -16,9 +16,11 @@ import '../../shop/data/models/products_model.dart';
 import '../../shop/domain/entities/products_entity.dart';
 
 class NewProductItem extends StatefulWidget {
-  const NewProductItem({super.key, required this.product});
+  const NewProductItem(
+      {super.key, required this.product, required this.typeProduct});
 
   final ProductAuMallModel product;
+  final int typeProduct;
 
   @override
   State<StatefulWidget> createState() => _NewProductItemState();
@@ -67,7 +69,8 @@ class _NewProductItemState extends State<NewProductItem> {
                         if (state is AddToFavouriteState) {
                           showSnackbar(S.current.addfav, context, Colors.green);
                         } else if (state is RemoveFromFavoriteState) {
-                          showSnackbar(S.current.deletefav, context, Colors.green);
+                          showSnackbar(
+                              S.current.deletefav, context, Colors.green);
                         }
                       },
                       builder: (context, state) {
@@ -78,32 +81,36 @@ class _NewProductItemState extends State<NewProductItem> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                                BlocProvider.of<FavouriteBloc>(context)
-                                    .add(widget.product.isFavorite!
-                                    ? RemoveFavoriteProduct(widget.product.id!)
-                                    : AddToFavorite(
-                                  product: widget.product,
-                                  isFavourite: widget.product.isFavorite!,
-                                ));
+                                BlocProvider.of<FavouriteBloc>(context).add(
+                                    widget.product.isFavorite!
+                                        ? RemoveFavoriteProduct(
+                                            widget.product.id!)
+                                        : AddToFavorite(
+                                            product: widget.product,
+                                            isFavourite:
+                                                widget.product.isFavorite!,
+                                          ));
 
                                 setState(() {
-                                  print('setState bf ${widget.product.isFavorite}');
+                                  print(
+                                      'setState bf ${widget.product.isFavorite}');
                                   widget.product.isFavorite =
-                                  !widget.product.isFavorite!;
-                                  print('setState at ${widget.product.isFavorite}');
+                                      !widget.product.isFavorite!;
+                                  print(
+                                      'setState at ${widget.product.isFavorite}');
                                 });
                               },
                               child: widget.product.isFavorite!
                                   ? const Icon(
-                                Icons.favorite,
-                                size: 20.0,
-                                color: ColorManager.orangeLight,
-                              )
+                                      Icons.favorite,
+                                      size: 20.0,
+                                      color: ColorManager.orangeLight,
+                                    )
                                   : const Icon(
-                                Icons.favorite_outline,
-                                size: 20.0,
-                                color: ColorManager.grey,
-                              ),
+                                      Icons.favorite_outline,
+                                      size: 20.0,
+                                      color: ColorManager.grey,
+                                    ),
                             ),
                           ),
                         );
@@ -126,16 +133,24 @@ class _NewProductItemState extends State<NewProductItem> {
                     ),
                   ),
                   Container(
-                    width: 50,
+                    constraints: const BoxConstraints(
+                        minWidth: 50),
                     height: 20,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(5),
                       color: ColorManager.dark,
                     ),
                     child: Center(
-                      child: Text(
-                        S.current.newText.toUpperCase(),
-                        style: const TextStyle(color: ColorManager.white),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: Text(
+                          widget.typeProduct == 1
+                              ? S.current.newText.toUpperCase()
+                              : widget.typeProduct == 2
+                                  ? S.current.newComingSoon.toUpperCase()
+                                  : S.current.suggestText.toUpperCase(),
+                          style: const TextStyle(color: ColorManager.white),
+                        ),
                       ),
                     ),
                   ),
