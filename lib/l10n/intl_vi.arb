@@ -69,7 +69,7 @@
   "submit" : "Gửi",
   "savepass" : "Lưu mật khẩu",
   "rate" : "Xếp hạng",
-  "myProfile" : "Hồ sơ của tôi",
+  "myProfile" : "Tài khoản",
   "myOrders" : "Đơn hàng của tôi",
   "myAddresses" : "Địa chỉ giao hàng của tôi",
   "shippingAddresses" : "Địa chỉ giao hàng",
@@ -114,7 +114,7 @@
   "register" : "Đăng ký",
   "donthaveAccount" : "Chưa có tài khoản?",
   "haveAccount" : "Đã có tài khoản?",
-  "home" : "Home",
+  "home" : "Cho bạn",
   "phone" : "Điện thoại",
   "enterphone" : "Nhập số điện thoại",
   "deliveryAddress" : "Địa chỉ giao hàng",
@@ -146,6 +146,8 @@
   "delivery" : "Vận chuyển:",
   "summery" : "Tổng:",
   "submitOrder" : "Xác nhận đơn hàng",
+  "settings" : "Cài đặt",
+  "settingsSub" : "Cài đặt ứng dụng",
   "changePassword" : "Đổi mật khẩu",
   "changePasswordsub" : "Thay đổi mật khẩu",
   "edit" : "Chỉnh sửa ảnh đại diện, tên, email",
@@ -200,5 +202,6 @@
   "notification" : "Thông báo",
   "noNotification" : "Không có thông báo nào!",
   "close" : "Đóng",
+  "defaultAddress" : "Sử dụng địa chỉ này là mặc định",
   "noUserAuction" : "Chưa có ai tham gia đấu giá!"
 }

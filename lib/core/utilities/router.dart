@@ -2,6 +2,7 @@ import 'package:aumall/features/auction/presentation/views/auction.dart';
 import 'package:aumall/features/cart/presentation/views/cart.dart';
 import 'package:aumall/features/profile/presentation/views/address.dart';
 import 'package:aumall/features/profile/presentation/views/address_list.dart';
+import 'package:aumall/features/profile/presentation/views/settings.dart';
 import 'package:aumall/features/shop/presentation/views/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:aumall/features/cart/presentation/views/checkout.dart';
@@ -18,6 +19,7 @@ import '../../features/home/presentation/view/home.dart';
 import '../../features/home/presentation/view/layout.dart';
 import '../../features/home/presentation/view/product_details.dart';
 import '../../features/login/presentation/view/login.dart';
+import '../../features/notification/presentation/views/notification.dart';
 import '../../features/profile/domain/entities/profile_entity.dart';
 import '../../features/profile/presentation/views/updatepass.dart';
 import '../../features/profile/presentation/views/updateprofile.dart';
@@ -76,6 +78,12 @@ Route<dynamic> onGenerate(RouteSettings settings) {
     case AppRoutes.updatePassword:
       return MaterialPageRoute(
           builder: (context) => const UpdatePasswordView());
+    case AppRoutes.settings:
+      return MaterialPageRoute(
+          builder: (context) => const SettingsView());
+    case AppRoutes.notifications:
+      return MaterialPageRoute(
+          builder: (context) => const NotificationView());
     case AppRoutes.mapview:
       return MaterialPageRoute(builder: (context) => const MapView());
     case AppRoutes.payment:

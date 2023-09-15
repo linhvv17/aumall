@@ -82,12 +82,12 @@ class _LayoutPageState extends State<LayoutPage> {
                   BlocProvider.of<BottomNavigationBarBloc>(context)
                       .add(LoadFavorite());
                   break;
+                // case 4:
+                //   BlocProvider.of<BottomNavigationBarBloc>(context)
+                //       .add(LoadNotification());
+                //   BlocProvider.of<NotificationBloc>(context).add(GetListNotification());
+                //   break;
                 case 4:
-                  BlocProvider.of<BottomNavigationBarBloc>(context)
-                      .add(LoadNotification());
-                  BlocProvider.of<NotificationBloc>(context).add(GetListNotification());
-                  break;
-                case 5:
                   BlocProvider.of<BottomNavigationBarBloc>(context)
                       .add(LoadProfile());
                   BlocProvider.of<ProfileBloc>(context).add(GetProfile());
@@ -103,9 +103,9 @@ class _LayoutPageState extends State<LayoutPage> {
                   label: S.current.home,
                   activeIcon: const Icon(Icons.home)),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.shopping_cart_outlined),
+                  icon: const Icon(Icons.shopping_bag_outlined),
                   label: S.current.shop,
-                  activeIcon: const Icon(Icons.shopping_cart)),
+                  activeIcon: const Icon(Icons.shopping_bag_rounded)),
               BottomNavigationBarItem(
                   icon: const Icon(Icons.price_change_outlined),
                   label: S.current.auction,
@@ -119,10 +119,10 @@ class _LayoutPageState extends State<LayoutPage> {
                 label: S.current.favorite,
                 activeIcon: const Icon(Icons.favorite),
               ),
-              BottomNavigationBarItem(
-                  icon: const Icon(Icons.notifications_active_outlined),
-                  label: S.current.notification,
-                  activeIcon: const Icon(Icons.notifications_active)),
+              // BottomNavigationBarItem(
+              //     icon: const Icon(Icons.notifications_active_outlined),
+              //     label: S.current.notification,
+              //     activeIcon: const Icon(Icons.notifications_active)),
               BottomNavigationBarItem(
                   icon: const Icon(Icons.person_outline),
                   label: S.current.myProfile,
@@ -138,9 +138,10 @@ class _LayoutPageState extends State<LayoutPage> {
               } else if (state is AuctionSelectState) {
                 return const AuctionView();
               }
-              else if (state is NotifiState) {
-                return const NotificationView();
-              } else if (state is FavoriteState) {
+              // else if (state is NotifiState) {
+              //   return const NotificationView();
+              // }
+              else if (state is FavoriteState) {
                 return const FavoriteView();
               } else if (state is ProfilePageState) {
                 return const ProfileView();

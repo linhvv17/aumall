@@ -70,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dataLoading":
             MessageLookupByLibrary.simpleMessage("Đang tải dữ liệu ..."),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
+        "defaultAddress": MessageLookupByLibrary.simpleMessage(
+            "Sử dụng địa chỉ này là mặc định"),
         "defaultError": MessageLookupByLibrary.simpleMessage(
             "Lỗi trong quá trình tải dữ liêụ"),
         "deletefav": MessageLookupByLibrary.simpleMessage(
@@ -122,7 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mua sắm những sản phẩm thú vị nhất hiện có trên cửa hàng\nhãy để nó là áo phông, Đồ điện tử và hơn thế nữa!"),
         "headerTitle": MessageLookupByLibrary.simpleMessage(
             "Tập luyện\nMột phong cách mới!"),
-        "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "home": MessageLookupByLibrary.simpleMessage("Cho bạn"),
         "internalServerError":
             MessageLookupByLibrary.simpleMessage("Lỗi server"),
         "invalidCode":
@@ -141,7 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "myAddresses":
             MessageLookupByLibrary.simpleMessage("Địa chỉ giao hàng của tôi"),
         "myOrders": MessageLookupByLibrary.simpleMessage("Đơn hàng của tôi"),
-        "myProfile": MessageLookupByLibrary.simpleMessage("Hồ sơ của tôi"),
+        "myProfile": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "mybag": MessageLookupByLibrary.simpleMessage("Giỏ hàng của tôi"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("Tên được yêu cầu"),
@@ -249,6 +251,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendReview": MessageLookupByLibrary.simpleMessage("Gửi đánh giá"),
         "sendreviewsuccess":
             MessageLookupByLibrary.simpleMessage("Gửi đánh giá thành công"),
+        "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+        "settingsSub": MessageLookupByLibrary.simpleMessage("Cài đặt ứng dụng"),
         "shippingAddresses":
             MessageLookupByLibrary.simpleMessage("Địa chỉ giao hàng"),
         "shippingAddressesDescription":

@@ -69,6 +69,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Current Location"),
         "dataLoading": MessageLookupByLibrary.simpleMessage("Data loading ..."),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of birth"),
+        "defaultAddress": MessageLookupByLibrary.simpleMessage(
+            "Use as the default shipping address"),
         "defaultError":
             MessageLookupByLibrary.simpleMessage("Error In Fetching Data"),
         "deletefav": MessageLookupByLibrary.simpleMessage(
@@ -247,6 +249,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendReview": MessageLookupByLibrary.simpleMessage("Send Review"),
         "sendreviewsuccess":
             MessageLookupByLibrary.simpleMessage("Review sent Successfully"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "settingsSub": MessageLookupByLibrary.simpleMessage("Settings"),
         "shippingAddresses":
             MessageLookupByLibrary.simpleMessage("Shipping addresses"),
         "shippingAddressesDescription": MessageLookupByLibrary.simpleMessage(

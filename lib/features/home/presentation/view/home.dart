@@ -33,6 +33,7 @@ class _HomeState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
         body: SafeArea(
       child: BlocListener<HomeBloc, HomeLoadState>(
         listener: (context, state) {

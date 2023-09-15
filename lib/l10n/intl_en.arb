@@ -146,6 +146,8 @@
   "delivery" : "Delivery:",
   "summery" : "Summary:",
   "submitOrder" : "Submit Order",
+  "settings" : "Settings",
+  "settingsSub" : "Settings",
   "changePassword" : "Change Password",
   "changePasswordsub" : "Update & Change Password",
   "edit" : "Edit Avatar, name, email",
@@ -200,6 +202,7 @@
   "notification" : "Notification",
   "noNotification" : "There is no notification yet!",
   "close" : "Close",
+  "defaultAddress" : "Use as the default shipping address",
   "noUserAuction" : "No one has entered the auction yet!"
 
 }

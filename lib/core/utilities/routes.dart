@@ -14,6 +14,8 @@ class AppRoutes {
   static const productReviews = "/Product-reviews";
   static const updateProfile = "/update-profile";
   static const updatePassword = "/update-password";
+  static const settings = "/settings";
+  static const notifications = "/notifications";
   static const checkout = "/checkout";
   static const mapview = "/mapview";
   static const payment = "/payment";

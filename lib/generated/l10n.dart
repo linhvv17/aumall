@@ -1370,6 +1370,26 @@ class S {
     );
   }
 
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settingsSub {
+    return Intl.message(
+      'Settings',
+      name: 'settingsSub',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Change Password`
   String get changePassword {
     return Intl.message(
@@ -1885,6 +1905,16 @@ class S {
     return Intl.message(
       'Close',
       name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use as the default shipping address`
+  String get defaultAddress {
+    return Intl.message(
+      'Use as the default shipping address',
+      name: 'defaultAddress',
       desc: '',
       args: [],
     );

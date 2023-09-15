@@ -1,6 +1,8 @@
 import 'package:aumall/features/profile/domain/entities/address_entity.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../generated/l10n.dart';
+
 class AddressCard extends StatelessWidget {
   final int index;
   final AddressEntity addressEntity;
@@ -82,9 +84,9 @@ class AddressCard extends StatelessWidget {
                     addressEntity.defaultAddress!
                         ? const CheckboxCustom2()
                         : const CheckboxCustom(),
-                    const Text(
-                      'Use as the shipping address',
-                      style: TextStyle(
+                    Text(
+                      S.current.defaultAddress,
+                      style: const TextStyle(
                         color: Color(0xFF222222),
                         fontSize: 14,
                         fontFamily: 'Metropolis',

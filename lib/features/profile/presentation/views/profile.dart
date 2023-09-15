@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -23,29 +22,36 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          BlocBuilder<ThemeBloc, ThemeState>(
-            builder: (context, state) {
-              late AppTheme currentTheme;
-              return IconButton(
-                onPressed: () {
-                  if (state.themeData == appThemeData[AppTheme.lightTheme]) {
-                    currentTheme = AppTheme.values[1];
-                    ThemeDatabaseService.putThemeSettings(1);
-                  } else {
-                    currentTheme = AppTheme.values[0];
-                    ThemeDatabaseService.putThemeSettings(0);
-                  }
+          // BlocBuilder<ThemeBloc, ThemeState>(
+          //   builder: (context, state) {
+          //     late AppTheme currentTheme;
+          //     return IconButton(
+          //       onPressed: () {
+          //         if (state.themeData == appThemeData[AppTheme.lightTheme]) {
+          //           currentTheme = AppTheme.values[1];
+          //           ThemeDatabaseService.putThemeSettings(1);
+          //         } else {
+          //           currentTheme = AppTheme.values[0];
+          //           ThemeDatabaseService.putThemeSettings(0);
+          //         }
+          //
+          //         context
+          //             .read<ThemeBloc>()
+          //             .add(ThemeChanged(theme: currentTheme));
+          //       },
+          //       icon: state.themeData == appThemeData[AppTheme.lightTheme]
+          //           ? const Icon(Icons.sunny)
+          //           : const Icon(Icons.mode_night),
+          //     );
+          //   },
+          // ),
 
-                  context
-                      .read<ThemeBloc>()
-                      .add(ThemeChanged(theme: currentTheme));
-                },
-                icon: state.themeData == appThemeData[AppTheme.lightTheme]
-                    ? const Icon(Icons.sunny)
-                    : const Icon(Icons.mode_night),
-              );
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.notifications);
             },
-          ),
+            icon: const Icon(Icons.notifications_active),
+          )
         ],
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -139,7 +145,8 @@ class ProfileView extends StatelessWidget {
                           title: S.current.mybag,
                           subtitle: S.current.mybag,
                           ontab: () {
-                            BlocProvider.of<CartBloc>(context).add(CartStarted());
+                            BlocProvider.of<CartBloc>(context)
+                                .add(CartStarted());
                             Navigator.pushNamed(context, AppRoutes.cart);
                           },
                         ),
@@ -154,6 +161,13 @@ class ProfileView extends StatelessWidget {
                                       BlocProvider.of<ProfileBloc>(context)
                                           .add(GetProfile())
                                     });
+                          },
+                        ),
+                        MYListTile(
+                          title: S.current.settings,
+                          subtitle: S.current.settingsSub,
+                          ontab: () {
+                            Navigator.pushNamed(context, AppRoutes.settings);
                           },
                         ),
                         MYListTile(

@@ -37,8 +37,9 @@ class _UpdatePasswordViewState extends State<UpdatePasswordView> {
             icon: const Icon(Icons.arrow_back_ios)),
         title: Text(
           S.current.changePassword,
-          style: TextStyle(color: ColorManager.dark),
+          style: const TextStyle(color: ColorManager.dark),
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Form(
