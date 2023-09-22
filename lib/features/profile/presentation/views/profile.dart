@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -204,7 +205,22 @@ class ProfileView extends StatelessWidget {
                     ),
                   );
                 } else if (state is ProfileLoadingState) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // The loading indicator
+                          const CupertinoActivityIndicator(
+                            radius: 20.0,
+                            color: CupertinoColors.activeGreen,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(S.current.dataLoading)
+                        ],
+                      ));
                 } else if (state is ProfileErrorState) {
                   return state.message == S.current.noInternetError
                       ? Column(
