@@ -1,5 +1,6 @@
 import 'package:aumall/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:aumall/features/profile/presentation/widgets/address_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -64,8 +65,12 @@ class _AddressListState extends State<AddressListView> {
               SizedBox(
                 height: kHeight(context) / 3,
               ),
-              const CircularProgressIndicator(),
-              SizedBox(height: 10,),
+              // The loading indicator
+                                const CupertinoActivityIndicator(
+                                  radius: 20.0,
+                                  color: CupertinoColors.activeGreen,
+                                ),
+              const SizedBox(height: 10,),
               Text(S.current.dataLoading)
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:aumall/features/home/data/models/list_product_home_model.dart';
 import 'package:aumall/features/home/domain/entities/banner_entity.dart';
 import 'package:aumall/features/home/domain/entities/list_product_home_entity.dart';
+import 'package:aumall/features/home/domain/entities/shop_entity.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class HomeLoadState extends Equatable {
@@ -17,8 +18,9 @@ class HomeStateLoading extends HomeLoadState {}
 class HomeStateGetDataSuccess extends HomeLoadState {
   BannerEntity? bannerEntity;
   ListProductHomeEntity? listProductHomeEntity;
+  List<ShopEntity>? shopEntities;
 
-  HomeStateGetDataSuccess(this.bannerEntity, this.listProductHomeEntity);
+  HomeStateGetDataSuccess(this.bannerEntity, this.listProductHomeEntity, this.shopEntities);
 }
 
 class HomeStateLoadedFullData extends HomeLoadState {

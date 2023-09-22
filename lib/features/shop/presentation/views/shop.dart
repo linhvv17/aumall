@@ -1,15 +1,13 @@
 import 'package:aumall/features/shop/domain/entities/categories_entity.dart';
 import 'package:aumall/features/shop/domain/entities/list_product_shop_entity.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
-
 import '../../../../generated/l10n.dart';
 import '../../../favorite/presentation/views/product_item_aumall.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../home/widgets/customGridView.dart';
-import '../../domain/entities/products_entity.dart';
 import '../bloc/categories/categories_bloc.dart';
 import '../bloc/products_bloc.dart';
 import '../widgets/filter.dart';
@@ -58,7 +56,11 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircularProgressIndicator(),
+              // The loading indicator
+              const CupertinoActivityIndicator(
+                radius: 20.0,
+                color: CupertinoColors.activeBlue,
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -76,7 +78,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
         return DefaultTabController(
             length: listCategory.length,
             child: Scaffold(
-              backgroundColor: Colors.grey.shade200,
+                backgroundColor: Colors.grey.shade200,
                 appBar: AppBar(
                     title: Text(
                       S.current.shop,
@@ -124,7 +126,11 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const CircularProgressIndicator(),
+                                // The loading indicator
+                                const CupertinoActivityIndicator(
+                                  radius: 20.0,
+                                  color: CupertinoColors.activeGreen,
+                                ),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -478,7 +484,11 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
             SizedBox(
               height: kHeight(context) / 3,
             ),
-            const CircularProgressIndicator(),
+            // The loading indicator
+                                const CupertinoActivityIndicator(
+                                  radius: 20.0,
+                                  color: CupertinoColors.activeGreen,
+                                ),
             Text(S.current.dataLoading)
           ],
         ),

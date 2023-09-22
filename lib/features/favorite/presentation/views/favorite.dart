@@ -1,4 +1,5 @@
 import 'package:aumall/features/favorite/presentation/views/product_item_aumall.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -57,7 +58,11 @@ class _FavoriteViewState extends State<FavoriteView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CircularProgressIndicator(),
+                  // The loading indicator
+                                const CupertinoActivityIndicator(
+                                  radius: 20.0,
+                                  color: CupertinoColors.activeGreen,
+                                ),
                   SizedBox(height: 10,),
                   Text(S.current.dataLoading)
                 ],

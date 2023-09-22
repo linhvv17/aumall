@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -122,7 +123,11 @@ class _CartViewState extends State<CartView> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const CircularProgressIndicator(),
+                          // The loading indicator
+                                const CupertinoActivityIndicator(
+                                  radius: 20.0,
+                                  color: CupertinoColors.activeGreen,
+                                ),
                           SizedBox(height: 10,),
                           Text(S.current.dataLoading)
                         ],

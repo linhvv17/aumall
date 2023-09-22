@@ -3,7 +3,7 @@ import 'package:aumall/features/home/domain/entities/home_data_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class HomeDataModel extends HomeDataEntity {
-  const HomeDataModel(super.images, super.listProductHomeData);
+  const HomeDataModel(super.images, super.listProductHomeData, super.shopEntities);
 
   // factory BannerModel.fromJson(Map<String, dynamic> json) {
   //   print('BannerModel ${json}');

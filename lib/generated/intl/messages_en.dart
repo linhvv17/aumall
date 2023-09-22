@@ -271,6 +271,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeoutError": MessageLookupByLibrary.simpleMessage("timeout_error"),
         "todaySuggestProducts":
             MessageLookupByLibrary.simpleMessage("Today\'s Suggestions"),
+        "topBrand": MessageLookupByLibrary.simpleMessage("Outstanding brand"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Total amount"),
         "unauthorizedError": MessageLookupByLibrary.simpleMessage(
             "UNAUTHORIZED: Invalid Input Data"),

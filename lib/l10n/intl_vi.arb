@@ -203,5 +203,6 @@
   "noNotification" : "Không có thông báo nào!",
   "close" : "Đóng",
   "defaultAddress" : "Sử dụng địa chỉ này là mặc định",
-  "noUserAuction" : "Chưa có ai tham gia đấu giá!"
+  "noUserAuction" : "Chưa có ai tham gia đấu giá!",
+  "topBrand" : "Thương hiệu nổi bật"
 }

@@ -3,6 +3,7 @@ import 'package:aumall/features/cart/presentation/views/cart.dart';
 import 'package:aumall/features/home/data/models/detail_product_response.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -694,8 +695,12 @@ class _ProductDetailsState extends State<ProductDetails>
                           const SizedBox(
                             height: 100,
                           ),
-                          const CircularProgressIndicator(),
-                          SizedBox(height: 10,),
+                          // The loading indicator
+                                const CupertinoActivityIndicator(
+                                  radius: 20.0,
+                                  color: CupertinoColors.activeGreen,
+                                ),
+                          const SizedBox(height: 10,),
                           Text(S.current.dataLoading)
                         ],
                       ),

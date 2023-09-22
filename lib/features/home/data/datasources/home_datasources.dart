@@ -3,6 +3,7 @@ import 'package:aumall/core/utilities/endpoints.dart';
 import 'package:aumall/features/home/data/models/banner_model.dart';
 import 'package:aumall/features/home/data/models/detail_product_response.dart';
 import 'package:aumall/features/home/data/models/product_detail_model.dart';
+import 'package:aumall/features/home/data/models/shop_model.dart';
 import 'package:aumall/features/home/domain/repositories/home_repository.dart';
 
 import '../../../../core/local/shared_preference.dart';
@@ -75,6 +76,11 @@ class HomeDatasourceImpl implements HomeDatasource {
     ListProductHomeModel listProductHomeModel =
         ListProductHomeModel.fromJson(responseListProductHome.data);
 
-    return HomeDataModel(bannerModel, listProductHomeModel);
+    List<ShopModel> shopModels = <ShopModel>[];
+    responseListProductHome.data['data']['shops'].forEach((v) {
+      shopModels.add(ShopModel.fromJson(v));
+    });
+
+    return HomeDataModel(bannerModel, listProductHomeModel, shopModels);
   }
 }

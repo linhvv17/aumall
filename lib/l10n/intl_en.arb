@@ -203,6 +203,7 @@
   "noNotification" : "There is no notification yet!",
   "close" : "Close",
   "defaultAddress" : "Use as the default shipping address",
-  "noUserAuction" : "No one has entered the auction yet!"
+  "noUserAuction" : "No one has entered the auction yet!",
+  "topBrand" : "Outstanding brand"
 
 }

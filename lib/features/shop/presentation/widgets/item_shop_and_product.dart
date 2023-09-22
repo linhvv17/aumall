@@ -89,7 +89,7 @@ class _ItemShopAndProductState extends State<ItemShopAndProduct> {
                 ? Container()
                 : widget.productAuMallEntities.length == 1
                     ? ItemProductOfShop(
-                        productFavoriteEntity:
+                        productAuMallEntity:
                             widget.productAuMallEntities.elementAt(0),
                         isAuctionProduct: false,
                       )
@@ -97,12 +97,12 @@ class _ItemShopAndProductState extends State<ItemShopAndProduct> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ItemProductOfShop(
-                            productFavoriteEntity:
+                            productAuMallEntity:
                                 widget.productAuMallEntities.elementAt(0),
                             isAuctionProduct: false,
                           ),
                           ItemProductOfShop(
-                            productFavoriteEntity:
+                            productAuMallEntity:
                                 widget.productAuMallEntities.elementAt(1),
                             isAuctionProduct: false,
                           ),

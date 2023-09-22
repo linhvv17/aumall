@@ -274,6 +274,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "timeoutError": MessageLookupByLibrary.simpleMessage("Lỗi time out"),
         "todaySuggestProducts":
             MessageLookupByLibrary.simpleMessage("Gợi ý hôm nay"),
+        "topBrand": MessageLookupByLibrary.simpleMessage("Thương hiệu nổi bật"),
         "totalAmount": MessageLookupByLibrary.simpleMessage("Tổng tiền"),
         "unauthorizedError": MessageLookupByLibrary.simpleMessage(
             "Chưa xác thực: Lỗi xác thực quyền truy cập"),

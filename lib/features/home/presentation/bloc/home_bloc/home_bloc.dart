@@ -13,6 +13,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeLoadState> {
   final GetBannerUseCase getBannerUseCase;
   final GetListProductHomeUseCase getListProductHomeUseCase;
   final GetHomeDataUseCase getHomeDataUseCase;
+
   HomeBloc(this.getBannerUseCase, this.getListProductHomeUseCase,
       this.getHomeDataUseCase)
       : super(HomeStateLoading()) {
@@ -39,8 +40,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeLoadState> {
       failureOrSuccess.fold(
           (failure) => emit(HomeErrorState(failure.message)),
           // (success) => emit(HomeStateDataLoaded(success)),
-          (success) => emit(HomeStateGetDataSuccess(
-              success.bannerEntity, success.listProductHomeEntity)));
+          (success) => emit(HomeStateGetDataSuccess(success.bannerEntity,
+              success.listProductHomeEntity, success.shopEntities)));
     });
   }
 }

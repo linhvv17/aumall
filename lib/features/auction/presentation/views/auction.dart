@@ -1,5 +1,6 @@
 import 'package:aumall/features/auction/presentation/bloc/auction_bloc.dart';
 import 'package:aumall/features/favorite/presentation/views/product_item_aumall.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/features/home/widgets/customGridView.dart';
@@ -73,7 +74,11 @@ class _AuctionViewState extends State<AuctionView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CircularProgressIndicator(),
+                      // The loading indicator
+                                const CupertinoActivityIndicator(
+                                  radius: 20.0,
+                                  color: CupertinoColors.activeGreen,
+                                ),
                       SizedBox(height: 10,),
                       Text(S.current.dataLoading)
                     ],
@@ -159,7 +164,11 @@ class _AuctionViewState extends State<AuctionView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CircularProgressIndicator(),
+                      // The loading indicator
+                                const CupertinoActivityIndicator(
+                                  radius: 20.0,
+                                  color: CupertinoColors.activeGreen,
+                                ),
                       SizedBox(height: 10,),
                       Text(S.current.dataLoading)
                     ],
@@ -244,7 +253,11 @@ class _AuctionViewState extends State<AuctionView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CircularProgressIndicator(),
+                      // The loading indicator
+                                const CupertinoActivityIndicator(
+                                  radius: 20.0,
+                                  color: CupertinoColors.activeGreen,
+                                ),
                       SizedBox(height: 10,),
                       Text(S.current.dataLoading)
                     ],

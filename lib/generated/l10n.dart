@@ -1929,6 +1929,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Outstanding brand`
+  String get topBrand {
+    return Intl.message(
+      'Outstanding brand',
+      name: 'topBrand',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
