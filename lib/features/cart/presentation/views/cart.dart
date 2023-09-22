@@ -124,11 +124,13 @@ class _CartViewState extends State<CartView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
-                                ),
-                          SizedBox(height: 10,),
+                          const CupertinoActivityIndicator(
+                            radius: 20.0,
+                            color: CupertinoColors.activeGreen,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           Text(S.current.dataLoading)
                         ],
                       ),

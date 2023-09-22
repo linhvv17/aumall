@@ -284,367 +284,396 @@ class _ProductDetailsState extends State<ProductDetails>
                 .add(GetInfoAuctionSession(widget.productSimpleEntity.id!));
           }
         },
-        child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-            builder: (context, state) {
-          if (state is ProductDetailLoaded) {
-            ProductDetailDataModel productDetailData =
-                state.productDetailEntity.productDetailData!;
-            var averageRate = 0.0;
-            var totalRate = 0.0;
+        child: RefreshIndicator(
+          onRefresh: () async {
+            BlocProvider.of<ProductDetailBloc>(context)
+                .add(GetProductDetailData(widget.productSimpleEntity.id!));
+          },
+          child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+              builder: (context, state) {
+            if (state is ProductDetailLoaded) {
+              ProductDetailDataModel productDetailData =
+                  state.productDetailEntity.productDetailData!;
+              var averageRate = 0.0;
+              var totalRate = 0.0;
 
-            if (productDetailData.reviews.isNotEmpty) {
-              for (int i = 0; i < productDetailData.reviews.length; i++) {
-                totalRate = totalRate + productDetailData.reviews[i].rating;
+              if (productDetailData.reviews.isNotEmpty) {
+                for (int i = 0; i < productDetailData.reviews.length; i++) {
+                  totalRate = totalRate + productDetailData.reviews[i].rating;
+                }
+                averageRate = totalRate / productDetailData.reviews.length;
               }
-              averageRate = totalRate / productDetailData.reviews.length;
-            }
 
-            return SingleChildScrollView(
-              child: SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //media of product
-                    Carousel(images: productDetailData.images),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 15),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          //info
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              //title
-                              SizedBox(
-                                width: kWidth(context) / 2,
-                                child: Text(
+              return SingleChildScrollView(
+                child: SafeArea(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //media of product
+                      Carousel(images: productDetailData.images),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 15),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            //info
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                //title
+                                SizedBox(
+                                  width: kWidth(context) / 2,
+                                  child: Text(
+                                    productDetailData.title,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                //sub title
+                                Text(
                                   productDetailData.title,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: ColorManager.grey,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                              //sub title
-                              Text(
-                                productDetailData.title,
-                                style: const TextStyle(
-                                  color: ColorManager.grey,
+                                const SizedBox(
+                                  height: 5,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              //rating
-                              Row(
-                                children: [
-                                  RatingBarIndicator(
-                                    itemSize: 25.0,
-                                    rating: widget.productSimpleEntity
-                                                .ratingNumber !=
-                                            null
-                                        ? averageRate
-                                        : 0.0,
-                                    itemBuilder: (context, _) => const Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
+                                //rating
+                                Row(
+                                  children: [
+                                    RatingBarIndicator(
+                                      itemSize: 25.0,
+                                      rating: widget.productSimpleEntity
+                                                  .ratingNumber !=
+                                              null
+                                          ? averageRate
+                                          : 0.0,
+                                      itemBuilder: (context, _) => const Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
+                                      direction: Axis.horizontal,
                                     ),
-                                    direction: Axis.horizontal,
-                                  ),
-                                  const SizedBox(width: 4.0),
-                                  Text(
-                                    widget.productSimpleEntity.reviewNumber !=
-                                            null
-                                        ? '(${averageRate.toStringAsFixed(1)})'
-                                        : S.current.notYetReview,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
-                                        .copyWith(
-                                          color: Colors.grey,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          //price
-                          Text(
-                            "₫${double.parse(productDetailData.price).toInt()}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(color: ColorManager.orangeLight),
-                          )
-                        ],
+                                    const SizedBox(width: 4.0),
+                                    Text(
+                                      widget.productSimpleEntity.reviewNumber !=
+                                              null
+                                          ? '(${averageRate.toStringAsFixed(1)})'
+                                          : S.current.notYetReview,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .copyWith(
+                                            color: Colors.grey,
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            //price
+                            Text(
+                              "₫${double.parse(productDetailData.price).toInt()}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge!
+                                  .copyWith(color: ColorManager.orangeLight),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
 
-                    //shop info
-                    Container(
-                      // width: 350,
-                      // height: 65,
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 49,
-                                height: 49,
-                                decoration: ShapeDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(productDetailData
-                                        .user.shop!.imageUrl
-                                        .toString()),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
+                      //shop info
+                      Container(
+                        // width: 350,
+                        // height: 65,
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 49,
+                                  height: 49,
+                                  decoration: ShapeDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(productDetailData
+                                          .user.shop!.imageUrl
+                                          .toString()),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(width: 12),
-                              Column(
+                                const SizedBox(width: 12),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      productDetailData.user!.shopName
+                                          .toString(),
+                                      style: const TextStyle(
+                                        color: Color(0xFF393F42),
+                                        fontSize: 16,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 3),
+                                    Text(
+                                      productDetailData.user!.name.toString(),
+                                      style: const TextStyle(
+                                        color: Color(0xFF939393),
+                                        fontSize: 12,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 37),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: InkWell(
+                                  child: const Column(
+                                    children: [
+                                      Icon(
+                                        Icons.call,
+                                        size: 40,
+                                      ),
+                                      Text(
+                                        'Hotline',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 14,
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  onTap: () {
+                                    //show dialog confirm call
+
+                                    showPopUpConfirmCall(
+                                        productDetailData.user.shop!.contact!);
+                                  }),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 32, vertical: 10),
+                              decoration: ShapeDecoration(
+                                  shape: RoundedRectangleBorder(
+                                    side: const BorderSide(
+                                        width: 0.50, color: Color(0xFFD9D9D9)),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  color: Colors.deepOrangeAccent),
+                              child: const Row(
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    productDetailData.user!.shopName.toString(),
-                                    style: const TextStyle(
-                                      color: Color(0xFF393F42),
-                                      fontSize: 16,
+                                    'Follow',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
                                       fontFamily: 'Inter',
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  const SizedBox(height: 3),
-                                  Text(
-                                    productDetailData.user!.name.toString(),
-                                    style: const TextStyle(
-                                      color: Color(0xFF939393),
-                                      fontSize: 12,
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
                                 ],
                               ),
-                            ],
-                          ),
-                          const SizedBox(width: 37),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20.0),
-                            child: InkWell(
-                                child: const Column(
-                                  children: [
-                                    Icon(
-                                        Icons.call,
-                                      size: 40,
-                                    ),
-                                    Text(
-                                      'Hotline',
-                                      style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 14,
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                onTap: () {
-                                  //show dialog confirm call
-
-                                  showPopUpConfirmCall(
-                                      productDetailData.user.shop!.contact!);
-                                }),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 32, vertical: 10),
-                            decoration: ShapeDecoration(
-                                shape: RoundedRectangleBorder(
-                                  side: const BorderSide(
-                                      width: 0.50, color: Color(0xFFD9D9D9)),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                color: Colors.deepOrangeAccent),
-                            child: const Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Follow',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        ),
+                      ),
+                      //description
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 15),
+                        child: Text(
+                          S.current.description,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(color: ColorManager.orangeLight),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 15),
+                        child: Text(
+                          productDetailData.description,
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                      ////reviews
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(S.current.rateandreview,
+                                style: Theme.of(context).textTheme.titleLarge),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.productReviews,
+                                      arguments: widget.productSimpleEntity);
+                                  BlocProvider.of<SendReviewBloc>(context).add(
+                                      GetReviews(widget.productSimpleEntity.id
+                                          .toString()));
+                                },
+                                child: Text(S.current.seeMore))
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 15),
+                        child: Row(
+                          children: [
+                            RatingBarIndicator(
+                              itemSize: 25.0,
+                              rating: productDetailData.ratingNumber != null
+                                  ? averageRate
+                                  : 0.0,
+                              itemBuilder: (context, _) => const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              direction: Axis.horizontal,
+                              itemCount: 5,
+                            ),
+                            const SizedBox(width: 4.0),
+                            Text(
+                              productDetailData.ratingNumber != null
+                                  ? averageRate.toStringAsFixed(1)
+                                  : "0.0",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(
+                                    color: Colors.grey,
                                   ),
-                                ),
-                              ],
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 4.0),
+                            Text(
+                              productDetailData.reviewNumber != null
+                                  ? "(${productDetailData.reviews.length})"
+                                  : S.current.notYetReview,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(
+                                    color: Colors.grey,
+                                  ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    //description
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 15),
-                      child: Text(
-                        S.current.description,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge!
-                            .copyWith(color: ColorManager.orangeLight),
+                      productDetailData.reviews.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 15),
+                              child: ReviewCard(
+                                  product: productDetailData, index: 0),
+                            )
+                          : const SizedBox(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 15),
+                        child: Text(S.current.mayLike,
+                            style: Theme.of(context).textTheme.titleLarge),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 15),
-                      child: Text(
-                        productDetailData.description,
-                        textAlign: TextAlign.justify,
-                      ),
-                    ),
-                    ////reviews
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(S.current.rateandreview,
-                              style: Theme.of(context).textTheme.titleLarge),
-                          TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                    context, AppRoutes.productReviews,
-                                    arguments: widget.productSimpleEntity);
-                                BlocProvider.of<SendReviewBloc>(context).add(
-                                    GetReviews(widget.productSimpleEntity.id
-                                        .toString()));
+                      SizedBox(
+                        height: 330,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.productDetailEntity.relatedProducts!
+                              .relatedProducts?.length,
+                          itemBuilder: (context, index) {
+                            ProductAuMallEntity productAuMallEntity = state
+                                .productDetailEntity
+                                .relatedProducts!
+                                .relatedProducts![index];
+                            return InkWell(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ProductDetails(
+                                        index: index,
+                                        productSimpleEntity:
+                                            productAuMallEntity,
+                                        isFromAuction: false,
+                                      ),
+                                    ));
                               },
-                              child: Text(S.current.seeMore))
-                        ],
+                              child: SizedBox(
+                                  width: kWidth(context) / 2,
+                                  height: 330,
+                                  child: ProductItem(
+                                      product: state
+                                          .productDetailEntity
+                                          .relatedProducts!
+                                          .relatedProducts![index])),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 0, horizontal: 15),
-                      child: Row(
-                        children: [
-                          RatingBarIndicator(
-                            itemSize: 25.0,
-                            rating: productDetailData.ratingNumber != null
-                                ? averageRate
-                                : 0.0,
-                            itemBuilder: (context, _) => const Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                            direction: Axis.horizontal,
-                            itemCount: 5,
-                          ),
-                          const SizedBox(width: 4.0),
-                          Text(
-                            productDetailData.ratingNumber != null
-                                ? averageRate.toStringAsFixed(1)
-                                : "0.0",
-                            style:
-                                Theme.of(context).textTheme.bodySmall!.copyWith(
-                                      color: Colors.grey,
-                                    ),
-                          ),
-                          const SizedBox(width: 4.0),
-                          Text(
-                            productDetailData.reviewNumber != null
-                                ? "(${productDetailData.reviews.length})"
-                                : S.current.notYetReview,
-                            style:
-                                Theme.of(context).textTheme.bodySmall!.copyWith(
-                                      color: Colors.grey,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    productDetailData.reviews.isNotEmpty
-                        ? Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 15),
-                            child: ReviewCard(
-                                product: productDetailData, index: 0),
-                          )
-                        : const SizedBox(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 15),
-                      child: Text(S.current.mayLike,
-                          style: Theme.of(context).textTheme.titleLarge),
-                    ),
-                    SizedBox(
-                      height: 330,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: state.productDetailEntity.relatedProducts!
-                            .relatedProducts?.length,
-                        itemBuilder: (context, index) {
-                          ProductAuMallEntity productAuMallEntity = state
-                              .productDetailEntity
-                              .relatedProducts!
-                              .relatedProducts![index];
-                          return InkWell(
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProductDetails(
-                                      index: index,
-                                      productSimpleEntity: productAuMallEntity,
-                                      isFromAuction: false,
-                                    ),
-                                  ));
-                            },
-                            child: SizedBox(
-                                width: kWidth(context) / 2,
-                                height: 330,
-                                child: ProductItem(
-                                    product: state
-                                        .productDetailEntity
-                                        .relatedProducts!
-                                        .relatedProducts![index])),
-                          );
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: kHeight(context) / 11,
-                    )
-                  ],
+                      SizedBox(
+                        height: kHeight(context) / 11,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            );
-          } else if (state is ProductDetailErrorState) {
-            return Center(child: Text(state.message));
-          } else {
-            return Container();
-          }
-        }),
+              );
+            } else if (state is ProductDetailLoading) {
+              return Center(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // The loading indicator
+                  const CupertinoActivityIndicator(
+                    radius: 20.0,
+                    color: CupertinoColors.activeGreen,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(S.current.dataLoading)
+                ],
+              ));
+            } else if (state is ProductDetailErrorState) {
+              return Center(child: Text(state.message));
+            } else {
+              return Container();
+            }
+          }),
+        ),
       ),
     );
   }
@@ -696,11 +725,13 @@ class _ProductDetailsState extends State<ProductDetails>
                             height: 100,
                           ),
                           // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
-                                ),
-                          const SizedBox(height: 10,),
+                          const CupertinoActivityIndicator(
+                            radius: 20.0,
+                            color: CupertinoColors.activeGreen,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           Text(S.current.dataLoading)
                         ],
                       ),

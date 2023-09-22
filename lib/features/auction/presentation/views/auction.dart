@@ -75,11 +75,13 @@ class _AuctionViewState extends State<AuctionView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
-                                ),
-                      SizedBox(height: 10,),
+                      const CupertinoActivityIndicator(
+                        radius: 20.0,
+                        color: CupertinoColors.activeGreen,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Text(S.current.dataLoading)
                     ],
                   ));
@@ -125,7 +127,7 @@ class _AuctionViewState extends State<AuctionView> {
                                                               listAuction[
                                                                   index],
                                                           index: index,
-                                                              isFromAuction: true,
+                                                          isFromAuction: true,
                                                         ),
                                                       ))
                                                   .then((value) => {
@@ -143,7 +145,7 @@ class _AuctionViewState extends State<AuctionView> {
                                               productFavoriteEntity:
                                                   listAuction[index],
                                               isAuctionProduct: true,
-                                                  typeProduct: 1,
+                                              typeProduct: 1,
                                             ));
                                       },
                                     ),
@@ -165,11 +167,13 @@ class _AuctionViewState extends State<AuctionView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
-                                ),
-                      SizedBox(height: 10,),
+                      const CupertinoActivityIndicator(
+                        radius: 20.0,
+                        color: CupertinoColors.activeGreen,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Text(S.current.dataLoading)
                     ],
                   ));
@@ -229,11 +233,11 @@ class _AuctionViewState extends State<AuctionView> {
                                             child:
                                                 // Container()
                                                 ProductItemAuMall(
-                                                    productFavoriteEntity:
-                                                        listAuction[index],
-                                                    isAuctionProduct: true,
-                                                  typeProduct: 2,
-                                                ));
+                                              productFavoriteEntity:
+                                                  listAuction[index],
+                                              isAuctionProduct: true,
+                                              typeProduct: 2,
+                                            ));
                                       },
                                     ),
                                   ))
@@ -254,11 +258,13 @@ class _AuctionViewState extends State<AuctionView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
-                                ),
-                      SizedBox(height: 10,),
+                      const CupertinoActivityIndicator(
+                        radius: 20.0,
+                        color: CupertinoColors.activeGreen,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Text(S.current.dataLoading)
                     ],
                   ));
@@ -304,7 +310,7 @@ class _AuctionViewState extends State<AuctionView> {
                                                               listAuction[
                                                                   index],
                                                           index: index,
-                                                              isFromAuction: true,
+                                                          isFromAuction: true,
                                                         ),
                                                       ))
                                                   .then((value) => {
@@ -322,7 +328,7 @@ class _AuctionViewState extends State<AuctionView> {
                                               productFavoriteEntity:
                                                   listAuction[index],
                                               isAuctionProduct: true,
-                                                  typeProduct: 3,
+                                              typeProduct: 3,
                                             ));
                                       },
                                     ),

@@ -66,11 +66,13 @@ class _AddressListState extends State<AddressListView> {
                 height: kHeight(context) / 3,
               ),
               // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
-                                ),
-              const SizedBox(height: 10,),
+              const CupertinoActivityIndicator(
+                radius: 20.0,
+                color: CupertinoColors.activeGreen,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Text(S.current.dataLoading)
             ],
           ),

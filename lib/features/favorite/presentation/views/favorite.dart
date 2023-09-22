@@ -53,17 +53,19 @@ class _FavoriteViewState extends State<FavoriteView> {
           child: BlocBuilder<FavouriteBloc, FavouriteState>(
               builder: (context, state) {
             if (state is FavouriteDataLoading) {
-              return  Center(
+              return Center(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
-                                ),
-                  SizedBox(height: 10,),
+                  const CupertinoActivityIndicator(
+                    radius: 20.0,
+                    color: CupertinoColors.activeGreen,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Text(S.current.dataLoading)
                 ],
               ));
@@ -116,7 +118,7 @@ class _FavoriteViewState extends State<FavoriteView> {
                                                   productSimpleEntity:
                                                       listFavorite[index],
                                                   index: index,
-                                                      isFromAuction: false,
+                                                  isFromAuction: false,
                                                 ),
                                               ));
                                         },

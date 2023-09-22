@@ -53,17 +53,19 @@ class _NotificationViewState extends State<NotificationView> {
                   previous != current && current is NotificationDataLoaded,
               builder: (context, state) {
                 if (state is NotificationDataLoading) {
-                  return  Center(
+                  return Center(
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
-                                ),
-                      SizedBox(height: 10,),
+                      const CupertinoActivityIndicator(
+                        radius: 20.0,
+                        color: CupertinoColors.activeGreen,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Text(S.current.dataLoading)
                     ],
                   ));

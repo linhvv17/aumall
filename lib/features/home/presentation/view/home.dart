@@ -59,10 +59,10 @@ class _HomeState extends State<HomeView> {
                         height: 100,
                       ),
                       // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
-                                ),
+                      const CupertinoActivityIndicator(
+                        radius: 20.0,
+                        color: CupertinoColors.activeGreen,
+                      ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -364,9 +364,7 @@ class _HomeState extends State<HomeView> {
                         )),
                   ),
 
-                  const SizedBox(
-                      height: 50
-                      ),
+                  const SizedBox(height: 50),
                 ]);
               } else if (state is HomeErrorState) {
                 return Center(child: Text(state.message));
