@@ -1,5 +1,5 @@
 import 'package:aumall/features/home/domain/entities/banner_entity.dart';
-import 'package:aumall/features/shop/data/models/products_model.dart';
+import 'package:aumall/features/shopping/data/models/products_model.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../domain/entities/list_product_home_entity.dart';

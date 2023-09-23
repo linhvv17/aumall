@@ -12,8 +12,8 @@ import '../../../core/utilities/strings.dart';
 import '../../../core/utilities/utils.dart';
 import '../../../generated/l10n.dart';
 import '../../login/presentation/widgets/alert_snackbar.dart';
-import '../../shop/data/models/products_model.dart';
-import '../../shop/domain/entities/products_entity.dart';
+import '../../shopping/data/models/products_model.dart';
+import '../../shopping/domain/entities/products_entity.dart';
 
 class NewProductItem extends StatefulWidget {
   const NewProductItem(

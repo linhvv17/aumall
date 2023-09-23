@@ -8,7 +8,7 @@ import '../../../../core/utilities/enums.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
-import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
 import '../bloc/auction_bloc.dart';
 
 class ProductAuctionAuMall extends StatefulWidget {

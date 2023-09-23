@@ -1,7 +1,7 @@
 import 'package:aumall/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:aumall/core/usecase/usecase.dart';
-import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
+import 'package:aumall/features/shopping/domain/entities/reviews_entity.dart';
 import '../../../home/domain/entities/product_detail_entity.dart';
 import '../repositories/product_repository.dart';
 

@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../../../core/usecase/usecase.dart';
-import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
 import '../../domain/entities/list_favorite_entity.dart';
 import '../../domain/usecases/add_favorite_product_usecase.dart';
 import '../../domain/usecases/get_favorite_product_usecase.dart';

@@ -1,9 +1,9 @@
 import 'package:aumall/features/home/domain/entities/product_detail_entity.dart';
-import 'package:aumall/features/shop/domain/entities/categories_entity.dart';
-import 'package:aumall/features/shop/domain/entities/shop_data_default_entity.dart';
-import 'package:aumall/features/shop/domain/usecases/get_specific_product.dart';
+import 'package:aumall/features/shopping/domain/entities/categories_entity.dart';
+import 'package:aumall/features/shopping/domain/entities/shop_data_default_entity.dart';
+import 'package:aumall/features/shopping/domain/usecases/get_specific_product.dart';
 import 'package:dartz/dartz.dart';
-import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
+import 'package:aumall/features/shopping/domain/entities/reviews_entity.dart';
 import '../../../../core/error/error_handler.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/network/network_info.dart';

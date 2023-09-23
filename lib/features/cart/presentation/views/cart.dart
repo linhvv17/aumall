@@ -16,7 +16,7 @@ import '../../../favorite/presentation/views/product_item_aumall.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../home/widgets/customGridView.dart';
 import '../../../payment/presentation/bloc/payment_bloc.dart';
-import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
 
 class CartView extends StatefulWidget {
   final bool isFromBottomBar;
@@ -126,7 +126,7 @@ class _CartViewState extends State<CartView> {
                           // The loading indicator
                           const CupertinoActivityIndicator(
                             radius: 20.0,
-                            color: CupertinoColors.activeGreen,
+                            color: ColorManager.colorApp,
                           ),
                           const SizedBox(
                             height: 10,

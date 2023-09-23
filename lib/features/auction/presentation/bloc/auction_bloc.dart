@@ -2,7 +2,7 @@ import 'package:aumall/features/auction/domain/usecases/action_auction_usecase.d
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../../../core/usecase/usecase.dart';
-import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
 import '../../domain/entities/auction_session_info_entity.dart';
 import '../../domain/entities/list_auction_entity.dart';
 import '../../domain/repositories/auction_product_repository.dart';

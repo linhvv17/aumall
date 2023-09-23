@@ -6,9 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
+import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/routes.dart';
 import '../../../../generated/l10n.dart';
-import '../../../shop/presentation/bloc/products_bloc.dart';
+import '../../../shopping/presentation/bloc/products_bloc.dart';
 import '../../widgets/carousel_screen.dart';
 import '../../widgets/customGridView.dart';
 import '../../widgets/item_shop_top.dart';
@@ -61,7 +62,7 @@ class _HomeState extends State<HomeView> {
                       // The loading indicator
                       const CupertinoActivityIndicator(
                         radius: 20.0,
-                        color: CupertinoColors.activeGreen,
+                        color: ColorManager.colorApp,
                       ),
                       const SizedBox(
                         height: 10,
@@ -226,7 +227,7 @@ class _HomeState extends State<HomeView> {
                       )),
 
                   //suggest
-                  Padding(
+                  suggestionProducts!.isEmpty ? Container() : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -258,8 +259,8 @@ class _HomeState extends State<HomeView> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                      height: suggestionProducts!.length > 2 ? 550 : 250,
+                  suggestionProducts.isEmpty ? Container() : SizedBox(
+                      height: suggestionProducts.length > 2 ? 550 : 250,
                       child: GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,

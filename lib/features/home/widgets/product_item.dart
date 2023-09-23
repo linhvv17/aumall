@@ -11,7 +11,7 @@ import '../../../core/utilities/strings.dart';
 import '../../../generated/l10n.dart';
 import '../../favorite/presentation/bloc/favourite_bloc.dart';
 import '../../login/presentation/widgets/alert_snackbar.dart';
-import '../../shop/domain/entities/products_entity.dart';
+import '../../shopping/domain/entities/products_entity.dart';
 import '../data/models/product_detail_model.dart';
 
 class ProductItem extends StatefulWidget {

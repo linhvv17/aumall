@@ -1,4 +1,4 @@
-import '../../../shop/data/models/products_model.dart';
+import '../../../shopping/data/models/products_model.dart';
 import '../../domain/entities/list_auction_entity.dart';
 
 class ListAuctionModel extends ListAuctionEntity {

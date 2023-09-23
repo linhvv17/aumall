@@ -17,9 +17,9 @@ import '../../../../generated/l10n.dart';
 import '../../../auction/data/models/auction_session_info_model.dart';
 import '../../../favorite/presentation/bloc/favourite_bloc.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
-import '../../../shop/domain/entities/products_entity.dart';
-import '../../../shop/presentation/bloc/send_review_bloc.dart';
-import '../../../shop/presentation/widgets/review_card.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
+import '../../../shopping/presentation/bloc/send_review_bloc.dart';
+import '../../../shopping/presentation/widgets/review_card.dart';
 import '../../widgets/carousel.dart';
 import '../../widgets/product_item.dart';
 import '../bloc/product_detail_bloc/product_detail_event.dart';
@@ -659,7 +659,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   // The loading indicator
                   const CupertinoActivityIndicator(
                     radius: 20.0,
-                    color: CupertinoColors.activeGreen,
+                    color: ColorManager.colorApp,
                   ),
                   const SizedBox(
                     height: 10,
@@ -727,7 +727,7 @@ class _ProductDetailsState extends State<ProductDetails>
                           // The loading indicator
                           const CupertinoActivityIndicator(
                             radius: 20.0,
-                            color: CupertinoColors.activeGreen,
+                            color: ColorManager.colorApp,
                           ),
                           const SizedBox(
                             height: 10,

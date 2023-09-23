@@ -1,6 +1,6 @@
 import 'package:aumall/features/auction/domain/entities/auction_session_info_entity.dart';
 import '../../../home/data/models/detail_product_response.dart';
-import '../../../shop/data/models/products_model.dart';
+import '../../../shopping/data/models/products_model.dart';
 
 class AuctionSessionInfoModel extends AuctionSessionInfoEntity {
   const AuctionSessionInfoModel(super.product, super.userAuctions);

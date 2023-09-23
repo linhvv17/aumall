@@ -3,7 +3,7 @@ import 'package:aumall/features/cart/presentation/views/cart.dart';
 import 'package:aumall/features/profile/presentation/views/address.dart';
 import 'package:aumall/features/profile/presentation/views/address_list.dart';
 import 'package:aumall/features/profile/presentation/views/settings.dart';
-import 'package:aumall/features/shop/presentation/views/shop.dart';
+import 'package:aumall/features/shopping/presentation/views/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:aumall/features/cart/presentation/views/checkout.dart';
 import 'package:aumall/features/payment/domain/entities/all_orders_entity.dart';
@@ -25,8 +25,8 @@ import '../../features/profile/presentation/views/updatepass.dart';
 import '../../features/profile/presentation/views/updateprofile.dart';
 import '../../features/register/presentation/views/register.dart';
 import '../../features/setpassword/presentation/views/setpassword.dart';
-import '../../features/shop/domain/entities/products_entity.dart';
-import '../../features/shop/presentation/views/reviews.dart';
+import '../../features/shopping/domain/entities/products_entity.dart';
+import '../../features/shopping/presentation/views/reviews.dart';
 import 'routes.dart';
 
 Route<dynamic> onGenerate(RouteSettings settings) {

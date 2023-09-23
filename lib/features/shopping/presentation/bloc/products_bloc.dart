@@ -1,7 +1,7 @@
-import 'package:aumall/features/shop/domain/entities/categories_entity.dart';
-import 'package:aumall/features/shop/domain/repositories/product_repository.dart';
-import 'package:aumall/features/shop/domain/usecases/get_products_shop_usecase.dart';
-import 'package:aumall/features/shop/domain/usecases/search_products_usecase.dart';
+import 'package:aumall/features/shopping/domain/entities/categories_entity.dart';
+import 'package:aumall/features/shopping/domain/repositories/product_repository.dart';
+import 'package:aumall/features/shopping/domain/usecases/get_products_shop_usecase.dart';
+import 'package:aumall/features/shopping/domain/usecases/search_products_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

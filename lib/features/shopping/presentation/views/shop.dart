@@ -1,9 +1,10 @@
-import 'package:aumall/features/shop/domain/entities/categories_entity.dart';
-import 'package:aumall/features/shop/domain/entities/list_product_shop_entity.dart';
+import 'package:aumall/features/shopping/domain/entities/categories_entity.dart';
+import 'package:aumall/features/shopping/domain/entities/list_product_shop_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
+import '../../../../core/colors/colors.dart';
 import '../../../../generated/l10n.dart';
 import '../../../favorite/presentation/views/product_item_aumall.dart';
 import '../../../home/presentation/view/product_details.dart';
@@ -129,7 +130,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                 // The loading indicator
                                 const CupertinoActivityIndicator(
                                   radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
+                                  color: ColorManager.colorApp,
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -487,7 +488,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
             // The loading indicator
                                 const CupertinoActivityIndicator(
                                   radius: 20.0,
-                                  color: CupertinoColors.activeGreen,
+                                  color: ColorManager.colorApp,
                                 ),
             Text(S.current.dataLoading)
           ],

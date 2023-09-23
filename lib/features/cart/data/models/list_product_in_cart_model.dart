@@ -1,4 +1,4 @@
-import '../../../shop/data/models/products_model.dart';
+import '../../../shopping/data/models/products_model.dart';
 import '../../domain/entities/list_product_in_cart_entity.dart';
 
 class ListProductInCartModel extends ListProductInCartEntity {

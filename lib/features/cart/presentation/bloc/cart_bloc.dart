@@ -8,7 +8,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:aumall/features/shop/domain/entities/products_entity.dart';
+import 'package:aumall/features/shopping/domain/entities/products_entity.dart';
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../../data/models/cart_model.dart';

@@ -8,7 +8,7 @@ import '../../../../core/theme/theme_data.dart';
 import '../../../../core/utilities/enums.dart';
 import '../../../../core/utilities/utils.dart';
 import '../../../home/presentation/view/product_details.dart';
-import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
 
 class ItemProductOfShop extends StatefulWidget {
   final ProductAuMallEntity productAuMallEntity;

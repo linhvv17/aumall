@@ -1,6 +1,6 @@
-import 'package:aumall/features/shop/domain/entities/products_entity.dart';
+import 'package:aumall/features/shopping/domain/entities/products_entity.dart';
 
-import '../../../shop/data/models/products_model.dart';
+import '../../../shopping/data/models/products_model.dart';
 
 class DetailProductResponse {
   DetailProductResponse({

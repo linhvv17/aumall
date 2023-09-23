@@ -30,8 +30,8 @@ import 'features/profile/presentation/bloc/profile_bloc.dart';
 import 'features/profile/presentation/bloc/update_password_bloc.dart';
 import 'features/register/presentation/bloc/register_bloc.dart';
 import 'features/setpassword/presentation/bloc/reset_password_bloc.dart';
-import 'features/shop/presentation/bloc/products_bloc.dart';
-import 'features/shop/presentation/bloc/send_review_bloc.dart';
+import 'features/shopping/presentation/bloc/products_bloc.dart';
+import 'features/shopping/presentation/bloc/send_review_bloc.dart';
 import 'generated/l10n.dart';
 
 

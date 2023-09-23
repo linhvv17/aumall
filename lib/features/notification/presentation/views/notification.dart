@@ -5,9 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:aumall/features/favorite/presentation/bloc/favourite_bloc.dart';
 import 'package:aumall/features/home/widgets/customGridView.dart';
+import '../../../../core/colors/colors.dart';
 import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
-import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
 import '../../domain/entities/notification_entity.dart';
 import '../bloc/notification_bloc.dart';
 import 'notification_item.dart';
@@ -61,7 +62,7 @@ class _NotificationViewState extends State<NotificationView> {
                       // The loading indicator
                       const CupertinoActivityIndicator(
                         radius: 20.0,
-                        color: CupertinoColors.activeGreen,
+                        color: ColorManager.colorApp,
                       ),
                       const SizedBox(
                         height: 10,

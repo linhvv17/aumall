@@ -1,6 +1,6 @@
 import 'package:aumall/features/favorite/domain/entities/list_favorite_entity.dart';
 
-import '../../../shop/data/models/products_model.dart';
+import '../../../shopping/data/models/products_model.dart';
 
 class ListFavoriteModel extends ListFavoriteEntity {
   const ListFavoriteModel(super.listFavorite);

@@ -6,12 +6,11 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/theme/theme_data.dart';
 import '../../../../core/utilities/enums.dart';
 import '../../../../core/utilities/mediaquery.dart';
-import '../../../../core/utilities/routes.dart';
 import '../../../../core/utilities/utils.dart';
 import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
-import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
 import '../bloc/favourite_bloc.dart';
 
 class ProductItemAuMall extends StatefulWidget {

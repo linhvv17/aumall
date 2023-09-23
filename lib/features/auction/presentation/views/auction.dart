@@ -4,9 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/features/home/widgets/customGridView.dart';
+import '../../../../core/colors/colors.dart';
 import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
-import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
 
 class AuctionView extends StatefulWidget {
   const AuctionView({super.key});
@@ -77,7 +78,7 @@ class _AuctionViewState extends State<AuctionView> {
                       // The loading indicator
                       const CupertinoActivityIndicator(
                         radius: 20.0,
-                        color: CupertinoColors.activeGreen,
+                        color: ColorManager.colorApp,
                       ),
                       const SizedBox(
                         height: 10,
@@ -169,7 +170,7 @@ class _AuctionViewState extends State<AuctionView> {
                       // The loading indicator
                       const CupertinoActivityIndicator(
                         radius: 20.0,
-                        color: CupertinoColors.activeGreen,
+                        color: ColorManager.colorApp,
                       ),
                       SizedBox(
                         height: 10,
@@ -260,9 +261,9 @@ class _AuctionViewState extends State<AuctionView> {
                       // The loading indicator
                       const CupertinoActivityIndicator(
                         radius: 20.0,
-                        color: CupertinoColors.activeGreen,
+                        color: ColorManager.colorApp,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(S.current.dataLoading)

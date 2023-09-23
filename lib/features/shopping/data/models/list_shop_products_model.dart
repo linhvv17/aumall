@@ -1,7 +1,8 @@
 import 'package:aumall/features/favorite/domain/entities/list_favorite_entity.dart';
 import 'package:aumall/features/home/data/models/detail_product_response.dart';
+import 'package:aumall/features/shopping/data/models/products_model.dart';
 
-import '../../../shop/data/models/products_model.dart';
+import '../../../shopping/data/models/products_model.dart';
 import '../../domain/entities/list_product_shop_entity.dart';
 
 class ListShopProductsModel extends ListProductShopEntity {

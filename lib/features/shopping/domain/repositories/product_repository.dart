@@ -1,6 +1,6 @@
 import 'package:aumall/core/usecase/usecase.dart';
 import 'package:dartz/dartz.dart';
-import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
+import 'package:aumall/features/shopping/domain/entities/reviews_entity.dart';
 import '../../../../core/error/failure.dart';
 import '../../../home/domain/entities/product_detail_entity.dart';
 import '../entities/categories_entity.dart';

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:aumall/features/shop/domain/entities/reviews_entity.dart';
-import 'package:aumall/features/shop/domain/usecases/get_all_reviews.dart';
+import 'package:aumall/features/shopping/domain/entities/reviews_entity.dart';
+import 'package:aumall/features/shopping/domain/usecases/get_all_reviews.dart';
 import '../../../home/data/models/detail_product_response.dart';
 import '../../domain/entities/response_entity.dart';
 import '../../domain/usecases/send_review_usecase.dart';

@@ -2,7 +2,7 @@ import 'package:aumall/features/notification/domain/usecases/get_detail_notifica
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../../../core/usecase/usecase.dart';
-import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
 import '../../domain/entities/list_notification_entity.dart';
 import '../../domain/entities/notification_entity.dart';
 import '../../domain/usecases/get_list_notification_usecase.dart';

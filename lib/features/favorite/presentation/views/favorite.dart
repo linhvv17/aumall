@@ -5,10 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:aumall/features/favorite/presentation/bloc/favourite_bloc.dart';
 import 'package:aumall/features/home/widgets/customGridView.dart';
+import '../../../../core/colors/colors.dart';
 import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../home/widgets/product_item.dart';
-import '../../../shop/domain/entities/products_entity.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
 
 class FavoriteView extends StatefulWidget {
   const FavoriteView({super.key});
@@ -61,7 +62,7 @@ class _FavoriteViewState extends State<FavoriteView> {
                   // The loading indicator
                   const CupertinoActivityIndicator(
                     radius: 20.0,
-                    color: CupertinoColors.activeGreen,
+                    color: ColorManager.colorApp,
                   ),
                   const SizedBox(
                     height: 10,

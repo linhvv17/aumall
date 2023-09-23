@@ -37,6 +37,7 @@ class _LoginViewState extends State<LoginView> {
         await SecureStorage().storage.read(key: "username") ?? "";
     passController.text =
         await SecureStorage().storage.read(key: "password") ?? "";
+  saveAccount = await PreferenceHelper.getDataFromSharedPreference(key: "saveAccount") ?? false;
   }
 
   @override
@@ -174,6 +175,9 @@ class _LoginViewState extends State<LoginView> {
                                     SecureStorage().storage.write(
                                         key: "password",
                                         value: passController.text);
+                                    PreferenceHelper.saveDataInSharedPreference(
+                                        key: "saveAccount", value: saveAccount);
+
                                   }
                                   BlocProvider.of<LoginBloc>(context).add(
                                       UserLogin(emailController.text,
