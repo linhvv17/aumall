@@ -9,6 +9,7 @@ import '../../../../generated/l10n.dart';
 import '../../../favorite/presentation/views/product_item_aumall.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../home/widgets/customGridView.dart';
+import '../../domain/entities/product/products_order_by_shop_entity.dart';
 import '../bloc/categories/categories_bloc.dart';
 import '../bloc/products_bloc.dart';
 import '../widgets/filter.dart';
@@ -143,7 +144,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                             return Text(state.message);
                           }
                           if (state is ShopLoadProductsSuccessWithFilter) {
-                            ListProductShopEntity listProductShopEntity =
+                            List<ProductsOrderByShopEntity> listProductShopEntity =
                                 state.listProductShopEntity;
                             return PageStorage(
                               bucket: PageStorageBucket(),
@@ -151,7 +152,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                 children: [
                                   Expanded(
                                       child: listProductShopEntity
-                                              .listProductAuMall.isEmpty
+                                              .isEmpty
                                           ? Center(
                                               child: Text(
                                                 S.current.noProducts,
@@ -177,19 +178,16 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                                   ListView.builder(
                                                       itemCount:
                                                           listProductShopEntity
-                                                              .listProductAuMall
                                                               .length,
                                                       itemBuilder:
                                                           (context, index) {
                                                         return ItemShopAndProduct(
-                                                          shop: listProductShopEntity
-                                                              .listProductAuMall[
-                                                                  index]
-                                                              .userEntity!
-                                                              .shop!,
-                                                          productAuMallEntities:
+                                                          shop:
                                                               listProductShopEntity
-                                                                  .listProductAuMall,
+                                                                  [index].shopEntity,
+                                                          productEntities:
+                                                              listProductShopEntity
+                                                              [index].products,
                                                         );
                                                       })
 
@@ -336,40 +334,40 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                     categoriesEntity.categories[tabIndex].id));
                           },
                         ),
-                        Expanded(
-                          child: GridView.builder(
-                            padding: EdgeInsets.zero,
-                            itemCount: newState
-                                .listProductAuMall.listProductAuMall.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                    height: 330, crossAxisCount: 2),
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => ProductDetails(
-                                            productSimpleEntity: newState
-                                                .listProductAuMall
-                                                .listProductAuMall[index],
-                                            index: index,
-                                            isFromAuction: false,
-                                          ),
-                                        ));
-                                  },
-                                  child: Hero(
-                                      tag: '$index',
-                                      child: ProductItemAuMall(
-                                        productFavoriteEntity: newState
-                                            .listProductAuMall
-                                            .listProductAuMall[index],
-                                        isAuctionProduct: false,
-                                      )));
-                            },
-                          ),
-                        ),
+                        // Expanded(
+                        //   child: GridView.builder(
+                        //     padding: EdgeInsets.zero,
+                        //     itemCount: newState
+                        //         .listProductAuMall.listProductAuMall.length,
+                        //     gridDelegate:
+                        //         const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                        //             height: 330, crossAxisCount: 2),
+                        //     itemBuilder: (context, index) {
+                        //       return InkWell(
+                        //           onTap: () {
+                        //             Navigator.push(
+                        //                 context,
+                        //                 MaterialPageRoute(
+                        //                   builder: (context) => ProductDetails(
+                        //                     productSimpleEntity: newState
+                        //                         .listProductAuMall
+                        //                         .listProductAuMall[index],
+                        //                     index: index,
+                        //                     isFromAuction: false,
+                        //                   ),
+                        //                 ));
+                        //           },
+                        //           child: Hero(
+                        //               tag: '$index',
+                        //               child: ProductItemAuMall(
+                        //                 productFavoriteEntity: newState
+                        //                     .listProductAuMall
+                        //                     .listProductAuMall[index],
+                        //                 isAuctionProduct: false,
+                        //               )));
+                        //     },
+                        //   ),
+                        // ),
                       ],
                     )),
         );
@@ -439,42 +437,43 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                         ],
                       ),
 
-                      Expanded(
-                        child: newState is ProductsLoadingState
-                            ? const Center(child: CircularProgressIndicator())
-                            : GridView.builder(
-                                padding: EdgeInsets.zero,
-                                itemCount: newState
-                                    .listProductAuMall.listProductAuMall.length,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                        height: 330, crossAxisCount: 2),
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProductDetails(
-                                                productSimpleEntity: newState
-                                                    .listProductAuMall
-                                                    .listProductAuMall[index],
-                                                index: index,
-                                              ),
-                                            ));
-                                      },
-                                      child: Hero(
-                                          tag: '$index',
-                                          child: ProductItemAuMall(
-                                            productFavoriteEntity: newState
-                                                .listProductAuMall
-                                                .listProductAuMall[index],
-                                            isAuctionProduct: false,
-                                          )));
-                                },
-                              ),
-                      ),
+                      // Expanded(
+                      //   child: newState is ProductsLoadingState
+                      //       ? const Center(child: CircularProgressIndicator())
+                      //       : GridView.builder(
+                      //           padding: EdgeInsets.zero,
+                      //           itemCount: newState
+                      //               .listProductAuMall.listProductAuMall.length,
+                      //           gridDelegate:
+                      //               const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                      //                   height: 330, crossAxisCount: 2),
+                      //           itemBuilder: (context, index) {
+                      //             return InkWell(
+                      //                 onTap: () {
+                      //                   Navigator.push(
+                      //                       context,
+                      //                       MaterialPageRoute(
+                      //                         builder: (context) =>
+                      //                             ProductDetails(
+                      //                           productSimpleEntity: newState
+                      //                               .listProductAuMall
+                      //                               .listProductAuMall[index],
+                      //                           index: index,
+                      //                         ),
+                      //                       ));
+                      //                 },
+                      //                 child: Hero(
+                      //                     tag: '$index',
+                      //                     child: ProductItemAuMall(
+                      //                       productFavoriteEntity: newState
+                      //                           .listProductAuMall
+                      //                           .listProductAuMall[index],
+                      //                       isAuctionProduct: false,
+                      //                     )));
+                      //           },
+                      //         ),
+                      // ),
+
                     ],
                   ));
       }
@@ -486,10 +485,10 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
               height: kHeight(context) / 3,
             ),
             // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: ColorManager.colorApp,
-                                ),
+            const CupertinoActivityIndicator(
+              radius: 20.0,
+              color: ColorManager.colorApp,
+            ),
             Text(S.current.dataLoading)
           ],
         ),

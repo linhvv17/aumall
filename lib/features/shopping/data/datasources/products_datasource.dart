@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:aumall/features/shopping/data/models/categories_model.dart';
+import 'package:aumall/features/shopping/data/models/product/info_shopping_model.dart';
+import 'package:aumall/features/shopping/data/models/product/products_order_by_shop_model.dart';
 import 'package:aumall/features/shopping/data/models/reviews_model.dart';
 import 'package:aumall/features/shopping/domain/entities/reviews_entity.dart';
 import 'package:aumall/features/shopping/domain/usecases/get_specific_product.dart';
@@ -25,15 +27,15 @@ abstract class ProductsDatasource {
   Future<GetReviewsEntity> getReviews(GetReviewsParams params);
   Future<ShopDataDefaultModel> getShopDataDefault();
   Future<CategoriesModel> getCategories();
-  Future<ListShopProductsModel> getProductsOfCategory(
+  Future<List<ProductsOrderByShopModel>> getProductsOfCategory(
       GetProductsOfCategoryUseCaseParams getProductsOfCategoryUseCaseParams);
   Future<ListShopProductsModel> changCategory(
       ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
-  Future<ListShopProductsModel> searchProducts(
+  Future<List<ProductsOrderByShopModel>> searchProducts(
       SearchProductsUseCaseParams searchProductsUseCaseParams);
   Future<ListShopProductsModel> getProductsByType(
       GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams);
-  Future<ListShopProductsModel> getProductsByFilter(
+  Future<List<ProductsOrderByShopModel>> getProductsByFilter(
       GetProductByFilterUseCaseParams params);
 }
 
@@ -207,7 +209,7 @@ class ProductsDatasourceImpl implements ProductsDatasource {
   }
 
   @override
-  Future<ListShopProductsModel> searchProducts(
+  Future<List<ProductsOrderByShopModel>> searchProducts(
       SearchProductsUseCaseParams searchProductsUseCaseParams) async {
     final params = <String, dynamic>{
       'keyword': searchProductsUseCaseParams.keyWord,
@@ -219,13 +221,14 @@ class ProductsDatasourceImpl implements ProductsDatasource {
         token:
             PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
-    print("searchProducts ${responseProducts.data.toString()}");
-
-    return ListShopProductsModel.fromJson(responseProducts.data);
+    List<ProductsOrderByShopModel> listProductsOrderByShopModel =
+    List<ProductsOrderByShopModel>.from(
+        responseProducts.data['data']['data'].map((x) => ProductsOrderByShopModel.fromJson(x)));
+    return listProductsOrderByShopModel;
   }
 
   @override
-  Future<ListShopProductsModel> getProductsByFilter(
+  Future<List<ProductsOrderByShopModel>> getProductsByFilter(
       GetProductByFilterUseCaseParams getProductByFilterUseCaseParams) async {
     final params = <String, dynamic>{
       'status': "1",
@@ -239,9 +242,10 @@ class ProductsDatasourceImpl implements ProductsDatasource {
         token:
             PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
-    print("getProductsByFilter ${responseProducts.data.toString()}");
-
-    return ListShopProductsModel.fromJson(responseProducts.data);
+    List<ProductsOrderByShopModel> listProductsOrderByShopModel =
+    List<ProductsOrderByShopModel>.from(
+        responseProducts.data['data']['data'].map((x) => ProductsOrderByShopModel.fromJson(x)));
+    return listProductsOrderByShopModel;
   }
 
   @override
@@ -275,7 +279,7 @@ class ProductsDatasourceImpl implements ProductsDatasource {
   }
 
   @override
-  Future<ListShopProductsModel> getProductsOfCategory(
+  Future<List<ProductsOrderByShopModel>> getProductsOfCategory(
       GetProductsOfCategoryUseCaseParams
           getProductsOfCategoryUseCaseParams) async {
     ////get list products by categories
@@ -284,14 +288,16 @@ class ProductsDatasourceImpl implements ProductsDatasource {
       'category_id': getProductsOfCategoryUseCaseParams.categoryId.toString(),
     };
     final responseProducts = await apiProvider.get(
-        endPoint: allProductsAuMall,
+        endPoint: allProductsOderByShop,
         query: params,
         token:
             PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
 
-    ListShopProductsModel listShopProductsModel =
-        ListShopProductsModel.fromJson(responseProducts.data);
 
-    return listShopProductsModel;
+    List<ProductsOrderByShopModel> listProductsOrderByShopModel =
+    List<ProductsOrderByShopModel>.from(
+        responseProducts.data['data']['data'].map((x) => ProductsOrderByShopModel.fromJson(x)));
+
+    return listProductsOrderByShopModel;
   }
 }

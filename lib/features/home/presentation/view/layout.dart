@@ -12,6 +12,7 @@ import '../../../favorite/presentation/views/favorite.dart';
 import '../../../notification/presentation/bloc/notification_bloc.dart';
 import '../../../profile/presentation/bloc/profile_bloc.dart';
 import '../../../profile/presentation/views/profile.dart';
+import '../../../shopping/presentation/bloc/categories/categories_bloc.dart';
 import '../../../shopping/presentation/bloc/products_bloc.dart';
 import '../../../shopping/presentation/views/shop.dart';
 import '../bloc/bottom_nav/bottomNavigationBar_bloc.dart';
@@ -58,14 +59,15 @@ class _LayoutPageState extends State<LayoutPage> {
                 case 1:
                   BlocProvider.of<BottomNavigationBarBloc>(context)
                       .add(LoadShop());
-                  BlocProvider.of<ProductsBloc>(context).add(GetSpecificProduct(
-                      BlocProvider.of<ProductsBloc>(context)
-                          .categoriesEntity[0]
-                          .name,
-                      '0',
-                      '100000',
-                      '-1',
-                      ''));
+                  BlocProvider.of<CategoriesBloc>(context).add(const GetCategories());
+                  // BlocProvider.of<ProductsBloc>(context).add(GetSpecificProduct(
+                  //     BlocProvider.of<ProductsBloc>(context)
+                  //         .categoriesEntity[0]
+                  //         .name,
+                  //     '0',
+                  //     '100000',
+                  //     '-1',
+                  //     ''));
                   break;
                 case 2:
                   BlocProvider.of<BottomNavigationBarBloc>(context)

@@ -5,6 +5,7 @@ import '../../../../core/error/failure.dart';
 import '../../../home/domain/entities/product_detail_entity.dart';
 import '../entities/categories_entity.dart';
 import '../entities/list_product_shop_entity.dart';
+import '../entities/product/products_order_by_shop_entity.dart';
 import '../entities/products_entity.dart';
 import '../entities/response_entity.dart';
 import '../entities/shop_data_default_entity.dart';
@@ -17,7 +18,7 @@ abstract class ProductRepository {
       // GetShopDataDefaultParams getShopDataDefaultParams
       );
   Future<Either<Failure, ProductsEntity>> getAllProducts();
-  Future<Either<Failure, ListProductShopEntity>> getProductByFilter(
+  Future<Either<Failure, List<ProductsOrderByShopEntity>>> getProductByFilter(
       GetProductByFilterUseCaseParams params);
   Future<Either<Failure, ResponseEntity>> sendReview(SendReviewParams params);
   Future<Either<Failure, GetReviewsEntity>> getReviews(GetReviewsParams params);
@@ -25,10 +26,10 @@ abstract class ProductRepository {
   Future<Either<Failure, ShopDataDefaultEntity>> getShopDataDefault();
   Future<Either<Failure, ListProductShopEntity>> changeCategory(
       ChangeCategoryUseCaseParams changeCategoryUseCaseParams);
-  Future<Either<Failure, ListProductShopEntity>> getProductsOfCategory(
+  Future<Either<Failure, List<ProductsOrderByShopEntity>>> getProductsOfCategory(
       GetProductsOfCategoryUseCaseParams getProductsOfCategoryUseCaseParams);
   Future<Either<Failure, CategoriesEntity>> getCategories();
-  Future<Either<Failure, ListProductShopEntity>> searchProducts(
+  Future<Either<Failure, List<ProductsOrderByShopEntity>>> searchProducts(
       SearchProductsUseCaseParams searchProductsUseCaseParams);
   Future<Either<Failure, ListProductShopEntity>> getProductsByType(
       GetProductsByTypeUseCaseParams getProductsByTypeUseCaseParams);

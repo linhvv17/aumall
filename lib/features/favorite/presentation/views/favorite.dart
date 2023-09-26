@@ -116,8 +116,8 @@ class _FavoriteViewState extends State<FavoriteView> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     ProductDetails(
-                                                  productSimpleEntity:
-                                                      listFavorite[index],
+                                                  productEntityId:
+                                                      listFavorite[index].id!,
                                                   index: index,
                                                   isFromAuction: false,
                                                 ),

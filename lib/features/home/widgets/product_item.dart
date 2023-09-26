@@ -74,7 +74,7 @@ class _ProductItemState extends State<ProductItem>{
                                 .add(widget.product.isFavorite!
                                 ? RemoveFavoriteProduct(widget.product.id!)
                                 : AddToFavorite(
-                              product: widget.product,
+                              productId: widget.product.id!,
                               isFavourite: widget.product.isFavorite!,
                             ));
 

@@ -59,7 +59,7 @@ Route<dynamic> onGenerate(RouteSettings settings) {
       final index = settings.arguments as int;
       return MaterialPageRoute(
           builder: (context) => ProductDetails(
-                productSimpleEntity: product,
+            productEntityId: product.id!,
                 // products: products,
                 index: index,
               ));

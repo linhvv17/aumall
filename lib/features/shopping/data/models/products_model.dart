@@ -1,3 +1,5 @@
+import 'package:aumall/features/shopping/domain/entities/product/shop_entity.dart';
+
 import '../../domain/entities/products_entity.dart';
 
 class ProductsModel extends ProductsEntity {
@@ -151,21 +153,15 @@ class CategoryOfProductModel extends CategoryOfProductEntity {
 }
 
 class ShopModel extends ShopEntity{
-  const ShopModel(super.id, super.userId, super.name, super.address, super.contact, super.description, super.banner, super.image, super.note, super.status, super.createdAt, super.updatedAt, super.bannerUrl, super.imageUrl);
+  const ShopModel(super.id, super.user_id,  super.name, super.banner, super.image, super.created_at, super.banner_url, super.image_url);
 
   factory ShopModel.fromJson(Map<String, dynamic> json) =>
       ShopModel(
         json['id'],
         json['user_id'],
         json['name'].toString(),
-        json['address'].toString(),
-        json['contact'].toString(),
-        json['description'].toString(),
         json['banner'].toString(),
         json['image'].toString(),
-        json['note'].toString(),
-        json['status'],
-        json['created_at'].toString(),
         json['updated_at'].toString(),
         json['banner_url'].toString(),
         json['image_url'].toString(),

@@ -22,9 +22,9 @@ class ProductEntity extends Equatable {
    final String? thumbnailUrl;
    final String? videoLink;
    final bool? isFavorite;
-   final bool? isWishList;
+   // final bool? isWishList;
 
-  const ProductEntity({
+  const ProductEntity(
     this.id,
     this.userId,
     this.addedBy,
@@ -46,8 +46,8 @@ class ProductEntity extends Equatable {
     this.thumbnailUrl,
     this.videoLink,
     this.isFavorite,
-    this.isWishList,
-  });
+    // this.isWishList,
+  );
 
   @override
   List<Object?> get props {

@@ -141,7 +141,7 @@ class _HomeState extends State<HomeView> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ProductDetails(
-                                    productSimpleEntity: newProducts[index],
+                                    productEntityId: newProducts[index].id!,
                                     index: index,
                                     isFromAuction: false,
                                   ),
@@ -211,8 +211,8 @@ class _HomeState extends State<HomeView> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ProductDetails(
-                                      productSimpleEntity:
-                                          comingSoonProducts[index],
+                                      productEntityId:
+                                          comingSoonProducts[index].id!,
                                       index: index,
                                       isFromAuction: false,
                                     ),
@@ -281,8 +281,8 @@ class _HomeState extends State<HomeView> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ProductDetails(
-                                      productSimpleEntity:
-                                          suggestionProducts[index],
+                                      productEntityId:
+                                          suggestionProducts[index].id!,
                                       index: index,
                                     ),
                                   ));

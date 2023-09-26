@@ -7,6 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../../domain/entities/list_product_shop_entity.dart';
+import '../../domain/entities/product/products_order_by_shop_entity.dart';
 import '../../domain/entities/products_entity.dart';
 import '../../domain/entities/shop_data_default_entity.dart';
 import '../../domain/usecases/change_category_usecase.dart';
@@ -116,7 +117,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       });
     });
 
-    //search
+    // search
     on<SearchProduct>((event, emit) async {
       final failureOrSuccess = await searchProductsUseCase(
           SearchProductsUseCaseParams(event.keyword, event.categoryId));
@@ -140,9 +141,10 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
               (success) {
         emit(const ShopLoadingDataProducts());
         //map with current category
-        for (var element in success.listProductAuMall) {}
+        // for (var element in success.listProductAuMall) {}
         emit(ShopLoadProductsSuccessWithFilter(success));
       });
     });
+
   }
 }

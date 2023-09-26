@@ -17,9 +17,9 @@ class GetListFavoriteProduct extends FavoriteEvent {}
 
 class AddToFavorite extends FavoriteEvent {
   final bool isFavourite;
-  final ProductAuMallEntity product;
+  final int productId;
   const AddToFavorite({
     required this.isFavourite,
-    required this.product,
+    required this.productId,
   });
 }

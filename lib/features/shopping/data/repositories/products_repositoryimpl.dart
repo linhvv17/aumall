@@ -10,6 +10,7 @@ import '../../../../core/network/network_info.dart';
 import '../../../../core/utilities/strings.dart';
 import '../../../../generated/l10n.dart';
 import '../../domain/entities/list_product_shop_entity.dart';
+import '../../domain/entities/product/products_order_by_shop_entity.dart';
 import '../../domain/entities/products_entity.dart';
 import '../../domain/entities/response_entity.dart';
 import '../../domain/repositories/product_repository.dart';
@@ -134,7 +135,7 @@ class ProductsRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, ListProductShopEntity>> searchProducts(
+  Future<Either<Failure, List<ProductsOrderByShopEntity>>> searchProducts(
       SearchProductsUseCaseParams searchProductsUseCaseParams) async {
     if (await networkInfo.isConnected) {
       try {
@@ -150,7 +151,7 @@ class ProductsRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, ListProductShopEntity>> getProductByFilter(
+  Future<Either<Failure, List<ProductsOrderByShopEntity>>> getProductByFilter(
       GetProductByFilterUseCaseParams params) async {
     if (await networkInfo.isConnected) {
       try {
@@ -195,7 +196,7 @@ class ProductsRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, ListProductShopEntity>> getProductsOfCategory(
+  Future<Either<Failure, List<ProductsOrderByShopEntity>>> getProductsOfCategory(
       GetProductsOfCategoryUseCaseParams
           getProductsOfCategoryUseCaseParams) async {
     if (await networkInfo.isConnected) {

@@ -1,3 +1,4 @@
+import 'package:aumall/features/shopping/domain/entities/product/shop_entity.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../home/data/models/list_product_home_model.dart';
@@ -139,45 +140,45 @@ class UserShopEntity extends Equatable {
       ];
 }
 
-class ShopEntity extends Equatable {
-  const ShopEntity(
-    this.id,
-    this.userId,
-    this.name,
-    this.address,
-    this.contact,
-    this.description,
-    this.banner,
-    this.image,
-    this.note,
-    this.status,
-    this.createdAt,
-    this.updatedAt,
-    this.bannerUrl,
-    this.imageUrl,
-  );
-
-  final int id;
-  final int userId;
-  final String? name;
-  final String? address;
-  final String? contact;
-  final String? description;
-  final String? banner;
-  final String? image;
-  final String? note;
-  final int status;
-  final String? createdAt;
-  final String? updatedAt;
-  final String? bannerUrl;
-  final String? imageUrl;
-
-  @override
-  List<Object?> get props => [
-        id,
-        name,
-      ];
-}
+// class ShopEntity extends Equatable {
+//   const ShopEntity(
+//     this.id,
+//     this.userId,
+//     this.name,
+//     this.address,
+//     this.contact,
+//     this.description,
+//     this.banner,
+//     this.image,
+//     this.note,
+//     this.status,
+//     this.createdAt,
+//     this.updatedAt,
+//     this.bannerUrl,
+//     this.imageUrl,
+//   );
+//
+//   final int id;
+//   final int userId;
+//   final String? name;
+//   final String? address;
+//   final String? contact;
+//   final String? description;
+//   final String? banner;
+//   final String? image;
+//   final String? note;
+//   final int status;
+//   final String? createdAt;
+//   final String? updatedAt;
+//   final String? bannerUrl;
+//   final String? imageUrl;
+//
+//   @override
+//   List<Object?> get props => [
+//         id,
+//         name,
+//       ];
+// }
 
 class ProductAuMallEntity extends Equatable {
   int? id;

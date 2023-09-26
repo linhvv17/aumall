@@ -123,6 +123,7 @@ class Product {
     required this.publishedAt,
     required this.expiredAt,
     required this.price,
+    required this.priceStep,
     required this.currentPrice,
     required this.thumbnailUrl,
     required this.videoLink,
@@ -134,6 +135,7 @@ class Product {
   late final String publishedAt;
   late final String expiredAt;
   late final String price;
+  late final String priceStep;
   late final String currentPrice;
   late final String thumbnailUrl;
   late final String videoLink;
@@ -146,6 +148,7 @@ class Product {
     publishedAt = json['published_at'].toString();
     expiredAt = json['expired_at'].toString();
     price = json['price'].toString();
+    priceStep = json['price_step'].toString();
     currentPrice = json['current_price'].toString();
     thumbnailUrl = json['thumbnail_url'].toString();
     videoLink = json['video_link'].toString();

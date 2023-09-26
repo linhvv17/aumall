@@ -124,11 +124,13 @@ class _AuctionViewState extends State<AuctionView> {
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             ProductDetails(
-                                                          productSimpleEntity:
+                                                              productEntityId:
                                                               listAuction[
-                                                                  index],
+                                                                  index].id!,
                                                           index: index,
                                                           isFromAuction: true,
+                                                              priceStep:  listAuction[
+                                                              index].priceStep,
                                                         ),
                                                       ))
                                                   .then((value) => {
@@ -216,9 +218,9 @@ class _AuctionViewState extends State<AuctionView> {
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             ProductDetails(
-                                                          productSimpleEntity:
+                                                              productEntityId:
                                                               listAuction[
-                                                                  index],
+                                                                  index].id!,
                                                           index: index,
                                                         ),
                                                       ))
@@ -307,11 +309,13 @@ class _AuctionViewState extends State<AuctionView> {
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             ProductDetails(
-                                                          productSimpleEntity:
+                                                              productEntityId:
                                                               listAuction[
-                                                                  index],
+                                                                  index].id!,
                                                           index: index,
                                                           isFromAuction: true,
+                                                              priceStep:  listAuction[
+                                                              index].priceStep,
                                                         ),
                                                       ))
                                                   .then((value) => {

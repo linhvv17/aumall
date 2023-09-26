@@ -82,8 +82,8 @@ class _ProductItemAuMallState extends State<ProductItemAuMall> {
                                           ? RemoveFavoriteProduct(
                                               widget.productFavoriteEntity.id!)
                                           : AddToFavorite(
-                                              product:
-                                                  widget.productFavoriteEntity,
+                                              productId:
+                                                  widget.productFavoriteEntity.id!,
                                               isFavourite: widget
                                                   .productFavoriteEntity
                                                   .isFavorite!,
@@ -195,8 +195,8 @@ class _ProductItemAuMallState extends State<ProductItemAuMall> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ProductDetails(
-                                      productSimpleEntity:
-                                      widget.productFavoriteEntity,
+                                      productEntityId:
+                                      widget.productFavoriteEntity.id!,
                                       index: 1,
                                       isFromAuction: widget.isAuctionProduct!
                                           ? true

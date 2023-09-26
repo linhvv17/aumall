@@ -39,7 +39,7 @@ class FavouriteBloc extends Bloc<FavoriteEvent, FavouriteState> {
       // }
 
       final failureOrSuccess = await addFavoriteProductUseCase(
-          AddFavoriteProductUseCaseParams(idProduct: event.product.id!));
+          AddFavoriteProductUseCaseParams(idProduct: event.productId));
       failureOrSuccess.fold(
           (failure) => emit(FavouriteDataErrorState(failure.message)),
           // (success) => emit(HomeStateDataLoaded(success)),

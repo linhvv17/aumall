@@ -180,7 +180,7 @@ class _NewProductItemState extends State<NewProductItem> {
                                             ? RemoveFavoriteProduct(
                                             widget.product.id!)
                                             : AddToFavorite(
-                                          product: widget.product,
+                                          productId: widget.product.id!,
                                           isFavourite:
                                           widget.product.isFavorite!,
                                         ));

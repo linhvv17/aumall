@@ -143,7 +143,7 @@ class ShopLoadListCategoriesSuccess extends ProductsState {
 }
 
 class ShopLoadProductsSuccessWithFilter extends ProductsState {
-  final ListProductShopEntity listProductShopEntity;
+  final List<ProductsOrderByShopEntity> listProductShopEntity;
   const ShopLoadProductsSuccessWithFilter(this.listProductShopEntity);
 }
 

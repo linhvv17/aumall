@@ -58,6 +58,7 @@ class ProductDetailDataModel {
     required this.updatedAt,
     required this.thumbnailUrl,
     required this.videoLink,
+    required this.isFavorite,
     required this.images,
     required this.brand,
     required this.madeIn,
@@ -88,6 +89,7 @@ class ProductDetailDataModel {
   late final String updatedAt;
   late final String thumbnailUrl;
   late final String videoLink;
+  late final bool isFavorite;
   late final List<Images> images;
   late final Brand brand;
   late final MadeIn madeIn;
@@ -119,6 +121,7 @@ class ProductDetailDataModel {
     updatedAt = json['updated_at'].toString();
     thumbnailUrl = json['thumbnail_url'].toString();
     videoLink = json['video_link'].toString() ?? ''; //
+    isFavorite = json['is_favorite'] ?? false; //
     images = List.from(json['images']).map((e) => Images.fromJson(e)).toList();
     brand = Brand.fromJson(json['brand']);
     madeIn = MadeIn.fromJson(json['made_in']);

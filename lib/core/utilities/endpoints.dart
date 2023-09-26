@@ -38,6 +38,7 @@ const String homeAuMall = "/home";
 const String categoryAuMall = "/category";
 const String productDetailAuMall = "/product";
 const String allProductsAuMall = "/products";
+const String allProductsOderByShop = "/shops";
 const String auctionProductsAuMall = "/product-auction";
 const String userAuctionProductsAuMall = "/user-auctions";
 const String favoriteProductsAuMall = "/product-wish-list";
