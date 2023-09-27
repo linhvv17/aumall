@@ -35,6 +35,7 @@ class _ProductItemAuMallState extends State<ProductItemAuMall> {
                     appThemeData[AppTheme.lightTheme]
                 ? ColorManager.white
                 : Colors.white.withOpacity(0.2),
+            border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(15)),
         child: Stack(
           children: [
@@ -126,7 +127,7 @@ class _ProductItemAuMallState extends State<ProductItemAuMall> {
                           rating:
                               widget.productFavoriteEntity.ratingNumber != null
                                   ? double.parse(widget.productFavoriteEntity.ratingNumber!)
-                              
+
                                   : 0.0,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,

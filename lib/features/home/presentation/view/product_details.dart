@@ -21,6 +21,7 @@ import '../../../shopping/domain/entities/products_entity.dart';
 import '../../../shopping/presentation/bloc/send_review_bloc.dart';
 import '../../../shopping/presentation/widgets/review_card.dart';
 import '../../widgets/carousel.dart';
+import '../../widgets/loading_product_detail_screen.dart';
 import '../../widgets/product_item.dart';
 import '../bloc/product_detail_bloc/product_detail_event.dart';
 
@@ -689,23 +690,9 @@ class _ProductDetailsState extends State<ProductDetails>
                   ),
                 ),
               );
-            } else if (state is ProductDetailLoading) {
-              return Center(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // The loading indicator
-                  const CupertinoActivityIndicator(
-                    radius: 20.0,
-                    color: ColorManager.colorApp,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(S.current.dataLoading)
-                ],
-              ));
+            }
+            else if (state is ProductDetailLoading) {
+              return const LoadingProductDetailScreen();
             } else if (state is ProductDetailErrorState) {
               return Center(child: Text(state.message));
             } else {

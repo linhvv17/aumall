@@ -11,7 +11,7 @@ import 'package:hive_flutter/adapters.dart';
 
 import '../core/local/shared_preference.dart';
 import '../core/theme/theme_service.dart';
-import '../dependancy_injection.dart';
+import '../app/di/dependancy_injection.dart';
 import '../features/cart/data/datasource/local_datasource.dart';
 import '../features/profile/data/datasources/profile_local_datasource.dart';
 import '../local_notification_service.dart';

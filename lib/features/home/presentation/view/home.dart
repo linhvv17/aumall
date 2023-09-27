@@ -13,6 +13,7 @@ import '../../../shopping/presentation/bloc/products_bloc.dart';
 import '../../widgets/carousel_screen.dart';
 import '../../widgets/customGridView.dart';
 import '../../widgets/item_shop_top.dart';
+import '../../widgets/loading_home_screen.dart';
 import '../../widgets/product_item_new.dart';
 import '../bloc/bottom_nav/bottomNavigationBar_bloc.dart';
 import '../bloc/home_bloc/home_state.dart';
@@ -51,27 +52,9 @@ class _HomeState extends State<HomeView> {
             child:
                 BlocBuilder<HomeBloc, HomeLoadState>(builder: (context, state) {
               if (state is HomeStateLoading) {
-                return Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 100,
-                      ),
-                      // The loading indicator
-                      const CupertinoActivityIndicator(
-                        radius: 20.0,
-                        color: ColorManager.colorApp,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(S.current.dataLoading)
-                    ],
-                  ),
-                );
-              } else if (state is HomeStateGetDataSuccess) {
+                return const LoadingHomeScreen();
+              }
+              else if (state is HomeStateGetDataSuccess) {
                 final newProducts = state
                     .listProductHomeEntity!.listProductHomeData.newProducts;
 
@@ -190,7 +173,7 @@ class _HomeState extends State<HomeView> {
                     ),
                   ),
                   SizedBox(
-                      height: comingSoonProducts!.length > 2 ? 550 : 250,
+                      height: comingSoonProducts!.length > 2 ? 550 : 275,
                       child: GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
@@ -260,7 +243,7 @@ class _HomeState extends State<HomeView> {
                     ),
                   ),
                   suggestionProducts.isEmpty ? Container() : SizedBox(
-                      height: suggestionProducts.length > 2 ? 550 : 250,
+                      height: suggestionProducts.length > 2 ? 550 : 275,
                       child: GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
@@ -338,7 +321,7 @@ class _HomeState extends State<HomeView> {
                           itemCount: shops?.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                  mainAxisSpacing: 5,
+                                  mainAxisSpacing: 8,
                                   height: (kWidth(context) -
                                           20 -
                                           ((shops?.length)! - 1) * 5) /

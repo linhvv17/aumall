@@ -23,7 +23,7 @@ import 'configs/app_configs.dart';
 import 'configs/app_flavor.dart';
 import 'core/local/shared_preference.dart';
 import 'core/theme/theme_service.dart';
-import 'dependancy_injection.dart';
+import 'app/di/dependancy_injection.dart';
 import 'features/cart/data/datasource/local_datasource.dart';
 import 'features/favorite/presentation/bloc/favourite_bloc.dart';
 import 'features/home/presentation/bloc/bottom_nav/bottomNavigationBar_bloc.dart';

@@ -37,7 +37,9 @@ class _NewProductItemState extends State<NewProductItem> {
                     appThemeData[AppTheme.lightTheme]
                 ? ColorManager.white
                 : Colors.white.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(10)),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: kElevationToShadow[3]
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

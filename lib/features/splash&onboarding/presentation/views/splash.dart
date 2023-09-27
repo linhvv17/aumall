@@ -23,7 +23,7 @@ class SplashViewState extends State<SplashView>
   Animation<double>? animation;
 
   startTime() async {
-    var duration = const Duration(seconds: 3);
+    var duration = const Duration(seconds: 1);
     return Timer(duration, navigationPage);
   }
 
@@ -39,7 +39,7 @@ class SplashViewState extends State<SplashView>
   void initState() {
     super.initState();
     animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 4));
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
     animation =
         CurvedAnimation(parent: animationController!, curve: Curves.easeOut);
 

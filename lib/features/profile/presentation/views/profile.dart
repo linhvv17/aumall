@@ -14,6 +14,7 @@ import '../../../../generated/l10n.dart';
 import '../../../cart/presentation/bloc/cart_bloc.dart';
 import '../bloc/profile_bloc.dart';
 import '../widgets/listtile.dart';
+import '../widgets/loading_profile_screen.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -23,30 +24,6 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          // BlocBuilder<ThemeBloc, ThemeState>(
-          //   builder: (context, state) {
-          //     late AppTheme currentTheme;
-          //     return IconButton(
-          //       onPressed: () {
-          //         if (state.themeData == appThemeData[AppTheme.lightTheme]) {
-          //           currentTheme = AppTheme.values[1];
-          //           ThemeDatabaseService.putThemeSettings(1);
-          //         } else {
-          //           currentTheme = AppTheme.values[0];
-          //           ThemeDatabaseService.putThemeSettings(0);
-          //         }
-          //
-          //         context
-          //             .read<ThemeBloc>()
-          //             .add(ThemeChanged(theme: currentTheme));
-          //       },
-          //       icon: state.themeData == appThemeData[AppTheme.lightTheme]
-          //           ? const Icon(Icons.sunny)
-          //           : const Icon(Icons.mode_night),
-          //     );
-          //   },
-          // ),
-
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, AppRoutes.notifications);
@@ -205,22 +182,7 @@ class ProfileView extends StatelessWidget {
                     ),
                   );
                 } else if (state is ProfileLoadingState) {
-                  return Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // The loading indicator
-                          const CupertinoActivityIndicator(
-                            radius: 20.0,
-                            color: ColorManager.colorApp,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(S.current.dataLoading)
-                        ],
-                      ));
+                  return const LoadingProfileScreen();
                 } else if (state is ProfileErrorState) {
                   return state.message == S.current.noInternetError
                       ? Column(

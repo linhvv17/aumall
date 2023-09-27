@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:lottie/lottie.dart';
 import 'package:aumall/core/utilities/routes.dart';
 import 'package:aumall/features/cart/presentation/bloc/cart_bloc.dart';
@@ -12,11 +11,8 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../generated/l10n.dart';
-import '../../../favorite/presentation/views/product_item_aumall.dart';
-import '../../../home/presentation/view/product_details.dart';
-import '../../../home/widgets/customGridView.dart';
 import '../../../payment/presentation/bloc/payment_bloc.dart';
-import '../../../shopping/domain/entities/products_entity.dart';
+import '../widgets/loading_cart_screen.dart';
 
 class CartView extends StatefulWidget {
   final bool isFromBottomBar;
@@ -32,9 +28,6 @@ class _CartViewState extends State<CartView> {
   void initState() {
     BlocProvider.of<CartBloc>(context).add(CartStarted());
     BlocProvider.of<LocationBloc>(context).add(GetCurrentLocation());
-    // BlocProvider.of<PaymentBloc>(context).add(RequestAuth(dotenv.env['PAYMENT_API_KEY']!));
-    print("PreferenceHelper.getDataFromSharedPreference(key: " ")");
-    print(PreferenceHelper.getDataFromSharedPreference(key: "keyUser"));
     super.initState();
   }
 
@@ -118,49 +111,32 @@ class _CartViewState extends State<CartView> {
               child: BlocBuilder<CartBloc, CartState>(
                 builder: (context, state) {
                   if (state is CartLoading) {
-                    return Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // The loading indicator
-                          const CupertinoActivityIndicator(
-                            radius: 20.0,
-                            color: ColorManager.colorApp,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(S.current.dataLoading)
-                        ],
-                      ),
-                    );
+                    return const LoadingCartScreen();
                   }
                   if (state is CartDataErrorState) {
                     return Center(child: Text(state.message));
                   }
                   if (state is CartDataLoaded) {
-                    if (state
-                        .listProductInCartEntity.listProductInCart.isEmpty) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Center(
-                                child: LottieBuilder.asset(
-                                    'assets/images/empty.json')),
+                    return state
+                        .listProductInCartEntity.listProductInCart.isEmpty ?
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Center(
+                              child: LottieBuilder.asset(
+                                  'assets/images/empty.json')),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            S.current.notCart,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              S.current.notCart,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ),
-                        ],
-                      );
-                    }
-                    return Column(
+                        ),
+                      ],
+                    ) :
+                    Column(
                       children: [
                         Expanded(
                           child: ListView.builder(
@@ -187,7 +163,7 @@ class _CartViewState extends State<CartView> {
                                 if (state is CartLoaded) {
                                   return Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "${BlocProvider.of<CartBloc>(context).totalNumberItems} items",
@@ -199,7 +175,7 @@ class _CartViewState extends State<CartView> {
                                       ),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             "${S.current.totalAmount}: ",
@@ -207,7 +183,7 @@ class _CartViewState extends State<CartView> {
                                                 .textTheme
                                                 .titleLarge!
                                                 .copyWith(
-                                                    color: ColorManager.grey),
+                                                color: ColorManager.grey),
                                           ),
                                           FittedBox(
                                             child: Text(

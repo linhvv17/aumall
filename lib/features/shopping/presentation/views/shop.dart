@@ -14,6 +14,8 @@ import '../bloc/categories/categories_bloc.dart';
 import '../bloc/products_bloc.dart';
 import '../widgets/filter.dart';
 import '../widgets/item_shop_and_product.dart';
+import '../widgets/loading_shopping_product.dart';
+import '../widgets/loading_shopping_screen.dart';
 import '../widgets/search.dart';
 import '../widgets/sort_by.dart';
 
@@ -53,6 +55,10 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
 
     return BlocBuilder<CategoriesBloc, CategoriesState>(
         builder: (oldState, newState) {
+      if (newState is CategoriesLoadingState) {
+        return const LoadingShoppingScreen();
+      }
+
       if (newState is ShopLoadingData) {
         return Center(
           child: Column(
@@ -123,22 +129,7 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                         (category) => BlocBuilder<ProductsBloc, ProductsState>(
                             builder: (context, state) {
                           if (state is ShopLoadingDataProducts) {
-                            return Center(
-                                child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                // The loading indicator
-                                const CupertinoActivityIndicator(
-                                  radius: 20.0,
-                                  color: ColorManager.colorApp,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(S.current.dataLoading)
-                              ],
-                            ));
+                            return const LoadingShoppingProduct();
                           }
                           if (state is ShopLoadDataErrorState) {
                             return Text(state.message);

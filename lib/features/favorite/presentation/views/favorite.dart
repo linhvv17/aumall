@@ -10,6 +10,7 @@ import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../home/widgets/product_item.dart';
 import '../../../shopping/domain/entities/products_entity.dart';
+import 'loading_favorite_screen.dart';
 
 class FavoriteView extends StatefulWidget {
   const FavoriteView({super.key});
@@ -54,22 +55,7 @@ class _FavoriteViewState extends State<FavoriteView> {
           child: BlocBuilder<FavouriteBloc, FavouriteState>(
               builder: (context, state) {
             if (state is FavouriteDataLoading) {
-              return Center(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // The loading indicator
-                  const CupertinoActivityIndicator(
-                    radius: 20.0,
-                    color: ColorManager.colorApp,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(S.current.dataLoading)
-                ],
-              ));
+              return const LoadingFavoriteScreen();
             } else if (state is FavouriteDataLoaded) {
               List<ProductAuMallEntity> listFavorite =
                   state.listFavoriteEntity.listFavorite;

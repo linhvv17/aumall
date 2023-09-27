@@ -1,8 +1,7 @@
-
 import 'package:aumall/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -13,7 +12,7 @@ import 'core/theme/bloc/theme_bloc.dart';
 import 'core/utilities/endpoints.dart';
 import 'core/utilities/router.dart';
 import 'core/utilities/routes.dart';
-import 'dependancy_injection.dart';
+import 'app/di/dependancy_injection.dart';
 import 'features/auction/presentation/bloc/auction_bloc.dart';
 import 'features/cart/presentation/bloc/cart_bloc.dart';
 import 'features/cart/presentation/bloc/cubit/address_cubit.dart';
@@ -63,10 +62,14 @@ class _MyAppState extends State<MyApp> {
       provisional: false,
       sound: true,
     );
-    print('User granted permission: ${settings.authorizationStatus}');
+    if (kDebugMode) {
+      print('User granted permission: ${settings.authorizationStatus}');
+    }
     final fcmToken = await FirebaseMessaging.instance.getToken();
     await FirebaseMessaging.instance.setAutoInitEnabled(true);
-    print("FCMToken $fcmToken");
+    if (kDebugMode) {
+      print("FCMToken $fcmToken");
+    }
 
     _handleAndroidFCMWhenOpenApp();
 

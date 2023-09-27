@@ -8,6 +8,7 @@ import '../../../../core/colors/colors.dart';
 import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../shopping/domain/entities/products_entity.dart';
+import 'loading_auction_screen.dart';
 
 class AuctionView extends StatefulWidget {
   const AuctionView({super.key});
@@ -70,22 +71,7 @@ class _AuctionViewState extends State<AuctionView> {
             children: [
               BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
                 if (state is AuctionDataLoading) {
-                  return Center(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // The loading indicator
-                      const CupertinoActivityIndicator(
-                        radius: 20.0,
-                        color: ColorManager.colorApp,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(S.current.dataLoading)
-                    ],
-                  ));
+                  return const LoadingAuctionScreen();
                 } else if (state is AuctionDataLoaded) {
                   List<ProductAuMallEntity> listAuction =
                       state.listAuctionEntity.listAuction;
@@ -164,22 +150,7 @@ class _AuctionViewState extends State<AuctionView> {
               }),
               BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
                 if (state is AuctionDataLoading) {
-                  return Center(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // The loading indicator
-                      const CupertinoActivityIndicator(
-                        radius: 20.0,
-                        color: ColorManager.colorApp,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(S.current.dataLoading)
-                    ],
-                  ));
+                  return const LoadingAuctionScreen();
                 } else if (state is AuctionDataLoaded) {
                   List<ProductAuMallEntity> listAuction =
                       state.listAuctionEntity.listAuction;
@@ -255,22 +226,7 @@ class _AuctionViewState extends State<AuctionView> {
               }),
               BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
                 if (state is AuctionDataLoading) {
-                  return Center(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // The loading indicator
-                      const CupertinoActivityIndicator(
-                        radius: 20.0,
-                        color: ColorManager.colorApp,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(S.current.dataLoading)
-                    ],
-                  ));
+                  return const LoadingAuctionScreen();
                 } else if (state is AuctionDataLoaded) {
                   List<ProductAuMallEntity> listAuction =
                       state.listAuctionEntity.listAuction;
