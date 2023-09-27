@@ -125,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "headerTitle": MessageLookupByLibrary.simpleMessage(
             "Tập luyện\nMột phong cách mới!"),
         "home": MessageLookupByLibrary.simpleMessage("Cho bạn"),
+        "hotProduct": MessageLookupByLibrary.simpleMessage("HOT"),
         "internalServerError":
             MessageLookupByLibrary.simpleMessage("Lỗi server"),
         "invalidCode":
@@ -138,6 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginsuccess":
             MessageLookupByLibrary.simpleMessage("Đăng nhập thành công"),
         "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
+        "mainProduct": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "mayLike": MessageLookupByLibrary.simpleMessage(
             "Bạn cũng có thể thích cái này"),
         "myAddresses":
@@ -150,6 +152,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameError": MessageLookupByLibrary.simpleMessage(
             "Tên phải có nhiều hơn 3 ký tự"),
         "newComingSoon": MessageLookupByLibrary.simpleMessage("Sắp về"),
+        "newProduct": MessageLookupByLibrary.simpleMessage("Sản phầm mới"),
         "newText": MessageLookupByLibrary.simpleMessage("Mới"),
         "newpassword": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
         "newpasswordEmpty":

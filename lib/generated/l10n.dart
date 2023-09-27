@@ -1939,6 +1939,36 @@ class S {
       args: [],
     );
   }
+
+  /// `TOP`
+  String get mainProduct {
+    return Intl.message(
+      'TOP',
+      name: 'mainProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HOT`
+  String get hotProduct {
+    return Intl.message(
+      'HOT',
+      name: 'hotProduct',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NEWS`
+  String get newProduct {
+    return Intl.message(
+      'NEWS',
+      name: 'newProduct',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

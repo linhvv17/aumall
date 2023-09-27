@@ -124,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "headerTitle": MessageLookupByLibrary.simpleMessage(
             "Give your workout\nA New Style!"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "hotProduct": MessageLookupByLibrary.simpleMessage("HOT"),
         "internalServerError":
             MessageLookupByLibrary.simpleMessage("internal_server_error"),
         "invalidCode":
@@ -138,6 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginsuccess":
             MessageLookupByLibrary.simpleMessage("Login done successfully"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "mainProduct": MessageLookupByLibrary.simpleMessage("TOP"),
         "mayLike":
             MessageLookupByLibrary.simpleMessage("You can also like this"),
         "myAddresses": MessageLookupByLibrary.simpleMessage("My Addresses"),
@@ -149,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameError": MessageLookupByLibrary.simpleMessage(
             "Name should have more than 3 characters"),
         "newComingSoon": MessageLookupByLibrary.simpleMessage("Coming Soon"),
+        "newProduct": MessageLookupByLibrary.simpleMessage("NEWS"),
         "newText": MessageLookupByLibrary.simpleMessage("New"),
         "newpassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "newpasswordEmpty":

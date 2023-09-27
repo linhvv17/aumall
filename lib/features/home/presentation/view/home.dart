@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utilities/routes.dart';
 import '../../../../generated/l10n.dart';
+import '../../../shop_profile/presentation/views/shop_profile.dart';
 import '../../../shopping/presentation/bloc/products_bloc.dart';
 import '../../widgets/customGridView.dart';
 import '../../widgets/item_shop_top.dart';
@@ -323,15 +324,11 @@ class _HomeState extends State<HomeView> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) => ProductDetails(
-                              //         productSimpleEntity:
-                              //         suggestionProducts![index],
-                              //         index: index,
-                              //       ),
-                              //     ));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const ShopProfileView(),
+                                  ));
                             },
                             child: ItemShopTop(
                               shopEntity: shops[index],

@@ -1,0 +1,308 @@
+import 'package:aumall/features/auction/presentation/bloc/auction_bloc.dart';
+import 'package:aumall/features/favorite/presentation/views/product_item_aumall.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:aumall/features/home/widgets/customGridView.dart';
+import '../../../../generated/l10n.dart';
+import '../../../home/presentation/view/product_details.dart';
+import '../../../shopping/domain/entities/products_entity.dart';
+import 'loading_auction_screen.dart';
+
+class ShopProfileView extends StatefulWidget {
+  const ShopProfileView({super.key});
+
+  @override
+  State<ShopProfileView> createState() => _ShopProfileViewState();
+}
+
+class _ShopProfileViewState extends State<ShopProfileView> {
+  @override
+  void initState() {
+    BlocProvider.of<AuctionBloc>(context).add(const GetListAuctionProduct(2));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final auctionBloc = BlocProvider.of<AuctionBloc>(context);
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            title: Text(
+              S.current.shop,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            bottom: TabBar(
+              onTap: (tabIndex) {
+                switch (tabIndex) {
+                  // Recent
+                  case 0:
+                    BlocProvider.of<AuctionBloc>(context)
+                        .add(const GetListAuctionProduct(2));
+                    break;
+
+                  // Upcoming
+                  case 1:
+                    BlocProvider.of<AuctionBloc>(context)
+                        .add(const GetListAuctionProduct(1));
+                    break;
+
+                  // Finished
+                  case 2:
+                    BlocProvider.of<AuctionBloc>(context)
+                        .add(const GetListAuctionProduct(3));
+                    break;
+                }
+              },
+              tabs: [
+                Tab(text: S.current.mainProduct),
+                Tab(text: S.current.hotProduct),
+                Tab(text: S.current.newProduct),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
+                if (state is AuctionDataLoading) {
+                  return const LoadingAuctionScreen();
+                } else if (state is AuctionDataLoaded) {
+                  List<ProductAuMallEntity> listAuction =
+                      state.listAuctionEntity.listAuction;
+                  return PageStorage(
+                    bucket: PageStorageBucket(),
+                    child: Column(
+                      children: [
+                        Expanded(
+                            child: listAuction.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      S.current.notauction,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  )
+                                : RefreshIndicator(
+                                    onRefresh: () async {
+                                      auctionBloc
+                                          .add(const GetListAuctionProduct(2));
+                                    },
+                                    child: GridView.builder(
+                                      physics:
+                                          const AlwaysScrollableScrollPhysics(
+                                              parent: BouncingScrollPhysics()),
+                                      itemCount: listAuction.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                              crossAxisCount: 2, height: 330),
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProductDetails(
+                                                              productEntityId:
+                                                              listAuction[
+                                                                  index].id!,
+                                                          index: index,
+                                                          isFromAuction: true,
+                                                              priceStep:  listAuction[
+                                                              index].priceStep,
+                                                        ),
+                                                      ))
+                                                  .then((value) => {
+                                                        BlocProvider.of<
+                                                                    AuctionBloc>(
+                                                                context)
+                                                            .add(
+                                                                const GetListAuctionProduct(
+                                                                    2))
+                                                      });
+                                            },
+                                            child:
+                                                // Container()
+                                                ProductItemAuMall(
+                                              productFavoriteEntity:
+                                                  listAuction[index],
+                                              isAuctionProduct: true,
+                                              typeProduct: 1,
+                                            ));
+                                      },
+                                    ),
+                                  ))
+                      ],
+                    ),
+                  );
+                } else if (state is AuctionDataErrorState) {
+                  return Text(state.message);
+                } else {
+                  return Container();
+                }
+              }),
+              BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
+                if (state is AuctionDataLoading) {
+                  return const LoadingAuctionScreen();
+                } else if (state is AuctionDataLoaded) {
+                  List<ProductAuMallEntity> listAuction =
+                      state.listAuctionEntity.listAuction;
+                  return PageStorage(
+                    bucket: PageStorageBucket(),
+                    child: Column(
+                      children: [
+                        Expanded(
+                            child: listAuction.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      S.current.notauction,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  )
+                                : RefreshIndicator(
+                                    onRefresh: () async {
+                                      auctionBloc
+                                          .add(const GetListAuctionProduct(2));
+                                    },
+                                    child: GridView.builder(
+                                      physics:
+                                          const AlwaysScrollableScrollPhysics(
+                                              parent: BouncingScrollPhysics()),
+                                      itemCount: listAuction.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                              crossAxisCount: 2, height: 330),
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProductDetails(
+                                                              productEntityId:
+                                                              listAuction[
+                                                                  index].id!,
+                                                          index: index,
+                                                        ),
+                                                      ))
+                                                  .then((value) => {
+                                                        BlocProvider.of<
+                                                                    AuctionBloc>(
+                                                                context)
+                                                            .add(
+                                                                const GetListAuctionProduct(
+                                                                    2))
+                                                      });
+                                            },
+                                            child:
+                                                // Container()
+                                                ProductItemAuMall(
+                                              productFavoriteEntity:
+                                                  listAuction[index],
+                                              isAuctionProduct: true,
+                                              typeProduct: 2,
+                                            ));
+                                      },
+                                    ),
+                                  ))
+                      ],
+                    ),
+                  );
+                } else if (state is AuctionDataErrorState) {
+                  return Text(state.message);
+                } else {
+                  return Container();
+                }
+              }),
+              BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
+                if (state is AuctionDataLoading) {
+                  return const LoadingAuctionScreen();
+                } else if (state is AuctionDataLoaded) {
+                  List<ProductAuMallEntity> listAuction =
+                      state.listAuctionEntity.listAuction;
+                  return PageStorage(
+                    bucket: PageStorageBucket(),
+                    child: Column(
+                      children: [
+                        Expanded(
+                            child: listAuction.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      S.current.notauction,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium,
+                                    ),
+                                  )
+                                : RefreshIndicator(
+                                    onRefresh: () async {
+                                      auctionBloc
+                                          .add(const GetListAuctionProduct(3));
+                                    },
+                                    child: GridView.builder(
+                                      physics:
+                                          const AlwaysScrollableScrollPhysics(
+                                              parent: BouncingScrollPhysics()),
+                                      itemCount: listAuction.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                              crossAxisCount: 2, height: 330),
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProductDetails(
+                                                              productEntityId:
+                                                              listAuction[
+                                                                  index].id!,
+                                                          index: index,
+                                                          isFromAuction: true,
+                                                              priceStep:  listAuction[
+                                                              index].priceStep,
+                                                        ),
+                                                      ))
+                                                  .then((value) => {
+                                                        BlocProvider.of<
+                                                                    AuctionBloc>(
+                                                                context)
+                                                            .add(
+                                                                const GetListAuctionProduct(
+                                                                    2))
+                                                      });
+                                            },
+                                            child:
+                                                // Container()
+                                                ProductItemAuMall(
+                                              productFavoriteEntity:
+                                                  listAuction[index],
+                                              isAuctionProduct: true,
+                                              typeProduct: 3,
+                                            ));
+                                      },
+                                    ),
+                                  ))
+                      ],
+                    ),
+                  );
+                } else if (state is AuctionDataErrorState) {
+                  return Text(state.message);
+                } else {
+                  return Container();
+                }
+              }),
+            ],
+          )),
+    );
+  }
+}

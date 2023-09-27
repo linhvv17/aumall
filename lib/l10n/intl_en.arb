@@ -204,6 +204,8 @@
   "close" : "Close",
   "defaultAddress" : "Use as the default shipping address",
   "noUserAuction" : "No one has entered the auction yet!",
-  "topBrand" : "Outstanding brand"
-
+  "topBrand" : "Outstanding brand",
+  "mainProduct" : "TOP",
+  "hotProduct" : "HOT",
+  "newProduct" : "NEWS"
 }
