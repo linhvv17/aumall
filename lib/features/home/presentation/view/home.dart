@@ -2,15 +2,11 @@ import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart'
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_event.dart';
 import 'package:aumall/features/home/presentation/view/product_details.dart';
 import 'package:aumall/features/home/widgets/bannerads.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:aumall/core/utilities/mediaquery.dart';
-import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/routes.dart';
 import '../../../../generated/l10n.dart';
 import '../../../shopping/presentation/bloc/products_bloc.dart';
-import '../../widgets/carousel_screen.dart';
 import '../../widgets/customGridView.dart';
 import '../../widgets/item_shop_top.dart';
 import '../../widgets/loading_home_screen.dart';
@@ -28,8 +24,6 @@ class HomeView extends StatefulWidget {
 class _HomeState extends State<HomeView> {
   @override
   void initState() {
-    // BlocProvider.of<HomeBloc>(context).add(GetBannerData());
-    // BlocProvider.of<HomeBloc>(context).add(GetListProductHomeData());
     BlocProvider.of<HomeBloc>(context).add(GetDataHome());
     super.initState();
   }
@@ -178,7 +172,7 @@ class _HomeState extends State<HomeView> {
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         padding: const EdgeInsets.all(10),
-                        itemCount: comingSoonProducts!.length > 4
+                        itemCount: comingSoonProducts.length > 4
                             ? 4
                             : comingSoonProducts.length,
                         gridDelegate:
@@ -311,42 +305,40 @@ class _HomeState extends State<HomeView> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: SizedBox(
-                        height: kHeight(context) / 4,
-                        child: GridView.builder(
-                          scrollDirection: Axis.horizontal,
-                          padding: EdgeInsets.zero,
-                          itemCount: shops?.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                  mainAxisSpacing: 8,
-                                  height: (kWidth(context) -
-                                          20 -
-                                          ((shops?.length)! - 1) * 5) /
-                                      3,
-                                  crossAxisCount: 1),
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) => ProductDetails(
-                                //         productSimpleEntity:
-                                //         suggestionProducts![index],
-                                //         index: index,
-                                //       ),
-                                //     ));
-                              },
-                              child: ItemShopTop(
-                                shopEntity: shops![index],
-                              ),
-                            );
-                          },
-                        )),
-                  ),
+                  SizedBox(
+                      height: shops!.length > 2 ? 550 : 275,
+                      child: GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        padding: const EdgeInsets.all(10),
+                        itemCount: shops.length > 4
+                            ? 4
+                            : shops.length,
+                        gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            height: 250,
+                            crossAxisCount: 2),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => ProductDetails(
+                              //         productSimpleEntity:
+                              //         suggestionProducts![index],
+                              //         index: index,
+                              //       ),
+                              //     ));
+                            },
+                            child: ItemShopTop(
+                              shopEntity: shops[index],
+                            ),
+                          );
+                        },
+                      )),
 
                   const SizedBox(height: 50),
                 ]);
@@ -370,7 +362,7 @@ class _HomeState extends State<HomeView> {
                 "${S.current.unauthorizedError} \nHãy đăng nhập lại để tiếp tục sử dụng"),
             actions: [
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
                   },

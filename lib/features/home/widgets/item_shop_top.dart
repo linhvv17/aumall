@@ -21,12 +21,15 @@ class _ItemShopTopState extends State<ItemShopTop> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
+        height: 250,
         decoration: BoxDecoration(
             color: BlocProvider.of<ThemeBloc>(context).themeData ==
                     appThemeData[AppTheme.lightTheme]
                 ? ColorManager.white
                 : Colors.white.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(10)),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: kElevationToShadow[3]
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
