@@ -48,11 +48,34 @@ class _ShopProfileViewState extends State<ShopProfileView> {
               children: [
                 currentTab == 1
                     ? Container()
-                    : Image.network(
-                        "https://timelinecovers.pro/facebook-cover/download/tron_lamborghini_aventador-facebook-cover.jpg",
-                        height: 270,
-                        fit: BoxFit.fitHeight,
-                      )
+                    :
+                BlocBuilder<ShopProfileBloc, ShopProfileState>(
+                    builder: (context, state) {
+                      if (state is ShopProfileDataLoading) {
+                        return Container(
+                          height: 270,
+                          decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(Radius.circular(10)),
+                              // border: Border.all(color: Colors.white),
+                              color: Colors.grey.withOpacity(0.5)),
+                        );
+                      } else if (state is ShopProfileDataLoaded) {
+                        ShopProfileEntity shopProfileEntity =
+                            state.shopProfileEntity;
+                        return Image.network(
+                          shopProfileEntity.bannerUrl!,
+                          height: 270,
+                          fit: BoxFit.fitHeight,
+                        );
+                      } else if (state is ShopProfileDataErrorState) {
+                        return Text(state.message);
+                      } else {
+                        return Container();
+                      }
+                    })
+
+
+
               ],
             ),
             Column(
