@@ -1,10 +1,8 @@
 import 'package:aumall/features/auction/presentation/bloc/auction_bloc.dart';
 import 'package:aumall/features/favorite/presentation/views/product_item_aumall.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/features/home/widgets/customGridView.dart';
-import '../../../../core/colors/colors.dart';
 import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
 import '../../../shopping/domain/entities/products_entity.dart';

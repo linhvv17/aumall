@@ -110,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favorite": MessageLookupByLibrary.simpleMessage("Yêu thích"),
         "filter": MessageLookupByLibrary.simpleMessage("Bộ lọc"),
         "firstname": MessageLookupByLibrary.simpleMessage("Tên"),
+        "follow": MessageLookupByLibrary.simpleMessage("Theo dõi"),
         "forbiddenError":
             MessageLookupByLibrary.simpleMessage("Truy cập bị cấm"),
         "forgetPassword":

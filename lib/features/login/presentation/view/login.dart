@@ -24,7 +24,7 @@ class _LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
   bool hidePass = true;
 
-  bool saveAccount = false;
+  String saveAccount = "false";
 
   @override
   void initState() {
@@ -37,7 +37,8 @@ class _LoginViewState extends State<LoginView> {
         await SecureStorage().storage.read(key: "username") ?? "";
     passController.text =
         await SecureStorage().storage.read(key: "password") ?? "";
-  saveAccount = await PreferenceHelper.getDataFromSharedPreference(key: "saveAccount") ?? false;
+    saveAccount =
+        await SecureStorage().storage.read(key: "saveAccount") ?? "false";
   }
 
   @override
@@ -122,10 +123,10 @@ class _LoginViewState extends State<LoginView> {
                       Checkbox(
                         checkColor: Colors.white, // color of tick Mark
                         activeColor: Colors.deepOrange,
-                        value: saveAccount,
+                        value: saveAccount == "false" ? false : true,
                         onChanged: (bool? value) {
                           setState(() {
-                            saveAccount = value!;
+                            saveAccount = value.toString();
                           });
                         },
                       ),
@@ -168,15 +169,19 @@ class _LoginViewState extends State<LoginView> {
                               height: 50,
                               ontab: () {
                                 if (formKey.currentState!.validate()) {
-                                  if (saveAccount) {
+                                  if (saveAccount == "true") {
                                     SecureStorage().storage.write(
                                         key: "username",
                                         value: emailController.text);
                                     SecureStorage().storage.write(
                                         key: "password",
                                         value: passController.text);
-                                    PreferenceHelper.saveDataInSharedPreference(
-                                        key: "saveAccount", value: saveAccount);
+                                    SecureStorage().storage.write(
+                                        key: "saveAccount",
+                                        value: saveAccount.toString()
+                                    );
+                                    // PreferenceHelper.saveDataInSharedPreference(
+                                    //     key: "saveAccount", value: saveAccount);
 
                                   }
                                   BlocProvider.of<LoginBloc>(context).add(

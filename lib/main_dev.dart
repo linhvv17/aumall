@@ -4,6 +4,7 @@ import 'package:aumall/features/auction/presentation/bloc/auction_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:aumall/features/notification/presentation/bloc/notification_bloc.dart';
+import 'package:aumall/features/shop_profile/presentation/bloc/shop_profile_bloc.dart';
 import 'package:aumall/features/shopping/presentation/bloc/categories/categories_bloc.dart';
 import 'package:aumall/local_notification_service.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -168,6 +169,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => injector<ProductsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => injector<ShopProfileBloc>(),
         ),
         BlocProvider(
           create: (context) => injector<CategoriesBloc>(),

@@ -108,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favorite": MessageLookupByLibrary.simpleMessage("Favorite"),
         "filter": MessageLookupByLibrary.simpleMessage("Filter"),
         "firstname": MessageLookupByLibrary.simpleMessage("First Name"),
+        "follow": MessageLookupByLibrary.simpleMessage("Follow"),
         "forbiddenError":
             MessageLookupByLibrary.simpleMessage("forbidden_error"),
         "forgetPassword":

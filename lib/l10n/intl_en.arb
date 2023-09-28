@@ -207,5 +207,6 @@
   "topBrand" : "Outstanding brand",
   "mainProduct" : "TOP",
   "hotProduct" : "HOT",
-  "newProduct" : "NEWS"
+  "newProduct" : "NEWS",
+  "follow" : "Follow"
 }

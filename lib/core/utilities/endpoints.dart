@@ -54,3 +54,4 @@ const String changePasswordAuMall = '/user/change-password';
 const String updateProfileAuMall = '/user/update';
 const String submitAuctionAuMall = '/submit-auction';
 const String notificationAuMall = '/notification';
+const String shopInfoAuMall = '/shop-info';

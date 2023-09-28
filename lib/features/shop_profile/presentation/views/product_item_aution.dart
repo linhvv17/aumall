@@ -9,7 +9,7 @@ import '../../../../core/utilities/mediaquery.dart';
 import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../shopping/domain/entities/products_entity.dart';
-import '../bloc/auction_bloc.dart';
+import '../bloc/shop_profile_bloc.dart';
 
 class ProductAuctionAuMall extends StatefulWidget {
   const ProductAuctionAuMall({super.key, required this.productFavoriteEntity});
@@ -37,72 +37,6 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
               widget.productFavoriteEntity.thumbnailUrl!,
               width: 200,
               height: 200,
-            ),
-            Positioned(
-              left: kWidth(context) * 0.34,
-              bottom: kHeight(context) * 0.008,
-              child: Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 5,
-                      color: ColorManager.grey,
-                      spreadRadius: 2,
-                    )
-                  ],
-                ),
-                child: BlocConsumer<AuctionBloc, AuctionState>(
-                  listener: (context, state) {
-                    if (state is AddToAuctionState) {
-                      showSnackbar(S.current.addfav, context, Colors.green);
-                    } else if (state is RemoveFromFavoriteState) {
-                      showSnackbar(S.current.deletefav, context, Colors.green);
-                    }
-                  },
-                  builder: (context, state) {
-                    return CircleAvatar(
-                      backgroundColor: ColorManager.white,
-                      radius: 20.0,
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            BlocProvider.of<AuctionBloc>(context).add(
-                                widget.productFavoriteEntity.isFavorite!
-                                    ? RemoveAuctionProduct(
-                                        widget.productFavoriteEntity.id!)
-                                    : AddToAuction(
-                                        product: widget.productFavoriteEntity,
-                                        isFavourite: widget
-                                            .productFavoriteEntity.isFavorite!,
-                                      ));
-                            setState(() {
-                              print(
-                                  'setState bf ${widget.productFavoriteEntity.isFavorite}');
-                              widget.productFavoriteEntity.isFavorite =
-                                  !widget.productFavoriteEntity.isFavorite!;
-                              print(
-                                  'setState at ${widget.productFavoriteEntity.isFavorite}');
-                            });
-                          },
-                          child: widget.productFavoriteEntity.isFavorite!
-                              ? const Icon(
-                                  Icons.favorite,
-                                  size: 20.0,
-                                  color: ColorManager.orangeLight,
-                                )
-                              : const Icon(
-                                  Icons.favorite_outline,
-                                  size: 20.0,
-                                  color: ColorManager.grey,
-                                ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
             ),
             Positioned(
               bottom: 5,

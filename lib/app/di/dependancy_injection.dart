@@ -21,6 +21,11 @@ import 'package:aumall/features/notification/domain/usecases/get_list_notificati
 import 'package:aumall/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:aumall/features/profile/domain/usecases/add_address_usecase.dart';
 import 'package:aumall/features/profile/domain/usecases/logout_usecase.dart';
+import 'package:aumall/features/shop_profile/data/datasources/shop_profile_datasource.dart';
+import 'package:aumall/features/shop_profile/data/repositories_impls/shop_profile_repository_impl.dart';
+import 'package:aumall/features/shop_profile/domain/repositories/shop_profile_repository.dart';
+import 'package:aumall/features/shop_profile/domain/usecases/get_shop_profile_usecase.dart';
+import 'package:aumall/features/shop_profile/presentation/bloc/shop_profile_bloc.dart';
 import 'package:aumall/features/shopping/domain/usecases/change_category_usecase.dart';
 import 'package:aumall/features/shopping/domain/usecases/get_categories_usecase.dart';
 import 'package:aumall/features/shopping/domain/usecases/get_products_shop_usecase.dart';
@@ -130,6 +135,7 @@ Future<void> init() async {
       injector(),
       injector(),
       injector()));
+  injector.registerFactory(() => ShopProfileBloc(injector()));
   injector.registerFactory(() => CategoriesBloc(injector()));
   injector.registerFactory(() => ProductDetailBloc(injector()));
   injector.registerFactory(() =>
@@ -195,6 +201,8 @@ Future<void> init() async {
   injector.registerLazySingleton(() => RequestPaymentUsecase(injector()));
   injector.registerLazySingleton(() => CreateNewOrderUsecase(injector()));
   injector.registerLazySingleton(() => GetAllOrderesUsecase(injector()));
+  //shop profile
+  injector.registerLazySingleton(() => GetShopProfileUseCase(injector()));
   //notification
   injector.registerLazySingleton(() => GetListNotificationUseCase(injector()));
   injector.registerLazySingleton(() => GetDetailNotificationUseCase(injector()));
@@ -226,6 +234,9 @@ Future<void> init() async {
       () => PaymentRepositoryImpl(injector(), injector()));
   injector.registerLazySingleton<NotificationBaseRepository>(
           () => NotificationRepositoryImpl(injector(), injector()));
+  //shop profile
+  injector.registerLazySingleton<ShopProfileBaseRepository>(
+          () => ShopProfileRepositoryImpl(injector(), injector()));
 
   //DataSource
   injector.registerLazySingleton<LoginDatasource>(
@@ -254,6 +265,10 @@ Future<void> init() async {
       () => PaymentDataSourceImpl(injector(), injector()));
   injector.registerLazySingleton<NotificationDatasource>(
           () => NotificationDatasourceImpl(injector()));
+  //shop profile
+  injector.registerLazySingleton<ShopProfileDatasource>(
+          () => ShopProfileDatasourceImpl(injector()));
+
 
   //---Core---//
   //API Provider
