@@ -451,7 +451,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(width: 12),
+                                  SizedBox(width: kWidth(context)/30),
                                   Column(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -482,7 +482,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   ),
                                 ],
                               ),
-                              const SizedBox(width: 37),
+                              SizedBox(width: kWidth(context)/30),
                               Padding(
                                 padding: const EdgeInsets.only(right: 20.0),
                                 child: InkWell(
@@ -510,6 +510,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                           .user.shop!.contact!);
                                     }),
                               ),
+                              SizedBox(width: kWidth(context)/30),
                               Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 32, vertical: 10),

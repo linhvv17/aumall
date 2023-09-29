@@ -327,7 +327,7 @@ class _HomeState extends State<HomeView> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const ShopProfileView(),
+                                    builder: (context) =>  ShopProfileView( shopId: shops[index].user_id!,),
                                   ));
                             },
                             child: ItemShopTop(

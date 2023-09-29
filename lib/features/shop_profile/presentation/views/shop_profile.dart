@@ -13,7 +13,8 @@ import '../../../shopping/domain/entities/products_entity.dart';
 import 'loading_auction_screen.dart';
 
 class ShopProfileView extends StatefulWidget {
-  const ShopProfileView({super.key});
+  final int shopId;
+  const ShopProfileView({super.key, required this.shopId});
 
   @override
   State<ShopProfileView> createState() => _ShopProfileViewState();
@@ -24,14 +25,15 @@ class _ShopProfileViewState extends State<ShopProfileView> {
 
   @override
   void initState() {
-    BlocProvider.of<ShopProfileBloc>(context).add(const GetShopProfile(40));
-    BlocProvider.of<AuctionBloc>(context).add(const GetListAuctionProduct(2));
+    BlocProvider.of<ShopProfileBloc>(context).add( GetShopProfile(widget.shopId));
+    // BlocProvider.of<AuctionBloc>(context).add(const GetListAuctionProduct(2));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final auctionBloc = BlocProvider.of<AuctionBloc>(context);
+    // final auctionBloc = BlocProvider.of<AuctionBloc>(context);
+    final shopProfileBloc = BlocProvider.of<ShopProfileBloc>(context);
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -53,7 +55,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                     builder: (context, state) {
                       if (state is ShopProfileDataLoading) {
                         return Container(
-                          height: 270,
+                          height: kHeight(context)/3,
                           decoration: BoxDecoration(
                               borderRadius: const BorderRadius.all(Radius.circular(10)),
                               // border: Border.all(color: Colors.white),
@@ -64,7 +66,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             state.shopProfileEntity;
                         return Image.network(
                           shopProfileEntity.bannerUrl!,
-                          height: 270,
+                          height: kHeight(context)/3,
                           fit: BoxFit.fitHeight,
                         );
                       } else if (state is ShopProfileDataErrorState) {
@@ -82,7 +84,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
               children: [
                 _buildAppBar(),
                 _buildInfoShopHeaderWidget(),
-                const SizedBox(height: 10,),
+                SizedBox(height: kHeight(context)/150),
                 _buildTabBar(),
                 const Expanded(
                   child: TabBarView(
@@ -146,12 +148,14 @@ class _ShopProfileViewState extends State<ShopProfileView> {
               child: Column(
                 children: [
                   Container(
+                    height: kHeight(context)/6.8,
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(Radius.circular(10)),
                         // border: Border.all(color: Colors.white),
                         color: Colors.grey.shade200.withOpacity(0.5)),
-                    padding: const EdgeInsets.all(8.0),
+                    padding:  EdgeInsets.all(kHeight(context)/100),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ///info
                         Row(
@@ -165,8 +169,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                       borderRadius: BorderRadius.circular(8.0),
                                       child: Image.network(
                                         shopProfileEntity.imageUrl!,
-                                        width: 50,
-                                        height: 50,
+                                        width: kWidth(context)/8,
+                                        height: kWidth(context)/8,
                                         fit: BoxFit.fill,
                                       ),
                                     )),
@@ -192,8 +196,10 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                               ],
                             ),
                             Container(
+                              width: kWidth(context)/4,
+                              height: kWidth(context)/11,
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 8),
+                                  horizontal: 15, vertical: 6),
                               decoration: ShapeDecoration(
                                   shape: RoundedRectangleBorder(
                                     side: const BorderSide(
@@ -203,8 +209,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                   color: Colors.deepOrangeAccent),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
                                     S.current.follow,
@@ -219,7 +225,6 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                             ),
                           ],
                         ),
-
                         ///rating
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -266,17 +271,17 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                       width: kWidth(context),
                       child: Container(
                         padding:
-                        const EdgeInsets.symmetric(horizontal: 32, vertical: 10),
+                        EdgeInsets.symmetric(horizontal: kWidth(context)/40, vertical: kWidth(context)/50),
                         decoration: ShapeDecoration(
                             shape: RoundedRectangleBorder(
                               side: const BorderSide(
                                   width: 0.50, color: Color(0xFFD9D9D9)),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(kWidth(context)/20),
                             ),
                             color: Colors.white.withOpacity(0.9)),
                         child: const Row(
                           mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
