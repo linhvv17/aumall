@@ -18,10 +18,10 @@ class ShopProfileDataLoaded extends ShopProfileState {
   const ShopProfileDataLoaded(this.shopProfileEntity);
 }
 
-
 class ShopProfileDataErrorState extends ShopProfileState {
   final String message;
 
   const ShopProfileDataErrorState(this.message);
 }
+
 

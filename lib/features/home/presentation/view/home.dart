@@ -1,3 +1,4 @@
+import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/home_bloc/home_event.dart';
 import 'package:aumall/features/home/presentation/view/product_details.dart';
@@ -67,14 +68,14 @@ class _HomeState extends State<HomeView> {
                   ),
                   //new
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: kWidth(context)/40),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           S.current.recentlyAddedProducts.toUpperCase(),
                           style: const TextStyle(
-                              color: Colors.deepOrangeAccent, fontSize: 18),
+                              color: Colors.deepOrangeAccent, fontSize: 17),
                         ),
                         TextButton(
                           onPressed: () {
@@ -143,7 +144,7 @@ class _HomeState extends State<HomeView> {
                         Text(
                           S.current.comingSoonProducts.toUpperCase(),
                           style: const TextStyle(
-                              color: Colors.deepOrangeAccent, fontSize: 20),
+                              color: Colors.deepOrangeAccent, fontSize: 17),
                         ),
                         TextButton(
                           onPressed: () {
@@ -213,7 +214,7 @@ class _HomeState extends State<HomeView> {
                         Text(
                           S.current.todaySuggestProducts.toUpperCase(),
                           style: const TextStyle(
-                              color: Colors.deepOrangeAccent, fontSize: 20),
+                              color: Colors.deepOrangeAccent, fontSize: 17),
                         ),
                         TextButton(
                           onPressed: () {
@@ -282,7 +283,7 @@ class _HomeState extends State<HomeView> {
                         Text(
                           S.current.topBrand.toUpperCase(),
                           style: const TextStyle(
-                              color: Colors.deepOrangeAccent, fontSize: 20),
+                              color: Colors.deepOrangeAccent, fontSize: 17),
                         ),
                         TextButton(
                           onPressed: () {

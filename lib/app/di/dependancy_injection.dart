@@ -25,7 +25,7 @@ import 'package:aumall/features/shop_profile/data/datasources/shop_profile_datas
 import 'package:aumall/features/shop_profile/data/repositories_impls/shop_profile_repository_impl.dart';
 import 'package:aumall/features/shop_profile/domain/repositories/shop_profile_repository.dart';
 import 'package:aumall/features/shop_profile/domain/usecases/get_shop_profile_usecase.dart';
-import 'package:aumall/features/shop_profile/presentation/bloc/shop_profile_bloc.dart';
+import 'package:aumall/features/shop_profile/presentation/bloc/profile/shop_profile_bloc.dart';
 import 'package:aumall/features/shopping/domain/usecases/change_category_usecase.dart';
 import 'package:aumall/features/shopping/domain/usecases/get_categories_usecase.dart';
 import 'package:aumall/features/shopping/domain/usecases/get_products_shop_usecase.dart';
@@ -102,6 +102,8 @@ import '../../features/setpassword/data/repositories/resetpassword_repositoryimp
 import '../../features/setpassword/domain/repositories/resetPassword_repository.dart';
 import '../../features/setpassword/domain/usecases/resetpassword_usecase.dart';
 import '../../features/setpassword/presentation/bloc/reset_password_bloc.dart';
+import '../../features/shop_profile/domain/usecases/get_shop_product_usecase.dart';
+import '../../features/shop_profile/presentation/bloc/product/shop_product_bloc.dart';
 import '../../features/shopping/data/datasources/products_datasource.dart';
 import '../../features/shopping/data/repositories/products_repositoryimpl.dart';
 import '../../features/shopping/domain/repositories/product_repository.dart';
@@ -135,7 +137,8 @@ Future<void> init() async {
       injector(),
       injector(),
       injector()));
-  injector.registerFactory(() => ShopProfileBloc(injector()));
+  injector.registerFactory(() => ShopProfileBloc(injector(), injector()));
+  injector.registerFactory(() => ShopProductBloc(injector()));
   injector.registerFactory(() => CategoriesBloc(injector()));
   injector.registerFactory(() => ProductDetailBloc(injector()));
   injector.registerFactory(() =>
@@ -203,6 +206,7 @@ Future<void> init() async {
   injector.registerLazySingleton(() => GetAllOrderesUsecase(injector()));
   //shop profile
   injector.registerLazySingleton(() => GetShopProfileUseCase(injector()));
+  injector.registerLazySingleton(() => GetShopProductUseCase(injector()));
   //notification
   injector.registerLazySingleton(() => GetListNotificationUseCase(injector()));
   injector.registerLazySingleton(() => GetDetailNotificationUseCase(injector()));

@@ -29,7 +29,8 @@ import 'features/profile/presentation/bloc/profile_bloc.dart';
 import 'features/profile/presentation/bloc/update_password_bloc.dart';
 import 'features/register/presentation/bloc/register_bloc.dart';
 import 'features/setpassword/presentation/bloc/reset_password_bloc.dart';
-import 'features/shop_profile/presentation/bloc/shop_profile_bloc.dart';
+import 'features/shop_profile/presentation/bloc/product/shop_product_bloc.dart';
+import 'features/shop_profile/presentation/bloc/profile/shop_profile_bloc.dart';
 import 'features/shopping/presentation/bloc/products_bloc.dart';
 import 'features/shopping/presentation/bloc/send_review_bloc.dart';
 import 'generated/l10n.dart';
@@ -52,7 +53,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   Future<void> setupInteractedMessage() async {
-
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
@@ -71,9 +71,7 @@ class _MyAppState extends State<MyApp> {
     if (kDebugMode) {
       print("FCMToken $fcmToken");
     }
-
     _handleAndroidFCMWhenOpenApp();
-
   }
 
   void _handleAndroidFCMWhenOpenApp() async {
@@ -159,6 +157,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => injector<ShopProfileBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => injector<ShopProductBloc>(),
         ),
         BlocProvider(
           create: (context) => injector<ProfileBloc>(),

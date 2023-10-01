@@ -30,6 +30,7 @@ class SplashViewState extends State<SplashView>
   void navigationPage() {
     isLoggedIN =
         PreferenceHelper.getDataFromSharedPreference(key: 'IsLoggedIn');
+    print("abcdefgh $isLoggedIN");
     isLoggedIN == true
         ? Navigator.pushReplacementNamed(context, AppRoutes.layout)
         : Navigator.pushReplacementNamed(context, AppRoutes.login);

@@ -35,14 +35,24 @@ class _ProductItemAuMallState extends State<ProductItemAuMall> {
                     appThemeData[AppTheme.lightTheme]
                 ? ColorManager.white
                 : Colors.white.withOpacity(0.2),
-            border: Border.all(color: Colors.grey),
+            // border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(15)),
         child: Stack(
           children: [
-            Image.network(
-              widget.productFavoriteEntity.thumbnailUrl!,
-              width: 200,
-              height: 200,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                  child: Image.network(
+                    widget.productFavoriteEntity.thumbnailUrl!,
+                    width: kWidth(context)/2,
+                    height: kWidth(context)/3,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
             ),
             widget.isAuctionProduct!
                 ? Container()

@@ -24,7 +24,8 @@ class _LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
   bool hidePass = true;
 
-  String saveAccount = "false";
+
+  bool saveAccount = false;
 
   @override
   void initState() {
@@ -37,12 +38,12 @@ class _LoginViewState extends State<LoginView> {
         await SecureStorage().storage.read(key: "username") ?? "";
     passController.text =
         await SecureStorage().storage.read(key: "password") ?? "";
-    saveAccount =
-        await SecureStorage().storage.read(key: "saveAccount") ?? "false";
+    saveAccount = PreferenceHelper.getDataFromSharedPreference(key: "saveAccount") ?? false;
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -123,10 +124,10 @@ class _LoginViewState extends State<LoginView> {
                       Checkbox(
                         checkColor: Colors.white, // color of tick Mark
                         activeColor: Colors.deepOrange,
-                        value: saveAccount == "false" ? false : true,
+                        value: saveAccount ? true : false,
                         onChanged: (bool? value) {
                           setState(() {
-                            saveAccount = value.toString();
+                            saveAccount = !saveAccount;
                           });
                         },
                       ),
@@ -169,20 +170,18 @@ class _LoginViewState extends State<LoginView> {
                               height: 50,
                               ontab: () {
                                 if (formKey.currentState!.validate()) {
-                                  if (saveAccount == "true") {
+                                  if (saveAccount) {
                                     SecureStorage().storage.write(
                                         key: "username",
                                         value: emailController.text);
                                     SecureStorage().storage.write(
                                         key: "password",
                                         value: passController.text);
-                                    SecureStorage().storage.write(
-                                        key: "saveAccount",
-                                        value: saveAccount.toString()
-                                    );
-                                    // PreferenceHelper.saveDataInSharedPreference(
-                                    //     key: "saveAccount", value: saveAccount);
-
+                                    PreferenceHelper.saveDataInSharedPreference(
+                                        key: "saveAccount", value: true);
+                                  } else {
+                                    PreferenceHelper.saveDataInSharedPreference(
+                                        key: "saveAccount", value: false);
                                   }
                                   BlocProvider.of<LoginBloc>(context).add(
                                       UserLogin(emailController.text,

@@ -1,3 +1,4 @@
+import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/features/favorite/presentation/views/product_item_aumall.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -92,8 +93,8 @@ class _FavoriteViewState extends State<FavoriteView> {
                                       parent: BouncingScrollPhysics()),
                                   itemCount: listFavorite.length,
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                          crossAxisCount: 2, height: 330),
+                                       SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                          crossAxisCount: 2, height: kWidth(context)/1.5),
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                         onTap: () {
