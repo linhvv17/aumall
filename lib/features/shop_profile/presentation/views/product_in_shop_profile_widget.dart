@@ -31,9 +31,9 @@ class _ProductInShopWidgetState extends State<ProductInShopWidget> {
         decoration: BoxDecoration(
             color: BlocProvider.of<ThemeBloc>(context).themeData ==
                     appThemeData[AppTheme.lightTheme]
-                ? ColorManager.white
+                ? ColorManager.grey.withOpacity(0.1)
                 : Colors.white.withOpacity(0.2),
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: Colors.grey.withOpacity(0.3)),
             borderRadius: BorderRadius.circular(15)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

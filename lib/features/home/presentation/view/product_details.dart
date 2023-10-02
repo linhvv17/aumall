@@ -3,6 +3,7 @@ import 'package:aumall/features/cart/presentation/views/cart.dart';
 import 'package:aumall/features/home/data/models/detail_product_response.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_bloc.dart';
 import 'package:aumall/features/home/presentation/bloc/product_detail_bloc/product_detail_state.dart';
+import 'package:aumall/features/shop_profile/presentation/views/shop_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,10 +37,7 @@ class ProductDetails extends StatefulWidget {
       required this.productEntityId,
       required this.index,
       this.isFromAuction,
-  this.priceStep
-}
-
-      );
+      this.priceStep});
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -430,59 +428,72 @@ class _ProductDetailsState extends State<ProductDetails>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 49,
-                                    height: 49,
-                                    decoration: ShapeDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(productDetailData
-                                            .user.shop!.imageUrl
-                                            .toString()),
-                                        fit: BoxFit.cover,
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(50),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ShopProfileView(shopId: productDetailData
+                                            .user.id)
+                                      ));
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 49,
+                                      height: 49,
+                                      decoration: ShapeDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(productDetailData
+                                              .user.shop!.imageUrl
+                                              .toString()),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(width: kWidth(context)/30),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        productDetailData.user!.shopName
-                                            .toString(),
-                                        style: const TextStyle(
-                                          color: Color(0xFF393F42),
-                                          fontSize: 16,
-                                          fontFamily: 'Inter',
-                                          fontWeight: FontWeight.w500,
+                                    SizedBox(width: kWidth(context) / 30),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          productDetailData.user!.shopName
+                                              .toString(),
+                                          style: const TextStyle(
+                                            color: Color(0xFF393F42),
+                                            fontSize: 16,
+                                            fontFamily: 'Inter',
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 3),
-                                      Text(
-                                        productDetailData.user!.name.toString(),
-                                        style: const TextStyle(
-                                          color: Color(0xFF939393),
-                                          fontSize: 12,
-                                          fontFamily: 'Inter',
-                                          fontWeight: FontWeight.w400,
+                                        const SizedBox(height: 3),
+                                        Text(
+                                          productDetailData.user!.name
+                                              .toString(),
+                                          style: const TextStyle(
+                                            color: Color(0xFF939393),
+                                            fontSize: 12,
+                                            fontFamily: 'Inter',
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                              SizedBox(width: kWidth(context)/30),
+                              SizedBox(width: kWidth(context) / 30),
                               Padding(
                                 padding: const EdgeInsets.only(right: 20.0),
                                 child: InkWell(
@@ -510,7 +521,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                           .user.shop!.contact!);
                                     }),
                               ),
-                              SizedBox(width: kWidth(context)/30),
+                              SizedBox(width: kWidth(context) / 30),
                               Container(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 32, vertical: 10),
@@ -691,8 +702,7 @@ class _ProductDetailsState extends State<ProductDetails>
                   ),
                 ),
               );
-            }
-            else if (state is ProductDetailLoading) {
+            } else if (state is ProductDetailLoading) {
               return const LoadingProductDetailScreen();
             } else if (state is ProductDetailErrorState) {
               return Center(child: Text(state.message));
@@ -949,8 +959,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                                   .product.price
                                               : state.auctionSessionInfoEntity
                                                   .userAuctions.data[0].price,
-                                      widget.priceStep!
-                                  )
+                                          widget.priceStep!)
                                       .length,
                                   shrinkWrap: true,
                                   itemBuilder: (context, j) {
@@ -975,8 +984,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                                           .userAuctions
                                                           .data[0]
                                                           .price,
-                                              widget.priceStep!
-                                          )[j]
+                                                  widget.priceStep!)[j]
                                               .toString()),
                                           onPressed: () => {
                                                 showPopUpConfirmAuction(
@@ -1003,8 +1011,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                                                     .userAuctions
                                                                     .data[0]
                                                                     .price,
-                                                        widget.priceStep!
-                                                    )[j]
+                                                            widget
+                                                                .priceStep!)[j]
                                                         .toString())
                                               }),
                                     );

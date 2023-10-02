@@ -2,6 +2,7 @@ import 'package:aumall/features/shopping/domain/entities/product/product_entity.
 import 'package:aumall/features/shopping/domain/entities/product/shop_entity.dart';
 import 'package:flutter/material.dart';
 import '../../../home/widgets/customGridView.dart';
+import '../../../shop_profile/presentation/views/shop_profile.dart';
 import 'item_product_of_shop.dart';
 
 class ItemShopAndProduct extends StatefulWidget {
@@ -31,73 +32,82 @@ class _ItemShopAndProductState extends State<ItemShopAndProduct> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration:  BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  border: Border.all(color: Colors.grey),
-                  color: Colors.white,
-                ),
-                child: Row(
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: CircleAvatar(
-                          radius: 30.0,
-                          backgroundImage: NetworkImage(
-                            widget.shop.image_url!,
-                          ),
-                          backgroundColor: Colors.transparent,
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Text(
-                              widget.shop.name!,
-                              style: const TextStyle(fontSize: 18),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ShopProfileView(shopId: widget.shop.user_id!)
+                      ));
+                },
+                child: Container(
+                  decoration:  BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(color: Colors.grey),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: CircleAvatar(
+                            radius: 30.0,
+                            backgroundImage: NetworkImage(
+                              widget.shop.image_url!,
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Colors.red.shade600),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(4.0),
-                                    child: Text(
-                                      "AuMall",
-                                      style: TextStyle(color: Colors.white),
+                            backgroundColor: Colors.transparent,
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Text(
+                                widget.shop.name!,
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.red.shade600),
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(4.0),
+                                      child: Text(
+                                        "AuMall",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Colors.red.shade100),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Text("Gian hàng chính hãng",
-                                        style: TextStyle(
-                                          color: Colors.red.shade500,
-                                        )),
+                                  const SizedBox(
+                                    width: 10,
                                   ),
-                                ),
-                              ],
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: Colors.red.shade100),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text("Gian hàng chính hãng",
+                                          style: TextStyle(
+                                            color: Colors.red.shade500,
+                                          )),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 10,),

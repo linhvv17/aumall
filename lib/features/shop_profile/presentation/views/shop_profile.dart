@@ -1,10 +1,10 @@
 import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/features/auction/presentation/bloc/auction_bloc.dart';
-import 'package:aumall/features/favorite/presentation/views/product_item_aumall.dart';
 import 'package:aumall/features/shop_profile/domain/entities/shop_product_entity.dart';
 import 'package:aumall/features/shop_profile/domain/entities/shop_profile_entity.dart';
 import 'package:aumall/features/shop_profile/presentation/bloc/profile/shop_profile_bloc.dart';
 import 'package:aumall/features/shop_profile/presentation/views/product_in_shop_profile_widget.dart';
+import 'package:aumall/features/shop_profile/presentation/widgets/item_product_sale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/features/home/widgets/customGridView.dart';
@@ -12,7 +12,6 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/utils.dart';
 import '../../../../generated/l10n.dart';
 import '../../../home/presentation/view/product_details.dart';
-import '../../../shopping/domain/entities/products_entity.dart';
 import '../../domain/entities/list_shop_product_entity.dart';
 import '../bloc/product/shop_product_bloc.dart';
 import '../bloc/product/shop_product_event.dart';
@@ -92,31 +91,47 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                 _buildAppBar(),
                 _buildInfoShopHeaderWidget(),
                 SizedBox(height: kHeight(context) / 150),
-                _buildTabBar(),
-                Expanded(
-                  child: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      ///trang chủ
-                      _buildTabTopContent(shopProductBloc),
+                // _buildTabBar(),
 
-                      // ///hot
-                      // _buildTabHotContent(auctionBloc),
-                      //
 
-                      const Center(
-                        child: Text(
-                          "HOT",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
 
-                      ///new
-                      _buildTabNewContent(shopProductBloc),
-                    ],
-                  ),
-                ),
+                // Expanded(
+                //   child: TabBarView(
+                //     physics: const NeverScrollableScrollPhysics(),
+                //     children: [
+                //       ///trang chủ
+                //       _buildTabTopContent(shopProductBloc),
+                //
+                //       ///hot
+                //       _buildTabHotContent(shopProductBloc),
+                //
+                //       ///new
+                //       _buildTabNewContent(shopProductBloc),
+                //     ],
+                //   ),
+                // ),
+
               ],
+            ),
+
+            SizedBox.expand(
+              child: DraggableScrollableSheet(
+                maxChildSize: 0.85,
+                initialChildSize: 0.6,
+                minChildSize: 0.6,
+                builder: (BuildContext context, ScrollController scrollController) {
+                  return Container(
+                    color: Colors.blue[100],
+                    child: ListView.builder(
+                      controller: scrollController,
+                      itemCount: 25,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(title: Text('Item $index'));
+                      },
+                    ),
+                  );
+                },
+              ),
             )
           ],
         ),
@@ -472,78 +487,75 @@ class _ShopProfileViewState extends State<ShopProfileView> {
     });
   }
 
-  Widget _buildTabHotContent(AuctionBloc auctionBloc) {
-    return BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
-      if (state is AuctionDataLoading) {
+  Widget _buildTabHotContent(ShopProductBloc shopProfileBloc) {
+    return BlocBuilder<ShopProductBloc, ShopProductState>(
+        builder: (context, state) {
+      if (state is ShopProductDataLoading) {
         return const LoadingAuctionScreen();
-      } else if (state is AuctionDataLoaded) {
-        List<ProductAuMallEntity> listAuction =
-            state.listAuctionEntity.listAuction;
+      } else if (state is ShopProductDataLoaded) {
+        List<ListShopProductsEntity> listShopProductEntities =
+            state.shopProductEntities;
+        List<ShopProductEntity> list =
+            listShopProductEntities[0].shopProductEntities;
         return Container(
-          decoration: const BoxDecoration(color: Colors.deepOrange),
+          decoration: BoxDecoration(color: Colors.grey.shade300),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(top: 8.0),
             child: PageStorage(
               bucket: PageStorageBucket(),
-              child: Column(
-                children: [
-                  Expanded(
-                      child: listAuction.isEmpty
-                          ? Center(
-                              child: Text(
-                                S.current.notauction,
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                            )
-                          : RefreshIndicator(
-                              onRefresh: () async {
-                                auctionBloc.add(const GetListAuctionProduct(2));
-                              },
-                              child: GridView.builder(
-                                physics: const AlwaysScrollableScrollPhysics(
-                                    parent: BouncingScrollPhysics()),
-                                itemCount: listAuction.length,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                        crossAxisCount: 2, height: 330),
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: () {
-                                        Navigator.push(
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                        child: list.isEmpty
+                            ? Center(
+                                child: Text(
+                                  S.current.notauction,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                              )
+                            : RefreshIndicator(
+                                onRefresh: () async {
+                                  // shopProfileBloc.add(
+                                  //     const GetListAuctionProduct(
+                                  //         3));
+                                },
+                                child: ListView.builder(
+                                  itemCount: list.length,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: InkWell(
+                                          onTap: () {
+                                            Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       ProductDetails(
                                                     productEntityId:
-                                                        listAuction[index].id!,
-                                                    index: index,
+                                                        list[index].id!,
+                                                    index: 1,
+                                                    isFromAuction: false,
                                                   ),
-                                                ))
-                                            .then((value) => {
-                                                  BlocProvider.of<AuctionBloc>(
-                                                          context)
-                                                      .add(
-                                                          const GetListAuctionProduct(
-                                                              2))
-                                                });
-                                      },
-                                      child:
-                                          // Container()
-                                          ProductItemAuMall(
-                                        productFavoriteEntity:
-                                            listAuction[index],
-                                        isAuctionProduct: true,
-                                        typeProduct: 2,
-                                      ));
-                                },
-                              ),
-                            ))
-                ],
+                                                ));
+                                          },
+                                          child: ItemProductSale(
+                                              shopProductEntity: list[index])),
+                                    );
+                                  },
+                                )))
+                  ],
+                ),
               ),
             ),
           ),
         );
-      } else if (state is AuctionDataErrorState) {
+      } else if (state is ShopProductDataErrorState) {
         return Text(state.message);
       } else {
         return Container();

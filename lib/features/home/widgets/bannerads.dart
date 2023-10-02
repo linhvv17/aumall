@@ -23,7 +23,6 @@ class _BannerAdsState extends State<BannerAds> {
       options: CarouselOptions(
         autoPlay: true,
         viewportFraction: 1,
-        height: kHeight(context) * 0.3,
       ),
     );
   }
@@ -32,7 +31,11 @@ class _BannerAdsState extends State<BannerAds> {
     var banners = <Image>[];
     // // var list = List<int>.generate(images.length, (i) =>i + 1 );
     for (int i = 0; i < images[0].length; i++) {
-      var img = Image.network((widget.images[0][i] as ImageModel).src);
+      var img = Image.network(
+          (widget.images[0][i] as ImageModel).src,
+        height: kHeight(context) * 0.2,
+        fit: BoxFit.fill,
+      );
       banners.add(img);
     }
     return banners;

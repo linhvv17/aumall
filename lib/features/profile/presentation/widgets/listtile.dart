@@ -4,15 +4,21 @@ import '../../../../core/utilities/mediaquery.dart';
 
 class MYListTile extends StatelessWidget {
   final String title;
-
+  final Widget leading;
   final String? subtitle;
   final VoidCallback ontab;
+
   const MYListTile(
-      {super.key, required this.title, this.subtitle, required this.ontab});
+      {super.key,
+      required this.title,
+      this.subtitle,
+      required this.ontab,
+      required this.leading});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+        leading: leading,
         onTap: ontab,
         title: Text(
           title,

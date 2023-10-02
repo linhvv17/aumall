@@ -1,3 +1,4 @@
+import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/features/home/domain/entities/shop_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,10 +37,13 @@ class _ItemShopTopState extends State<ItemShopTop> {
             const SizedBox(height: 10,),
             Stack(
               children: [
-                Image.network(
-                  widget.shopEntity.image_url!,
-                  // height: 100,
-                  fit: BoxFit.cover,
+                Center(
+                  child: Image.network(
+                    widget.shopEntity.image_url!,
+                    height: kHeight(context)/5,
+                    width: kHeight(context)/5,
+                    fit: BoxFit.fill,
+                  ),
                 ),
                 Container(
                   decoration: BoxDecoration(
