@@ -5,6 +5,7 @@ import 'package:aumall/features/shop_profile/domain/entities/shop_profile_entity
 import 'package:aumall/features/shop_profile/presentation/bloc/profile/shop_profile_bloc.dart';
 import 'package:aumall/features/shop_profile/presentation/views/product_in_shop_profile_widget.dart';
 import 'package:aumall/features/shop_profile/presentation/widgets/item_product_sale.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/features/home/widgets/customGridView.dart';
@@ -27,11 +28,25 @@ class ShopProfileView extends StatefulWidget {
   State<ShopProfileView> createState() => _ShopProfileViewState();
 }
 
-class _ShopProfileViewState extends State<ShopProfileView> {
-  int currentTab = 0;
+class _ShopProfileViewState extends State<ShopProfileView>
+    with TickerProviderStateMixin {
+  ///
+  late TabController _controller;
+  int selectedIndex = 0;
 
   @override
   void initState() {
+    _controller = TabController(length: 3, vsync: this);
+
+    _controller.addListener(() {
+      setState(() {
+        selectedIndex = _controller.index;
+      });
+      if (kDebugMode) {
+        print("Selected Index: ${_controller.index}");
+      }
+    });
+
     BlocProvider.of<ShopProfileBloc>(context)
         .add(GetShopProfile(widget.shopId));
     BlocProvider.of<ShopProductBloc>(context)
@@ -47,95 +62,115 @@ class _ShopProfileViewState extends State<ShopProfileView> {
       length: 3,
       child: Scaffold(
           body: Container(
-        decoration: currentTab == 1
-            ? const BoxDecoration(color: Colors.deepOrangeAccent)
-            : const BoxDecoration(
-                color: ColorManager.white,
-              ),
-        child: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                currentTab == 1
-                    ? Container()
-                    : BlocBuilder<ShopProfileBloc, ShopProfileState>(
-                        builder: (context, state) {
-                        if (state is ShopProfileDataLoading) {
-                          return Container(
-                            height: kHeight(context) / 3,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(10)),
-                                // border: Border.all(color: Colors.white),
-                                color: Colors.grey.withOpacity(0.5)),
-                          );
-                        } else if (state is ShopProfileDataLoaded) {
-                          ShopProfileEntity shopProfileEntity =
-                              state.shopProfileEntity;
-                          return Image.network(
-                            shopProfileEntity.bannerUrl!,
-                            height: kHeight(context) / 3,
-                            fit: BoxFit.fitHeight,
-                          );
-                        } else if (state is ShopProfileDataErrorState) {
-                          return Text(state.message);
-                        } else {
-                          return Container();
-                        }
-                      })
-              ],
+            decoration: selectedIndex == 1
+                ? const BoxDecoration(color: Colors.deepOrangeAccent)
+                : const BoxDecoration(
+              color: ColorManager.white,
             ),
-            Column(
-              children: [
-                _buildAppBar(),
-                _buildInfoShopHeaderWidget(),
-                SizedBox(height: kHeight(context) / 150),
-                // _buildTabBar(),
+            child: BlocBuilder<ShopProfileBloc, ShopProfileState>(
+                builder: (context, state) {
+                  if (state is ShopProfileDataErrorState) {
+                    return Center(child: Text(state.message));
+                  } else {
+                    return Stack(
+                      children: [
+                        ///image cover
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            selectedIndex == 1
+                                ? Container()
+                                : BlocBuilder<ShopProfileBloc, ShopProfileState>(
+                                builder: (context, state) {
+                                  if (state is ShopProfileDataLoading) {
+                                    return Container(
+                                      height: kHeight(context) / 3,
+                                      decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10)),
+                                          color: Colors.grey.withOpacity(0.5)),
+                                    );
+                                  } else if (state is ShopProfileDataLoaded) {
+                                    ShopProfileEntity shopProfileEntity =
+                                        state.shopProfileEntity;
+                                    return Image.network(
+                                      shopProfileEntity.bannerUrl!,
+                                      height: kHeight(context) * 0.35,
+                                      fit: BoxFit.fitHeight,
+                                    );
+                                  } else if (state is ShopProfileDataErrorState) {
+                                    return Text(state.message);
+                                  } else {
+                                    return Container();
+                                  }
+                                })
+                          ],
+                        ),
 
+                        ///header info
+                        Column(
+                          children: [
+                            _buildAppBar(),
+                            _buildInfoShopHeaderWidget(),
+                          ],
+                        ),
 
+                        ///tabview product
+                        SizedBox.expand(
+                          child: DraggableScrollableSheet(
+                            maxChildSize: 0.85,
+                            initialChildSize: 0.65,
+                            minChildSize: 0.65,
+                            builder: (context, scrollController) =>
+                                DefaultTabController(
+                                  length: 3,
+                                  child: _buildProductTabView(
+                                      scrollController, shopProductBloc),
+                                  // child: _buildFlatCustomScrollView(scrollController),
+                                  // child: _buildTabsCustomScrollView(scrollController),
+                                ),
+                          ),
+                        )
+                      ],
+                    );
+                  }
+                }),
+          )),
+    );
+  }
 
-                // Expanded(
-                //   child: TabBarView(
-                //     physics: const NeverScrollableScrollPhysics(),
-                //     children: [
-                //       ///trang chủ
-                //       _buildTabTopContent(shopProductBloc),
-                //
-                //       ///hot
-                //       _buildTabHotContent(shopProductBloc),
-                //
-                //       ///new
-                //       _buildTabNewContent(shopProductBloc),
-                //     ],
-                //   ),
-                // ),
-
-              ],
+  NestedScrollView _buildProductTabView(
+      ScrollController scrollController, ShopProductBloc shopProductBloc) {
+    return NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return [
+          SliverOverlapAbsorber(
+            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+            sliver: SliverAppBar(
+              toolbarHeight: 0.0,
+              pinned: true,
+              primary: false,
+              forceElevated: innerBoxIsScrolled,
+              bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(kHeight(context) / 16),
+                  child: _buildTabBar()),
             ),
+          ),
+        ];
+      },
+      body: TabBarView(
+        controller: _controller,
+        children: [
+          ///top
+          _buildTabTopContent(shopProductBloc, scrollController),
 
-            SizedBox.expand(
-              child: DraggableScrollableSheet(
-                maxChildSize: 0.85,
-                initialChildSize: 0.6,
-                minChildSize: 0.6,
-                builder: (BuildContext context, ScrollController scrollController) {
-                  return Container(
-                    color: Colors.blue[100],
-                    child: ListView.builder(
-                      controller: scrollController,
-                      itemCount: 25,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(title: Text('Item $index'));
-                      },
-                    ),
-                  );
-                },
-              ),
-            )
-          ],
-        ),
-      )),
+          ///sale
+          _buildTabHotContent(shopProductBloc, scrollController),
+
+          ///new
+          _buildTabNewContent(shopProductBloc, scrollController),
+        ],
+      ),
     );
   }
 
@@ -145,7 +180,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
         color: Colors.white, //change your color here
       ),
       backgroundColor:
-          currentTab == 1 ? Colors.deepOrangeAccent : Colors.transparent,
+          selectedIndex == 1 ? Colors.deepOrangeAccent : Colors.transparent,
       automaticallyImplyLeading: true,
       centerTitle: true,
       title: Text(
@@ -335,13 +370,13 @@ class _ShopProfileViewState extends State<ShopProfileView> {
 
   Widget _buildTabBar() {
     return TabBar(
-      labelColor: currentTab == 1 ? Colors.white : Colors.black,
-      //<-- selected text color
-      unselectedLabelColor: currentTab == 1 ? Colors.white : Colors.grey,
-      //<-- Unselected text color
+      controller: _controller,
+      labelColor: selectedIndex == 1 ? Colors.white : Colors.black,
+      unselectedLabelColor: selectedIndex == 1 ? Colors.grey : Colors.grey,
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(
-            width: 2.0, color: currentTab == 1 ? Colors.white : Colors.black),
+            width: 2.0,
+            color: selectedIndex == 1 ? Colors.white : Colors.black),
         insets: EdgeInsets.symmetric(
             horizontal: kWidth(context) / 10, vertical: 10),
       ),
@@ -350,28 +385,28 @@ class _ShopProfileViewState extends State<ShopProfileView> {
           // Recent
           case 0:
             setState(() {
-              currentTab = 0;
+              selectedIndex = 0;
             });
-            BlocProvider.of<AuctionBloc>(context)
-                .add(const GetListAuctionProduct(2));
+            BlocProvider.of<ShopProductBloc>(context)
+                .add(GetShopProduct(widget.shopId));
             break;
 
           // Upcoming
           case 1:
             setState(() {
-              currentTab = 1;
+              selectedIndex = 1;
             });
-            BlocProvider.of<AuctionBloc>(context)
-                .add(const GetListAuctionProduct(1));
+            BlocProvider.of<ShopProductBloc>(context)
+                .add(GetShopProduct(widget.shopId));
             break;
 
           // Finished
           case 2:
             setState(() {
-              currentTab = 2;
+              selectedIndex = 2;
             });
-            BlocProvider.of<AuctionBloc>(context)
-                .add(const GetListAuctionProduct(3));
+            BlocProvider.of<ShopProductBloc>(context)
+                .add(GetShopProduct(widget.shopId));
             break;
         }
       },
@@ -396,7 +431,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
     );
   }
 
-  Widget _buildTabTopContent(ShopProductBloc shopProfileBloc) {
+  Widget _buildTabTopContent(
+      ShopProductBloc shopProfileBloc, ScrollController scrollController) {
     return BlocBuilder<ShopProductBloc, ShopProductState>(
         builder: (context, state) {
       if (state is ShopProductDataLoading) {
@@ -408,73 +444,80 @@ class _ShopProfileViewState extends State<ShopProfileView> {
             listShopProductEntities[0].shopProductEntities;
         return Container(
           decoration: BoxDecoration(color: Colors.grey.shade300),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: PageStorage(
-              bucket: PageStorageBucket(),
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                        child: list.isEmpty
-                            ? Center(
-                                child: Text(
-                                  S.current.notauction,
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
-                                ),
-                              )
-                            : RefreshIndicator(
-                                onRefresh: () async {
-                                  // auctionBloc
-                                  //     .add(const GetListAuctionProduct(2));
-                                },
-                                child: GridView.builder(
-                                  physics: const AlwaysScrollableScrollPhysics(
-                                      parent: BouncingScrollPhysics()),
-                                  itemCount: list.length,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                    crossAxisCount: 2,
-                                    height: kWidth(context) / 2,
+          child: PageStorage(
+            bucket: PageStorageBucket(),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                      child: list.isEmpty
+                          ? Center(
+                              child: Text(
+                                S.current.notauction,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            )
+                          : RefreshIndicator(
+                              onRefresh: () async {
+                                // auctionBloc
+                                //     .add(const GetListAuctionProduct(2));
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    8.0, 8.0 + kHeight(context) / 16, 8.0, 8.0),
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
                                   ),
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ProductDetails(
-                                                      productEntityId:
-                                                          list[index].id!,
-                                                      index: index,
-                                                      isFromAuction: true,
-                                                    ),
-                                                  ))
-                                              .then((value) => {
-                                                    BlocProvider.of<
-                                                                AuctionBloc>(
-                                                            context)
-                                                        .add(
-                                                            const GetListAuctionProduct(
-                                                                2))
-                                                  });
-                                        },
-                                        child:
-                                            // Container()
-                                            ProductInShopWidget(
-                                          shopProductEntity: list[index],
-                                        ));
-                                  },
+                                  child: GridView.builder(
+                                    controller: scrollController,
+                                    // physics: scrollController,
+                                    itemCount: list.length,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                                      crossAxisCount: 2,
+                                      height: kWidth(context) / 2,
+                                    ),
+                                    itemBuilder: (context, index) {
+                                      return InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ProductDetails(
+                                                        productEntityId:
+                                                            list[index].id!,
+                                                        index: index,
+                                                        isFromAuction: true,
+                                                      ),
+                                                    ))
+                                                .then((value) => {
+                                                      BlocProvider.of<
+                                                                  AuctionBloc>(
+                                                              context)
+                                                          .add(
+                                                              const GetListAuctionProduct(
+                                                                  2))
+                                                    });
+                                          },
+                                          child:
+                                              // Container()
+                                              ProductInShopWidget(
+                                            shopProductEntity: list[index],
+                                          ));
+                                    },
+                                  ),
                                 ),
-                              ))
-                  ],
-                ),
+                              ),
+                            ))
+                ],
               ),
             ),
           ),
@@ -487,7 +530,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
     });
   }
 
-  Widget _buildTabHotContent(ShopProductBloc shopProfileBloc) {
+  Widget _buildTabHotContent(
+      ShopProductBloc shopProfileBloc, ScrollController scrollController) {
     return BlocBuilder<ShopProductBloc, ShopProductState>(
         builder: (context, state) {
       if (state is ShopProductDataLoading) {
@@ -526,6 +570,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                   //         3));
                                 },
                                 child: ListView.builder(
+                                  controller: scrollController,
                                   itemCount: list.length,
                                   itemBuilder: (context, index) {
                                     return Padding(
@@ -563,7 +608,8 @@ class _ShopProfileViewState extends State<ShopProfileView> {
     });
   }
 
-  Widget _buildTabNewContent(ShopProductBloc shopProfileBloc) {
+  Widget _buildTabNewContent(
+      ShopProductBloc shopProfileBloc, ScrollController scrollController) {
     return BlocBuilder<ShopProductBloc, ShopProductState>(
         builder: (context, state) {
       if (state is ShopProductDataLoading) {
@@ -602,6 +648,7 @@ class _ShopProfileViewState extends State<ShopProfileView> {
                                   //         3));
                                 },
                                 child: ListView.builder(
+                                  controller: scrollController,
                                   itemCount: list.length,
                                   itemBuilder: (context, index) {
                                     return Padding(

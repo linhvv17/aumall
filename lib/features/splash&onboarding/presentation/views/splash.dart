@@ -1,10 +1,9 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:aumall/core/colors/colors.dart';
 import 'package:aumall/core/utilities/endpoints.dart';
 import 'package:aumall/core/utilities/routes.dart';
-import 'package:aumall/core/utilities/strings.dart';
-
 import '../../../../core/local/shared_preference.dart';
 import '../../../../generated/l10n.dart';
 
@@ -30,9 +29,12 @@ class SplashViewState extends State<SplashView>
   void navigationPage() {
     isLoggedIN =
         PreferenceHelper.getDataFromSharedPreference(key: 'IsLoggedIn');
-    print("abcdefgh $isLoggedIN");
+    if (kDebugMode) {
+      print("isLoggedIN $isLoggedIN");
+    }
     isLoggedIN == true
-        ? Navigator.pushReplacementNamed(context, AppRoutes.layout)
+        ? Navigator.of(context)
+            .pushNamedAndRemoveUntil(AppRoutes.layout, (Route route) => false)
         : Navigator.pushReplacementNamed(context, AppRoutes.login);
   }
 
@@ -78,7 +80,7 @@ class SplashViewState extends State<SplashView>
               ),
               Text(
                 S.current.appName,
-                style: Theme.of(context).textTheme.headline6!.copyWith(
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: ColorManager.orangeLight,
                     ),
               )

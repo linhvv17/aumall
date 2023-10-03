@@ -7,11 +7,12 @@ import 'package:aumall/features/shopping/presentation/bloc/send_review_bloc.dart
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../generated/l10n.dart';
+import '../../../home/domain/entities/product_detail_entity.dart';
 import '../../domain/entities/products_entity.dart';
 import '../widgets/reviewsheet.dart';
 
 class ReviewsView extends StatefulWidget {
-  final ProductAuMallEntity product;
+  final ProductDetailEntity product;
   const ReviewsView({super.key, required this.product});
 
   @override
@@ -31,7 +32,7 @@ class _ReviewsViewState extends State<ReviewsView> {
         //   icon: const Icon(Icons.arrow_back_ios_new),
         // ),
         title: Text(S.current.rateandreview,
-            style: Theme.of(context).textTheme.headline6),
+            style: Theme.of(context).textTheme.titleLarge),
         centerTitle: true,
       ),
       floatingActionButton: SizedBox(
@@ -56,7 +57,7 @@ class _ReviewsViewState extends State<ReviewsView> {
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
                       child: ReviewSheet(
-                        id: widget.product.id.toString(),
+                        id: widget.product.productDetailData!.id.toString(),
                       ),
                     );
                   });

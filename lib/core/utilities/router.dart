@@ -1,5 +1,6 @@
 import 'package:aumall/features/auction/presentation/views/auction.dart';
 import 'package:aumall/features/cart/presentation/views/cart.dart';
+import 'package:aumall/features/home/domain/entities/product_detail_entity.dart';
 import 'package:aumall/features/profile/presentation/views/address.dart';
 import 'package:aumall/features/profile/presentation/views/address_list.dart';
 import 'package:aumall/features/profile/presentation/views/settings.dart';
@@ -64,7 +65,7 @@ Route<dynamic> onGenerate(RouteSettings settings) {
                 index: index,
               ));
     case AppRoutes.productReviews:
-      final product = settings.arguments as ProductAuMallEntity;
+      final product = settings.arguments as ProductDetailEntity;
       return MaterialPageRoute(
           builder: (context) => ReviewsView(product: product));
     case AppRoutes.updateProfile:

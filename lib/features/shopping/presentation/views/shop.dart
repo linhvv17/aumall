@@ -1,14 +1,9 @@
 import 'package:aumall/features/shopping/domain/entities/categories_entity.dart';
-import 'package:aumall/features/shopping/domain/entities/list_product_shop_entity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:aumall/core/utilities/mediaquery.dart';
-import '../../../../core/colors/colors.dart';
 import '../../../../generated/l10n.dart';
-import '../../../favorite/presentation/views/product_item_aumall.dart';
-import '../../../home/presentation/view/product_details.dart';
-import '../../../home/widgets/customGridView.dart';
 import '../../domain/entities/product/products_order_by_shop_entity.dart';
 import '../bloc/categories/categories_bloc.dart';
 import '../bloc/products_bloc.dart';
@@ -107,17 +102,30 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                               const FilterProduct(),
                             ],
                           ),
-                          TabBar(
-                            onTap: (tabIndex) {
-                              BlocProvider.of<ProductsBloc>(context).add(
-                                  GetListProductOfCategory(
-                                      listCategory[tabIndex].id));
-                            },
-                            tabs: listCategory
-                                .map((e) => Tab(
-                                      child: Text(e.name),
-                                    ))
-                                .toList(),
+                          Material(
+                            color: Colors.deepOrange,
+                            child: TabBar(
+                              labelColor: Colors.white ,
+                              unselectedLabelColor: Colors.white,
+                              indicator: UnderlineTabIndicator(
+                                borderSide: const BorderSide(
+                                    width: 2.0,
+                                    color: Colors.white),
+                                insets: EdgeInsets.symmetric(
+                                    horizontal: kWidth(context) / 10, vertical: 10),
+                              ),
+                              onTap: (tabIndex) {
+                                BlocProvider.of<ProductsBloc>(context).add(
+                                    GetListProductOfCategory(
+                                        listCategory[tabIndex].id));
+                              },
+                              isScrollable: true,
+                              tabs: listCategory
+                                  .map((e) => Tab(
+                                        child: Text(e.name),
+                                      ))
+                                  .toList(),
+                            ),
                           ),
                         ],
                       ),
@@ -161,11 +169,6 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                                             category.id));
                                               },
                                               child:
-                                                  // ItemShopAndProduct(
-                                                  // shop: listProductShopEntity.listProductAuMall[0].userEntity!.shop!!,
-                                                  // productAuMallEntities: listProductShopEntity.listProductAuMall,
-                                                  //
-                                                  // )
                                                   ListView.builder(
                                                       itemCount:
                                                           listProductShopEntity
@@ -182,62 +185,6 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                                                         );
                                                       })
 
-                                              // GridView.builder(
-                                              //   physics:
-                                              //       const AlwaysScrollableScrollPhysics(
-                                              //           parent:
-                                              //               BouncingScrollPhysics()),
-                                              //   itemCount:
-                                              //       listProductShopEntity
-                                              //           .listProductAuMall
-                                              //           .length,
-                                              //   gridDelegate:
-                                              //       const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                              //           crossAxisCount: 1,
-                                              //           height: 330),
-                                              //   itemBuilder:
-                                              //       (context, index) {
-                                              //     return
-                                              //       ItemShopAndProduct(
-                                              //         shop: listProductShopEntity.listProductAuMall[index].userEntity!.shop!!,
-                                              //         productAuMallEntities: listProductShopEntity.listProductAuMall,
-                                              //
-                                              //       );
-                                              //     Text(listProductShopEntity.listProductAuMall[index].userEntity!.shop!.name!);
-                                              //       InkWell(
-                                              //         onTap: () {
-                                              //           Navigator.push(
-                                              //                   context,
-                                              //                   MaterialPageRoute(
-                                              //                     builder:
-                                              //                         (context) =>
-                                              //                             ProductDetails(
-                                              //                       productSimpleEntity:
-                                              //                           listProductShopEntity.listProductAuMall[index],
-                                              //                       index:
-                                              //                           index,
-                                              //                               isFromAuction: false,
-                                              //                     ),
-                                              //                   ))
-                                              //               .then(
-                                              //                   (value) => {
-                                              //                         BlocProvider.of<ProductsBloc>(context)
-                                              //                             .add(GetListProductOfCategory(category.id))
-                                              //                       });
-                                              //         },
-                                              //         child:
-                                              //             // Container()
-                                              //             ProductItemAuMall(
-                                              //           productFavoriteEntity:
-                                              //               listProductShopEntity
-                                              //                       .listProductAuMall[
-                                              //                   index],
-                                              //           isAuctionProduct:
-                                              //               false,
-                                              //         ));
-                                              //   },
-                                              // ),
-
                                               ))
                                 ],
                               ),
@@ -251,239 +198,6 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
       }
 
       return Container();
-    });
-
-    return BlocBuilder<ProductsBloc, ProductsState>(
-        builder: (oldState, newState) {
-      if (newState is ProductsStateDataLoaded) {
-        CategoriesEntity categoriesEntity = newState.categoriesEntity;
-        final List<String> categoryNames = categoriesEntity.categories
-            .map((categoryEntity) => categoryEntity.name)
-            .toList();
-        current = BlocProvider.of<ProductsBloc>(context).current;
-        tabController = TabController(
-            initialIndex: current, length: categoryNames.length, vsync: this);
-        tabController.addListener(() {
-          BlocProvider.of<ProductsBloc>(context).add(ChangeCategory(
-              tabController.index,
-              categoriesEntity.categories[tabController.index].id));
-        });
-
-        return DefaultTabController(
-          length: categoriesEntity.categories.length,
-          child: Scaffold(
-              appBar: PreferredSize(
-                  preferredSize: const Size.fromHeight(50),
-                  child: SafeArea(
-                    child: AppBar(
-                      title: Text(
-                        S.current.shop,
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                      automaticallyImplyLeading: false,
-                    ),
-                  )),
-              body: newState.listProductAuMall.listProductAuMall.isEmpty
-                  ? Column(
-                      children: [
-                        Row(
-                          children: [
-                            SortProduct(
-                              sortBys: sortBys,
-                            ),
-                            const Expanded(child: SearchWidget()),
-                            const FilterProduct(),
-                          ],
-                        ),
-                        const Center(
-                            child: Text("Không có sản phầm nào!!!!!!!!!!!!!!!"))
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        Row(
-                          children: [
-                            SortProduct(
-                              sortBys: sortBys,
-                            ),
-                            const Expanded(child: SearchWidget()),
-                            const FilterProduct(),
-                          ],
-                        ),
-                        TabBar(
-                          indicatorColor: Colors.grey.shade800,
-                          indicatorWeight: 3,
-                          unselectedLabelColor: Colors.grey,
-                          labelColor: Colors.black,
-                          // controller: tabController,
-                          tabs: categoryNames
-                              .map((tabName) => Tab(child: Text(tabName)))
-                              .toList(),
-                          onTap: (tabIndex) {
-                            BlocProvider.of<ProductsBloc>(context).add(
-                                ChangeCategory(tabController.index,
-                                    categoriesEntity.categories[tabIndex].id));
-                          },
-                        ),
-                        // Expanded(
-                        //   child: GridView.builder(
-                        //     padding: EdgeInsets.zero,
-                        //     itemCount: newState
-                        //         .listProductAuMall.listProductAuMall.length,
-                        //     gridDelegate:
-                        //         const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                        //             height: 330, crossAxisCount: 2),
-                        //     itemBuilder: (context, index) {
-                        //       return InkWell(
-                        //           onTap: () {
-                        //             Navigator.push(
-                        //                 context,
-                        //                 MaterialPageRoute(
-                        //                   builder: (context) => ProductDetails(
-                        //                     productSimpleEntity: newState
-                        //                         .listProductAuMall
-                        //                         .listProductAuMall[index],
-                        //                     index: index,
-                        //                     isFromAuction: false,
-                        //                   ),
-                        //                 ));
-                        //           },
-                        //           child: Hero(
-                        //               tag: '$index',
-                        //               child: ProductItemAuMall(
-                        //                 productFavoriteEntity: newState
-                        //                     .listProductAuMall
-                        //                     .listProductAuMall[index],
-                        //                 isAuctionProduct: false,
-                        //               )));
-                        //     },
-                        //   ),
-                        // ),
-                      ],
-                    )),
-        );
-      }
-      if (newState is ProductsSearchStateDataLoaded) {
-        return Scaffold(
-            appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(50),
-                child: SafeArea(
-                  child: AppBar(
-                    title: Text(
-                      S.current.shop,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                    // elevation: 0,
-                    // primary: false,
-                    // automaticallyImplyLeading: false,
-                    // backgroundColor: Colors.transparent,
-                    // titleSpacing: 10,
-                    // bottom: TabBar(
-                    //   indicatorColor: Colors.grey.shade800,
-                    //   indicatorWeight: 3,
-                    //   unselectedLabelColor: Colors.grey,
-                    //   labelColor: Colors.black,
-                    //   controller: tabController,
-                    //   tabs: categoryNames
-                    //       .map((tabName) => Tab(child: Text(tabName)))
-                    //       .toList(),
-                    // ),
-                  ),
-                )),
-            body: newState.listProductAuMall.listProductAuMall.isEmpty
-                ? Column(
-                    children: [
-                      // Text(
-                      //   S.current.shop,
-                      //   style: Theme.of(context).textTheme.headline5,
-                      // ),
-                      Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SortProduct(
-                            sortBys: sortBys,
-                          ),
-                          const Expanded(child: SearchWidget()),
-                          const FilterProduct(),
-                        ],
-                      ),
-                      const Center(
-                          child: Text("Không có sản phầm nào!!!!!!!!!!!!!!!"))
-                    ],
-                  )
-                : Column(
-                    children: [
-                      // Text(
-                      //   S.current.shop,
-                      //   style: Theme.of(context).textTheme.headline5,
-                      // ),
-                      Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SortProduct(
-                            sortBys: sortBys,
-                          ),
-                          const Expanded(child: SearchWidget()),
-                          const FilterProduct(),
-                        ],
-                      ),
-
-                      // Expanded(
-                      //   child: newState is ProductsLoadingState
-                      //       ? const Center(child: CircularProgressIndicator())
-                      //       : GridView.builder(
-                      //           padding: EdgeInsets.zero,
-                      //           itemCount: newState
-                      //               .listProductAuMall.listProductAuMall.length,
-                      //           gridDelegate:
-                      //               const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                      //                   height: 330, crossAxisCount: 2),
-                      //           itemBuilder: (context, index) {
-                      //             return InkWell(
-                      //                 onTap: () {
-                      //                   Navigator.push(
-                      //                       context,
-                      //                       MaterialPageRoute(
-                      //                         builder: (context) =>
-                      //                             ProductDetails(
-                      //                           productSimpleEntity: newState
-                      //                               .listProductAuMall
-                      //                               .listProductAuMall[index],
-                      //                           index: index,
-                      //                         ),
-                      //                       ));
-                      //                 },
-                      //                 child: Hero(
-                      //                     tag: '$index',
-                      //                     child: ProductItemAuMall(
-                      //                       productFavoriteEntity: newState
-                      //                           .listProductAuMall
-                      //                           .listProductAuMall[index],
-                      //                       isAuctionProduct: false,
-                      //                     )));
-                      //           },
-                      //         ),
-                      // ),
-
-                    ],
-                  ));
-      }
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: kHeight(context) / 3,
-            ),
-            // The loading indicator
-            const CupertinoActivityIndicator(
-              radius: 20.0,
-              color: ColorManager.colorApp,
-            ),
-            Text(S.current.dataLoading)
-          ],
-        ),
-      );
     });
   }
 }

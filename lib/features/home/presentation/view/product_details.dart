@@ -111,9 +111,7 @@ class _ProductDetailsState extends State<ProductDetails>
     return Scaffold(
       body: BlocListener<AuctionBloc, AuctionState>(
         listener: (context, state) {
-          // do stuff here based on BlocA's state
           if (state is AuctionSessionInfoDataLoaded) {
-            // showPopUpConfirmAuction(34, "123456789");
             _showInfoAuctionSession();
           }
           if (state is AuctionDataErrorState) {
@@ -587,8 +585,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   onPressed: () {
                                     Navigator.pushNamed(
                                         context, AppRoutes.productReviews,
-                                        arguments: state.productDetailEntity
-                                            .productDetailData!);
+                                        arguments: state.productDetailEntity);
                                     BlocProvider.of<SendReviewBloc>(context)
                                         .add(GetReviews(state
                                             .productDetailEntity
@@ -671,16 +668,14 @@ class _ProductDetailsState extends State<ProductDetails>
                                   .relatedProducts![index];
                               return InkWell(
                                 onTap: () {
-                                  // Navigator.pushReplacement(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //       builder: (context) => ProductDetails(
-                                  //         index: index,
-                                  //         productSimpleEntity:
-                                  //             productAuMallEntity,
-                                  //         isFromAuction: false,
-                                  //       ),
-                                  //     ));
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ProductDetails(
+                                          index: index,
+                                          isFromAuction: false, productEntityId: productAuMallEntity.id!,
+                                        ),
+                                      ));
                                 },
                                 child: SizedBox(
                                     width: kWidth(context) / 2,
