@@ -5,7 +5,6 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
-import '../widgets/address_card.dart';
 
 class AddressView extends StatefulWidget {
   const AddressView({super.key});

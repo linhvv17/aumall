@@ -1,3 +1,4 @@
+import 'package:aumall/app/widgets/skeleton.dart';
 import 'package:aumall/features/profile/domain/entities/address_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,11 +7,9 @@ import '../../../../core/utilities/routes.dart';
 import '../../../../generated/l10n.dart';
 import '../bloc/profile_bloc.dart';
 
-class AddressCard extends StatelessWidget {
-  final int index;
-  final AddressEntity addressEntity;
-  const AddressCard(
-      {super.key, required this.index, required this.addressEntity});
+class AddressCardLoading extends StatelessWidget {
+  const AddressCardLoading(
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,76 +30,25 @@ class AddressCard extends StatelessWidget {
               )
             ],
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
+          child: const Padding(
+            padding: EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      addressEntity.name!,
-                      style: const TextStyle(
-                        color: Color(0xFF222222),
-                        fontSize: 14,
-                        fontFamily: 'Metropolis',
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, AppRoutes.address)
-                        //     .then((value) =>
-                        // {BlocProvider.of<ProfileBloc>(context).add(GetListAddress())})
-                        ;
-                      },
-                      child: const Text(
-                        'Edit',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: Color(0xFFDB3022),
-                          fontSize: 14,
-                          fontFamily: 'Metropolis',
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    )
+                    Skeleton(100, 30),
+                    Skeleton(50, 30),
                   ],
                 ),
-                Text(
-                  addressEntity.mobile!,
-                  style: const TextStyle(
-                    color: Color(0xFF222222),
-                    fontSize: 14,
-                    fontFamily: 'Metropolis',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                Text(
-                  addressEntity.address!,
-                  style: const TextStyle(
-                    color: Color(0xFF222222),
-                    fontSize: 14,
-                    fontFamily: 'Metropolis',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+                Skeleton(100, 30),
+                Skeleton(200, 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    addressEntity.defaultAddress!
-                        ? const CheckboxCustom2()
-                        : const CheckboxCustom(),
-                    Text(
-                      S.current.defaultAddress,
-                      style: const TextStyle(
-                        color: Color(0xFF222222),
-                        fontSize: 14,
-                        fontFamily: 'Metropolis',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    )
+                    Skeleton(30, 30),
+                    Skeleton(200, 30),
                   ],
                 )
               ],

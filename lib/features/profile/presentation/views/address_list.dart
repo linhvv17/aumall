@@ -1,5 +1,6 @@
 import 'package:aumall/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:aumall/features/profile/presentation/widgets/address_card.dart';
+import 'package:aumall/features/profile/presentation/widgets/address_card_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,6 +59,14 @@ class _AddressListState extends State<AddressListView> {
         if (state is ProfileErrorState) {
           return Text(state.message);
         }
+        return ListView.builder(
+          padding: const EdgeInsets.symmetric(vertical: 22),
+          itemCount: 4,
+          itemBuilder: (context, index) {
+            return const AddressCardLoading(
+            );
+          },
+        );
         return Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
