@@ -23,13 +23,14 @@ class _LoginViewState extends State<LoginView> {
   final TextEditingController passController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   bool hidePass = true;
-
-
-  bool saveAccount = false;
+  bool rememberAccount = false;
 
   @override
   void initState() {
     super.initState();
+    rememberAccount =
+        PreferenceHelper.getDataFromSharedPreference(key: "rememberAccount") ??
+            false;
     loadAccountInfo();
   }
 
@@ -38,12 +39,10 @@ class _LoginViewState extends State<LoginView> {
         await SecureStorage().storage.read(key: "username") ?? "";
     passController.text =
         await SecureStorage().storage.read(key: "password") ?? "";
-    saveAccount = PreferenceHelper.getDataFromSharedPreference(key: "saveAccount") ?? false;
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -124,10 +123,10 @@ class _LoginViewState extends State<LoginView> {
                       Checkbox(
                         checkColor: Colors.white, // color of tick Mark
                         activeColor: Colors.deepOrange,
-                        value: saveAccount ? true : false,
-                        onChanged: (bool? value) {
+                        value: rememberAccount,
+                        onChanged: (bool? newValue) {
                           setState(() {
-                            saveAccount = !saveAccount;
+                            rememberAccount = newValue!;
                           });
                         },
                       ),
@@ -170,7 +169,7 @@ class _LoginViewState extends State<LoginView> {
                               height: 50,
                               ontab: () {
                                 if (formKey.currentState!.validate()) {
-                                  if (saveAccount) {
+                                  if (rememberAccount) {
                                     SecureStorage().storage.write(
                                         key: "username",
                                         value: emailController.text);
@@ -178,18 +177,21 @@ class _LoginViewState extends State<LoginView> {
                                         key: "password",
                                         value: passController.text);
                                     PreferenceHelper.saveDataInSharedPreference(
-                                        key: "saveAccount", value: true);
+                                        key: "rememberAccount", value: true);
                                   } else {
+                                    SecureStorage()
+                                        .storage
+                                        .write(key: "username", value: "");
+                                    SecureStorage()
+                                        .storage
+                                        .write(key: "password", value: "");
                                     PreferenceHelper.saveDataInSharedPreference(
-                                        key: "saveAccount", value: false);
+                                        key: "rememberAccount", value: false);
                                   }
                                   BlocProvider.of<LoginBloc>(context).add(
                                       UserLogin(emailController.text,
                                           passController.text));
                                 }
-
-                                // Navigator.pushReplacementNamed(
-                                //     context, AppRoutes.layout);
                               });
                     },
                   ),
