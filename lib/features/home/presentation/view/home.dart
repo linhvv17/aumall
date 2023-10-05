@@ -123,6 +123,7 @@ class _HomeState extends State<HomeView> {
                                     productEntityId: newProducts[index].id!,
                                     index: index,
                                     isFromAuction: false,
+                                    isFavorite: newProducts[index].isFavorite!,
                                   ),
                                 ));
                           },

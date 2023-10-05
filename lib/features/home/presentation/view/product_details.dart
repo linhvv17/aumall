@@ -29,6 +29,7 @@ import '../bloc/product_detail_bloc/product_detail_event.dart';
 class ProductDetails extends StatefulWidget {
   final int productEntityId;
   final int index;
+  bool? isFavorite;
   bool? isFromAuction;
   String? priceStep;
 
@@ -36,6 +37,7 @@ class ProductDetails extends StatefulWidget {
       {super.key,
       required this.productEntityId,
       required this.index,
+      this.isFavorite,
       this.isFromAuction,
       this.priceStep});
 
@@ -45,6 +47,9 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails>
     with TickerProviderStateMixin {
+
+  // bool isFavorite = false;
+
   @override
   void initState() {
     animationController = AnimationController(
@@ -108,6 +113,7 @@ class _ProductDetailsState extends State<ProductDetails>
 
   @override
   Widget build(BuildContext context) {
+    print("isFavorite when call build init ${widget.isFavorite!}");
     return Scaffold(
       body: BlocListener<AuctionBloc, AuctionState>(
         listener: (context, state) {
@@ -134,9 +140,12 @@ class _ProductDetailsState extends State<ProductDetails>
             if (state is ProductDetailLoaded) {
               ProductDetailDataModel productDetailData =
                   state.productDetailEntity.productDetailData!;
+              // isFavorite = productDetailData.isFavorite;
+
+              print("isFavorite when call build  ProductDetailLoaded ${widget.isFavorite!}");
+
               var averageRate = 0.0;
               var totalRate = 0.0;
-
               if (productDetailData.reviews.isNotEmpty) {
                 for (int i = 0; i < productDetailData.reviews.length; i++) {
                   totalRate = totalRate + productDetailData.reviews[i].rating;
@@ -178,9 +187,9 @@ class _ProductDetailsState extends State<ProductDetails>
                                 radius: 20.0,
                                 child: InkWell(
                                   onTap: () {
+                                    print("isFavorite when call build  onTap: () ${widget.isFavorite!}");
                                     BlocProvider.of<FavouriteBloc>(context).add(
-                                        state.productDetailEntity
-                                                .productDetailData!.isFavorite!
+                                        widget.isFavorite!
                                             ? RemoveFavoriteProduct(state
                                                 .productDetailEntity
                                                 .productDetailData!
@@ -197,14 +206,15 @@ class _ProductDetailsState extends State<ProductDetails>
                                               ));
 
                                     setState(() {
-                                      state.productDetailEntity
-                                              .productDetailData!.isFavorite =
-                                          !state.productDetailEntity
-                                              .productDetailData!.isFavorite;
+                                      print("isFavorite ${widget.isFavorite!}");
+                                      widget.isFavorite =
+                                          !widget.isFavorite!;
+
+                                      print("isFavorite ${widget.isFavorite!}");
+                                      print("isFavorite when call build  after onTap: () ${widget.isFavorite!}");
                                     });
                                   },
-                                  child: state.productDetailEntity
-                                          .productDetailData!.isFavorite
+                                  child: widget.isFavorite!
                                       ? const Icon(
                                           Icons.favorite,
                                           size: 20.0,
@@ -245,7 +255,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                   GetInfoAuctionSession(state
                                       .productDetailEntity
                                       .productDetailData!
-                                      .id!));
+                                      .id));
                             },
                           ),
                         ],
@@ -283,14 +293,14 @@ class _ProductDetailsState extends State<ProductDetails>
                               BlocProvider.of<CartBloc>(context)
                                   .add(AddProductToCart(
                                 productId: state
-                                    .productDetailEntity.productDetailData!.id!,
+                                    .productDetailEntity.productDetailData!.id,
                               ));
 
                               animateCartAdd(
                                 context,
                                 NetworkImage(
                                   state.productDetailEntity.productDetailData!
-                                      .thumbnailUrl!,
+                                      .thumbnailUrl,
                                 ),
                               );
                             },
@@ -466,7 +476,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          productDetailData.user!.shopName
+                                          productDetailData.user.shopName
                                               .toString(),
                                           style: const TextStyle(
                                             color: Color(0xFF393F42),
@@ -477,7 +487,7 @@ class _ProductDetailsState extends State<ProductDetails>
                                         ),
                                         const SizedBox(height: 3),
                                         Text(
-                                          productDetailData.user!.name
+                                          productDetailData.user.name
                                               .toString(),
                                           style: const TextStyle(
                                             color: Color(0xFF939393),
@@ -1032,11 +1042,8 @@ class _ProductDetailsState extends State<ProductDetails>
   List<int> _generateRecommendListPriceAuction(
       String priceProduct, String maxPriceProduct, String priceStepProduct) {
     int maxPrice = double.parse(maxPriceProduct).toInt();
-    int price = double.parse(priceProduct).toInt();
     int step = double.parse(priceStepProduct).toInt();
 
-    int priceRange = maxPrice - price;
-    int numberSuggest = priceRange ~/ step;
 
     return [
       maxPrice + step,
@@ -1133,10 +1140,10 @@ class _ProductDetailsState extends State<ProductDetails>
           return AlertDialog(
             title: const Text('Gọi vào số Hotline'),
             content:
-                Text("Bạn có muốn gọi vào số Hotline ${phone} để nhận tư vấn!"),
+                Text("Bạn có muốn gọi vào số Hotline $phone để nhận tư vấn!"),
             actions: [
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -1161,7 +1168,7 @@ class _ProductDetailsState extends State<ProductDetails>
             content: Text("Bạn xác nhận tham gia đấu giá với mức giá $price"),
             actions: [
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -1193,7 +1200,7 @@ class _ProductDetailsState extends State<ProductDetails>
             content: Text(message),
             actions: [
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -1213,7 +1220,7 @@ class _ProductDetailsState extends State<ProductDetails>
                 const Text("Hiện bạn là người trả giá cao nhất cho sản phẩm"),
             actions: [
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.green),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
                   },

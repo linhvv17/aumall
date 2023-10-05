@@ -215,20 +215,23 @@ class ProfileView extends StatelessWidget {
   _buildUserMainInfo(UserEntity userEntity, BuildContext context) {
     return Row(
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            userEntity.avatar != null
-                ? CircleAvatar(
-                    radius: 35,
-                    backgroundImage: NetworkImage(userEntity.avatar.toString()),
-                  )
-                : const CircleAvatar(
-                    radius: 35,
-                    backgroundImage: NetworkImage(
-                        'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png'),
-                  ),
-          ],
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              userEntity.avatar != null
+                  ? CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(userEntity.avatar.toString()),
+                    )
+                  : const CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(
+                          'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png'),
+                    ),
+            ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -289,7 +292,7 @@ class ProfileView extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .labelLarge!
-                          .copyWith(color: ColorManager.grey),
+                          .copyWith(color: ColorManager.orangeLight),
                     ),
                   ),
                 ],
@@ -369,57 +372,60 @@ class ProfileView extends StatelessWidget {
   }
 
   _buildEKYCView(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.deepOrange.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                'assets/images/ekyc_icon.png',
-                width: 60,
-                height: 60,
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    "Vui lòng xác thực tài khoản để \nsử dụng dịch vụ tin cậy hơn",
-                    maxLines: 2,
-                  ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.deepOrange.withOpacity(0.4),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  'assets/images/ekyc_icon.png',
+                  width: 60,
+                  height: 60,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 4.0),
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 4,
-                        horizontal: 16,
-                      ),
-                      decoration: const BoxDecoration(
-                        color: Colors.deepOrange,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      child: const Text("Xác thực ngay",
-                          style: TextStyle(color: Colors.black)),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "Vui lòng xác thực tài khoản để \nsử dụng dịch vụ tin cậy hơn",
+                      maxLines: 2,
                     ),
                   ),
-                ),
-              ],
-            )
-          ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 4.0),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 4,
+                          horizontal: 16,
+                        ),
+                        decoration: const BoxDecoration(
+                          color: Colors.deepOrange,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: const Text("Xác thực ngay",
+                            style: TextStyle(color: Colors.black)),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
