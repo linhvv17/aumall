@@ -1,3 +1,4 @@
+import 'package:aumall/features/favorite/domain/entities/product/products_order_by_shop_entity.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import '../../../../core/usecase/usecase.dart';

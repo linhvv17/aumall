@@ -18,8 +18,9 @@ class FavouriteDataErrorState extends FavouriteState {
 }
 
 class FavouriteDataLoaded extends FavouriteState {
-  final ListFavoriteEntity listFavoriteEntity;
-  const FavouriteDataLoaded(this.listFavoriteEntity);
+  // final ListFavoriteEntity listFavoriteEntity;
+  final List<ProductsOrderByShopEntity> listProductShopEntity;
+  const FavouriteDataLoaded(this.listProductShopEntity);
 }
 
 class AddToFavouriteState extends FavouriteState {}

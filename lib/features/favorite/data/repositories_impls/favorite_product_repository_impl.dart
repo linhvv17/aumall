@@ -3,6 +3,7 @@ import 'package:aumall/core/error/failure.dart';
 import 'package:aumall/core/network/network_info.dart';
 import 'package:aumall/features/favorite/data/datasources/favorite_datasource.dart';
 import 'package:aumall/features/favorite/domain/entities/list_favorite_entity.dart';
+import 'package:aumall/features/favorite/domain/entities/product/products_order_by_shop_entity.dart';
 import 'package:aumall/features/favorite/domain/repositories/favorite_product_repository.dart';
 import 'package:aumall/generated/l10n.dart';
 import 'package:dartz/dartz.dart';
@@ -13,7 +14,7 @@ class FavoriteRepositoryImpl extends FavoriteBaseRepository {
   FavoriteRepositoryImpl(this.networkInfo, this.favoriteDatasource);
 
   @override
-  Future<Either<Failure, ListFavoriteEntity>> getFavoriteList() async {
+  Future<Either<Failure, List<ProductsOrderByShopEntity>>> getFavoriteList() async {
     if (await networkInfo.isConnected) {
       try {
         final data = await favoriteDatasource.getListFavorite();

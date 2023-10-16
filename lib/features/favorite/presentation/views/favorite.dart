@@ -1,4 +1,6 @@
 import 'package:aumall/core/utilities/mediaquery.dart';
+import 'package:aumall/features/favorite/domain/entities/product/products_order_by_shop_entity.dart';
+import 'package:aumall/features/favorite/presentation/views/item_shop_and_product.dart';
 import 'package:aumall/features/favorite/presentation/views/product_item_aumall.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,14 +60,17 @@ class _FavoriteViewState extends State<FavoriteView> {
             if (state is FavouriteDataLoading) {
               return const LoadingFavoriteScreen();
             } else if (state is FavouriteDataLoaded) {
-              List<ProductAuMallEntity> listFavorite =
-                  state.listFavoriteEntity.listFavorite;
+              // List<ProductAuMallEntity> listFavorite =
+              //     state.listFavoriteEntity.listFavorite;
+
+              List<ProductsOrderByShopEntity> listProductShopEntity =
+                  state.listProductShopEntity;
               return PageStorage(
                 bucket: PageStorageBucket(),
                 child: Column(
                   children: [
                     Expanded(
-                        child: listFavorite.isEmpty
+                        child: listProductShopEntity.isEmpty
                             ? Column(
                                 children: [
                                   Expanded(
@@ -88,37 +93,76 @@ class _FavoriteViewState extends State<FavoriteView> {
                                 onRefresh: () async {
                                   favouriteBloc.add(GetListFavoriteProduct());
                                 },
-                                child: GridView.builder(
-                                  physics: const AlwaysScrollableScrollPhysics(
-                                      parent: BouncingScrollPhysics()),
-                                  itemCount: listFavorite.length,
-                                  gridDelegate:
-                                       SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                          crossAxisCount: 2, height: kWidth(context)/1.5),
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProductDetails(
-                                                  productEntityId:
-                                                      listFavorite[index].id!,
-                                                  index: index,
-                                                  isFromAuction: false,
-                                                ),
-                                              ));
-                                        },
-                                        child:
-                                            // Container()
-                                            ProductItemAuMall(
-                                                productFavoriteEntity:
-                                                    listFavorite[index],
-                                                isAuctionProduct: false));
+                                child: NestedScrollView(
+                                  headerSliverBuilder: (BuildContext context,
+                                      bool innerBoxIsScrolled) {
+                                    return <Widget>[
+                                      const SliverAppBar(
+                                        pinned: true,
+                                        title: Text('Flutter Demo'),
+                                      ),
+                                    ];
                                   },
-                                ),
-                              ))
+                                  body: Column(
+                                    children: <Widget>[
+                                      const FlutterLogo(
+                                        size: 100.0,
+                                      ),
+                                      SizedBox(
+                                        height: 300.0,
+                                        child: ListView.builder(
+                                          itemCount: 60,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Text('Item $index');
+                                          },
+                                        ),
+                                      ),
+                                      const FlutterLogo(
+                                        size: 100.0,
+                                      ),
+                                    ],
+                                  ),
+                                )
+
+                                // ListView.builder(
+                                //     shrinkWrap: true,
+                                //     itemCount: listProductShopEntity.length,
+                                //     itemBuilder: (BuildContext context, int index) {
+                                //       return Column(
+                                //         crossAxisAlignment: CrossAxisAlignment.start,
+                                //         children: <Widget>[
+                                //           // Text('Parent'),
+                                //           ListView.builder(
+                                //
+                                //               physics: const ClampingScrollPhysics(),
+                                //               shrinkWrap: true,
+                                //               itemBuilder: (BuildContext context, int index) {
+                                //                 return ItemShopAndProduct(
+                                //                   shop: listProductShopEntity[index]
+                                //                       .shopEntity,
+                                //                   productEntities:
+                                //                   listProductShopEntity[index]
+                                //                       .products,
+                                //                 );
+                                //               }),
+                                //         ],
+                                //       );
+                                //     }),
+
+                                // ListView.builder(
+                                //     itemCount: listProductShopEntity.length,
+                                //     itemBuilder: (context, index) {
+                                //       return ItemShopAndProduct(
+                                //         shop: listProductShopEntity[index]
+                                //             .shopEntity,
+                                //         productEntities:
+                                //             listProductShopEntity[index]
+                                //                 .products,
+                                //       );
+                                //     }),
+
+                                ))
                   ],
                 ),
               );
