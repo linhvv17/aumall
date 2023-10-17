@@ -208,5 +208,6 @@
   "mainProduct" : "TOP",
   "hotProduct" : "HOT",
   "newProduct" : "NEWS",
-  "follow" : "Follow"
+  "follow" : "Follow",
+  "referralCode" : "Referral code"
 }

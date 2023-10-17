@@ -3,11 +3,12 @@ import 'package:aumall/features/auction/data/models/auction_session_info_model.d
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/network/api_provider.dart';
 import '../../../../core/utilities/endpoints.dart';
+import '../../../auction/data/models/product/products_order_by_shop_model.dart';
 import '../../domain/repositories/auction_product_repository.dart';
 import '../models/list_auction_model.dart';
 
 abstract class AuctionDatasource {
-  Future<ListAuctionModel> getListAuction(GetAuctionParams getAuctionParams);
+  Future<List<ProductsOrderByShopModel>> getListAuction(GetAuctionParams getAuctionParams);
   Future<AuctionSessionInfoModel> getAuctionSessionInfo(
       GetAuctionSessionInfoParams getAuctionSessionInfoParams);
   Future<bool> removeAuctionProduct(int idProduct);
@@ -19,7 +20,7 @@ class AuctionDatasourceImpl implements AuctionDatasource {
   final APIProvider apiProvider;
   AuctionDatasourceImpl(this.apiProvider);
   @override
-  Future<ListAuctionModel> getListAuction(
+  Future<List<ProductsOrderByShopModel>> getListAuction(
       GetAuctionParams getAuctionParams) async {
     final response = await apiProvider.get(
         endPoint: auctionProductsAuMall,
@@ -28,7 +29,10 @@ class AuctionDatasourceImpl implements AuctionDatasource {
           'status': '1',
           'auction_type': getAuctionParams.typeAuction,
         });
-    return ListAuctionModel.fromJson(response.data);
+    List<ProductsOrderByShopModel> listProductsOrderByShopModel =
+    List<ProductsOrderByShopModel>.from(
+        response.data['data']['data'].map((x) => ProductsOrderByShopModel.fromJson(x)));
+    return listProductsOrderByShopModel;
   }
 
   @override

@@ -229,6 +229,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Rating & Reviews"),
         "recentlyAddedProducts":
             MessageLookupByLibrary.simpleMessage("New products have arrived"),
+        "referralCode": MessageLookupByLibrary.simpleMessage("Referral code"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registerText": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "registeruccess": MessageLookupByLibrary.simpleMessage(

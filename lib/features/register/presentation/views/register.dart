@@ -4,7 +4,6 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/routes.dart';
-import '../../../../core/utilities/strings.dart';
 import '../../../../generated/l10n.dart';
 import '../../../login/presentation/widgets/alert_snackbar.dart';
 import '../../../login/presentation/widgets/mainbutton.dart';
@@ -22,6 +21,7 @@ class _RegisterViewState extends State<RegisterView> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController referralCodeController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   bool hidePass = true;
   bool checked = false;
@@ -51,7 +51,7 @@ class _RegisterViewState extends State<RegisterView> {
                     children: [
                       Text(
                         S.current.register,
-                        style: Theme.of(context).textTheme.headline4!.copyWith(
+                        style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                             fontWeight: FontWeight.bold,
                             color: ColorManager.dark),
                       ),
@@ -76,6 +76,20 @@ class _RegisterViewState extends State<RegisterView> {
                       isPassword: false,
                       borderRadius: 16,
                       inputType: TextInputType.text),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  MainTFF(
+                      max: 1,
+                      labelText: S.current.referralCode,
+                      hintText: S.current.referralCode,
+                      controller: referralCodeController,
+                      validate: (value) {
+                        return null;
+                      },
+                      isPassword: false,
+                      borderRadius: 16,
+                      inputType: TextInputType.emailAddress),
                   const SizedBox(
                     height: 10,
                   ),

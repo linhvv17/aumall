@@ -231,6 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xếp hạng & Bài đánh giá"),
         "recentlyAddedProducts":
             MessageLookupByLibrary.simpleMessage("Sản phẩm mới về"),
+        "referralCode": MessageLookupByLibrary.simpleMessage("Mã giới thiệu"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "registerText": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "registeruccess":

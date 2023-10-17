@@ -2,6 +2,7 @@ import 'package:aumall/core/error/error_handler.dart';
 import 'package:aumall/core/error/failure.dart';
 import 'package:aumall/core/network/network_info.dart';
 import 'package:aumall/features/auction/domain/entities/auction_session_info_entity.dart';
+import 'package:aumall/features/auction/domain/entities/product/products_order_by_shop_entity.dart';
 import 'package:aumall/generated/l10n.dart';
 import 'package:dartz/dartz.dart';
 
@@ -15,7 +16,7 @@ class AuctionRepositoryImpl extends AuctionBaseRepository {
   AuctionRepositoryImpl(this.networkInfo, this.auctionDatasource);
 
   @override
-  Future<Either<Failure, ListAuctionEntity>> getAuctionList(
+  Future<Either<Failure, List<ProductsOrderByShopEntity>>> getAuctionList(
       GetAuctionParams getAuctionParams) async {
     if (await networkInfo.isConnected) {
       try {

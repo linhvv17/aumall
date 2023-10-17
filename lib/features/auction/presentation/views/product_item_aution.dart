@@ -1,3 +1,4 @@
+import 'package:aumall/features/auction/domain/entities/product/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -6,20 +7,23 @@ import '../../../../core/colors/colors.dart';
 import '../../../../core/theme/theme_data.dart';
 import '../../../../core/utilities/enums.dart';
 import '../../../../core/utilities/mediaquery.dart';
+import '../../../../core/utilities/utils.dart';
 import '../../../../generated/l10n.dart';
-import '../../../login/presentation/widgets/alert_snackbar.dart';
-import '../../../shopping/domain/entities/products_entity.dart';
-import '../bloc/auction_bloc.dart';
+import '../../../home/presentation/view/product_details.dart';
 
-class ProductAuctionAuMall extends StatefulWidget {
-  const ProductAuctionAuMall({super.key, required this.productFavoriteEntity});
-  final ProductAuMallEntity productFavoriteEntity;
+
+class ProductItemAuction extends StatefulWidget {
+  final ProductEntity productEntity;
+  bool? isAuctionProduct;
+  int? typeProduct;
+  ProductItemAuction(
+      {super.key, required this.productEntity, this.isAuctionProduct, this.typeProduct});
 
   @override
-  State<StatefulWidget> createState() => _ProductAuctionAuMallState();
+  State<StatefulWidget> createState() => _ProductItemAuctionState();
 }
 
-class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
+class _ProductItemAuctionState extends State<ProductItemAuction> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,85 +31,30 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
       child: Container(
         decoration: BoxDecoration(
             color: BlocProvider.of<ThemeBloc>(context).themeData ==
-                    appThemeData[AppTheme.lightTheme]
+                appThemeData[AppTheme.lightTheme]
                 ? ColorManager.white
                 : Colors.white.withOpacity(0.2),
+            // border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(15)),
         child: Stack(
           children: [
-            Image.network(
-              widget.productFavoriteEntity.thumbnailUrl!,
-              width: 200,
-              height: 200,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                  child: Image.network(
+                    widget.productEntity.thumbnailUrl!,
+                    width: kWidth(context)/2,
+                    height: kWidth(context)/3,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
             ),
             Positioned(
-              left: kWidth(context) * 0.34,
-              bottom: kHeight(context) * 0.008,
-              child: Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 5,
-                      color: ColorManager.grey,
-                      spreadRadius: 2,
-                    )
-                  ],
-                ),
-                child: BlocConsumer<AuctionBloc, AuctionState>(
-                  listener: (context, state) {
-                    if (state is AddToAuctionState) {
-                      showSnackbar(S.current.addfav, context, Colors.green);
-                    } else if (state is RemoveFromFavoriteState) {
-                      showSnackbar(S.current.deletefav, context, Colors.green);
-                    }
-                  },
-                  builder: (context, state) {
-                    return CircleAvatar(
-                      backgroundColor: ColorManager.white,
-                      radius: 20.0,
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            BlocProvider.of<AuctionBloc>(context).add(
-                                widget.productFavoriteEntity.isFavorite!
-                                    ? RemoveAuctionProduct(
-                                        widget.productFavoriteEntity.id!)
-                                    : AddToAuction(
-                                        product: widget.productFavoriteEntity,
-                                        isFavourite: widget
-                                            .productFavoriteEntity.isFavorite!,
-                                      ));
-                            setState(() {
-                              print(
-                                  'setState bf ${widget.productFavoriteEntity.isFavorite}');
-                              widget.productFavoriteEntity.isFavorite =
-                                  !widget.productFavoriteEntity.isFavorite!;
-                              print(
-                                  'setState at ${widget.productFavoriteEntity.isFavorite}');
-                            });
-                          },
-                          child: widget.productFavoriteEntity.isFavorite!
-                              ? const Icon(
-                                  Icons.favorite,
-                                  size: 20.0,
-                                  color: ColorManager.orangeLight,
-                                )
-                              : const Icon(
-                                  Icons.favorite_outline,
-                                  size: 20.0,
-                                  color: ColorManager.grey,
-                                ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 5,
+              bottom: 0,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
@@ -116,9 +65,10 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
                         RatingBarIndicator(
                           itemSize: 25.0,
                           rating:
-                              widget.productFavoriteEntity.ratingNumber != null
-                                  ? double.parse(widget.productFavoriteEntity.ratingNumber!)
-                                  : 0.0,
+                          widget.productEntity.ratingNumber != null
+                              ? double.parse(widget.productEntity.ratingNumber!)
+
+                              : 0.0,
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,
@@ -127,34 +77,36 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
                         ),
                         const SizedBox(width: 4.0),
                         Text(
-                          '(${widget.productFavoriteEntity.reviewNumber})',
+                          '(${widget.productEntity.reviewNumber})',
                           style:
-                              Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: Colors.grey,
-                                  ),
+                          Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8.0),
+                    // const SizedBox(height: 8.0),
                     // Text(
-                    //   product.category,
-                    //   style: Theme.of(context).textTheme.caption!.copyWith(
-                    //         color: ColorManager.grey,
-                    //       ),
+                    //   widget
+                    //       .productEntity.categoryOfProductEntity!.name!,
+                    //   style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    //     color: ColorManager.grey,
+                    //   ),
                     // ),
                     const SizedBox(height: 6.0),
                     Text(
-                      widget.productFavoriteEntity.title!,
+                      widget.productEntity.title!,
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 6.0),
                     Text.rich(
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: '${widget.productFavoriteEntity.price} \$',
+                            text: Utils.convertPrice(
+                                widget.productEntity.price!),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall!
@@ -163,6 +115,46 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 6.0),
+                    widget.isAuctionProduct!
+                        ? InkWell(
+                      child: Container(
+                        width: kWidth(context) * 0.3,
+                        height: 30,
+                        decoration: ShapeDecoration(
+                          color:  (widget.typeProduct! == 1)? Colors.lightBlue:(widget.typeProduct! == 2)? Colors.green: Colors.red ,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: Center(child: Text(S.current.auction)),
+                      ),
+                      onTap: () {
+                        //1: now
+                        (widget.typeProduct! == 2) ?
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductDetails(
+                                productEntityId:
+                                widget.productEntity.id!,
+                                index: 1,
+                                isFromAuction: widget.isAuctionProduct!
+                                    ? true
+                                    : false,
+                                isFavorite: false,
+                                priceStep: widget.productEntity.priceStep,
+                              ),
+                            )) :
+                        //2: coming
+                        (widget.typeProduct! == 1) ?
+                        showDialogCanNotAuction(1) :
+                        //3: finished
+                        showDialogCanNotAuction(3)
+                        ;
+                      },
+                    )
+                        : Container()
                   ],
                 ),
               ),
@@ -171,5 +163,28 @@ class _ProductAuctionAuMallState extends State<ProductAuctionAuMall> {
         ),
       ),
     );
+  }
+
+
+  void showDialogCanNotAuction(int type) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(type == 1 ? 'Phiên đấu giá chưa diễn ra'
+                : 'Phiên đấu giá đã kết thúc'),
+            content:
+            Text(type == 1 ? 'Hãy quay lại khi phiên đấu giá bắt đầu'
+                : 'Rất tiếc. Hãy tham khảo sản phẩm khác của chúng tôi'),
+            actions: [
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Đã hiểu')),
+            ],
+          );
+        });
   }
 }

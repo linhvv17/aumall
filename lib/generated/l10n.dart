@@ -1979,6 +1979,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Referral code`
+  String get referralCode {
+    return Intl.message(
+      'Referral code',
+      name: 'referralCode',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,4 +1,6 @@
+import 'package:aumall/features/auction/domain/entities/product/products_order_by_shop_entity.dart';
 import 'package:aumall/features/auction/presentation/bloc/auction_bloc.dart';
+import 'package:aumall/features/auction/presentation/views/widgets/item_shop_and_product.dart';
 import 'package:aumall/features/favorite/presentation/views/product_item_aumall.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,18 +69,21 @@ class _AuctionViewState extends State<AuctionView> {
           body: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
             children: [
+              ///now
               BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
                 if (state is AuctionDataLoading) {
                   return const LoadingAuctionScreen();
                 } else if (state is AuctionDataLoaded) {
-                  List<ProductAuMallEntity> listAuction =
-                      state.listAuctionEntity.listAuction;
+                  List<ProductsOrderByShopEntity> listProductShopEntity =
+                      state.listProductShopEntity;
+                  // List<ProductAuMallEntity> listAuction =
+                  //     state.listAuctionEntity.listAuction;
                   return PageStorage(
                     bucket: PageStorageBucket(),
                     child: Column(
                       children: [
                         Expanded(
-                            child: listAuction.isEmpty
+                            child: listProductShopEntity.isEmpty
                                 ? Center(
                                     child: Text(
                                       S.current.notauction,
@@ -92,51 +97,19 @@ class _AuctionViewState extends State<AuctionView> {
                                       auctionBloc
                                           .add(const GetListAuctionProduct(2));
                                     },
-                                    child: GridView.builder(
-                                      physics:
-                                          const AlwaysScrollableScrollPhysics(
-                                              parent: BouncingScrollPhysics()),
-                                      itemCount: listAuction.length,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                              crossAxisCount: 2, height: 330),
-                                      itemBuilder: (context, index) {
-                                        return InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ProductDetails(
-                                                              productEntityId:
-                                                              listAuction[
-                                                                  index].id!,
-                                                          index: index,
-                                                          isFromAuction: true,
-                                                              priceStep:  listAuction[
-                                                              index].priceStep,
-                                                        ),
-                                                      ))
-                                                  .then((value) => {
-                                                        BlocProvider.of<
-                                                                    AuctionBloc>(
-                                                                context)
-                                                            .add(
-                                                                const GetListAuctionProduct(
-                                                                    2))
-                                                      });
-                                            },
-                                            child:
-                                                // Container()
-                                                ProductItemAuMall(
-                                              productFavoriteEntity:
-                                                  listAuction[index],
-                                              isAuctionProduct: true,
-                                              typeProduct: 1,
-                                            ));
-                                      },
-                                    ),
-                                  ))
+                                    child: ListView.builder(
+                                        itemCount: listProductShopEntity.length,
+                                        itemBuilder: (context, index) {
+                                          return ItemShopAndProduct(
+                                            shop: listProductShopEntity[index]
+                                                .shopEntity,
+                                            productEntities:
+                                                listProductShopEntity[index]
+                                                    .products,
+                                            typeProduct: 2,
+                                          );
+                                        })
+                                    ))
                       ],
                     ),
                   );
@@ -146,18 +119,20 @@ class _AuctionViewState extends State<AuctionView> {
                   return Container();
                 }
               }),
+
+              ///upcoming
               BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
                 if (state is AuctionDataLoading) {
                   return const LoadingAuctionScreen();
                 } else if (state is AuctionDataLoaded) {
-                  List<ProductAuMallEntity> listAuction =
-                      state.listAuctionEntity.listAuction;
+                  List<ProductsOrderByShopEntity> listProductShopEntity =
+                      state.listProductShopEntity;
                   return PageStorage(
                     bucket: PageStorageBucket(),
                     child: Column(
                       children: [
                         Expanded(
-                            child: listAuction.isEmpty
+                            child: listProductShopEntity.isEmpty
                                 ? Center(
                                     child: Text(
                                       S.current.notauction,
@@ -169,50 +144,21 @@ class _AuctionViewState extends State<AuctionView> {
                                 : RefreshIndicator(
                                     onRefresh: () async {
                                       auctionBloc
-                                          .add(const GetListAuctionProduct(2));
+                                          .add(const GetListAuctionProduct(1));
                                     },
-                                    child: GridView.builder(
-                                      physics:
-                                          const AlwaysScrollableScrollPhysics(
-                                              parent: BouncingScrollPhysics()),
-                                      itemCount: listAuction.length,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                              crossAxisCount: 2, height: 330),
-                                      itemBuilder: (context, index) {
-                                        return InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ProductDetails(
-                                                              productEntityId:
-                                                              listAuction[
-                                                                  index].id!,
-                                                          index: index,
-                                                        ),
-                                                      ))
-                                                  .then((value) => {
-                                                        BlocProvider.of<
-                                                                    AuctionBloc>(
-                                                                context)
-                                                            .add(
-                                                                const GetListAuctionProduct(
-                                                                    2))
-                                                      });
-                                            },
-                                            child:
-                                                // Container()
-                                                ProductItemAuMall(
-                                              productFavoriteEntity:
-                                                  listAuction[index],
-                                              isAuctionProduct: true,
-                                              typeProduct: 2,
-                                            ));
-                                      },
-                                    ),
-                                  ))
+                                    child: ListView.builder(
+                                        itemCount: listProductShopEntity.length,
+                                        itemBuilder: (context, index) {
+                                          return ItemShopAndProduct(
+                                            shop: listProductShopEntity[index]
+                                                .shopEntity,
+                                            productEntities:
+                                                listProductShopEntity[index]
+                                                    .products,
+                                            typeProduct: 1,
+                                          );
+                                        })
+                                    ))
                       ],
                     ),
                   );
@@ -222,18 +168,20 @@ class _AuctionViewState extends State<AuctionView> {
                   return Container();
                 }
               }),
+
+              ///end
               BlocBuilder<AuctionBloc, AuctionState>(builder: (context, state) {
                 if (state is AuctionDataLoading) {
                   return const LoadingAuctionScreen();
                 } else if (state is AuctionDataLoaded) {
-                  List<ProductAuMallEntity> listAuction =
-                      state.listAuctionEntity.listAuction;
+                  List<ProductsOrderByShopEntity> listProductShopEntity =
+                      state.listProductShopEntity;
                   return PageStorage(
                     bucket: PageStorageBucket(),
                     child: Column(
                       children: [
                         Expanded(
-                            child: listAuction.isEmpty
+                            child: listProductShopEntity.isEmpty
                                 ? Center(
                                     child: Text(
                                       S.current.notauction,
@@ -247,50 +195,19 @@ class _AuctionViewState extends State<AuctionView> {
                                       auctionBloc
                                           .add(const GetListAuctionProduct(3));
                                     },
-                                    child: GridView.builder(
-                                      physics:
-                                          const AlwaysScrollableScrollPhysics(
-                                              parent: BouncingScrollPhysics()),
-                                      itemCount: listAuction.length,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
-                                              crossAxisCount: 2, height: 330),
-                                      itemBuilder: (context, index) {
-                                        return InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ProductDetails(
-                                                              productEntityId:
-                                                              listAuction[
-                                                                  index].id!,
-                                                          index: index,
-                                                          isFromAuction: true,
-                                                              priceStep:  listAuction[
-                                                              index].priceStep,
-                                                        ),
-                                                      ))
-                                                  .then((value) => {
-                                                        BlocProvider.of<
-                                                                    AuctionBloc>(
-                                                                context)
-                                                            .add(
-                                                                const GetListAuctionProduct(
-                                                                    2))
-                                                      });
-                                            },
-                                            child:
-                                                // Container()
-                                                ProductItemAuMall(
-                                              productFavoriteEntity:
-                                                  listAuction[index],
-                                              isAuctionProduct: true,
-                                              typeProduct: 3,
-                                            ));
-                                      },
-                                    ),
+                                    child:
+                                    ListView.builder(
+                                        itemCount: listProductShopEntity.length,
+                                        itemBuilder: (context, index) {
+                                          return ItemShopAndProduct(
+                                            shop: listProductShopEntity[index]
+                                                .shopEntity,
+                                            productEntities:
+                                            listProductShopEntity[index]
+                                                .products,
+                                            typeProduct: 3,
+                                          );
+                                        })
                                   ))
                       ],
                     ),

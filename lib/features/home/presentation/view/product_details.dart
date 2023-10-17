@@ -683,7 +683,9 @@ class _ProductDetailsState extends State<ProductDetails>
                                       MaterialPageRoute(
                                         builder: (context) => ProductDetails(
                                           index: index,
-                                          isFromAuction: false, productEntityId: productAuMallEntity.id!,
+                                          isFromAuction: false,
+                                          productEntityId: productAuMallEntity.id!,
+                                          isFavorite: false,
                                         ),
                                       ));
                                 },

@@ -1,3 +1,4 @@
+import 'package:aumall/features/auction/domain/entities/product/products_order_by_shop_entity.dart';
 import 'package:aumall/features/auction/domain/usecases/action_auction_usecase.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';

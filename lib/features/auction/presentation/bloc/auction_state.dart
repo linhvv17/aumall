@@ -25,8 +25,9 @@ class AuctionSessionInfoDataLoaded extends AuctionState {
 }
 
 class AuctionDataLoaded extends AuctionState {
-  final ListAuctionEntity listAuctionEntity;
-  const AuctionDataLoaded(this.listAuctionEntity);
+  // final ListAuctionEntity listAuctionEntity;
+  final List<ProductsOrderByShopEntity> listProductShopEntity;
+  const AuctionDataLoaded(this.listProductShopEntity);
 }
 
 class AddToAuctionState extends AuctionState {}
