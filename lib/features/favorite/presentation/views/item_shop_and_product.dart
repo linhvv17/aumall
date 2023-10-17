@@ -1,6 +1,7 @@
 import 'package:aumall/features/favorite/domain/entities/product/product_entity.dart';
 import 'package:aumall/features/favorite/domain/entities/product/shop_entity.dart';
 import 'package:flutter/material.dart';
+import '../../../home/presentation/view/product_details.dart';
 import '../../../shop_profile/presentation/views/shop_profile.dart';
 import 'item_product_favorite.dart';
 
@@ -31,7 +32,6 @@ class _ItemShopAndProductState extends State<ItemShopAndProduct> {
           child: Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
-
               color: Colors.white,
             ),
             child: Row(
@@ -71,29 +71,31 @@ class _ItemShopAndProductState extends State<ItemShopAndProduct> {
         const SizedBox(
           height: 10,
         ),
-        // widget.productEntities.isEmpty
-        //     ? Container()
-        //     : ListView.builder(
-        //         itemCount: widget.productEntities.length,
-        //         itemBuilder: (context, index) {
-        //           return InkWell(
-        //             onTap: () {
-        //               // Navigator.push(
-        //               //     context,
-        //               //     MaterialPageRoute(
-        //               //       builder: (context) => ProductDetails(
-        //               //         productSimpleEntity: newProducts[index],
-        //               //         index: index,
-        //               //         isFromAuction: false,
-        //               //       ),
-        //               //     ));
-        //             },
-        //             child: ItemProductFavorite(
-        //               productEntity: widget.productEntities[index],
-        //             ),
-        //           );
-        //         }
-        //     ),
+        widget.productEntities.isEmpty
+            ? Container()
+            : ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: widget.productEntities.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductDetails(
+                              productEntityId: widget.productEntities[index].id!,
+                              index: index,
+                              isFromAuction: false,
+                              isFavorite: true,
+                            ),
+                          ));
+                    },
+                    child: ItemProductFavorite(
+                      productEntity: widget.productEntities[index],
+                    ),
+                  );
+                }),
       ],
     );
   }

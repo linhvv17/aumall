@@ -93,62 +93,57 @@ class _FavoriteViewState extends State<FavoriteView> {
                                 onRefresh: () async {
                                   favouriteBloc.add(GetListFavoriteProduct());
                                 },
-                                child: NestedScrollView(
-                                  headerSliverBuilder: (BuildContext context,
-                                      bool innerBoxIsScrolled) {
-                                    return <Widget>[
-                                      const SliverAppBar(
-                                        pinned: true,
-                                        title: Text('Flutter Demo'),
-                                      ),
-                                    ];
-                                  },
-                                  body: Column(
-                                    children: <Widget>[
-                                      const FlutterLogo(
-                                        size: 100.0,
-                                      ),
-                                      SizedBox(
-                                        height: 300.0,
-                                        child: ListView.builder(
-                                          itemCount: 60,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return Text('Item $index');
-                                          },
-                                        ),
-                                      ),
-                                      const FlutterLogo(
-                                        size: 100.0,
-                                      ),
-                                    ],
-                                  ),
-                                )
+                                child:
 
                                 // ListView.builder(
-                                //     shrinkWrap: true,
-                                //     itemCount: listProductShopEntity.length,
-                                //     itemBuilder: (BuildContext context, int index) {
-                                //       return Column(
-                                //         crossAxisAlignment: CrossAxisAlignment.start,
-                                //         children: <Widget>[
-                                //           // Text('Parent'),
-                                //           ListView.builder(
-                                //
-                                //               physics: const ClampingScrollPhysics(),
-                                //               shrinkWrap: true,
-                                //               itemBuilder: (BuildContext context, int index) {
-                                //                 return ItemShopAndProduct(
-                                //                   shop: listProductShopEntity[index]
-                                //                       .shopEntity,
-                                //                   productEntities:
-                                //                   listProductShopEntity[index]
-                                //                       .products,
-                                //                 );
-                                //               }),
-                                //         ],
-                                //       );
-                                //     }),
+                                //   shrinkWrap: true,
+                                //   itemCount: 2,
+                                //   itemBuilder: (BuildContext context, int index) {
+                                //     return Column(
+                                //       crossAxisAlignment: CrossAxisAlignment.start,
+                                //       children: [
+                                //         Text(
+                                //           "List View 1 | Index : $index",
+                                //           style: const TextStyle(
+                                //             fontSize: 20.0,
+                                //             fontWeight: FontWeight.bold,
+                                //           ),
+                                //         ),
+                                //         ListView.builder(
+                                //           shrinkWrap: true,
+                                //           physics: const NeverScrollableScrollPhysics(),
+                                //           itemCount: 20,
+                                //           itemBuilder: (BuildContext context, int index) {
+                                //             return ListTile(
+                                //               leading: const Icon(Icons.list),
+                                //               trailing: const Text(
+                                //                 "Text",
+                                //                 style: TextStyle(color: Colors.green, fontSize: 15),
+                                //               ),
+                                //               title: Text(
+                                //                 "List View 2 | Index Val: $index",
+                                //               ),
+                                //             );
+                                //           },
+                                //         ),
+                                //       ],
+                                //     );
+                                //   },
+                                // ),
+
+                                ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: listProductShopEntity.length,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return ItemShopAndProduct(
+                                        shop: listProductShopEntity[index]
+                                            .shopEntity,
+                                        productEntities:
+                                        listProductShopEntity[index]
+                                            .products,
+                                      );
+                                    }),
+
 
                                 // ListView.builder(
                                 //     itemCount: listProductShopEntity.length,
