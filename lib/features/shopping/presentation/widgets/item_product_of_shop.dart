@@ -32,6 +32,7 @@ class _ItemProductOfShopState extends State<ItemProductOfShop> {
               builder: (context) => ProductDetails(
                 productEntityId: widget.productEntity.id!,
                 index: 0,
+                isFavorite: false,
                 isFromAuction: false,
               ),
             )
