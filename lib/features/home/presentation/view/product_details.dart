@@ -14,6 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/routes.dart';
+import '../../../../core/utilities/utils.dart';
 import '../../../../generated/l10n.dart';
 import '../../../auction/data/models/auction_session_info_model.dart';
 import '../../../favorite/presentation/bloc/favourite_bloc.dart';
@@ -47,7 +48,6 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails>
     with TickerProviderStateMixin {
-
   // bool isFavorite = false;
 
   @override
@@ -142,7 +142,8 @@ class _ProductDetailsState extends State<ProductDetails>
                   state.productDetailEntity.productDetailData!;
               // isFavorite = productDetailData.isFavorite;
 
-              print("isFavorite when call build  ProductDetailLoaded ${widget.isFavorite!}");
+              print(
+                  "isFavorite when call build  ProductDetailLoaded ${widget.isFavorite!}");
 
               var averageRate = 0.0;
               var totalRate = 0.0;
@@ -187,7 +188,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                 radius: 20.0,
                                 child: InkWell(
                                   onTap: () {
-                                    print("isFavorite when call build  onTap: () ${widget.isFavorite!}");
+                                    print(
+                                        "isFavorite when call build  onTap: () ${widget.isFavorite!}");
                                     BlocProvider.of<FavouriteBloc>(context).add(
                                         widget.isFavorite!
                                             ? RemoveFavoriteProduct(state
@@ -207,11 +209,11 @@ class _ProductDetailsState extends State<ProductDetails>
 
                                     setState(() {
                                       print("isFavorite ${widget.isFavorite!}");
-                                      widget.isFavorite =
-                                          !widget.isFavorite!;
+                                      widget.isFavorite = !widget.isFavorite!;
 
                                       print("isFavorite ${widget.isFavorite!}");
-                                      print("isFavorite when call build  after onTap: () ${widget.isFavorite!}");
+                                      print(
+                                          "isFavorite when call build  after onTap: () ${widget.isFavorite!}");
                                     });
                                   },
                                   child: widget.isFavorite!
@@ -416,7 +418,8 @@ class _ProductDetailsState extends State<ProductDetails>
                               ),
                               //price
                               Text(
-                                "₫${double.parse(productDetailData.price).toInt()}",
+                                Utils.convertPrice(state.productDetailEntity
+                                    .productDetailData!.price!),
                                 style: Theme.of(context)
                                     .textTheme
                                     .titleLarge!
@@ -441,9 +444,9 @@ class _ProductDetailsState extends State<ProductDetails>
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => ShopProfileView(shopId: productDetailData
-                                            .user.id)
-                                      ));
+                                          builder: (context) => ShopProfileView(
+                                              shopId:
+                                                  productDetailData.user.id)));
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -684,7 +687,8 @@ class _ProductDetailsState extends State<ProductDetails>
                                         builder: (context) => ProductDetails(
                                           index: index,
                                           isFromAuction: false,
-                                          productEntityId: productAuMallEntity.id!,
+                                          productEntityId:
+                                              productAuMallEntity.id!,
                                           isFavorite: false,
                                         ),
                                       ));
@@ -1046,7 +1050,6 @@ class _ProductDetailsState extends State<ProductDetails>
     int maxPrice = double.parse(maxPriceProduct).toInt();
     int step = double.parse(priceStepProduct).toInt();
 
-
     return [
       maxPrice + step,
       maxPrice + 2 * step,
@@ -1145,7 +1148,8 @@ class _ProductDetailsState extends State<ProductDetails>
                 Text("Bạn có muốn gọi vào số Hotline $phone để nhận tư vấn!"),
             actions: [
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -1170,7 +1174,8 @@ class _ProductDetailsState extends State<ProductDetails>
             content: Text("Bạn xác nhận tham gia đấu giá với mức giá $price"),
             actions: [
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -1202,7 +1207,8 @@ class _ProductDetailsState extends State<ProductDetails>
             content: Text(message),
             actions: [
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -1222,7 +1228,8 @@ class _ProductDetailsState extends State<ProductDetails>
                 const Text("Hiện bạn là người trả giá cao nhất cho sản phẩm"),
             actions: [
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
                   },

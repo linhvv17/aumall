@@ -8,6 +8,7 @@ import '../../../core/theme/theme_data.dart';
 import '../../../core/utilities/enums.dart';
 import '../../../core/utilities/mediaquery.dart';
 import '../../../core/utilities/strings.dart';
+import '../../../core/utilities/utils.dart';
 import '../../../generated/l10n.dart';
 import '../../favorite/presentation/bloc/favourite_bloc.dart';
 import '../../login/presentation/widgets/alert_snackbar.dart';
@@ -16,12 +17,14 @@ import '../data/models/product_detail_model.dart';
 
 class ProductItem extends StatefulWidget {
   const ProductItem({super.key, required this.product});
+
   final ProductAuMallEntity product;
+
   @override
   State<StatefulWidget> createState() => _ProductItemState();
 }
 
-class _ProductItemState extends State<ProductItem>{
+class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,7 +32,7 @@ class _ProductItemState extends State<ProductItem>{
       child: Container(
         decoration: BoxDecoration(
             color: BlocProvider.of<ThemeBloc>(context).themeData ==
-                appThemeData[AppTheme.lightTheme]
+                    appThemeData[AppTheme.lightTheme]
                 ? ColorManager.white
                 : Colors.white.withOpacity(0.2),
             borderRadius: BorderRadius.circular(15)),
@@ -72,36 +75,36 @@ class _ProductItemState extends State<ProductItem>{
                           onTap: () {
                             BlocProvider.of<FavouriteBloc>(context)
                                 .add(widget.product.isFavorite!
-                                ? RemoveFavoriteProduct(widget.product.id!)
-                                : AddToFavorite(
-                              productId: widget.product.id!,
-                              isFavourite: widget.product.isFavorite!,
-                            ));
+                                    ? RemoveFavoriteProduct(widget.product.id!)
+                                    : AddToFavorite(
+                                        productId: widget.product.id!,
+                                        isFavourite: widget.product.isFavorite!,
+                                      ));
 
                             setState(() {
                               print('setState bf ${widget.product.isFavorite}');
                               widget.product.isFavorite =
-                              !widget.product.isFavorite!;
+                                  !widget.product.isFavorite!;
                               print('setState at ${widget.product.isFavorite}');
                             });
                           },
                           child:
-                          // const Icon(
-                          //   Icons.favorite,
-                          //   size: 20.0,
-                          //   color: ColorManager.orangeLight,
-                          // ),
-                          widget.product.isFavorite!
-                              ? const Icon(
-                            Icons.favorite,
-                            size: 20.0,
-                            color: ColorManager.orangeLight,
-                          )
-                              : const Icon(
-                            Icons.favorite_outline,
-                            size: 20.0,
-                            color: ColorManager.grey,
-                          ),
+                              // const Icon(
+                              //   Icons.favorite,
+                              //   size: 20.0,
+                              //   color: ColorManager.orangeLight,
+                              // ),
+                              widget.product.isFavorite!
+                                  ? const Icon(
+                                      Icons.favorite,
+                                      size: 20.0,
+                                      color: ColorManager.orangeLight,
+                                    )
+                                  : const Icon(
+                                      Icons.favorite_outline,
+                                      size: 20.0,
+                                      color: ColorManager.grey,
+                                    ),
                         ),
                       ),
                     );
@@ -133,8 +136,8 @@ class _ProductItemState extends State<ProductItem>{
                         Text(
                           '(${widget.product.reviewNumber})',
                           style: Theme.of(context).textTheme.caption!.copyWith(
-                            color: Colors.grey,
-                          ),
+                                color: Colors.grey,
+                              ),
                         ),
                       ],
                     ),
@@ -149,18 +152,19 @@ class _ProductItemState extends State<ProductItem>{
                     Text(
                       widget.product.title!,
                       style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     const SizedBox(height: 6.0),
                     Text.rich(
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: '${widget.product.price} \$',
+                            text:
+                                Utils.convertPrice(widget.product.price!),
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle2!
+                                .titleSmall!
                                 .copyWith(color: ColorManager.dark),
                           ),
                         ],
