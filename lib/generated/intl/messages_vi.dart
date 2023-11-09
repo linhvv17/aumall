@@ -247,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveAddress": MessageLookupByLibrary.simpleMessage("Lưu địa chỉ"),
         "savepass": MessageLookupByLibrary.simpleMessage("Lưu mật khẩu"),
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
+        "searchHint": MessageLookupByLibrary.simpleMessage("Tìm trong AuMall"),
         "searchlocation":
             MessageLookupByLibrary.simpleMessage("Tìm kiếm địa chỉ"),
         "seeMore": MessageLookupByLibrary.simpleMessage("Xem thêm>"),

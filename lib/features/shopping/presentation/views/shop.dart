@@ -95,11 +95,11 @@ class _ShopViewState extends State<ShopView> with TickerProviderStateMixin {
                         children: [
                           Row(
                             children: [
-                              SortProduct(
-                                sortBys: sortBys,
-                              ),
+                              // SortProduct(
+                              //   sortBys: sortBys,
+                              // ),
                               const Expanded(child: SearchWidget()),
-                              const FilterProduct(),
+                              // const FilterProduct(),
                             ],
                           ),
                           Material(

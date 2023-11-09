@@ -209,5 +209,6 @@
   "hotProduct" : "HOT",
   "newProduct" : "Sản phầm mới",
   "follow" : "Theo dõi",
-  "referralCode" : "Mã giới thiệu"
+  "referralCode" : "Mã giới thiệu",
+  "searchHint" : "Tìm trong AuMall"
 }

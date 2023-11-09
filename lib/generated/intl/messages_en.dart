@@ -245,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveAddress": MessageLookupByLibrary.simpleMessage("Save Address"),
         "savepass": MessageLookupByLibrary.simpleMessage("Save Password"),
         "search": MessageLookupByLibrary.simpleMessage("search"),
+        "searchHint": MessageLookupByLibrary.simpleMessage("Search in AuMall"),
         "searchlocation":
             MessageLookupByLibrary.simpleMessage("Search Location"),
         "seeMore": MessageLookupByLibrary.simpleMessage("See more>"),

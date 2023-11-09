@@ -209,5 +209,6 @@
   "hotProduct" : "HOT",
   "newProduct" : "NEWS",
   "follow" : "Follow",
-  "referralCode" : "Referral code"
+  "referralCode" : "Referral code",
+  "searchHint" : "Search in AuMall"
 }

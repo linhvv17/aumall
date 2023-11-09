@@ -71,19 +71,19 @@ class SplashViewState extends State<SplashView>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/logo.png',
+                'assets/images/au.png',
                 width: animation!.value * 200,
                 height: animation!.value * 200,
               ),
               const SizedBox(
                 height: 18,
               ),
-              Text(
-                S.current.appName,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: ColorManager.orangeLight,
-                    ),
-              )
+              // Text(
+              //   S.current.appName,
+              //   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              //         color: ColorManager.orangeLight,
+              //       ),
+              // )
             ],
           ),
         ],

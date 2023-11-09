@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/utilities/mediaquery.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/products_bloc.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -30,43 +31,81 @@ class _SearchWidgetState extends State<SearchWidget> {
           child: Row(
             children: [
               Expanded(
-                  child: bloc.searchFolded
-                      ? const SizedBox()
-                      : Form(
-                          key: formKey,
-                          child: TextFormField(
-                            controller: searchController,
-                            decoration: InputDecoration(
-                                prefixIcon: IconButton(
-                                    onPressed: () {
-                                      bloc.add(SearchProduct(
-                                          searchController.text,
-                                          bloc.currentCategoryId.toString()));
-                                    },
-                                    icon: const Icon(Icons.search)),
-                                hintText: 'Search',
-                                border: InputBorder.none),
-                            onEditingComplete: (){
-                              bloc.add(SearchProduct(
-                                  searchController.text,
-                                  bloc.currentCategoryId.toString()));
-                            },
-                          ),
-                        )),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    bloc.searchFolded = !bloc.searchFolded;
-                  });
-                  bloc.add(const GetShopDataDefault());
-                },
-                icon: bloc.searchFolded
-                    ? const Icon(Icons.search)
-                    : const Icon(
+                  child: Form(
+                key: formKey,
+                child: TextFormField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    prefixIcon: IconButton(
+                        onPressed: () {
+                          bloc.add(SearchProduct(searchController.text,
+                              bloc.currentCategoryId.toString()));
+                        },
+                        icon: const Icon(Icons.search)),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          bloc.searchFolded = !bloc.searchFolded;
+                        });
+                        bloc.add(const GetShopDataDefault());
+                      },
+                      icon: bloc.searchFolded
+                          ? Container()
+                          : const Icon(
                         Icons.close,
                         color: ColorManager.grey,
                       ),
+                    ),
+                    hintText: S.current.searchHint,
+                    border: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.deepOrange, width: 3.0),
+                        borderRadius: BorderRadius.circular(5.0)),
+                  ),
+                  onEditingComplete: () {
+                    bloc.add(SearchProduct(searchController.text,
+                        bloc.currentCategoryId.toString()));
+                  },
+                ),
               )
+
+                  // bloc.searchFolded
+                  //     ? const SizedBox()
+                  //     : Form(
+                  //         key: formKey,
+                  //         child: TextFormField(
+                  //           controller: searchController,
+                  //           decoration: InputDecoration(
+                  //               prefixIcon: IconButton(
+                  //                   onPressed: () {
+                  //                     bloc.add(SearchProduct(
+                  //                         searchController.text,
+                  //                         bloc.currentCategoryId.toString()));
+                  //                   },
+                  //                   icon: const Icon(Icons.search)),
+                  //               hintText: 'Tìm trong AuMall',
+                  //               border: InputBorder.none),
+                  //           onEditingComplete: (){
+                  //             bloc.add(SearchProduct(
+                  //                 searchController.text,
+                  //                 bloc.currentCategoryId.toString()));
+                  //           },
+                  //         ),
+                  //       )
+                  ),
+              // IconButton(
+              //   onPressed: () {
+              //     setState(() {
+              //       bloc.searchFolded = !bloc.searchFolded;
+              //     });
+              //     bloc.add(const GetShopDataDefault());
+              //   },
+              //   icon: bloc.searchFolded
+              //       ? Container()
+              //       : const Icon(
+              //           Icons.close,
+              //           color: ColorManager.grey,
+              //         ),
+              // )
             ],
           )),
     );

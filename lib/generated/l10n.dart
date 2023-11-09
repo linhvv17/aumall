@@ -1989,6 +1989,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Search in AuMall`
+  String get searchHint {
+    return Intl.message(
+      'Search in AuMall',
+      name: 'searchHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

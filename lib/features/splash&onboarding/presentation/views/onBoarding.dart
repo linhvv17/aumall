@@ -55,7 +55,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         Text(
                           contents[i].title,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headline5,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const SizedBox(height: 20),
                         Text(
