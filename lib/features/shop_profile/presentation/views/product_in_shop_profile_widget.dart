@@ -1,17 +1,12 @@
 import 'package:aumall/features/shop_profile/domain/entities/shop_product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:aumall/core/theme/bloc/theme_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/theme/theme_data.dart';
 import '../../../../core/utilities/enums.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../core/utilities/utils.dart';
-import '../../../../generated/l10n.dart';
-import '../../../home/presentation/view/product_details.dart';
-import '../../../login/presentation/widgets/alert_snackbar.dart';
-import '../../../shopping/domain/entities/products_entity.dart';
 
 class ProductInShopWidget extends StatefulWidget {
   final ShopProductEntity shopProductEntity;
@@ -60,28 +55,5 @@ class _ProductInShopWidgetState extends State<ProductInShopWidget> {
         ),
       ),
     );
-  }
-
-
-  void showDialogCanNotAuction(int type) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(type == 2 ? 'Phiên đấu giá chưa diễn ra'
-            : 'Phiên đấu giá đã kết thúc'),
-            content:
-             Text(type == 2 ? 'Hãy quay lại khi phiên đấu giá bắt đầu'
-                 : 'Rất tiếc. Hãy tham khảo sản phẩm khác của chúng tôi'),
-            actions: [
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.green),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Đã hiểu')),
-            ],
-          );
-        });
   }
 }

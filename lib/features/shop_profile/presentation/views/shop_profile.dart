@@ -495,17 +495,10 @@ class _ShopProfileViewState extends State<ShopProfileView>
                                                         productEntityId:
                                                             list[index].id!,
                                                         index: index,
-                                                        isFromAuction: true,
+                                                        isFromAuction: false,
+                                                        isFavorite: false,
                                                       ),
-                                                    ))
-                                                .then((value) => {
-                                                      BlocProvider.of<
-                                                                  AuctionBloc>(
-                                                              context)
-                                                          .add(
-                                                              const GetListAuctionProduct(
-                                                                  2))
-                                                    });
+                                                    ));
                                           },
                                           child:
                                               // Container()

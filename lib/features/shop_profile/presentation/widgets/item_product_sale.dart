@@ -32,6 +32,7 @@ class _ItemProductSaleState extends State<ItemProductSale> {
                 productEntityId: widget.shopProductEntity.id!,
                 index: 0,
                 isFromAuction: false,
+                isFavorite: false,
               ),
             )
         );
