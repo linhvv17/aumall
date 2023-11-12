@@ -195,6 +195,7 @@ class _HomeState extends State<HomeView> {
                                           comingSoonProducts[index].id!,
                                       index: index,
                                       isFromAuction: false,
+                                      isFavorite: comingSoonProducts[index].isFavorite!,
                                     ),
                                   ));
                             },
@@ -264,6 +265,8 @@ class _HomeState extends State<HomeView> {
                                       productEntityId:
                                           suggestionProducts[index].id!,
                                       index: index,
+                                      isFromAuction: false,
+                                      isFavorite: suggestionProducts[index].isFavorite!,
                                     ),
                                   ));
                             },

@@ -10,6 +10,8 @@ import 'package:aumall/features/favorite/domain/repositories/favorite_product_re
 import 'package:aumall/generated/l10n.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../domain/entities/products_in_cart_order_by_shop_entity.dart';
+
 class CartRepositoryImpl extends CartBaseRepository {
   final NetworkInfo networkInfo;
   final CartDatasource cartDatasource;
@@ -33,9 +35,10 @@ class CartRepositoryImpl extends CartBaseRepository {
   }
 
   @override
-  Future<Either<Failure, ListProductInCartEntity>>
+  Future<Either<Failure, List<ProductsInCartOrderByShopEntity>>>
       getProductInCartList() async {
     if (await networkInfo.isConnected) {
+      print("CartRepositoryImpl getProductInCartList() await networkInfo.isConnected try ${await cartDatasource.getListProductInCart()}");
       try {
         final data = await cartDatasource.getListProductInCart();
         print("CartRepositoryImpl getProductInCartList() try ${data}");
@@ -72,10 +75,10 @@ class CartRepositoryImpl extends CartBaseRepository {
       try {
         final data =
             await cartDatasource.updateProductToCart(idProduct, quantity);
-        print("FavoriteRepositoryImpl getFavoriteList() try ${data}");
+        print("CartRepositoryImpl updateProductToCart() try ${data}");
         return right(data);
       } catch (error) {
-        print("FavoriteRepositoryImpl getFavoriteList() catch ${error}");
+        print("CartRepositoryImpl updateProductToCart() catch ${error}");
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {

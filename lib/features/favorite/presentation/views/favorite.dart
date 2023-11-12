@@ -1,18 +1,11 @@
-import 'package:aumall/core/utilities/mediaquery.dart';
 import 'package:aumall/features/favorite/domain/entities/product/products_order_by_shop_entity.dart';
 import 'package:aumall/features/favorite/presentation/views/item_shop_and_product.dart';
-import 'package:aumall/features/favorite/presentation/views/product_item_aumall.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:aumall/features/favorite/presentation/bloc/favourite_bloc.dart';
-import 'package:aumall/features/home/widgets/customGridView.dart';
-import '../../../../core/colors/colors.dart';
 import '../../../../generated/l10n.dart';
-import '../../../home/presentation/view/product_details.dart';
-import '../../../home/widgets/product_item.dart';
-import '../../../shopping/domain/entities/products_entity.dart';
 import 'loading_favorite_screen.dart';
 
 class FavoriteView extends StatefulWidget {
@@ -60,9 +53,6 @@ class _FavoriteViewState extends State<FavoriteView> {
             if (state is FavouriteDataLoading) {
               return const LoadingFavoriteScreen();
             } else if (state is FavouriteDataLoaded) {
-              // List<ProductAuMallEntity> listFavorite =
-              //     state.listFavoriteEntity.listFavorite;
-
               List<ProductsOrderByShopEntity> listProductShopEntity =
                   state.listProductShopEntity;
               return PageStorage(
@@ -93,71 +83,20 @@ class _FavoriteViewState extends State<FavoriteView> {
                                 onRefresh: () async {
                                   favouriteBloc.add(GetListFavoriteProduct());
                                 },
-                                child:
-
-                                // ListView.builder(
-                                //   shrinkWrap: true,
-                                //   itemCount: 2,
-                                //   itemBuilder: (BuildContext context, int index) {
-                                //     return Column(
-                                //       crossAxisAlignment: CrossAxisAlignment.start,
-                                //       children: [
-                                //         Text(
-                                //           "List View 1 | Index : $index",
-                                //           style: const TextStyle(
-                                //             fontSize: 20.0,
-                                //             fontWeight: FontWeight.bold,
-                                //           ),
-                                //         ),
-                                //         ListView.builder(
-                                //           shrinkWrap: true,
-                                //           physics: const NeverScrollableScrollPhysics(),
-                                //           itemCount: 20,
-                                //           itemBuilder: (BuildContext context, int index) {
-                                //             return ListTile(
-                                //               leading: const Icon(Icons.list),
-                                //               trailing: const Text(
-                                //                 "Text",
-                                //                 style: TextStyle(color: Colors.green, fontSize: 15),
-                                //               ),
-                                //               title: Text(
-                                //                 "List View 2 | Index Val: $index",
-                                //               ),
-                                //             );
-                                //           },
-                                //         ),
-                                //       ],
-                                //     );
-                                //   },
-                                // ),
-
-                                ListView.builder(
+                                child: ListView.builder(
                                     shrinkWrap: true,
                                     itemCount: listProductShopEntity.length,
-                                    itemBuilder: (BuildContext context, int index) {
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
                                       return ItemShopAndProduct(
                                         shop: listProductShopEntity[index]
                                             .shopEntity,
                                         productEntities:
-                                        listProductShopEntity[index]
-                                            .products,
+                                            listProductShopEntity[index]
+                                                .products,
                                       );
                                     }),
-
-
-                                // ListView.builder(
-                                //     itemCount: listProductShopEntity.length,
-                                //     itemBuilder: (context, index) {
-                                //       return ItemShopAndProduct(
-                                //         shop: listProductShopEntity[index]
-                                //             .shopEntity,
-                                //         productEntities:
-                                //             listProductShopEntity[index]
-                                //                 .products,
-                                //       );
-                                //     }),
-
-                                ))
+                              ))
                   ],
                 ),
               );

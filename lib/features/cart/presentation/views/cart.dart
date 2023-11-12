@@ -12,6 +12,8 @@ import '../../../../core/local/shared_preference.dart';
 import '../../../../core/utilities/mediaquery.dart';
 import '../../../../generated/l10n.dart';
 import '../../../payment/presentation/bloc/payment_bloc.dart';
+import '../../domain/entities/products_in_cart_order_by_shop_entity.dart';
+import '../widgets/item_cart.dart';
 import '../widgets/loading_cart_screen.dart';
 
 class CartView extends StatefulWidget {
@@ -117,8 +119,11 @@ class _CartViewState extends State<CartView> {
                     return Center(child: Text(state.message));
                   }
                   if (state is CartDataLoaded) {
+                    List<ProductsInCartOrderByShopEntity> listProductsInCartOrderByShopEntity =
+                        state.listProductsInCartOrderByShopEntity;
+
                     return state
-                        .listProductInCartEntity.listProductInCart.isEmpty ?
+                        .listProductsInCartOrderByShopEntity.isEmpty ?
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -141,13 +146,12 @@ class _CartViewState extends State<CartView> {
                         Expanded(
                           child: ListView.builder(
                             padding: const EdgeInsets.symmetric(vertical: 22),
-                            itemCount: state.listProductInCartEntity
-                                .listProductInCart.length,
+                            itemCount: listProductsInCartOrderByShopEntity
+                                .length,
                             itemBuilder: (context, index) {
-                              return CartItem(
-                                item: state.listProductInCartEntity
-                                    .listProductInCart[index],
-                                index: index,
+                              return ItemCart(
+                                shop: listProductsInCartOrderByShopEntity[index].shopEntity,
+                                productEntities: listProductsInCartOrderByShopEntity[index].products,
                               );
                             },
                           ),

@@ -1,3 +1,4 @@
+import 'package:aumall/core/utilities/utils.dart';
 import 'package:aumall/features/cart/domain/entities/list_product_in_cart_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -152,7 +153,7 @@ class CartItem extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'đ ${double.parse(item.amount).toInt()}',
+                            Utils.convertPrice((double.parse(item.amount).toInt()*item.quantity).toString()),
                             style: const TextStyle(fontSize: 13),
                           )
                         ],

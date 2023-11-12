@@ -30,16 +30,18 @@ class ProductInCartModel extends ProductInCartEntity {
     super.product,
   );
 
-  factory ProductInCartModel.fromJson(Map<String, dynamic> json) =>
-      ProductInCartModel(
-        json['id'],
-        json['product_id'],
-        json['order_id'],
-        json['amount'],
-        json['quantity'],
-        json['created_at'],
-        ProductModel.fromJson(json['product']),
-      );
+  factory ProductInCartModel.fromJson(Map<String, dynamic> json) {
+    return ProductInCartModel(
+      json['id'],
+      json['product_id'],
+      json['order_id'],
+      json['amount'],
+      json['quantity'],
+      json['created_at'],
+      ProductModel.fromJson(json['product']),
+    );
+  }
+
 
   // Map<String, dynamic> toJson() {
   //   final _data = <String, dynamic>{};

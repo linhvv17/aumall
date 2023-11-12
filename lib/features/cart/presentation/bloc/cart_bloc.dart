@@ -12,6 +12,7 @@ import 'package:aumall/features/shopping/domain/entities/products_entity.dart';
 import '../../../../core/local/shared_preference.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../../data/models/cart_model.dart';
+import '../../domain/entities/products_in_cart_order_by_shop_entity.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';

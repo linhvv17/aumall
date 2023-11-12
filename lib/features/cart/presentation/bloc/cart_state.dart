@@ -26,8 +26,8 @@ class CartDataErrorState extends CartState {
 }
 
 class CartDataLoaded extends CartState {
-  final ListProductInCartEntity listProductInCartEntity;
-  const CartDataLoaded(this.listProductInCartEntity);
+  final List<ProductsInCartOrderByShopEntity> listProductsInCartOrderByShopEntity;
+  const CartDataLoaded(this.listProductsInCartOrderByShopEntity);
 }
 
 class AddToCartSuccess extends CartState {

@@ -2,9 +2,10 @@ import '../../../../core/local/shared_preference.dart';
 import '../../../../core/network/api_provider.dart';
 import '../../../../core/utilities/endpoints.dart';
 import '../models/list_product_in_cart_model.dart';
+import '../models/products_in_cart_order_by_shop_model.dart';
 
 abstract class CartDatasource {
-  Future<ListProductInCartModel> getListProductInCart();
+  Future<List<ProductsInCartOrderByShopModel>> getListProductInCart();
   Future<bool> removeProductInCart(int idProduct);
   Future<bool> addProductToCart(int idProduct, int quantity);
   Future<bool> updateProductToCart(int idProduct, int quantity);
@@ -14,12 +15,15 @@ class CartDatasourceImpl implements CartDatasource {
   final APIProvider apiProvider;
   CartDatasourceImpl(this.apiProvider);
   @override
-  Future<ListProductInCartModel> getListProductInCart() async {
+  Future<List<ProductsInCartOrderByShopModel>> getListProductInCart() async {
     final response = await apiProvider.get(
         endPoint: cartDetailProductsAuMall,
         token:
             PreferenceHelper.getDataFromSharedPreference(key: 'token') ?? '');
-    return ListProductInCartModel.fromJson(response.data);
+    List<ProductsInCartOrderByShopModel> listProductsInCartOrderByShopModel =
+    List<ProductsInCartOrderByShopModel>.from(
+        response.data['data']['data'].map((x) => ProductsInCartOrderByShopModel.fromJson(x)));
+    return listProductsInCartOrderByShopModel;
   }
 
   @override
